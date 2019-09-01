@@ -10,7 +10,7 @@ public interface InvoiceService {
 
     Invoice getInvoiceById(long id) throws Exception;
 
-    void saveInvoice(Invoice invoice) throws Exception;
+    Long saveInvoice(Invoice invoice) throws Exception;
 
     void updateInvoice(long id, Invoice invoice) throws  Exception;
 

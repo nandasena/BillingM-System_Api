@@ -27,8 +27,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void saveInvoice(Invoice invoice) throws Exception {
-        invoiceDao.save(invoice);
+    public Long saveInvoice(Invoice invoice) throws Exception {
+      Long id =  invoiceDao.save(invoice);
+      return id;
     }
 
     @Override

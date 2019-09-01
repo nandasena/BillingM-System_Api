@@ -105,24 +105,26 @@ public class InvoiceController {
     public ResponseEntity<Object> saveInvoice (@RequestBody InvoiceVO invoiceVO) throws Exception {
         try {
             Invoice saveInvoice =new Invoice();
-            List<ItemVO> itemVOList =new ArrayList<>();
-            itemVOList =invoiceVO.getItemList();
-            Set<InvoiceItemDetail>invoiceItemDetailSet =new HashSet<>();
-            for (ItemVO itemVO:itemVOList) {
-                InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
-                Item item = itemService.getItemById(itemVO.getItemId());
-                invoiceItemDetail.setItem(item);
-                invoiceItemDetailSet.add(invoiceItemDetail);
-            }
 
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
             saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
             saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
-            saveInvoice.setInvoiceItemDetails(invoiceItemDetailSet);
             saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
-            invoiceService.saveInvoice(saveInvoice);
-            return ResponseEntity.ok("HI");
+            Long id = invoiceService.saveInvoice(saveInvoice);
+            Invoice insertedInvoice =invoiceService.getInvoiceById(id);
+
+            List<ItemVO> itemVOList =new ArrayList<>();
+            itemVOList =invoiceVO.getItemList();
+            for (ItemVO itemVO:itemVOList) {
+                InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
+                Item item = itemService.getItemById(itemVO.getItemId());
+                invoiceItemDetail.setItem(item);
+                invoiceItemDetail.setInvoice(insertedInvoice);
+                invoiceItemDetailService.saveInvoiceItemDetail(invoiceItemDetail);
+            }
+
+            return ResponseEntity.ok(id);
         }catch (Exception e){
             return ResponseEntity.ok(e);
         }
