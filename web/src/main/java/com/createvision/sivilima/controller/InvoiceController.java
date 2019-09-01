@@ -120,6 +120,7 @@ public class InvoiceController {
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
             saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
             saveInvoice.setInvoiceItemDetails(invoiceItemDetailSet);
+            saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
             invoiceService.saveInvoice(saveInvoice);
             return ResponseEntity.ok("HI");
         }catch (Exception e){
