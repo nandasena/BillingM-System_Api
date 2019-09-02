@@ -105,27 +105,11 @@ public class InvoiceController {
     @ResponseBody
     public ResponseEntity<Object> saveInvoice (@RequestBody InvoiceVO invoiceVO) throws Exception {
         try {
-            Invoice saveInvoice =new Invoice();
 
-            saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
-            saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
-            saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
-            saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
-            saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
-            Long id = invoiceService.saveInvoice(saveInvoice);
-            Invoice insertedInvoice =invoiceService.getInvoiceById(id);
+            InvoiceVO insetedInvoice = invoiceService.createNewInvoice(invoiceVO);
 
-            List<ItemVO> itemVOList =new ArrayList<>();
-            itemVOList =invoiceVO.getItemList();
-            for (ItemVO itemVO:itemVOList) {
-                InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
-                Item item = itemService.getItemById(itemVO.getItemId());
-                invoiceItemDetail.setItem(item);
-                invoiceItemDetail.setInvoice(insertedInvoice);
-                invoiceItemDetailService.saveInvoiceItemDetail(invoiceItemDetail);
-            }
 
-            return ResponseEntity.ok(id);
+            return ResponseEntity.ok("");
         }catch (Exception e){
             return ResponseEntity.ok(e);
         }
