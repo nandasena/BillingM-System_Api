@@ -7,10 +7,8 @@ import com.createvision.sivilima.model.User;
 import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;
-//import com.createvision.sivilima.valueobject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valueobject.UserVO;
+import com.createvision.sivilima.valuesObject.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -109,7 +107,7 @@ public class InvoiceController {
             InvoiceVO insetedInvoice = invoiceService.createNewInvoice(invoiceVO);
 
 
-            return ResponseEntity.ok("");
+            return ResponseEntity.ok("Pasan OK");
         }catch (Exception e){
             return ResponseEntity.ok(e);
         }
