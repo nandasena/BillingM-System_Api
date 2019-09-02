@@ -1,4 +1,4 @@
-package com.createvision.sivilims.valueobject;
+package com.createvision.sivilima.valueobject;
 
 //import com.sun.xml.internal.ws.developer.StreamingAttachment;
 

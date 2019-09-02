@@ -15,4 +15,6 @@ public interface InvoiceItemDetailService {
     void updateInvoiceItemDetail(long id, InvoiceItemDetail invoiceItemDetail) throws  Exception;
 
     void deleteInvoiceItemDetail(long id) throws Exception;
+
+
 }

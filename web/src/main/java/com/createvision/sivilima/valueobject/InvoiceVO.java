@@ -1,10 +1,7 @@
-package com.createvision.sivilims.valueobject;
+package com.createvision.sivilima.valueobject;
 
-import com.createvision.sivilima.model.BaseObject;
 import com.createvision.sivilima.model.InvoiceItemDetail;
-import com.createvision.sivilima.model.User;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;

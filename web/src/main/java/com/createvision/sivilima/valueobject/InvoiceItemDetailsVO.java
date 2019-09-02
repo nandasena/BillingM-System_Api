@@ -1,4 +1,4 @@
-package com.createvision.sivilims.valueobject;
+package com.createvision.sivilima.valueobject;
 import com.createvision.sivilima.model.Invoice;
 import com.createvision.sivilima.model.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;

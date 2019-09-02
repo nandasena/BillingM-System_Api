@@ -1,4 +1,4 @@
-package com.createvision.sivilims.valueobject;
+package com.createvision.sivilima.valueobject;
 
 import javax.persistence.*;
 import java.io.Serializable;

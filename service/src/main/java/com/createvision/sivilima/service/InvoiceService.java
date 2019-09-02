@@ -1,7 +1,6 @@
 package com.createvision.sivilima.service;
 
 import com.createvision.sivilima.model.Invoice;
-
 import java.util.List;
 
 public interface InvoiceService {
@@ -15,4 +14,6 @@ public interface InvoiceService {
     void updateInvoice(long id, Invoice invoice) throws  Exception;
 
     void deleteInvoice(long id) throws Exception;
+
+
 }

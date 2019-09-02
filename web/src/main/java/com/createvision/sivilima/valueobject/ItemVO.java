@@ -1,4 +1,4 @@
-package com.createvision.sivilims.valueobject;
+package com.createvision.sivilima.valueobject;
 
 public class ItemVO {
   Long id;
