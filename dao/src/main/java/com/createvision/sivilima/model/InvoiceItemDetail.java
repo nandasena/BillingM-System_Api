@@ -11,13 +11,13 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id",nullable = false)
     @JsonIgnore
     private Item item;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invoice_id")
+    @JoinColumn(name = "invoice_id",nullable = false)
     @JsonIgnore
     private Invoice invoice;
 

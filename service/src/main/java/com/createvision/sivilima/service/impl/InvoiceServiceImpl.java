@@ -10,6 +10,8 @@ import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -60,9 +62,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         invoiceDao.delete(invoice);
     }
-
+    @org.springframework.transaction.annotation.Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, readOnly = false, timeout = 100, rollbackFor = Exception.class)
     @Override
-
     public InvoiceVO createNewInvoice(InvoiceVO invoiceVO){
 
         InvoiceVO invoiceVO1 =new InvoiceVO();
