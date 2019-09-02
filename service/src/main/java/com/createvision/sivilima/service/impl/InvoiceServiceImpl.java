@@ -2,6 +2,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.InvoiceDao;
 import com.createvision.sivilima.model.Invoice;
 import com.createvision.sivilima.service.InvoiceService;
+import com.createvision.sivilima.valuesObject.InvoiceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +46,14 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice invoice = getInvoiceById(id);
 
         invoiceDao.delete(invoice);
+    }
+
+    @Override
+
+    public InvoiceVO createNewInvoice(InvoiceVO invoiceVO){
+
+        InvoiceVO invoiceVO1 =new InvoiceVO();
+
+        return invoiceVO;
     }
 }

@@ -1,6 +1,7 @@
 package com.createvision.sivilima.service;
 
 import com.createvision.sivilima.model.Invoice;
+import com.createvision.sivilima.valuesObject.InvoiceVO;
 import java.util.List;
 
 public interface InvoiceService {
@@ -15,5 +16,6 @@ public interface InvoiceService {
 
     void deleteInvoice(long id) throws Exception;
 
+    InvoiceVO createNewInvoice(InvoiceVO invoiceVO)throws Exception;
 
 }
