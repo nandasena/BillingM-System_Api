@@ -64,18 +64,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
     @org.springframework.transaction.annotation.Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, readOnly = false, timeout = 100, rollbackFor = Exception.class)
     @Override
-    public InvoiceVO createNewInvoice(InvoiceVO invoiceVO){
+    public InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception{
 
         InvoiceVO invoiceVO1 =new InvoiceVO();
         Invoice saveInvoice =new Invoice();
-
+        try {
         saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
         saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
         saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
         saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
         saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
         Long id =  invoiceDao.save(saveInvoice);
-
         Invoice insertedInvoice =invoiceDao.get(id);
 
         List<ItemVO> itemVOList =new ArrayList<>();
@@ -87,6 +86,9 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoiceItemDetail.setItem(item);
             invoiceItemDetail.setInvoice(insertedInvoice);
             invoiceItemDetailDao.save(invoiceItemDetail);
+        }
+        }catch (Exception e){
+            throw e;
         }
 
         return invoiceVO;
