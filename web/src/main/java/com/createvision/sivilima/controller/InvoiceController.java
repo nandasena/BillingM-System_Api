@@ -8,6 +8,7 @@ import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
+import com.createvision.sivilima.valuesObject.ReturnVO;
 import com.createvision.sivilima.valuesObject.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,14 +103,18 @@ public class InvoiceController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> saveInvoice (@RequestBody InvoiceVO invoiceVO) throws Exception {
+        ReturnVO returnVO =new ReturnVO();
         try {
-
             InvoiceVO insetedInvoice = invoiceService.createNewInvoice(invoiceVO);
-
-
-            return ResponseEntity.ok("Pasan OK");
+            returnVO.setResult(insetedInvoice);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
         }catch (Exception e){
-            return ResponseEntity.ok(e);
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
         }
 
     }
