@@ -39,7 +39,7 @@ public class InvoiceController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
-    public List<InvoiceVO> getAllInventories() throws Exception {
+    public ResponseEntity<Object> getAllInventories() throws Exception {
 
         LOGGER.info("Invoice testing");
 
@@ -77,7 +77,7 @@ public class InvoiceController {
 
             List<Invoice> invoices = invoiceService.getAllInvoices();
             List<InvoiceVO> invoiceVOS = new ArrayList<>();
-
+            ReturnVO returnVO =new ReturnVO();
             LOGGER.info("Invoice count {}", invoices.size());
             for (Invoice invoiceTmp : invoices) {
                 User user = invoiceTmp.getUser();
@@ -90,13 +90,16 @@ public class InvoiceController {
 
                 }
                 invoiceVOS.add(invoiceVO);
+                returnVO.setResult(invoiceVOS);
+                returnVO.setSuccess(true);
+                returnVO.setStatusCode(200);
 
             }
 
-            return invoiceVOS;
+            return ResponseEntity.ok(returnVO);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return ResponseEntity.ok(e);
         }
     }
 
