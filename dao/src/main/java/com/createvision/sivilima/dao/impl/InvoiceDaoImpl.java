@@ -19,4 +19,15 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
 
         return c.list();
     }
+
+    @Override
+    public List<Object> testJoin () throws Exception {
+
+        Criteria IinCri= getSession().createCriteria(Invoice.class).add(Restrictions.eq("advanceAmount",2000.00));
+        Criteria It =IinCri.createCriteria("invoiceItemDetails");
+        Criteria ITD =It.createCriteria("item").add(Restrictions.eq("name","pasan"));
+        List result =IinCri.list();
+
+        return result;
+    }
 }

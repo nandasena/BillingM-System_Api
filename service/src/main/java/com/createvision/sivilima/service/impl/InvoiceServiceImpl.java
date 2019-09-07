@@ -66,6 +66,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception{
 
+        //  testJoing();
         InvoiceVO invoiceVO1 =new InvoiceVO();
         Invoice saveInvoice =new Invoice();
         try {
@@ -93,4 +94,14 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         return invoiceVO;
     }
+
+    public void testJoing() throws Exception{
+    List<Object>  test =  invoiceDao.testJoin();
+        for (Object temp:test) {
+            System.out.println("DATA ======="+temp.toString());
+        }
+
+    }
+
+
 }
