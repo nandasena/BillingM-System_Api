@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service("invoiceService")
@@ -66,39 +67,45 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception{
 
-        //  testJoing();
-        InvoiceVO invoiceVO1 =new InvoiceVO();
-        Invoice saveInvoice =new Invoice();
-        try {
-        saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
-        saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
-        saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
-        saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
-        saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
-        Long id =  invoiceDao.save(saveInvoice);
-        Invoice insertedInvoice =invoiceDao.get(id);
-
-        List<ItemVO> itemVOList =new ArrayList<>();
-        itemVOList =invoiceVO.getItemList();
-
-        for (ItemVO itemVO:itemVOList) {
-            InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
-            Item item = itemDao.get(itemVO.getItemId());
-            invoiceItemDetail.setItem(item);
-            invoiceItemDetail.setInvoice(insertedInvoice);
-            invoiceItemDetailDao.save(invoiceItemDetail);
-        }
-        }catch (Exception e){
-            throw e;
-        }
-
-        return invoiceVO;
+          testJoing();
+//        InvoiceVO invoiceVO1 =new InvoiceVO();
+//        Invoice saveInvoice =new Invoice();
+//        try {
+//        saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
+//        saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
+//        saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
+//        saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
+//        saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
+//        Long id =  invoiceDao.save(saveInvoice);
+//        Invoice insertedInvoice =invoiceDao.get(id);
+//
+//        List<ItemVO> itemVOList =new ArrayList<>();
+//        itemVOList =invoiceVO.getItemList();
+//
+//        for (ItemVO itemVO:itemVOList) {
+//            InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
+//            Item item = itemDao.get(itemVO.getItemId());
+//            invoiceItemDetail.setItem(item);
+//            invoiceItemDetail.setInvoice(insertedInvoice);
+//            invoiceItemDetailDao.save(invoiceItemDetail);
+//        }
+//        }catch (Exception e){
+//            throw e;
+//        }
+//
+//        return invoiceVO;
+        return  null;
     }
 
     public void testJoing() throws Exception{
-    List<Object>  test =  invoiceDao.testJoin();
-        for (Object temp:test) {
-            System.out.println("DATA ======="+temp.toString());
+    List<Invoice>  test =  invoiceDao.testJoin();
+        for (Invoice temp:test) {
+            System.out.println("come here=========");
+          Set<InvoiceItemDetail> invoiceItemDetails = temp.getInvoiceItemDetails();
+            for (InvoiceItemDetail IIDtemp:invoiceItemDetails) {
+                System.out.println("DATA ======="+IIDtemp.getItem().getName());
+            }
+
         }
 
     }

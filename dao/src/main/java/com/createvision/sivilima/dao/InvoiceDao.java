@@ -9,5 +9,5 @@ import java.util.List;
 public interface InvoiceDao extends AbstractDao<Invoice, Long> {
 
     List<Invoice> getInvoiceByAmount() throws Exception;
-    public List<Object> testJoin () throws Exception;
+    public List<Invoice> testJoin () throws Exception;
 }
