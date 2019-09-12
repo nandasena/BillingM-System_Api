@@ -1,12 +1,18 @@
+-- can not get same column name in hibernate there for when show same name assign another name to that column
 DELIMITER //
-CREATE PROCEDURE getAllInvoie()
+CREATE PROCEDURE getAllInvoie(amount double)
+
 BEGIN
- select *
+
+ select iid.*,items.name
  from invoices ins
  left JOIN invoice_item_Details iid
  on ins.id = iid.invoice_id
  left JOIN items on iid.item_id = items.id
  where items.name ="pasan"
- and ins.advance_amount =2000;
+ and ins.advance_amount =amount;
+
  END //
+
 DELIMITER ;
+

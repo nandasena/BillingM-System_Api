@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
+import sun.security.krb5.internal.CredentialsUtil;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception{
 
-          testJoing();
+        sampleStoreProcedure();
 //        InvoiceVO invoiceVO1 =new InvoiceVO();
 //        Invoice saveInvoice =new Invoice();
 //        try {
@@ -97,19 +98,18 @@ public class InvoiceServiceImpl implements InvoiceService {
         return  null;
     }
 
-    public void testJoing() throws Exception{
-    List<Object[]>  test =  invoiceDao.testJoin();
-        for(Object[] row : test){
+    public void sampleJoinQuery() throws Exception{
+    List<Invoice>  test =  invoiceDao.sampleJoinQuery();
+    }
 
-            System.out.println("data is======"+row[0].toString());
-            System.out.println("data is======"+row[6].toString());
-            System.out.println("data is======"+row[7].toString());
-//            emp.setId(Long.parseLong(row[0].toString()));
-//            emp.setName(row[1].toString());
-//            emp.setSalary(Double.parseDouble(row[2].toString()));
-//            System.out.println(emp);
+    public void sampleStoreProcedure() throws Exception{
+
+        List<Object[]> result =invoiceDao.sampleStoreProcedure();
+        for(Object[] row : result){
+            System.out.println("sample data ======"+row[0].toString());
+            System.out.println("sample data======"+row[6].toString());
+            System.out.println("sample data======"+row[7].toString());
         }
-
     }
 
 
