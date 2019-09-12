@@ -6,8 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository("invoiceDao")
