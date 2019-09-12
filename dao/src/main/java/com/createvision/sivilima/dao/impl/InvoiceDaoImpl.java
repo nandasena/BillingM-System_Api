@@ -3,6 +3,7 @@ package com.createvision.sivilima.dao.impl;
 import com.createvision.sivilima.dao.InvoiceDao;
 import com.createvision.sivilima.model.Invoice;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -24,19 +25,14 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
     @Override
     public List<Invoice> testJoin () throws Exception {
 
-//        Criteria IinCri= getSession().createCriteria(Invoice.class,"in");
-//        Criteria It =IinCri.createCriteria("invoiceItemDetails","itd");
-//        Criteria ITD =It.createCriteria("item","it");
-//        IinCri.add(Restrictions.eq("advanceAmount",2000.00));
-//        ITD.add(Restrictions.eq("name","pasan"));
-//        List<Invoice> result =IinCri.list();
-
-        Criteria IinCri= getSession().createCriteria(Invoice.class,"invoice");
-                 IinCri.createAlias("invoice.invoiceItemDetails","invoiceItemDetails");
-                 IinCri.createAlias("invoiceItemDetails.item","invoiceItem");
-                 IinCri.add(Restrictions.eq("invoiceItem.name","pasan"));
-                 IinCri.add(Restrictions.eq("invoice.advanceAmount",2000.00));
-                 List<Invoice> result =IinCri.list();
+//        Criteria IinCri= getSession().createCriteria(Invoice.class,"invoice");
+//                 IinCri.createAlias("invoice.invoiceItemDetails","invoiceItemDetails");
+//                 IinCri.createAlias("invoiceItemDetails.item","invoiceItem");
+//                 IinCri.add(Restrictions.eq("invoiceItem.name","pasan"));
+//                 IinCri.add(Restrictions.eq("invoice.advanceAmount",2000.00));
+//                 List<Invoice> result =IinCri.list();
+        Query query = getSession().createSQLQuery("CALL getAllInvoie()").addEntity(Invoice.class);
+        List<Invoice> result = query.list();
 
         return result;
     }

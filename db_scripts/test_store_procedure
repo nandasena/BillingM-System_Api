@@ -1,0 +1,12 @@
+DELIMITER //
+CREATE PROCEDURE getAllInvoie()
+BEGIN
+ select *
+ from invoices ins
+ left JOIN invoice_item_Details iid
+ on ins.id = iid.invoice_id
+ left JOIN items on iid.item_id = items.id
+ where items.name ="pasan"
+ and ins.advance_amount =2000;
+ END //
+DELIMITER ;
