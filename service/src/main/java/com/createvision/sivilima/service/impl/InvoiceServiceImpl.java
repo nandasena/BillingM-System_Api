@@ -98,14 +98,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     public void testJoing() throws Exception{
-    List<Invoice>  test =  invoiceDao.testJoin();
-        for (Invoice temp:test) {
-            System.out.println("come here=========");
-          Set<InvoiceItemDetail> invoiceItemDetails = temp.getInvoiceItemDetails();
-            for (InvoiceItemDetail IIDtemp:invoiceItemDetails) {
-                System.out.println("DATA ======="+IIDtemp.getItem().getName());
-            }
+    List<Object[]>  test =  invoiceDao.testJoin();
+        for(Object[] row : test){
 
+            System.out.println("data is======"+row[0].toString());
+            System.out.println("data is======"+row[6].toString());
+            System.out.println("data is======"+row[7].toString());
+//            emp.setId(Long.parseLong(row[0].toString()));
+//            emp.setName(row[1].toString());
+//            emp.setSalary(Double.parseDouble(row[2].toString()));
+//            System.out.println(emp);
         }
 
     }

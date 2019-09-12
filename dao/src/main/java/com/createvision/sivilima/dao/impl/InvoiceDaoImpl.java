@@ -23,7 +23,7 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
     }
 
     @Override
-    public List<Invoice> testJoin () throws Exception {
+    public List<Object[]> testJoin () throws Exception {
 
 //        Criteria IinCri= getSession().createCriteria(Invoice.class,"invoice");
 //                 IinCri.createAlias("invoice.invoiceItemDetails","invoiceItemDetails");
@@ -31,9 +31,10 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
 //                 IinCri.add(Restrictions.eq("invoiceItem.name","pasan"));
 //                 IinCri.add(Restrictions.eq("invoice.advanceAmount",2000.00));
 //                 List<Invoice> result =IinCri.list();
-        Query query = getSession().createSQLQuery("CALL getAllInvoie()").addEntity(Invoice.class);
-        List<Invoice> result = query.list();
-
+//        Query query = getSession().createSQLQuery("CALL getAllInvoie()").addEntity(Invoice.class);
+//        List<Invoice> result = query.list();
+        Query query = getSession().createSQLQuery("select iid.*,items.name from invoices ins left JOIN invoice_item_Details iid on ins.id = iid.invoice_id left JOIN items on iid.item_id = items.id where items.name =\"pasan\" and ins.advance_amount =2000;");
+        List<Object[]> result = query.list();
         return result;
     }
 }
