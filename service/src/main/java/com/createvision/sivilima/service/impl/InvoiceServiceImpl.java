@@ -8,6 +8,7 @@ import com.createvision.sivilima.model.Item;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -51,11 +52,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void updateInvoice(long id, Invoice invoice) throws Exception {
-        Invoice invoiceDB = getInvoiceById(id);
-        invoiceDB.setTotalAmount(invoice.getTotalAmount());
+    public InvoiceVO updateInvoice(InvoiceVO invoiceVO) throws Exception {
+        try {
+            Invoice invoiceDB = getInvoiceById(invoiceVO.getId());
+            invoiceDB.setTotalAmount(invoiceVO.getTotalAmount());
+            invoiceDao.update(invoiceDB);
+        }catch (Exception e){
+            throw e;
+        }
 
-        invoiceDao.update(invoiceDB);
+
+        return null;
     }
 
     @Override
@@ -68,34 +75,34 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception{
 
-        sampleStoreProcedure();
-//        InvoiceVO invoiceVO1 =new InvoiceVO();
-//        Invoice saveInvoice =new Invoice();
-//        try {
-//        saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
-//        saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
-//        saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
-//        saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
-//        saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
-//        Long id =  invoiceDao.save(saveInvoice);
-//        Invoice insertedInvoice =invoiceDao.get(id);
-//
-//        List<ItemVO> itemVOList =new ArrayList<>();
-//        itemVOList =invoiceVO.getItemList();
-//
-//        for (ItemVO itemVO:itemVOList) {
-//            InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
-//            Item item = itemDao.get(itemVO.getItemId());
-//            invoiceItemDetail.setItem(item);
-//            invoiceItemDetail.setInvoice(insertedInvoice);
-//            invoiceItemDetailDao.save(invoiceItemDetail);
-//        }
-//        }catch (Exception e){
-//            throw e;
-//        }
-//
-//        return invoiceVO;
-        return  null;
+      //  sampleStoreProcedure();
+        InvoiceVO invoiceVO1 =new InvoiceVO();
+        Invoice saveInvoice =new Invoice();
+        try {
+        saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
+        saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
+        saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
+        saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
+        saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
+        Long id =  invoiceDao.save(saveInvoice);
+        Invoice insertedInvoice =invoiceDao.get(id);
+
+        List<ItemVO> itemVOList =new ArrayList<>();
+        itemVOList =invoiceVO.getItemList();
+
+        for (ItemVO itemVO:itemVOList) {
+            InvoiceItemDetail invoiceItemDetail =new InvoiceItemDetail();
+            Item item = itemDao.get(itemVO.getItemId());
+            invoiceItemDetail.setItem(item);
+            invoiceItemDetail.setInvoice(insertedInvoice);
+            invoiceItemDetailDao.save(invoiceItemDetail);
+        }
+        }catch (Exception e){
+            throw e;
+        }
+
+        return invoiceVO;
+
     }
 
     public void sampleJoinQuery() throws Exception{
@@ -111,6 +118,4 @@ public class InvoiceServiceImpl implements InvoiceService {
             System.out.println("sample data======"+row[7].toString());
         }
     }
-
-
 }

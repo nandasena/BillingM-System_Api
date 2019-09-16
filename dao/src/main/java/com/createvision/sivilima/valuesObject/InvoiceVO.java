@@ -17,6 +17,7 @@ public class InvoiceVO {
     private Set<InvoiceItemDetail> invoiceItemDetails = new HashSet<InvoiceItemDetail>(0);
     private Long userId;
     private List<ItemVO> itemList;
+    private Long id;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -44,4 +45,7 @@ public class InvoiceVO {
 
     public List<ItemVO> getItemList() { return itemList; }
     public void setItemList(List<ItemVO> itemList) { this.itemList = itemList; }
+
+    public Long getId() {return id;}
+    public void setId(Long id) { this.id = id; }
 }

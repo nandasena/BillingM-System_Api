@@ -16,10 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -121,9 +118,20 @@ public class InvoiceController {
         }
 
     }
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<Object> saveInvoice1 () throws Exception {
+    public ResponseEntity<Object> updateInvoice(@RequestBody InvoiceVO invoiceVO) throws Exception {
+        try {
+            InvoiceVO updateInvoice =invoiceService.updateInvoice(invoiceVO);
+            return ResponseEntity.ok(updateInvoice);
+        }catch (Exception e){
+            return ResponseEntity.ok(e);
+        }
+
+    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Object> deleteInvoice(@PathVariable("id") Long id) throws Exception {
         try {
             InvoiceVO saveInvoice =new InvoiceVO();
             return ResponseEntity.ok(saveInvoice);
