@@ -74,16 +74,16 @@ public class InvoiceController {
 
             List<Invoice> invoices = invoiceService.getAllInvoices();
             List<InvoiceVO> invoiceVOS = new ArrayList<>();
-            ReturnVO returnVO =new ReturnVO();
+            ReturnVO returnVO = new ReturnVO();
             LOGGER.info("Invoice count {}", invoices.size());
             for (Invoice invoiceTmp : invoices) {
                 User user = invoiceTmp.getUser();
                 InvoiceVO invoiceVO = new InvoiceVO();
                 invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
-                if(user !=null){
-                UserVO userVO = new UserVO();
-                BeanUtils.copyProperties(user, userVO);
-             //   invoiceVO.setUser(userVO);
+                if (user != null) {
+                    UserVO userVO = new UserVO();
+                    BeanUtils.copyProperties(user, userVO);
+                    //   invoiceVO.setUser(userVO);
 
                 }
                 invoiceVOS.add(invoiceVO);
@@ -102,15 +102,15 @@ public class InvoiceController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> saveInvoice (@RequestBody InvoiceVO invoiceVO) throws Exception {
-        ReturnVO returnVO =new ReturnVO();
+    public ResponseEntity<Object> saveInvoice(@RequestBody InvoiceVO invoiceVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
         try {
             InvoiceVO insetedInvoice = invoiceService.createNewInvoice(invoiceVO);
             returnVO.setResult(insetedInvoice);
             returnVO.setSuccess(true);
             returnVO.setStatusCode(200);
             return ResponseEntity.ok(returnVO);
-        }catch (Exception e){
+        } catch (Exception e) {
             returnVO.setResult(e);
             returnVO.setStatusCode(5001);
             returnVO.setSuccess(false);
@@ -118,24 +118,32 @@ public class InvoiceController {
         }
 
     }
+
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Object> updateInvoice(@RequestBody InvoiceVO invoiceVO) throws Exception {
         try {
-            InvoiceVO updateInvoice =invoiceService.updateInvoice(invoiceVO);
+            InvoiceVO updateInvoice = invoiceService.updateInvoice(invoiceVO);
             return ResponseEntity.ok(updateInvoice);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(e);
         }
 
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Object> deleteInvoice(@PathVariable("id") Long id) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
         try {
-            InvoiceVO saveInvoice =new InvoiceVO();
-            return ResponseEntity.ok(saveInvoice);
-        }catch (Exception e){
+            boolean isTrue = invoiceService.deleteInvoice(id);
+            returnVO.setSuccess(isTrue);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
             return ResponseEntity.ok(e);
         }
 
