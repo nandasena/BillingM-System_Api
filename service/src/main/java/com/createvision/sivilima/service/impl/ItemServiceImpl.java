@@ -38,6 +38,8 @@ public class ItemServiceImpl implements ItemService {
 
                 for (ItemDetail temItem : itemDetail) {
                     ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                    itemDetailsVO.setId(temItem.getId());
+                    itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
                     itemDetailsVO.setPrice(temItem.getPrice());
                     itemDetailsVO.setQuantity(temItem.getQuantity());
                     itemDetailList.add(itemDetailsVO);

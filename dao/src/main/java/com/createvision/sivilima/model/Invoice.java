@@ -113,7 +113,7 @@ public class /**/Invoice extends BaseObject implements Serializable {
     }
 
     @Basic
-    @Column(name = "is_delete", columnDefinition = "boolean default false")
+    @Column(name = "is_delete",columnDefinition = "boolean default false")
     private Boolean isDelete;
 
     public Boolean getDelete() {

@@ -34,7 +34,7 @@ public class ItemDetail extends BaseObject implements Serializable {
     private Date purchaseDate;
 
     @Basic
-    @Column(name = "available_quantity")
+    @Column(name = "available_quantity",nullable = false)
     private double availableQuantity;
 
 
