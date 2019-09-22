@@ -101,12 +101,16 @@ public class InvoiceServiceImpl implements InvoiceService {
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
+                double availableQty =itemDetail.getAvailableQuantity();
+                availableQty = availableQty-itemVO.getSellingQuantity();
+                itemDetail.setAvailableQuantity(availableQty);
                 invoiceItemDetail.setItem(item);
                 invoiceItemDetail.setItemDetail(itemDetail);
                 invoiceItemDetail.setInvoice(insertedInvoice);
                 invoiceItemDetail.setSellingQuantity(itemVO.getSellingQuantity());
 
                 invoiceItemDetailDao.save(invoiceItemDetail);
+                itemDetailDao.save(itemDetail);
             }
         } catch (Exception e) {
             throw e;
