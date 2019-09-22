@@ -10,6 +10,7 @@ public class ItemVO {
     Long itemId;
     String itemName;
     String description;
+    Long categoryId;
     Set<ItemDetailsVO> itemDetailList;
 
 
@@ -25,6 +26,11 @@ public class ItemVO {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
+    public Long getCategoryId() { return categoryId; }
+    public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+
     public Set<ItemDetailsVO> getItemDetailList() { return itemDetailList; }
     public void setItemDetailList(Set<ItemDetailsVO> itemDetailList) { this.itemDetailList = itemDetailList; }
+
+
 }

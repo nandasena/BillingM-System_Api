@@ -26,6 +26,10 @@ public class ItemDetail extends BaseObject implements Serializable {
     private double price;
 
     @Basic
+    @Column(name = "cost_price",nullable = false)
+    private double costPrice;
+
+    @Basic
     @Column(name = "quantity")
     private double quantity;
 
@@ -52,4 +56,7 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public double getAvailableQuantity() {return availableQuantity;}
     public void setAvailableQuantity(double availableQuantity) { this.availableQuantity = availableQuantity; }
+
+    public double getCostPrice() {return costPrice; }
+    public void setCostPrice(double costPrice) {this.costPrice = costPrice;}
 }

@@ -1,5 +1,7 @@
 package com.createvision.sivilima.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +34,12 @@ public class Item  extends BaseObject implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
     private Set<ItemDetail> itemDetails = new HashSet<ItemDetail>(0);
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id",nullable = false)
+    @JsonIgnore
+    private Category category;
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
@@ -48,5 +56,8 @@ public class Item  extends BaseObject implements Serializable {
     public void setInvoiceItemDetails(Set<InvoiceItemDetail> invoiceItemDetails) { this.invoiceItemDetails = invoiceItemDetails; }
 
     public Set<ItemDetail> getItemDetails() { return itemDetails; }
-    public void setItemDetails(Set<ItemDetail> itemDetails) { this.itemDetails = itemDetails; }
+    public void setItemDetails(Set<ItemDetail> itemDetails) { this.itemDetails = itemDetails;}
+
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category;}
 }

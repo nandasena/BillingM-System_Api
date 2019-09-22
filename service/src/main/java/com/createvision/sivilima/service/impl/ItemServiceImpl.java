@@ -35,13 +35,16 @@ public class ItemServiceImpl implements ItemService {
                 itemVO.setDescription(temp.getDescription());
                 itemVO.setItemName(temp.getName());
                 itemVO.setId(temp.getId());
+                itemVO.setCategoryId(temp.getCategory().getId());
 
                 for (ItemDetail temItem : itemDetail) {
                     ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
                     itemDetailsVO.setId(temItem.getId());
                     itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
-                    itemDetailsVO.setPrice(temItem.getPrice());
+                    itemDetailsVO.setSellingPrice(temItem.getPrice());
+                    itemDetailsVO.setCostPrice(temItem.getCostPrice());
                     itemDetailsVO.setQuantity(temItem.getQuantity());
+
                     itemDetailList.add(itemDetailsVO);
                 }
                 itemVO.setItemDetailList(itemDetailList);
