@@ -33,6 +33,11 @@ public class ItemDetail extends BaseObject implements Serializable {
     @Column(name = "purchase_date")
     private Date purchaseDate;
 
+    @Basic
+    @Column(name = "available_quantity")
+    private double availableQuantity;
+
+
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
 
@@ -44,4 +49,7 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public Date getPurchaseDate() { return purchaseDate; }
     public void setPurchaseDate(Date purchaseDate) { this.purchaseDate = purchaseDate; }
+
+    public double getAvailableQuantity() {return availableQuantity;}
+    public void setAvailableQuantity(double availableQuantity) { this.availableQuantity = availableQuantity; }
 }
