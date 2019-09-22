@@ -52,7 +52,7 @@ public class InvoiceController {
                 if (user != null) {
                     UserVO userVO = new UserVO();
                     BeanUtils.copyProperties(user, userVO);
-                    //   invoiceVO.setUser(userVO);
+                   // invoiceVO.setUser(userVO);
                 }
                 invoiceVOS.add(invoiceVO);
                 returnVO.setResult(invoiceVOS);

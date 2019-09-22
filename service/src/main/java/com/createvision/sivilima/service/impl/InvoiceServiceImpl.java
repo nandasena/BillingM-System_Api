@@ -3,9 +3,11 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.InvoiceDao;
 import com.createvision.sivilima.dao.InvoiceItemDetailDao;
 import com.createvision.sivilima.dao.ItemDao;
+import com.createvision.sivilima.dao.ItemDetailDao;
 import com.createvision.sivilima.model.Invoice;
 import com.createvision.sivilima.model.InvoiceItemDetail;
 import com.createvision.sivilima.model.Item;
+import com.createvision.sivilima.model.ItemDetail;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
@@ -34,6 +36,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     InvoiceItemDetailDao invoiceItemDetailDao;
+
+    @Autowired
+    ItemDetailDao itemDetailDao;
 
 
     @Override
@@ -95,8 +100,12 @@ public class InvoiceServiceImpl implements InvoiceService {
             for (ItemVO itemVO : itemVOList) {
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
                 Item item = itemDao.get(itemVO.getItemId());
+                ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
                 invoiceItemDetail.setItem(item);
+                invoiceItemDetail.setItemDetail(itemDetail);
                 invoiceItemDetail.setInvoice(insertedInvoice);
+                invoiceItemDetail.setSellingQuantity(itemVO.getSellingQuantity());
+
                 invoiceItemDetailDao.save(invoiceItemDetail);
             }
         } catch (Exception e) {

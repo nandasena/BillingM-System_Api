@@ -11,6 +11,8 @@ public class ItemVO {
     String itemName;
     String description;
     Long categoryId;
+    Long itemDetailId;
+    double sellingQuantity;
     Set<ItemDetailsVO> itemDetailList;
 
 
@@ -28,6 +30,12 @@ public class ItemVO {
 
     public Long getCategoryId() { return categoryId; }
     public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+
+    public Long getItemDetailId() { return itemDetailId; }
+    public void setItemDetailId(Long itemDetailId) { this.itemDetailId = itemDetailId; }
+
+    public double getSellingQuantity() { return sellingQuantity; }
+    public void setSellingQuantity(double sellingQuantity) { this.sellingQuantity = sellingQuantity; }
 
     public Set<ItemDetailsVO> getItemDetailList() { return itemDetailList; }
     public void setItemDetailList(Set<ItemDetailsVO> itemDetailList) { this.itemDetailList = itemDetailList; }
