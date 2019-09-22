@@ -41,37 +41,6 @@ public class InvoiceController {
         LOGGER.info("Invoice testing");
 
         try {
-//            Invoice invoice = new Invoice();
-//            invoice.setTotalAmount(1000.00);
-//            invoice.setAdvanceAmount(2000.00);
-//            invoice.setBalanceAmount(500.00);
-//            invoice.setElivaryDate(new Date());
-//            invoice.setInvoiceDate(new Date());
-//            invoice.setInvoiceNumber(UUID.randomUUID().toString());
-//            invoiceService.saveInvoice(invoice);
-//
-//            Item item = new Item();
-//            item.setCreateDate(new Date());
-//            item.setDescription("Testing");
-//            item.setLastUpdateDate(new Date());
-//            item.setName("Item 1");
-//            itemService.saveItem(item);
-//
-//            InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
-//            invoiceItemDetail.setInvoice(invoice);
-//            invoiceItemDetail.setItem(item);
-//            invoiceItemDetailService.saveInvoiceItemDetail(invoiceItemDetail);
-//
-//            InvoiceItemDetail invoiceItemDetail2 = new InvoiceItemDetail();
-//            invoiceItemDetail2.setInvoice(invoice);
-//            invoiceItemDetail2.setItem(item);
-//            invoiceItemDetailService.saveInvoiceItemDetail(invoiceItemDetail2);
-//
-//            Set<InvoiceItemDetail> invoiceItemDetails = new HashSet<>();
-//            invoiceItemDetails.add(invoiceItemDetail);
-//            invoiceItemDetails.add(invoiceItemDetail2);
-//            invoice.setInvoiceItemDetails(invoiceItemDetails);
-
             List<Invoice> invoices = invoiceService.getAllInvoices();
             List<InvoiceVO> invoiceVOS = new ArrayList<>();
             ReturnVO returnVO = new ReturnVO();
@@ -84,13 +53,11 @@ public class InvoiceController {
                     UserVO userVO = new UserVO();
                     BeanUtils.copyProperties(user, userVO);
                     //   invoiceVO.setUser(userVO);
-
                 }
                 invoiceVOS.add(invoiceVO);
                 returnVO.setResult(invoiceVOS);
                 returnVO.setSuccess(true);
                 returnVO.setStatusCode(200);
-
             }
 
             return ResponseEntity.ok(returnVO);

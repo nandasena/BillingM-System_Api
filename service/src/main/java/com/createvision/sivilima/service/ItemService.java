@@ -1,12 +1,13 @@
 package com.createvision.sivilima.service;
 
 import com.createvision.sivilima.model.Item;
+import com.createvision.sivilima.valuesObject.ItemVO;
 
 import java.util.List;
 
 public interface ItemService {
 
-    List<Item> getAllItems() throws Exception;
+    List<ItemVO> getAllItems() throws Exception;
 
     Item getItemById(long id) throws Exception;
 
