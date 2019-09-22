@@ -12,6 +12,4 @@ public class Category extends BaseObject implements Serializable {
     @Basic
     @Column(name = "name")
     private String name;
-
-
 }
