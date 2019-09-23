@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/item")
 public class ItemController {
     @Autowired
     private ItemService itemService;
