@@ -34,12 +34,12 @@ public class ItemServiceImpl implements ItemService {
                 Set<ItemDetailsVO> itemDetailList = new HashSet<>();
                 itemVO.setDescription(temp.getDescription());
                 itemVO.setItemName(temp.getName());
-                itemVO.setId(temp.getId());
+                itemVO.setItemId(temp.getId());
                 itemVO.setCategoryId(temp.getCategory().getId());
 
                 for (ItemDetail temItem : itemDetail) {
                     ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
-                    itemDetailsVO.setId(temItem.getId());
+                    itemDetailsVO.setItemDetailId(temItem.getId());
                     itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
                     itemDetailsVO.setSellingPrice(temItem.getPrice());
                     itemDetailsVO.setCostPrice(temItem.getCostPrice());

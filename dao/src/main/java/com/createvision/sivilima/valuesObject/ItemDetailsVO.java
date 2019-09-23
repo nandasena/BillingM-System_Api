@@ -1,14 +1,15 @@
 package com.createvision.sivilima.valuesObject;
 
 public class ItemDetailsVO {
-    long id;
+    long itemDetailId;
     double sellingPrice;
     double costPrice;
     double quantity;
     double availableQuantity;
 
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id; }
+
+    public long getItemDetailId() { return itemDetailId;}
+    public void setItemDetailId(long itemDetailId) { this.itemDetailId = itemDetailId; }
 
     public double getSellingPrice() { return sellingPrice; }
     public void setSellingPrice(double sellingPrice) { this.sellingPrice = sellingPrice;}

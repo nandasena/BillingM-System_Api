@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class ItemVO {
-    Long id;
     Long itemId;
     String itemName;
     String description;
@@ -15,9 +14,6 @@ public class ItemVO {
     double sellingQuantity;
     Set<ItemDetailsVO> itemDetailList;
 
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id;}
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
