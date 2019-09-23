@@ -1,9 +1,12 @@
 package com.createvision.sivilima.service.impl;
 
+import com.createvision.sivilima.dao.CategoryDao;
 import com.createvision.sivilima.dao.ItemDao;
+import com.createvision.sivilima.model.Category;
 import com.createvision.sivilima.model.Item;
 import com.createvision.sivilima.model.ItemDetail;
 import com.createvision.sivilima.service.ItemService;
+import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemDao itemDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @Override
     public List<ItemVO> getAllItems() throws Exception {
@@ -81,5 +87,18 @@ public class ItemServiceImpl implements ItemService {
         Item item = getItemById(id);
 
         itemDao.delete(item);
+    }
+
+    @Override
+    public List<CategoryVO> getAllCategory() throws Exception {
+        List<Category> categoryList =categoryDao.getAll();
+        List<CategoryVO>categoryVOList =new ArrayList<>();
+        for (Category tempCategory:categoryList) {
+            CategoryVO categoryVO =new CategoryVO();
+            categoryVO.setCategoryId(tempCategory.getId());
+            categoryVO.setName(tempCategory.getName());
+            categoryVOList.add(categoryVO);
+        }
+        return categoryVOList;
     }
 }
