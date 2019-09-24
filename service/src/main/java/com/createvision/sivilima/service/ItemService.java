@@ -12,7 +12,7 @@ public interface ItemService {
 
     Item getItemById(long id) throws Exception;
 
-    void saveItem(Item item) throws Exception;
+    ItemVO createNewItem(ItemVO itemVO) throws Exception;
 
     void updateItem(long id, Item item) throws  Exception;
 

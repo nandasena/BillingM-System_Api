@@ -6,6 +6,7 @@ import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,24 @@ public class ItemController {
         ReturnVO returnVO = new ReturnVO();
         try {
             List<ItemVO> itemVOList = itemService.getAllItems();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(itemVOList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> addItem(@RequestBody ItemVO itemVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            ItemVO itemVOList = itemService.createNewItem(itemVO);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(itemVOList);
