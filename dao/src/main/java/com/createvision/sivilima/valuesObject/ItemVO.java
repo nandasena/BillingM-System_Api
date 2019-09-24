@@ -1,8 +1,5 @@
 package com.createvision.sivilima.valuesObject;
 
-import com.createvision.sivilima.model.ItemDetail;
-
-import java.util.List;
 import java.util.Set;
 
 public class ItemVO {

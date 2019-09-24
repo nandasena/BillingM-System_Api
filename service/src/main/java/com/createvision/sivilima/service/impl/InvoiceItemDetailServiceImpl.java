@@ -1,7 +1,7 @@
 package com.createvision.sivilima.service.impl;
 
 import com.createvision.sivilima.dao.InvoiceItemDetailDao;
-import com.createvision.sivilima.model.InvoiceItemDetail;
+import com.createvision.sivilima.TableModel.InvoiceItemDetail;
 import com.createvision.sivilima.service.InvoiceItemDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

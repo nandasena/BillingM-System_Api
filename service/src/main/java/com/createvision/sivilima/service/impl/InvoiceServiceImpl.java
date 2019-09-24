@@ -4,24 +4,21 @@ import com.createvision.sivilima.dao.InvoiceDao;
 import com.createvision.sivilima.dao.InvoiceItemDetailDao;
 import com.createvision.sivilima.dao.ItemDao;
 import com.createvision.sivilima.dao.ItemDetailDao;
-import com.createvision.sivilima.model.Invoice;
-import com.createvision.sivilima.model.InvoiceItemDetail;
-import com.createvision.sivilima.model.Item;
-import com.createvision.sivilima.model.ItemDetail;
+import com.createvision.sivilima.TableModel.Invoice;
+import com.createvision.sivilima.TableModel.InvoiceItemDetail;
+import com.createvision.sivilima.TableModel.Item;
+import com.createvision.sivilima.TableModel.ItemDetail;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
-import sun.security.krb5.internal.CredentialsUtil;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Service("invoiceService")

@@ -1,4 +1,4 @@
-package com.createvision.sivilima.model;
+package com.createvision.sivilima.TableModel;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

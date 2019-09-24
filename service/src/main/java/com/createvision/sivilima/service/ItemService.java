@@ -1,6 +1,6 @@
 package com.createvision.sivilima.service;
 
-import com.createvision.sivilima.model.Item;
+import com.createvision.sivilima.TableModel.Item;
 import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 

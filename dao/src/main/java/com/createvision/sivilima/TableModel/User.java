@@ -1,4 +1,4 @@
-package com.createvision.sivilima.model;
+package com.createvision.sivilima.TableModel;
 
 //import com.sun.xml.internal.ws.developer.StreamingAttachment;
 
@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity

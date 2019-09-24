@@ -1,7 +1,7 @@
 package com.createvision.sivilima.dao.impl;
 
 import com.createvision.sivilima.dao.InvoiceDao;
-import com.createvision.sivilima.model.Invoice;
+import com.createvision.sivilima.TableModel.Invoice;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;

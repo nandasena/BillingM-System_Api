@@ -2,9 +2,9 @@ package com.createvision.sivilima.service.impl;
 
 import com.createvision.sivilima.dao.CategoryDao;
 import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.model.Category;
-import com.createvision.sivilima.model.Item;
-import com.createvision.sivilima.model.ItemDetail;
+import com.createvision.sivilima.TableModel.Category;
+import com.createvision.sivilima.TableModel.Item;
+import com.createvision.sivilima.TableModel.ItemDetail;
 import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;

@@ -1,14 +1,10 @@
-package com.createvision.sivilima.model;
+package com.createvision.sivilima.TableModel;
 
-import org.hibernate.annotations.OptimisticLock;
-import org.jboss.logging.LoggingClass;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.naming.Name;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
@@ -19,7 +15,6 @@ public class ItemDetail extends BaseObject implements Serializable {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
-
 
     @Basic
     @Column(name = "price")
@@ -41,6 +36,12 @@ public class ItemDetail extends BaseObject implements Serializable {
     @Column(name = "available_quantity",nullable = false)
     private double availableQuantity;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id",nullable = false,columnDefinition ="int default 1")
+    @JsonIgnore
+    private CompanyDetail companyDetail;
+
 
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
@@ -59,4 +60,7 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public double getCostPrice() {return costPrice; }
     public void setCostPrice(double costPrice) {this.costPrice = costPrice;}
+
+    public CompanyDetail getCompanyDetail() { return companyDetail; }
+    public void setCompanyDetail(CompanyDetail companyDetail) { this.companyDetail = companyDetail; }
 }

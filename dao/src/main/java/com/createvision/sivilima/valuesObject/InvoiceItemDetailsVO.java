@@ -1,7 +1,7 @@
 package com.createvision.sivilima.valuesObject;
 
-import com.createvision.sivilima.model.Invoice;
-import com.createvision.sivilima.model.Item;
+import com.createvision.sivilima.TableModel.Invoice;
+import com.createvision.sivilima.TableModel.Item;
 
 public class InvoiceItemDetailsVO {
 
