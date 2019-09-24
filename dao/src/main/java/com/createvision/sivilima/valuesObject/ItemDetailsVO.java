@@ -6,6 +6,9 @@ public class ItemDetailsVO {
     double costPrice;
     double quantity;
     double availableQuantity;
+    long itemId;
+    Long companyId;
+    String purchaseDate;
 
 
     public long getItemDetailId() { return itemDetailId;}
@@ -22,4 +25,13 @@ public class ItemDetailsVO {
 
     public double getAvailableQuantity() { return availableQuantity;}
     public void setAvailableQuantity(double availableQuantity) { this.availableQuantity = availableQuantity;}
+
+    public long getItemId() { return itemId; }
+    public void setItemId(long itemId) { this.itemId = itemId; }
+
+    public Long getCompanyId() { return companyId; }
+    public void setCompanyId(Long companyId) { this.companyId = companyId;}
+
+    public String getPurchaseDate() { return purchaseDate; }
+    public void setPurchaseDate(String purchaseDate) { this.purchaseDate = purchaseDate; }
 }

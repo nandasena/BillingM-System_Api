@@ -12,12 +12,24 @@ import java.util.Date;
 @Repository("commonFunctionsImpl")
 public class CommonFunctionsImpl {
 
-    public Date getCurrentTime(String timeZone)throws Exception{
+    public Date getCorrentDateAndTimeByTimeZone(String timeZone) throws Exception {
         LocalDateTime today = LocalDateTime.now();
         ZoneId id = ZoneId.of(timeZone);  //Create timezone
         ZonedDateTime zonedDateTime = ZonedDateTime.of(today, id);  //Add timezone to
         String formattedDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(zonedDateTime);
-        Date date=new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(formattedDateTime);
+        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(formattedDateTime);
         return date;
     }
+
+    public Date getDateTimeByDateString(String dateString) throws Exception {
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } catch (Exception e) {
+            throw e;
+        }
+        return date;
+    }
+
+
 }

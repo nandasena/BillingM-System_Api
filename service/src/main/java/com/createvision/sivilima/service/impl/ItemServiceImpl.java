@@ -9,7 +9,6 @@ import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.service.impl.CommonFunctionsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemVO createNewItem(ItemVO itemVO) throws Exception {
         try {
-            Date date = commonFunctions.getCurrentTime("Asia/Colombo");
+            Date date = commonFunctions.getCorrentDateAndTimeByTimeZone("Asia/Colombo");
             Item item = new Item();
             Category category = categoryDao.get(itemVO.getCategoryId());
             item.setCategory(category);
