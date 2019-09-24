@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-@RequestMapping("/invoices")
+@RequestMapping("/invoice")
 public class InvoiceController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceController.class);

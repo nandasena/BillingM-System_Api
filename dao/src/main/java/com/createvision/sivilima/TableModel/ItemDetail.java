@@ -38,7 +38,7 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id",nullable = false,columnDefinition ="int default 1")
+    @JoinColumn(name = "company_id",nullable = false)
     @JsonIgnore
     private CompanyDetail companyDetail;
 
