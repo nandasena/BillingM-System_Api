@@ -71,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemVO createNewItem(ItemVO itemVO) throws Exception {
         try {
-            Date date = commonFunctions.getCorrentDateAndTimeByTimeZone("Asia/Colombo");
+            Date date = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
             Item item = new Item();
             Category category = categoryDao.get(itemVO.getCategoryId());
             item.setCategory(category);

@@ -61,7 +61,7 @@ public class ItemDetailServiceImpl implements ItemDetailService {
         try {
             Item item = itemDao.get(itemDetailsVO.getItemId());
             CompanyDetail companyDetail = companyDao.get(itemDetailsVO.getCompanyId());
-            Date createdDate = commonFunctions.getCorrentDateAndTimeByTimeZone("Asia/Colombo");
+            Date createdDate = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
             Date purchaseDate = commonFunctions.getDateTimeByDateString(itemDetailsVO.getPurchaseDate());
 
             ItemDetail itemDetail = new ItemDetail();

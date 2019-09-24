@@ -12,7 +12,7 @@ import java.util.Date;
 @Repository("commonFunctionsImpl")
 public class CommonFunctionsImpl {
 
-    public Date getCorrentDateAndTimeByTimeZone(String timeZone) throws Exception {
+    public Date getCurrentDateAndTimeByTimeZone(String timeZone) throws Exception {
         LocalDateTime today = LocalDateTime.now();
         ZoneId id = ZoneId.of(timeZone);  //Create timezone
         ZonedDateTime zonedDateTime = ZonedDateTime.of(today, id);  //Add timezone to
