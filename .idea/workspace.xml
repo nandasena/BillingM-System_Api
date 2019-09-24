@@ -250,7 +250,7 @@
       <workItem from="1569136787999" duration="22165000" />
       <workItem from="1569201995419" duration="2309000" />
       <workItem from="1569238604451" duration="8767000" />
-      <workItem from="1569296425516" duration="2232000" />
+      <workItem from="1569296425516" duration="2529000" />
     </task>
     <task id="LOCAL-00001" summary="add funtion to create invoice">
       <created>1567325263617</created>
@@ -483,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569252505127</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add new table">
+      <created>1569300033683</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1569300033683</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new values object to send result to UI" />
     <MESSAGE value="add git file" />
     <MESSAGE value="add return values object to get invoice function" />
     <MESSAGE value="add join query function to test" />
@@ -528,7 +534,8 @@
     <MESSAGE value="change variable name." />
     <MESSAGE value="add new category dao file" />
     <MESSAGE value="add new api to get category list" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new api to get category list" />
+    <MESSAGE value="add new table" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new table" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
