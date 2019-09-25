@@ -42,6 +42,10 @@ public class ItemDetail extends BaseObject implements Serializable {
     @JsonIgnore
     private CompanyDetail companyDetail;
 
+    @Basic
+    @Column(name = "is_delete",nullable = false,columnDefinition = "boolean default false")
+    private boolean isDelete;
+
 
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
@@ -63,4 +67,7 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public CompanyDetail getCompanyDetail() { return companyDetail; }
     public void setCompanyDetail(CompanyDetail companyDetail) { this.companyDetail = companyDetail; }
+
+    public boolean isDelete() { return isDelete; }
+    public void setDelete(boolean delete) { isDelete = delete;}
 }
