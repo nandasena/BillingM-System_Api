@@ -20,7 +20,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getAllItems() throws Exception {
+    public ResponseEntity<Object> getAllCategory() throws Exception {
         ReturnVO returnVO = new ReturnVO();
         try {
             List<CategoryVO> categoryList = itemService.getAllCategory();
