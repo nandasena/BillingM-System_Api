@@ -9,6 +9,7 @@ public class ItemDetailsVO {
     long itemId;
     Long companyId;
     String purchaseDate;
+    boolean isDelete;
 
 
     public long getItemDetailId() { return itemDetailId;}
@@ -34,4 +35,7 @@ public class ItemDetailsVO {
 
     public String getPurchaseDate() { return purchaseDate; }
     public void setPurchaseDate(String purchaseDate) { this.purchaseDate = purchaseDate; }
+
+    public boolean isDelete() { return isDelete;}
+    public void setDelete(boolean delete) { isDelete = delete;}
 }

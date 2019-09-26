@@ -32,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemVO> getAllItems() throws Exception {
         List<ItemVO> itemVOList = new ArrayList<>();
         try {
-            List<Item> itemList = itemDao.getAll();
+            List<Item> itemList = itemDao.getAllItem();
             for (Item temp : itemList) {
                 Set<ItemDetail> itemDetail = new HashSet<>();
                 itemDetail = temp.getItemDetails();
@@ -50,6 +50,7 @@ public class ItemServiceImpl implements ItemService {
                     itemDetailsVO.setSellingPrice(temItem.getPrice());
                     itemDetailsVO.setCostPrice(temItem.getCostPrice());
                     itemDetailsVO.setQuantity(temItem.getQuantity());
+                    itemDetailsVO.setDelete(temItem.isDelete());
 
                     itemDetailList.add(itemDetailsVO);
                 }
