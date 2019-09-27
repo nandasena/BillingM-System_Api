@@ -49,7 +49,7 @@ public class User extends BaseObject implements Serializable {
     private Set<Invoice> invoice = new HashSet<Invoice>(0);
 
     @Basic
-    @Column(name = "is_delete")
+    @Column(name = "is_delete",nullable = false,columnDefinition = "boolean default false")
     private boolean isDelete;
 
     public String getUserName() { return userName; }
