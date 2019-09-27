@@ -38,8 +38,9 @@ public class User extends BaseObject implements Serializable {
     private Date lastUpdatedDate;
 
     @Basic
-    @Column(name = "role_id")
-    private int roleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
+    private UserRole userRole;
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -47,6 +48,9 @@ public class User extends BaseObject implements Serializable {
     @JsonIgnore
     private Set<Invoice> invoice = new HashSet<Invoice>(0);
 
+    @Basic
+    @Column(name = "is_delete")
+    private boolean isDelete;
 
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
@@ -63,9 +67,12 @@ public class User extends BaseObject implements Serializable {
     public Date getLastUpdatedDate() { return lastUpdatedDate; }
     public void setLastUpdatedDate(Date lastUpdatedDate) { this.lastUpdatedDate = lastUpdatedDate; }
 
-    public int getRoleId() { return roleId; }
-    public void setRoleId(int roleId) { this.roleId = roleId; }
+    public UserRole getUserRole() { return userRole; }
+    public void setUserRole(UserRole userRole) { this.userRole = userRole; }
 
     public Set<Invoice> getInvoice() { return invoice; }
     public void setInvoice(Set<Invoice> invoice) { this.invoice = invoice; }
+
+    public boolean isDelete() { return isDelete;}
+    public void setDelete(boolean delete) { isDelete = delete;}
 }
