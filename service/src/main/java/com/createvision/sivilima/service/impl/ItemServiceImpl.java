@@ -32,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemVO> getAllItems() throws Exception {
         List<ItemVO> itemVOList = new ArrayList<>();
         try {
-            List<Item> itemList = itemDao.getAllItem();
+            List<Item> itemList = itemDao.getAll();
             for (Item temp : itemList) {
                 Set<ItemDetail> itemDetail = new HashSet<>();
                 itemDetail = temp.getItemDetails();
@@ -44,15 +44,18 @@ public class ItemServiceImpl implements ItemService {
                 itemVO.setCategoryId(temp.getCategory().getId());
 
                 for (ItemDetail temItem : itemDetail) {
-                    ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
-                    itemDetailsVO.setItemDetailId(temItem.getId());
-                    itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
-                    itemDetailsVO.setSellingPrice(temItem.getPrice());
-                    itemDetailsVO.setCostPrice(temItem.getCostPrice());
-                    itemDetailsVO.setQuantity(temItem.getQuantity());
-                    itemDetailsVO.setDelete(temItem.isDelete());
+                    if(!temItem.isDelete()){
+                        ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                        itemDetailsVO.setItemDetailId(temItem.getId());
+                        itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
+                        itemDetailsVO.setSellingPrice(temItem.getPrice());
+                        itemDetailsVO.setCostPrice(temItem.getCostPrice());
+                        itemDetailsVO.setQuantity(temItem.getQuantity());
+                        itemDetailsVO.setDelete(temItem.isDelete());
 
-                    itemDetailList.add(itemDetailsVO);
+                        itemDetailList.add(itemDetailsVO);
+                    }
+
                 }
                 itemVO.setItemDetailList(itemDetailList);
                 itemVOList.add(itemVO);
