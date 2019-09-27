@@ -40,16 +40,16 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             List<ItemDetail> itemDetailList = itemDetailDao.getItemDetailListByItemId(id);
             for (ItemDetail tempItemDetail : itemDetailList) {
                 ItemDetailsVO itemDetailVO = new ItemDetailsVO();
-                if (!tempItemDetail.isDelete()) {
-                    itemDetailVO.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
-                    itemDetailVO.setQuantity(tempItemDetail.getQuantity());
-                    itemDetailVO.setCostPrice(tempItemDetail.getCostPrice());
-                    itemDetailVO.setSellingPrice(tempItemDetail.getPrice());
-                    itemDetailVO.setItemDetailId(tempItemDetail.getId());
-                    itemDetailVO.setDelete(tempItemDetail.isDelete());
 
-                    itemDetailsVOList.add(itemDetailVO);
-                }
+                itemDetailVO.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
+                itemDetailVO.setQuantity(tempItemDetail.getQuantity());
+                itemDetailVO.setCostPrice(tempItemDetail.getCostPrice());
+                itemDetailVO.setSellingPrice(tempItemDetail.getPrice());
+                itemDetailVO.setItemDetailId(tempItemDetail.getId());
+                itemDetailVO.setDelete(tempItemDetail.isDelete());
+
+                itemDetailsVOList.add(itemDetailVO);
+
 
             }
         } catch (Exception e) {
