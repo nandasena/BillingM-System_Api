@@ -1,7 +1,7 @@
 package com.createvision.sivilima.dao.impl;
 
 import com.createvision.sivilima.dao.ItemDetailDao;
-import com.createvision.sivilima.TableModel.ItemDetail;
+import com.createvision.sivilima.tableModel.ItemDetail;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

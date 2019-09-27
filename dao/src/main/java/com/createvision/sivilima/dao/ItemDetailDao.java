@@ -1,6 +1,6 @@
 package com.createvision.sivilima.dao;
 
-import com.createvision.sivilima.TableModel.ItemDetail;
+import com.createvision.sivilima.tableModel.ItemDetail;
 
 import java.util.List;
 

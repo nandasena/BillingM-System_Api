@@ -1,6 +1,6 @@
 package com.createvision.sivilima.service;
 
-import com.createvision.sivilima.TableModel.Invoice;
+import com.createvision.sivilima.tableModel.Invoice;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 
 import java.util.List;

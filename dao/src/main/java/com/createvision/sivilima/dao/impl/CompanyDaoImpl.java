@@ -1,6 +1,6 @@
 package com.createvision.sivilima.dao.impl;
 
-import com.createvision.sivilima.TableModel.CompanyDetail;
+import com.createvision.sivilima.tableModel.CompanyDetail;
 import com.createvision.sivilima.dao.CompanyDao;
 import org.springframework.stereotype.Repository;
 

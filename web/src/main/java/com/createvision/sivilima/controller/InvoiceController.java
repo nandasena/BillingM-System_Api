@@ -1,7 +1,7 @@
 package com.createvision.sivilima.controller;
 
-import com.createvision.sivilima.TableModel.Invoice;
-import com.createvision.sivilima.TableModel.User;
+import com.createvision.sivilima.tableModel.Invoice;
+import com.createvision.sivilima.tableModel.User;
 import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;

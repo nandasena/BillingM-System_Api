@@ -1,4 +1,4 @@
-package com.createvision.sivilima.TableModel;
+package com.createvision.sivilima.tableModel;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

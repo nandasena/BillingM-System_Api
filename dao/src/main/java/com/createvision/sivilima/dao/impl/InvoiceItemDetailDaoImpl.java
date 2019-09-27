@@ -1,7 +1,7 @@
 package com.createvision.sivilima.dao.impl;
 
 import com.createvision.sivilima.dao.InvoiceItemDetailDao;
-import com.createvision.sivilima.TableModel.InvoiceItemDetail;
+import com.createvision.sivilima.tableModel.InvoiceItemDetail;
 import org.springframework.stereotype.Repository;
 
 @Repository("invoiceItemDetailDao")

@@ -1,5 +1,5 @@
 package com.createvision.sivilima.dao;
-import com.createvision.sivilima.TableModel.Invoice;
+import com.createvision.sivilima.tableModel.Invoice;
 import java.util.List;
 
 

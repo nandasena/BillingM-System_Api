@@ -1,4 +1,4 @@
-package com.createvision.sivilima.TableModel;
+package com.createvision.sivilima.tableModel;
 
 import java.io.Serializable;
 import java.util.Date;

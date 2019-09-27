@@ -1,7 +1,7 @@
 package com.createvision.sivilima.dao.impl;
 
 import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.TableModel.Item;
+import com.createvision.sivilima.tableModel.Item;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
