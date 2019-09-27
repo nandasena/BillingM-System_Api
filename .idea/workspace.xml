@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct spelling in function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/UserRole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" afterDir="false" />
@@ -22,17 +23,17 @@
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/model/User.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima.war" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/service-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/service-1.0.1.jar" afterDir="false" />
     </list>
@@ -218,21 +219,7 @@
       <workItem from="1569377518827" duration="7285000" />
       <workItem from="1569423733808" duration="3472000" />
       <workItem from="1569508640239" duration="3292000" />
-      <workItem from="1569567385290" duration="10923000" />
-    </task>
-    <task id="LOCAL-00003" summary="change file name">
-      <created>1567438360439</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1567438360439</updated>
-    </task>
-    <task id="LOCAL-00004" summary="add new values object">
-      <created>1567439973430</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1567439973430</updated>
+      <workItem from="1569567385290" duration="12151000" />
     </task>
     <task id="LOCAL-00005" summary="change file name">
       <created>1567440062312</created>
@@ -563,7 +550,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569600809836</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="change some query in get all invoice">
+      <created>1569603258798</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1569603258798</updated>
+    </task>
+    <task id="LOCAL-00053" summary="change fetch type in user role">
+      <created>1569603357983</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1569603357983</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,8 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new table,add new column to item table and item details table" />
-    <MESSAGE value="remove spaces" />
     <MESSAGE value="add new columns and save data" />
     <MESSAGE value="update available quantity" />
     <MESSAGE value="arrange code correctly" />
@@ -608,7 +607,9 @@
     <MESSAGE value="add new restriction when get item detail" />
     <MESSAGE value="add new table called role." />
     <MESSAGE value="correct spelling in function" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct spelling in function" />
+    <MESSAGE value="change some query in get all invoice" />
+    <MESSAGE value="change fetch type in user role" />
+    <option name="LAST_COMMIT_MESSAGE" value="change fetch type in user role" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

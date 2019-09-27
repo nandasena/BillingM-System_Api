@@ -13,7 +13,7 @@ public class UserRole extends BaseObject implements Serializable {
     private String roleName;
 
     @Basic
-    @Column(name = "")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole")
