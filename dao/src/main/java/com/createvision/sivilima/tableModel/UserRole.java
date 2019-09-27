@@ -16,7 +16,7 @@ public class UserRole extends BaseObject implements Serializable {
     @Column(name = "")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userRole")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole")
     private Set<User> partReleases;
     @Column(name = "role_id")
     private Long roleId;
