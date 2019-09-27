@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface InvoiceService {
 
-    List<Invoice> getAllInvoices() throws Exception;
+    List<InvoiceVO> getAllInvoices() throws Exception;
 
     Invoice getInvoiceById(long id) throws Exception;
 

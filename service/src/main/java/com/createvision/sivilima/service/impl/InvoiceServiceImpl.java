@@ -4,13 +4,14 @@ import com.createvision.sivilima.dao.InvoiceDao;
 import com.createvision.sivilima.dao.InvoiceItemDetailDao;
 import com.createvision.sivilima.dao.ItemDao;
 import com.createvision.sivilima.dao.ItemDetailDao;
-import com.createvision.sivilima.tableModel.Invoice;
-import com.createvision.sivilima.tableModel.InvoiceItemDetail;
-import com.createvision.sivilima.tableModel.Item;
-import com.createvision.sivilima.tableModel.ItemDetail;
+import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
+import com.createvision.sivilima.valuesObject.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceServiceImpl.class);
     @Autowired
     private InvoiceDao invoiceDao;
 
@@ -39,8 +41,23 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public List<Invoice> getAllInvoices() throws Exception {
-        return invoiceDao.getAll();
+    public List<InvoiceVO> getAllInvoices() throws Exception {
+        List<Invoice> invoices = invoiceDao.getAll();
+        List<InvoiceVO> invoiceVOS = new ArrayList<>();
+        //LOGGER.info("Invoice count {}", invoices.size());
+        for (Invoice invoiceTmp : invoices) {
+            User user = invoiceTmp.getUser();
+            InvoiceVO invoiceVO = new InvoiceVO();
+            invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
+            if (user != null) {
+                UserVO userVO = new UserVO();
+                //  BeanUtils.copyProperties(user, userVO);
+                //invoiceVO.setUser(userVO);
+            }
+            invoiceVOS.add(invoiceVO);
+
+        }
+        return invoiceVOS;
     }
 
     @Override

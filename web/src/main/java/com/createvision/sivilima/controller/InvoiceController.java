@@ -36,28 +36,12 @@ public class InvoiceController {
     @ResponseBody
     public ResponseEntity<Object> getAllInventories() throws Exception {
 
-        LOGGER.info("Invoice testing");
-
         try {
-            List<Invoice> invoices = invoiceService.getAllInvoices();
-            List<InvoiceVO> invoiceVOS = new ArrayList<>();
+            List<InvoiceVO> invoiceVOS = invoiceService.getAllInvoices();
             ReturnVO returnVO = new ReturnVO();
-            LOGGER.info("Invoice count {}", invoices.size());
-            for (Invoice invoiceTmp : invoices) {
-                User user = invoiceTmp.getUser();
-                InvoiceVO invoiceVO = new InvoiceVO();
-                invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
-                if (user != null) {
-                    UserVO userVO = new UserVO();
-                    BeanUtils.copyProperties(user, userVO);
-                   // invoiceVO.setUser(userVO);
-                }
-                invoiceVOS.add(invoiceVO);
-                returnVO.setResult(invoiceVOS);
-                returnVO.setSuccess(true);
-                returnVO.setStatusCode(200);
-            }
-
+            returnVO.setResult(invoiceVOS);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
             return ResponseEntity.ok(returnVO);
         } catch (Exception e) {
             e.printStackTrace();
