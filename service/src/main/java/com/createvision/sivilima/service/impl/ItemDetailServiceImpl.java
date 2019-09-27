@@ -39,14 +39,18 @@ public class ItemDetailServiceImpl implements ItemDetailService {
 
             List<ItemDetail> itemDetailList = itemDetailDao.getItemDetailListByItemId(id);
             for (ItemDetail tempItemDetail : itemDetailList) {
-                ItemDetailsVO itemDetail = new ItemDetailsVO();
+                ItemDetailsVO itemDetailVO = new ItemDetailsVO();
+                if (!tempItemDetail.isDelete()) {
+                    itemDetailVO.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
+                    itemDetailVO.setQuantity(tempItemDetail.getQuantity());
+                    itemDetailVO.setCostPrice(tempItemDetail.getCostPrice());
+                    itemDetailVO.setSellingPrice(tempItemDetail.getPrice());
+                    itemDetailVO.setItemDetailId(tempItemDetail.getId());
+                    itemDetailVO.setDelete(tempItemDetail.isDelete());
 
-                itemDetail.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
-                itemDetail.setQuantity(tempItemDetail.getQuantity());
-                itemDetail.setCostPrice(tempItemDetail.getCostPrice());
-                itemDetail.setSellingPrice(tempItemDetail.getPrice());
-                itemDetail.setItemDetailId(tempItemDetail.getId());
-                itemDetailsVOList.add(itemDetail);
+                    itemDetailsVOList.add(itemDetailVO);
+                }
+
             }
         } catch (Exception e) {
             throw e;
@@ -82,5 +86,22 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             throw e;
         }
         return itemDetailsVO;
+    }
+
+    @Override
+    public boolean deleteItemDetail(Long id) throws Exception {
+        try {
+            ItemDetail itemDetail = itemDetailDao.get(id);
+            itemDetail.setDelete(true);
+            Long returnId = itemDetailDao.save(itemDetail);
+            if (returnId != null) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

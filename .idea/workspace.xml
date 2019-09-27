@@ -7,35 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct spelling in function">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/BaseObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/CompanyDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/CompanyDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/InvoiceItemDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/ItemDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/TableModel/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CompanyDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CompanyDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceItemDetailDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceItemDetailDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ItemDetailDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ItemDetailDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CategoryDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CategoryDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CompanyDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CompanyDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceItemDetailDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceItemDetailDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ItemDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ItemDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ItemDetailDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ItemDetailDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/BaseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/BaseObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/InvoiceItemDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/InvoiceItemDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/ItemDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/ItemDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/InvoiceItemDetailsVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/InvoiceItemDetailsVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/InvoiceVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/InvoiceVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" afterDir="false" />
@@ -50,13 +22,8 @@
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/model/User.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceItemDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceItemDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceItemDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceItemDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/ItemDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/ItemDetailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceItemDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceItemDetailService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/ItemService.class" afterDir="false" />
@@ -65,8 +32,7 @@
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/spring-dao-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/spring-dao-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/ItemDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/ItemDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/spring-dao-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/spring-dao-config.xml" afterDir="false" />
@@ -260,7 +226,7 @@
       <workItem from="1569377518827" duration="7285000" />
       <workItem from="1569423733808" duration="3472000" />
       <workItem from="1569508640239" duration="3292000" />
-      <workItem from="1569567385290" duration="1367000" />
+      <workItem from="1569567385290" duration="3697000" />
     </task>
     <task id="LOCAL-00001" summary="add funtion to create invoice">
       <created>1567325263617</created>
@@ -577,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569568926193</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="change name in package">
+      <created>1569570930980</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1569570930980</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +570,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add delete function to delete invoice" />
     <MESSAGE value="add new values object and remove unwanted values object" />
     <MESSAGE value="add new function to get item details" />
     <MESSAGE value="add some field to get data from data base" />
@@ -622,7 +594,8 @@
     <MESSAGE value="add new function to get item detail by item id" />
     <MESSAGE value="change function name." />
     <MESSAGE value="modified get all item function" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified get all item function" />
+    <MESSAGE value="change name in package" />
+    <option name="LAST_COMMIT_MESSAGE" value="change name in package" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

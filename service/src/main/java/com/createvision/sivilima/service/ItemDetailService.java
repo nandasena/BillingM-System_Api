@@ -9,4 +9,6 @@ public interface ItemDetailService {
     List<ItemDetailsVO> getItemDetailByItemId(Long id) throws Exception;
 
     ItemDetailsVO createItemDetail(ItemDetailsVO itemDetailsVO) throws Exception;
+
+    boolean deleteItemDetail(Long ig) throws Exception;
 }

@@ -52,4 +52,21 @@ public class ItemDetailController {
         }
     }
 
+    @RequestMapping(value = "/{itemId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Object> deleteItemDetails(@PathVariable("itemId") Long itemId) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            boolean isTrue = itemDetailService.deleteItemDetail(itemId);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(isTrue);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
 }
