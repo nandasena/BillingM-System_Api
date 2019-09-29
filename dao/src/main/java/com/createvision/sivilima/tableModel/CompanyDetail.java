@@ -1,10 +1,8 @@
 package com.createvision.sivilima.tableModel;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "company_detail")
@@ -16,4 +14,9 @@ public class CompanyDetail extends BaseObject implements Serializable {
     @Basic
     @Column(name = "description")
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetail")
+    private Set<User> userList;
+
+
 }

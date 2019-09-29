@@ -52,6 +52,12 @@ public class User extends BaseObject implements Serializable {
     @Column(name = "is_delete",nullable = false,columnDefinition = "boolean default false")
     private boolean isDelete;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private CompanyDetail companyDetail;
+
+
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
 
@@ -75,4 +81,7 @@ public class User extends BaseObject implements Serializable {
 
     public boolean isDelete() { return isDelete;}
     public void setDelete(boolean delete) { isDelete = delete;}
+
+    public CompanyDetail getCompanyDetail() { return companyDetail; }
+    public void setCompanyDetail(CompanyDetail companyDetail) { this.companyDetail = companyDetail;}
 }

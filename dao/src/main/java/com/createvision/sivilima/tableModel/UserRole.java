@@ -17,7 +17,7 @@ public class UserRole extends BaseObject implements Serializable {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole")
-    private Set<User> partReleases;
+    private Set<User> userList;
     @Column(name = "role_id")
     private Long roleId;
 
@@ -27,8 +27,8 @@ public class UserRole extends BaseObject implements Serializable {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description;}
 
-    public Set<User> getPartReleases() { return partReleases; }
-    public void setPartReleases(Set<User> partReleases) { this.partReleases = partReleases; }
+    public Set<User> getUserList() { return userList; }
+    public void setUserList(Set<User> userList) { this.userList = userList; }
 
     public Long getRoleId() { return roleId; }
     public void setRoleId(Long roleId) { this.roleId = roleId; }
