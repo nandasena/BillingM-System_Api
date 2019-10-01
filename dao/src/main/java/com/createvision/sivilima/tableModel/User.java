@@ -37,9 +37,13 @@ public class User extends BaseObject implements Serializable {
     @Column(name = "last_updated_date")
     private Date lastUpdatedDate;
 
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
+//    @Basic
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
+//    private Set<UserRole> userRole;
+
+    @ManyToMany
+    @JoinTable(name = "T_USER_ROLE", joinColumns = @JoinColumn(name = "FK_USER"), inverseJoinColumns = @JoinColumn(name = "FK_ROLE"))
     private Set<UserRole> userRole;
 
 
