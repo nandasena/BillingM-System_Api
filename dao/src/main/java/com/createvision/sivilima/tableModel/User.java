@@ -43,7 +43,7 @@ public class User extends BaseObject implements Serializable {
 //    private Set<UserRole> userRole;
 
     @ManyToMany
-    @JoinTable(name = "T_USER_ROLE", joinColumns = @JoinColumn(name = "FK_USER"), inverseJoinColumns = @JoinColumn(name = "FK_ROLE"))
+    @JoinTable(name = "fk_user_role", joinColumns = @JoinColumn(name = "fk_user"), inverseJoinColumns = @JoinColumn(name = "fk_role"))
     private Set<UserRole> userRole;
 
 

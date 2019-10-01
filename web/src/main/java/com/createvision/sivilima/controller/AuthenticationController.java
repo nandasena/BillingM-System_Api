@@ -37,7 +37,7 @@ public class AuthenticationController {
     public ResponseEntity<Object> doLogin(@RequestBody LoginModalVO loginModel) throws Exception {
 
         try {
-            LOGGER.info("User name ========", loginModel.getUserName());
+//            LOGGER.info("User name ========", loginModel.getUserName());
             securityService.autologin(loginModel.getUserName(), loginModel.getPassword());
             User user = userService.getUserByUserName("pasan");
 
@@ -75,14 +75,12 @@ public class AuthenticationController {
             }
 
         } catch (UsernameNotFoundException e) {
-			//logger.error("Exception occured. ", e);
             ErrorModel errorModel = new ErrorModel();
             errorModel.setErrorCode("4001");
             errorModel.setErrorMsg("Username Not Found Error");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorModel);
 
         } catch (AuthenticationException e) {
-////			logger.error("Exception occured. ", e);
             ErrorModel errorModel = new ErrorModel();
             errorModel.setErrorCode("4002");
             errorModel.setErrorMsg("Authentication Error");
