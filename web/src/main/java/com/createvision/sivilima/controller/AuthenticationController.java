@@ -38,7 +38,7 @@ public class AuthenticationController {
 
         try {
             LOGGER.info("User name ========", loginModel.getUserName());
-            securityService.autologin("pasan", "123");
+            securityService.autologin(loginModel.getUserName(), loginModel.getPassword());
             User user = userService.getUserByUserName("pasan");
 
             if (!user.isDelete()) {

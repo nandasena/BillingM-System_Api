@@ -30,8 +30,6 @@ public class SecurityServiceImpl implements ISecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
-
     @Autowired
     private IUserDao userDao;
 

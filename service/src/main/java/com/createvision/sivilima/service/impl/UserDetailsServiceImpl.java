@@ -35,6 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }catch (Exception e){
 
         }
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),grantedAuthorities);
+        if(user!=null){
+            return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),grantedAuthorities);
+        }else {
+            return new org.springframework.security.core.userdetails.User("error","error",grantedAuthorities);
+        }
+
     }
 }
