@@ -11,24 +11,26 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 
-@Service
+@Service("securityService")
 public class SecurityServiceImpl implements ISecurityService {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
+
+
 
     @Autowired
     private IUserDao userDao;

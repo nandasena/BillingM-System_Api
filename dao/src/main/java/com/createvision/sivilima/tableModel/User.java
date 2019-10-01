@@ -40,7 +40,7 @@ public class User extends BaseObject implements Serializable {
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
-    private UserRole userRole;
+    private Set<UserRole> userRole;
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -73,8 +73,8 @@ public class User extends BaseObject implements Serializable {
     public Date getLastUpdatedDate() { return lastUpdatedDate; }
     public void setLastUpdatedDate(Date lastUpdatedDate) { this.lastUpdatedDate = lastUpdatedDate; }
 
-    public UserRole getUserRole() { return userRole; }
-    public void setUserRole(UserRole userRole) { this.userRole = userRole; }
+    public Set<UserRole> getUserRole() { return userRole; }
+    public void setUserRole(Set<UserRole> userRole) { this.userRole = userRole; }
 
     public Set<Invoice> getInvoice() { return invoice; }
     public void setInvoice(Set<Invoice> invoice) { this.invoice = invoice; }

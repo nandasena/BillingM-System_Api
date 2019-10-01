@@ -26,10 +26,10 @@ public class AuthenticationController {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceController.class);
 
     @Autowired
-    IUserService userService;
+    private IUserService userService;
 
     @Autowired
-    ISecurityService securityService;
+    private ISecurityService securityService;
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
