@@ -37,10 +37,10 @@ public class User extends BaseObject implements Serializable {
     @Column(name = "last_updated_date")
     private Date lastUpdatedDate;
 
-//    @Basic
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
-//    private Set<UserRole> userRole;
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id",nullable = false,referencedColumnName = "role_id")
+    private UserRole userRoleId;
 
     @ManyToMany
     @JoinTable(name = "fk_user_role", joinColumns = @JoinColumn(name = "fk_user"), inverseJoinColumns = @JoinColumn(name = "fk_role"))
@@ -88,4 +88,7 @@ public class User extends BaseObject implements Serializable {
 
     public CompanyDetail getCompanyDetail() { return companyDetail; }
     public void setCompanyDetail(CompanyDetail companyDetail) { this.companyDetail = companyDetail;}
+
+    public UserRole getUserRoleId() {return userRoleId;}
+    public void setUserRoleId(UserRole userRoleId) { this.userRoleId = userRoleId;}
 }
