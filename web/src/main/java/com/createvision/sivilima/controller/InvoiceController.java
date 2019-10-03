@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
+@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 @RequestMapping("/invoice")
 public class InvoiceController {
 
