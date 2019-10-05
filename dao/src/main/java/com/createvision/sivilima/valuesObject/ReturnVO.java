@@ -3,8 +3,9 @@ package com.createvision.sivilima.valuesObject;
 public class ReturnVO {
     private int statusCode;
     private boolean success;
-    private Object result;
     private String message;
+    private Object result;
+
 
     public int getStatusCode() { return statusCode; }
     public void setStatusCode(int statusCode) { this.statusCode = statusCode; }
