@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,6 +44,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<Invoice> invoices = invoiceDao.getAll();
         List<InvoiceVO> invoiceVOS = new ArrayList<>();
         //LOGGER.info("Invoice count {}", invoices.size());
@@ -49,6 +52,9 @@ public class InvoiceServiceImpl implements InvoiceService {
             User user = invoiceTmp.getUser();
             InvoiceVO invoiceVO = new InvoiceVO();
             invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
+            invoiceVO.setCustomerName(invoiceTmp.getCustomerName());
+            invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
+            invoiceVO.setTotalAmount(invoiceTmp.getTotalAmount());
             if (user != null) {
                 UserVO userVO = new UserVO();
                 //  BeanUtils.copyProperties(user, userVO);
@@ -105,6 +111,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
             saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
             saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
+            saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
 
