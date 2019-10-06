@@ -38,8 +38,8 @@ public class AuthenticationController {
 
         try {
 //            LOGGER.info("User name ========", loginModel.getUserName());
-            securityService.autologin(loginModel.getUserName(), loginModel.getPassword());
-            User user = userService.getUserByUserName("pasan");
+            securityService.autologin(loginModel.getEmail(), loginModel.getPassword());
+            User user = userService.getUserByUserName(loginModel.getEmail());
 
             if (!user.isDelete()) {
 
