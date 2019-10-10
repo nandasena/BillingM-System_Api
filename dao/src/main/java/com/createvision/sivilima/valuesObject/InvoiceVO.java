@@ -11,7 +11,7 @@ public class InvoiceVO {
     private double totalAmount;
     private double advanceAmount;
     private Date delivaryDate;
-    private Date invoiceDate;
+    private String invoiceDate;
     private double balanceAmount;
     private String invoiceNumber;
     private Set<InvoiceItemDetail> invoiceItemDetails = new HashSet<InvoiceItemDetail>(0);
@@ -30,8 +30,8 @@ public class InvoiceVO {
     public Date getDelivaryDate() { return delivaryDate; }
     public void setDelivaryDate(Date delivaryDate) { this.delivaryDate = delivaryDate; }
 
-    public Date getInvoiceDate() { return invoiceDate; }
-    public void setInvoiceDate(Date invoiceDate) { this.invoiceDate = invoiceDate; }
+    public String getInvoiceDate() { return invoiceDate; }
+    public void setInvoiceDate(String invoiceDate) { this.invoiceDate = invoiceDate;}
 
     public double getBalanceAmount() { return balanceAmount; }
     public void setBalanceAmount(double balanceAmount) { this.balanceAmount = balanceAmount; }

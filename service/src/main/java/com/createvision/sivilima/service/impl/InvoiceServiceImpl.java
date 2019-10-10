@@ -41,6 +41,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     ItemDetailDao itemDetailDao;
 
+    @Autowired
+    CommonFunctionsImpl commonFunctions;
+
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -109,7 +112,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
             saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
-            saveInvoice.setInvoiceDate(invoiceVO.getInvoiceDate());
+            saveInvoice.setInvoiceDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
             saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             Long id = invoiceDao.save(saveInvoice);
