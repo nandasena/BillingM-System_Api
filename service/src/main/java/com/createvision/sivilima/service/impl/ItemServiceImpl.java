@@ -1,7 +1,9 @@
 package com.createvision.sivilima.service.impl;
 
+import com.createvision.sivilima.dao.MainCategoryDao;
 import com.createvision.sivilima.dao.SubCategoryDao;
 import com.createvision.sivilima.dao.ItemDao;
+import com.createvision.sivilima.tableModel.MainCategory;
 import com.createvision.sivilima.tableModel.SubCategory;
 import com.createvision.sivilima.tableModel.Item;
 import com.createvision.sivilima.tableModel.ItemDetail;
@@ -24,6 +26,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private SubCategoryDao subCategoryDao;
+
+    @Autowired
+    private MainCategoryDao mainCategoryDao;
 
     @Autowired
     private CommonFunctionsImpl commonFunctions;
@@ -112,7 +117,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<CategoryVO> getAllCategory() throws Exception {
+    public List<CategoryVO> getAllSubCategory() throws Exception {
         List<SubCategory> subCategoryList = subCategoryDao.getAll();
         List<CategoryVO> categoryVOList = new ArrayList<>();
         for (SubCategory tempSubCategory : subCategoryList) {
@@ -121,6 +126,20 @@ public class ItemServiceImpl implements ItemService {
             categoryVO.setName(tempSubCategory.getName());
             categoryVOList.add(categoryVO);
         }
+        return categoryVOList;
+    }
+
+    @Override
+    public List<CategoryVO> getAllMainCategory() throws Exception {
+        List<MainCategory> mainCategoryList = mainCategoryDao.getAll();
+        List<CategoryVO> categoryVOList = new ArrayList<>();
+        for (MainCategory tempMainCategory : mainCategoryList) {
+            CategoryVO categoryVO = new CategoryVO();
+            categoryVO.setSubCategoryId(tempMainCategory.getId());
+            categoryVO.setName(tempMainCategory.getName());
+            categoryVOList.add(categoryVO);
+        }
+
         return categoryVOList;
     }
 }

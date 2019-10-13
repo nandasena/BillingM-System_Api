@@ -18,5 +18,7 @@ public interface ItemService {
 
     void deleteItem(long id) throws Exception;
 
-    List<CategoryVO> getAllCategory() throws Exception;
+    List<CategoryVO> getAllSubCategory() throws Exception;
+
+    List<CategoryVO> getAllMainCategory() throws Exception;
 }

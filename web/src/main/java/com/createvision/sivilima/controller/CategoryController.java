@@ -20,12 +20,30 @@ public class CategoryController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/subCategory", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getAllCategory() throws Exception {
+    public ResponseEntity<Object> getAllSubCategory() throws Exception {
         ReturnVO returnVO = new ReturnVO();
         try {
-            List<CategoryVO> categoryList = itemService.getAllCategory();
+            List<CategoryVO> categoryList = itemService.getAllSubCategory();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(categoryList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+    @RequestMapping(value = "/mainCategory/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getAllMainCategory() throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<CategoryVO> categoryList = itemService.getAllMainCategory();
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(categoryList);
