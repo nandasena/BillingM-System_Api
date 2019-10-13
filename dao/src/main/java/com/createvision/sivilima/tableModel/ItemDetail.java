@@ -17,8 +17,16 @@ public class ItemDetail extends BaseObject implements Serializable {
     private Item item;
 
     @Basic
-    @Column(name = "price")
-    private double price;
+    @Column(name = "fabricator_price")
+    private double fabricatorPrice;
+
+    @Basic
+    @Column(name = "mrp_price")
+    private double mrpPrice;
+
+    @Basic
+    @Column(name = "customer_price")
+    private double customerPrice;
 
     @Basic
     @Column(name = "cost_price",nullable = false)
@@ -50,8 +58,8 @@ public class ItemDetail extends BaseObject implements Serializable {
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public double getFabricatorPrice() { return fabricatorPrice; }
+    public void setFabricatorPrice(double fabricatorPrice) { this.fabricatorPrice = fabricatorPrice; }
 
     public double getQuantity() { return quantity; }
     public void setQuantity(double quantity) { this.quantity = quantity; }
@@ -70,4 +78,10 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public boolean isDelete() { return isDelete; }
     public void setDelete(boolean delete) { isDelete = delete;}
+
+    public double getMrpPrice() { return mrpPrice; }
+    public void setMrpPrice(double mrpPrice) { this.mrpPrice = mrpPrice; }
+
+    public double getCustomerPrice() { return customerPrice; }
+    public void setCustomerPrice(double customerPrice) { this.customerPrice = customerPrice; }
 }

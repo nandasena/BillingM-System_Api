@@ -17,6 +17,10 @@ public class Item  extends BaseObject implements Serializable {
     private String name;
 
     @Basic
+    @Column(name = "item_code",nullable =false,unique=true)
+    private String itemCode;
+
+    @Basic
     @Column(name = "description")
     private String description;
 
@@ -36,12 +40,17 @@ public class Item  extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "sub_category_id",nullable = false)
     @JsonIgnore
     private SubCategory subCategory;
 
+
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getItemCode() { return itemCode; }
+    public void setItemCode(String itemCode) { this.itemCode = itemCode; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -60,4 +69,6 @@ public class Item  extends BaseObject implements Serializable {
 
     public SubCategory getSubCategory() { return subCategory; }
     public void setSubCategory(SubCategory subCategory) { this.subCategory = subCategory;}
+
+
 }

@@ -1,9 +1,8 @@
 package com.createvision.sivilima.tableModel;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -14,4 +13,13 @@ public class SubCategory extends BaseObject implements Serializable {
     private String name;
     public String getName() { return name; }
     public void setName(String name) {this.name = name;}
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "main_category_id",nullable = false)
+    @JsonIgnore
+    private MainCategory mainCategory;
+
+    public MainCategory getMainCategory() { return mainCategory;}
+    public void setMainCategory(MainCategory mainCategory) {this.mainCategory = mainCategory;}
 }

@@ -44,7 +44,7 @@ public class ItemDetailServiceImpl implements ItemDetailService {
                 itemDetailVO.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
                 itemDetailVO.setQuantity(tempItemDetail.getQuantity());
                 itemDetailVO.setCostPrice(tempItemDetail.getCostPrice());
-                itemDetailVO.setSellingPrice(tempItemDetail.getPrice());
+                itemDetailVO.setSellingPrice(tempItemDetail.getFabricatorPrice());
                 itemDetailVO.setItemDetailId(tempItemDetail.getId());
                 itemDetailVO.setDelete(tempItemDetail.isDelete());
 
@@ -76,7 +76,7 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             itemDetail.setQuantity(itemDetailsVO.getQuantity());
             itemDetail.setAvailableQuantity(itemDetailsVO.getAvailableQuantity());
             itemDetail.setCostPrice(itemDetailsVO.getCostPrice());
-            itemDetail.setPrice(itemDetailsVO.getSellingPrice());
+            itemDetail.setFabricatorPrice(itemDetailsVO.getSellingPrice());
 
             Long id = itemDetailDao.save(itemDetail);
 
