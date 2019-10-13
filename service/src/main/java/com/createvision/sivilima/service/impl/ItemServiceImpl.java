@@ -123,6 +123,7 @@ public class ItemServiceImpl implements ItemService {
         for (SubCategory tempSubCategory : subCategoryList) {
             CategoryVO categoryVO = new CategoryVO();
             categoryVO.setSubCategoryId(tempSubCategory.getId());
+            categoryVO.setMainCategoryId(tempSubCategory.getMainCategory().getId());
             categoryVO.setName(tempSubCategory.getName());
             categoryVOList.add(categoryVO);
         }
@@ -135,7 +136,7 @@ public class ItemServiceImpl implements ItemService {
         List<CategoryVO> categoryVOList = new ArrayList<>();
         for (MainCategory tempMainCategory : mainCategoryList) {
             CategoryVO categoryVO = new CategoryVO();
-            categoryVO.setSubCategoryId(tempMainCategory.getId());
+            categoryVO.setMainCategoryId(tempMainCategory.getId());
             categoryVO.setName(tempMainCategory.getName());
             categoryVOList.add(categoryVO);
         }
