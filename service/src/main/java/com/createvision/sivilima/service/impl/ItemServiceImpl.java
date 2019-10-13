@@ -2,7 +2,7 @@ package com.createvision.sivilima.service.impl;
 
 import com.createvision.sivilima.dao.CategoryDao;
 import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.tableModel.Category;
+import com.createvision.sivilima.tableModel.SubCategory;
 import com.createvision.sivilima.tableModel.Item;
 import com.createvision.sivilima.tableModel.ItemDetail;
 import com.createvision.sivilima.service.ItemService;
@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
                 itemVO.setDescription(temp.getDescription());
                 itemVO.setItemName(temp.getName());
                 itemVO.setItemId(temp.getId());
-                itemVO.setCategoryId(temp.getCategory().getId());
+                itemVO.setCategoryId(temp.getSubCategory().getId());
 
                 for (ItemDetail temItem : itemDetail) {
                     if(!temItem.isDelete()){
@@ -77,8 +77,8 @@ public class ItemServiceImpl implements ItemService {
         try {
             Date date = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
             Item item = new Item();
-            Category category = categoryDao.get(itemVO.getCategoryId());
-            item.setCategory(category);
+            SubCategory subCategory = categoryDao.get(itemVO.getCategoryId());
+            item.setSubCategory(subCategory);
             item.setCreateDate(date);
             item.setDescription(itemVO.getDescription());
             item.setName(itemVO.getItemName());
@@ -109,12 +109,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<CategoryVO> getAllCategory() throws Exception {
-        List<Category> categoryList = categoryDao.getAll();
+        List<SubCategory> subCategoryList = categoryDao.getAll();
         List<CategoryVO> categoryVOList = new ArrayList<>();
-        for (Category tempCategory : categoryList) {
+        for (SubCategory tempSubCategory : subCategoryList) {
             CategoryVO categoryVO = new CategoryVO();
-            categoryVO.setCategoryId(tempCategory.getId());
-            categoryVO.setName(tempCategory.getName());
+            categoryVO.setCategoryId(tempSubCategory.getId());
+            categoryVO.setName(tempSubCategory.getName());
             categoryVOList.add(categoryVO);
         }
         return categoryVOList;

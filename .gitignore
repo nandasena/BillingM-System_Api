@@ -1,23 +1,4 @@
 
-SivilimaApi/.idea/artifacts/web_war.xml
-SivilimaApi/.idea/artifacts/web_war.xml
-SivilimaApi/.idea/artifacts/web_war.xml
-SivilimaApi/dao/target/maven-archiver/pom.properties
-SivilimaApi/dao/target/*.class
-*.jar
-*.war
-*.ear
-*.logs
-*.iml
-SivilimaApi/service/target/*.class
-*.jar
-*.war
-*.ear
-*.logs
-*.iml*
-SivilimaApi/web/target/*.class
-*.jar
-*.war
-*.ear
-*.logs
-*.iml
+/dao/target/
+/service/target/
+/web/target/

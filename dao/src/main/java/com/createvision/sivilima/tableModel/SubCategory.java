@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "category")
-public class Category extends BaseObject implements Serializable {
+@Table(name = "sub_category")
+public class SubCategory extends BaseObject implements Serializable {
     @Basic
     @Column(name = "name")
     private String name;
