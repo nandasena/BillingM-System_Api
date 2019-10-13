@@ -3,14 +3,14 @@ package com.createvision.sivilima.valuesObject;
 import java.util.Set;
 
 public class ItemVO {
-    Long itemId;
-    String itemName;
-    String description;
-    Long categoryId;
-    Long itemDetailId;
-    double sellingQuantity;
-    Set<ItemDetailsVO> itemDetailList;
-
+    private  Long itemId;
+    private  String itemName;
+    private  String description;
+    private  Long subCategoryId;
+    private  Long itemDetailId;
+    private  double sellingQuantity;
+    private  Set<ItemDetailsVO> itemDetailList;
+    private String itemCode;
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
@@ -21,8 +21,8 @@ public class ItemVO {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getCategoryId() { return categoryId; }
-    public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+    public Long getSubCategoryId() { return subCategoryId; }
+    public void setSubCategoryId(Long subCategoryId) { this.subCategoryId = subCategoryId; }
 
     public Long getItemDetailId() { return itemDetailId; }
     public void setItemDetailId(Long itemDetailId) { this.itemDetailId = itemDetailId; }
@@ -33,5 +33,6 @@ public class ItemVO {
     public Set<ItemDetailsVO> getItemDetailList() { return itemDetailList; }
     public void setItemDetailList(Set<ItemDetailsVO> itemDetailList) { this.itemDetailList = itemDetailList; }
 
-
+    public String getItemCode() { return itemCode;}
+    public void setItemCode(String itemCode) { this.itemCode = itemCode;}
 }

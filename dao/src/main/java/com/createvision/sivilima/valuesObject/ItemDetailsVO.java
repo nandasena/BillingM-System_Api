@@ -1,22 +1,31 @@
 package com.createvision.sivilima.valuesObject;
 
 public class ItemDetailsVO {
-    long itemDetailId;
-    double sellingPrice;
-    double costPrice;
-    double quantity;
-    double availableQuantity;
-    long itemId;
-    Long companyId;
-    String purchaseDate;
-    boolean isDelete;
+    private  long itemDetailId;
+    private  double fabricatorPrice;
+    private double mrpPrice;
+    private double customerPrice;
+    private  double costPrice;
+    private double quantity;
+    private double availableQuantity;
+    private  long itemId;
+    private Long companyId;
+    private String purchaseDate;
+    private boolean isDelete;
+
 
 
     public long getItemDetailId() { return itemDetailId;}
     public void setItemDetailId(long itemDetailId) { this.itemDetailId = itemDetailId; }
 
-    public double getSellingPrice() { return sellingPrice; }
-    public void setSellingPrice(double sellingPrice) { this.sellingPrice = sellingPrice;}
+    public double getFabricatorPrice() { return fabricatorPrice; }
+    public void setFabricatorPrice(double fabricatorPrice) { this.fabricatorPrice = fabricatorPrice;}
+
+    public double getMrpPrice() { return mrpPrice; }
+    public void setMrpPrice(double mrpPrice) { this.mrpPrice = mrpPrice; }
+
+    public double getCustomerPrice() { return customerPrice;}
+    public void setCustomerPrice(double customerPrice) { this.customerPrice = customerPrice;}
 
     public double getCostPrice() { return costPrice;}
     public void setCostPrice(double costPrice) { this.costPrice = costPrice; }
@@ -38,4 +47,6 @@ public class ItemDetailsVO {
 
     public boolean isDelete() { return isDelete;}
     public void setDelete(boolean delete) { isDelete = delete;}
+
+
 }

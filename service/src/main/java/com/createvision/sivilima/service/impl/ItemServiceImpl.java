@@ -41,17 +41,21 @@ public class ItemServiceImpl implements ItemService {
                 itemVO.setDescription(temp.getDescription());
                 itemVO.setItemName(temp.getName());
                 itemVO.setItemId(temp.getId());
-                itemVO.setCategoryId(temp.getSubCategory().getId());
+                itemVO.setSubCategoryId(temp.getSubCategory().getId());
+                itemVO.setItemCode(temp.getItemCode());
 
                 for (ItemDetail temItem : itemDetail) {
                     if(!temItem.isDelete()){
                         ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
                         itemDetailsVO.setItemDetailId(temItem.getId());
                         itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
-                        itemDetailsVO.setSellingPrice(temItem.getFabricatorPrice());
+                        itemDetailsVO.setFabricatorPrice(temItem.getFabricatorPrice());
+                        itemDetailsVO.setCustomerPrice(temItem.getCustomerPrice());
+                        itemDetailsVO.setMrpPrice(temItem.getMrpPrice());
                         itemDetailsVO.setCostPrice(temItem.getCostPrice());
                         itemDetailsVO.setQuantity(temItem.getQuantity());
                         itemDetailsVO.setDelete(temItem.isDelete());
+
 
                         itemDetailList.add(itemDetailsVO);
                     }
@@ -77,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             Date date = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
             Item item = new Item();
-            SubCategory subCategory = categoryDao.get(itemVO.getCategoryId());
+            SubCategory subCategory = categoryDao.get(itemVO.getSubCategoryId());
             item.setSubCategory(subCategory);
             item.setCreateDate(date);
             item.setDescription(itemVO.getDescription());
