@@ -1,11 +1,11 @@
 package com.createvision.sivilima.valuesObject;
 
 public class CategoryVO {
-    long categoryId;
+    long subCategoryId;
     String name;
 
-    public long getCategoryId() { return categoryId; }
-    public void setCategoryId(long categoryId) { this.categoryId = categoryId; }
+    public long getSubCategoryId() { return subCategoryId; }
+    public void setSubCategoryId(long subCategoryId) { this.subCategoryId = subCategoryId; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name;}

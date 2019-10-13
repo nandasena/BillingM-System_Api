@@ -7,18 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct spelling in function">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_spring_security_oauth2_2_0_12_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_4_0_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_4_0_2_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/MainCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CategoryDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CategoryDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/SubCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/SubCategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/CategoryDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/SubCategoryDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" afterDir="false" />
@@ -36,6 +27,7 @@
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
@@ -258,28 +250,7 @@
       <workItem from="1570756298087" duration="606000" />
       <workItem from="1570798955507" duration="344000" />
       <workItem from="1570840348290" duration="771000" />
-      <workItem from="1570929077051" duration="1184000" />
-    </task>
-    <task id="LOCAL-00016" summary="add new query to execute native query">
-      <created>1568267260281</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1568267260281</updated>
-    </task>
-    <task id="LOCAL-00017" summary="add separate sample function">
-      <created>1568274738394</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1568274738394</updated>
-    </task>
-    <task id="LOCAL-00018" summary="remove unwanted import class">
-      <created>1568282366600</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1568282366600</updated>
+      <workItem from="1570929077051" duration="6470000" />
     </task>
     <task id="LOCAL-00019" summary="add invoice update function">
       <created>1568658124785</created>
@@ -603,7 +574,28 @@
       <option name="project" value="LOCAL" />
       <updated>1570673494385</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="change sql table name category to sub_category and add new sql table">
+      <created>1570931438070</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1570931438071</updated>
+    </task>
+    <task id="LOCAL-00066" summary="change sql table column name">
+      <created>1570942574034</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1570942574034</updated>
+    </task>
+    <task id="LOCAL-00067" summary="add new values object and modified some variable name">
+      <created>1570943511159</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1570943511159</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,9 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new api to create new item" />
-    <MESSAGE value="add new function to get item details list by item id" />
-    <MESSAGE value="add new function to inset date to item details table" />
     <MESSAGE value="add new column to item details table" />
     <MESSAGE value="add new function to get item detail by item id" />
     <MESSAGE value="change function name." />
@@ -648,7 +637,10 @@
     <MESSAGE value="add new fild to invoice return object" />
     <MESSAGE value="change auth file" />
     <MESSAGE value="add incoice date when create invoice" />
-    <option name="LAST_COMMIT_MESSAGE" value="add incoice date when create invoice" />
+    <MESSAGE value="change sql table name category to sub_category and add new sql table" />
+    <MESSAGE value="change sql table column name" />
+    <MESSAGE value="add new values object and modified some variable name" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new values object and modified some variable name" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
