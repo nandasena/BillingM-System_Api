@@ -32,6 +32,12 @@ public class /**/Invoice extends BaseObject implements Serializable {
     public void setCustomerName(String customerName) { this.customerName = customerName;}
 
     @Basic
+    @Column(name = "invoice_discount")
+    private double invoiceDiscount;
+    public double getInvoiceDiscount() {return invoiceDiscount;}
+    public void setInvoiceDiscount(double invoiceDiscount) { this.invoiceDiscount = invoiceDiscount; }
+
+    @Basic
     @Column(name = "total_amount")
     private double totalAmount;
     public double getTotalAmount() {

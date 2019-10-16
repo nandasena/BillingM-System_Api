@@ -115,6 +115,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setInvoiceDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
             saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
+            saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
 
@@ -132,6 +133,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetail.setItemDetail(itemDetail);
                 invoiceItemDetail.setInvoice(insertedInvoice);
                 invoiceItemDetail.setSellingQuantity(itemVO.getSellingQuantity());
+                invoiceItemDetail.setItemDiscount(itemVO.getItemDiscount());
+                invoiceItemDetail.setItemDiscountPercentage(itemVO.getDiscountPercentage());
 
                 invoiceItemDetailDao.save(invoiceItemDetail);
                 itemDetailDao.save(itemDetail);

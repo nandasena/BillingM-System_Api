@@ -20,6 +20,7 @@ public class InvoiceVO {
     private Long id;
     private String customerName;
     private String invoiceDateOfString;
+    private double invoiceDiscount;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -56,4 +57,7 @@ public class InvoiceVO {
 
     public String getInvoiceDateOfString() { return invoiceDateOfString; }
     public void setInvoiceDateOfString(String invoiceDateOfString) { this.invoiceDateOfString = invoiceDateOfString; }
+
+    public double getInvoiceDiscount() { return invoiceDiscount; }
+    public void setInvoiceDiscount(double invoiceDiscount) { this.invoiceDiscount = invoiceDiscount; }
 }

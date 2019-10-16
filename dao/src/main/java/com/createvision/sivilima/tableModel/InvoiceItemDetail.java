@@ -31,6 +31,14 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     @Column(name = "selling_quantity")
     private double sellingQuantity;
 
+    @Basic
+    @Column(name = "item_discount")
+    private double itemDiscount;
+
+    @Basic
+    @Column(name = "item_discount_percentage")
+    private double itemDiscountPercentage;
+
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
@@ -42,4 +50,10 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
 
     public double getSellingQuantity() { return sellingQuantity; }
     public void setSellingQuantity(double sellingQuantity) { this.sellingQuantity = sellingQuantity; }
+
+    public double getItemDiscount() { return itemDiscount; }
+    public void setItemDiscount(double itemDiscount) { this.itemDiscount = itemDiscount; }
+
+    public double getItemDiscountPercentage() {return itemDiscountPercentage;}
+    public void setItemDiscountPercentage(double itemDiscountPercentage) { this.itemDiscountPercentage = itemDiscountPercentage;}
 }
