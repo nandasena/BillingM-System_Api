@@ -21,4 +21,8 @@ public interface ItemService {
     List<CategoryVO> getAllSubCategory() throws Exception;
 
     List<CategoryVO> getAllMainCategory() throws Exception;
+
+    List<CategoryVO> createMainCategory(List<CategoryVO> categoryVOS)throws Exception;
+
+
 }

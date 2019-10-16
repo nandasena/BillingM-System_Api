@@ -11,6 +11,7 @@ import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
+import org.apache.log4j.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class ItemServiceImpl implements ItemService {
                 itemVO.setItemCode(temp.getItemCode());
 
                 for (ItemDetail temItem : itemDetail) {
-                    if(!temItem.isDelete()){
+                    if (!temItem.isDelete()) {
                         ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
                         itemDetailsVO.setItemDetailId(temItem.getId());
                         itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
@@ -132,15 +133,35 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<CategoryVO> getAllMainCategory() throws Exception {
-        List<MainCategory> mainCategoryList = mainCategoryDao.getAll();
         List<CategoryVO> categoryVOList = new ArrayList<>();
-        for (MainCategory tempMainCategory : mainCategoryList) {
-            CategoryVO categoryVO = new CategoryVO();
-            categoryVO.setMainCategoryId(tempMainCategory.getId());
-            categoryVO.setName(tempMainCategory.getName());
-            categoryVOList.add(categoryVO);
+        try {
+            List<MainCategory> mainCategoryList = mainCategoryDao.getAll();
+            for (MainCategory tempMainCategory : mainCategoryList) {
+                CategoryVO categoryVO = new CategoryVO();
+                categoryVO.setMainCategoryId(tempMainCategory.getId());
+                categoryVO.setName(tempMainCategory.getName());
+                categoryVOList.add(categoryVO);
+            }
+        } catch (Exception e) {
+            throw e;
         }
-
         return categoryVOList;
+    }
+
+    @Override
+    public List<CategoryVO> createMainCategory(List<CategoryVO> categoryVOS) throws Exception {
+        try {
+            if(!categoryVOS.isEmpty()){
+                for (CategoryVO categoryVO : categoryVOS) {
+                    MainCategory mainCategory =new MainCategory ();
+                    mainCategory.setName(categoryVO.getName());
+                    mainCategoryDao.save(mainCategory);
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 }

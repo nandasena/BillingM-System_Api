@@ -6,10 +6,7 @@ import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +38,24 @@ public class CategoryController {
     @RequestMapping(value = "/mainCategory/", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Object> getAllMainCategory() throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<CategoryVO> categoryList = itemService.getAllMainCategory();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(categoryList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+    @RequestMapping(value = "/mainCategory/",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object>createMainCategory(@RequestBody List<CategoryVO> categoryVO)throws Exception{
         ReturnVO returnVO = new ReturnVO();
         try {
             List<CategoryVO> categoryList = itemService.getAllMainCategory();
