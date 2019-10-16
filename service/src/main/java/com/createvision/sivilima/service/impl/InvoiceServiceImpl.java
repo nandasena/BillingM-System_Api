@@ -11,7 +11,6 @@ import com.createvision.sivilima.valuesObject.ItemVO;
 import com.createvision.sivilima.valuesObject.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -123,6 +122,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             itemVOList = invoiceVO.getItemList();
 
             for (ItemVO itemVO : itemVOList) {
+                double totalDiscount =itemVO.getSellingQuantity()*itemVO.getPrice()*itemVO.getDiscountPercentage()/100;
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
@@ -133,8 +133,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetail.setItemDetail(itemDetail);
                 invoiceItemDetail.setInvoice(insertedInvoice);
                 invoiceItemDetail.setSellingQuantity(itemVO.getSellingQuantity());
-                invoiceItemDetail.setItemDiscount(itemVO.getItemDiscount());
                 invoiceItemDetail.setItemDiscountPercentage(itemVO.getDiscountPercentage());
+                invoiceItemDetail.setItemPrice(itemVO.getPrice());
+                invoiceItemDetail.setTotalItemDiscount(totalDiscount);
+                invoiceItemDetail.setTotalAmount(itemVO.getTotal());
 
                 invoiceItemDetailDao.save(invoiceItemDetail);
                 itemDetailDao.save(itemDetail);

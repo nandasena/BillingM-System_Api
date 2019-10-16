@@ -32,12 +32,20 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     private double sellingQuantity;
 
     @Basic
-    @Column(name = "item_discount")
-    private double itemDiscount;
+    @Column(name = "total_item_discount")
+    private double totalItemDiscount;
 
     @Basic
     @Column(name = "item_discount_percentage")
     private double itemDiscountPercentage;
+
+    @Basic
+    @Column(name = "item_price")
+    private double itemPrice;
+
+    @Basic
+    @Column(name = "total_amount")
+    private double totalAmount;
 
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
@@ -51,9 +59,15 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     public double getSellingQuantity() { return sellingQuantity; }
     public void setSellingQuantity(double sellingQuantity) { this.sellingQuantity = sellingQuantity; }
 
-    public double getItemDiscount() { return itemDiscount; }
-    public void setItemDiscount(double itemDiscount) { this.itemDiscount = itemDiscount; }
+    public double getTotalItemDiscount() { return totalItemDiscount; }
+    public void setTotalItemDiscount(double totalItemDiscount) { this.totalItemDiscount = totalItemDiscount; }
 
     public double getItemDiscountPercentage() {return itemDiscountPercentage;}
     public void setItemDiscountPercentage(double itemDiscountPercentage) { this.itemDiscountPercentage = itemDiscountPercentage;}
+
+    public double getItemPrice() { return itemPrice; }
+    public void setItemPrice(double itemPrice) { this.itemPrice = itemPrice; }
+
+    public double getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount;}
 }

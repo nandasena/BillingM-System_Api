@@ -13,6 +13,8 @@ public class ItemVO {
     private String itemCode;
     private double itemDiscount;
     private double discountPercentage;
+    private double total;
+    private double price;
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
@@ -43,4 +45,10 @@ public class ItemVO {
 
     public double getDiscountPercentage() { return discountPercentage; }
     public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
+
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total;}
+
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price;}
 }
