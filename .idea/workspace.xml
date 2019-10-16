@@ -31,7 +31,6 @@
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" afterDir="false" />
@@ -254,14 +253,7 @@
       <workItem from="1570840348290" duration="771000" />
       <workItem from="1570929077051" duration="12665000" />
       <workItem from="1571015668834" duration="793000" />
-      <workItem from="1571187140162" duration="2460000" />
-    </task>
-    <task id="LOCAL-00022" summary="add new function to get item details">
-      <created>1569163200974</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1569163200974</updated>
+      <workItem from="1571187140162" duration="3641000" />
     </task>
     <task id="LOCAL-00023" summary="add new column to item details table">
       <created>1569163626614</created>
@@ -599,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570967130769</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="add function to add main category.">
+      <created>1571190044346</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1571190044346</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -619,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified get all item function" />
     <MESSAGE value="change name in package" />
     <MESSAGE value="add new function to delete item detail" />
     <MESSAGE value="add new restriction when get item detail" />
@@ -644,7 +642,8 @@
     <MESSAGE value="change category to sub category" />
     <MESSAGE value="get main category data" />
     <MESSAGE value="add main category id" />
-    <option name="LAST_COMMIT_MESSAGE" value="add main category id" />
+    <MESSAGE value="add function to add main category." />
+    <option name="LAST_COMMIT_MESSAGE" value="add function to add main category." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -24,5 +24,7 @@ public interface ItemService {
 
     List<CategoryVO> createMainCategory(List<CategoryVO> categoryVOS)throws Exception;
 
+    List<CategoryVO> createSubCategory(List<CategoryVO> categoryVOS)throws Exception;
+
 
 }

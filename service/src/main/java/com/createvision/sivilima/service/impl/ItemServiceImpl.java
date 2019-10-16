@@ -164,4 +164,23 @@ public class ItemServiceImpl implements ItemService {
         }
         return null;
     }
+
+    @Override
+    public List<CategoryVO> createSubCategory(List<CategoryVO> categoryVOS) throws Exception {
+        try {
+            if(!categoryVOS.isEmpty()){
+                for (CategoryVO categoryVO : categoryVOS) {
+                    SubCategory subCategory =new SubCategory ();
+                    subCategory.setName(categoryVO.getName());
+                    MainCategory mainCategory = mainCategoryDao.get(categoryVO.getMainCategoryId());
+                    subCategory.setMainCategory(mainCategory);
+                    subCategoryDao.save(subCategory);
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
 }

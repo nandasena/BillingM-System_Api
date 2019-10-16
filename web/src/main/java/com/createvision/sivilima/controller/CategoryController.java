@@ -58,7 +58,25 @@ public class CategoryController {
     public ResponseEntity<Object>createMainCategory(@RequestBody List<CategoryVO> categoryVO)throws Exception{
         ReturnVO returnVO = new ReturnVO();
         try {
-            List<CategoryVO> categoryList = itemService.getAllMainCategory();
+            List<CategoryVO> categoryList = itemService.createMainCategory(categoryVO);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(categoryList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+    @RequestMapping(value = "/subCategory/",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object>createSubCategory(@RequestBody List<CategoryVO> categoryVO)throws Exception{
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<CategoryVO> categoryList = itemService.createSubCategory(categoryVO);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(categoryList);
