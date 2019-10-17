@@ -115,4 +115,17 @@ public class /**/Invoice extends BaseObject implements Serializable {
     public void setDelete(Boolean delete) {
         isDelete = delete;
     }
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_payment_type_id",nullable = false,referencedColumnName = "payment_type_id")
+    private PaymentType paymentTypeId;
+    public PaymentType getPaymentTypeId() { return paymentTypeId; }
+    public void setPaymentTypeId(PaymentType paymentTypeId) { this.paymentTypeId = paymentTypeId; }
+
+    @Basic
+    @Column(name = "cheque_number")
+    private String chequeNumber;
+    public String getChequeNumber() { return chequeNumber; }
+    public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
 }
