@@ -1,9 +1,6 @@
 package com.createvision.sivilima.service.impl;
 
-import com.createvision.sivilima.dao.InvoiceDao;
-import com.createvision.sivilima.dao.InvoiceItemDetailDao;
-import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.dao.ItemDetailDao;
+import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
@@ -42,6 +39,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     CommonFunctionsImpl commonFunctions;
+
+    @Autowired
+    PaymentTypeDao paymentTypeDao;
 
 
     @Override
@@ -108,6 +108,8 @@ public class InvoiceServiceImpl implements InvoiceService {
         InvoiceVO invoiceVO1 = new InvoiceVO();
         Invoice saveInvoice = new Invoice();
         try {
+            double totalInvoiceDiscount =0;
+            PaymentType paymentType =paymentTypeDao.get((long)1);
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
             saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
@@ -115,6 +117,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
+            saveInvoice.setPaymentTypeId(paymentType);
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
 
@@ -123,6 +126,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             for (ItemVO itemVO : itemVOList) {
                 double totalDiscount =itemVO.getSellingQuantity()*itemVO.getPrice()*itemVO.getDiscountPercentage()/100;
+                totalInvoiceDiscount+=totalDiscount;
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
@@ -141,6 +145,9 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetailDao.save(invoiceItemDetail);
                 itemDetailDao.save(itemDetail);
             }
+            insertedInvoice.setTotalDiscount(totalInvoiceDiscount);
+            invoiceDao.save(insertedInvoice);
+
         } catch (Exception e) {
             throw e;
         }

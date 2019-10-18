@@ -87,6 +87,11 @@ public class /**/Invoice extends BaseObject implements Serializable {
         this.balanceAmount = balanceAmount;
     }
 
+    @Basic
+    @Column(name = "total_discount")
+    private double totalDiscount;
+    public double getTotalDiscount() { return totalDiscount; }
+    public void setTotalDiscount(double totalDiscount) { this.totalDiscount = totalDiscount; }
 
     @Basic
     @Column(name = "invoice_number", unique = true, nullable = false)
