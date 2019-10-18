@@ -10,10 +10,16 @@ import java.io.Serializable;
 @Table(name = "customer")
 public class Customer extends BaseObject implements Serializable {
     @Basic
-    @Column(name = "name")
-    private String name;
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    @Column(name = "first_name")
+    private String firstName;
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    @Basic
+    @Column(name = "last_name")
+    private String lastName;
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     @Basic
     @Column(name = "address")
