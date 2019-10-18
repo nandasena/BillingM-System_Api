@@ -133,4 +133,10 @@ public class /**/Invoice extends BaseObject implements Serializable {
     private String chequeNumber;
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
+
+    @Basic
+    @Column(name = "customer_id")
+    private long customerId;
+    public long getCustomerId() { return customerId; }
+    public void setCustomerId(long customerId) { this.customerId = customerId;}
 }
