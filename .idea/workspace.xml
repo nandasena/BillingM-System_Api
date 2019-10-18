@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct spelling in function">
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Invoice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
@@ -256,14 +255,7 @@
       <workItem from="1571279086633" duration="2726000" />
       <workItem from="1571287587879" duration="499000" />
       <workItem from="1571315008513" duration="2500000" />
-      <workItem from="1571406045593" duration="3929000" />
-    </task>
-    <task id="LOCAL-00028" summary="update available quantity">
-      <created>1569175296293</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1569175296293</updated>
+      <workItem from="1571406045593" duration="4855000" />
     </task>
     <task id="LOCAL-00029" summary="arrange code correctly">
       <created>1569206627601</created>
@@ -601,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571406265798</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="add new customer table">
+      <created>1571412709411</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1571412709411</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +620,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change some query in get all invoice" />
     <MESSAGE value="change fetch type in user role" />
     <MESSAGE value="correct some error in user role table." />
     <MESSAGE value="add default values to user table" />
@@ -646,7 +644,8 @@
     <MESSAGE value="add new column to item detail table." />
     <MESSAGE value="add new table and add new two column to invoice table" />
     <MESSAGE value="add new dao" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new dao" />
+    <MESSAGE value="add new customer table" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new customer table" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

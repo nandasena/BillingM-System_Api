@@ -136,7 +136,7 @@ public class /**/Invoice extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "customer_id")
-    private long customerId;
-    public long getCustomerId() { return customerId; }
-    public void setCustomerId(long customerId) { this.customerId = customerId;}
+    private Long customerId;
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId;}
 }
