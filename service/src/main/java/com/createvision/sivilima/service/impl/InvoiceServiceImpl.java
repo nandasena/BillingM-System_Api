@@ -118,6 +118,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
             saveInvoice.setPaymentTypeId(paymentType);
+            saveInvoice.setCustomerId(invoiceVO.getCustomerId()!=null?invoiceVO.getCustomerId():null);
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
 
