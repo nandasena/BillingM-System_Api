@@ -13,7 +13,6 @@ public class ItemCode extends BaseObject implements Serializable {
     @Basic
     @Column(name = "code_name")
     private String codeName;
-
     public String getCodeName() { return codeName; }
     public void setCodeName(String codeName) { this.codeName = codeName;}
 

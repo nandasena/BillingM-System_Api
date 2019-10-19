@@ -43,6 +43,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     PaymentTypeDao paymentTypeDao;
 
+    @Autowired
+    ItemCodeDao itemCodeDao;
+
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -108,26 +111,33 @@ public class InvoiceServiceImpl implements InvoiceService {
         InvoiceVO invoiceVO1 = new InvoiceVO();
         Invoice saveInvoice = new Invoice();
         try {
-            double totalInvoiceDiscount =0;
-            PaymentType paymentType =paymentTypeDao.get((long)1);
+            ItemCode itemCode = itemCodeDao.getItemCode("INVOICE");
+            String code =itemCode.getCode();
+            int lastNUmber =itemCode.getLastNumber();
+            String lastInvoiceNumber =new Integer(itemCode.getLastNumber()).toString();
+            String invoiceNumber =code+"-"+lastInvoiceNumber;
+            double totalInvoiceDiscount = 0;
+            PaymentType paymentType = paymentTypeDao.get((long) 1);
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
             saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
             saveInvoice.setInvoiceDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
-            saveInvoice.setInvoiceNumber(UUID.randomUUID().toString());
+            saveInvoice.setInvoiceNumber(invoiceNumber);
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
             saveInvoice.setPaymentTypeId(paymentType);
-            saveInvoice.setCustomerId(invoiceVO.getCustomerId()!=null?invoiceVO.getCustomerId():null);
+            saveInvoice.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
+            itemCode.setLastNumber(++lastNUmber);
+            itemCodeDao.save(itemCode);
 
             List<ItemVO> itemVOList = new ArrayList<>();
             itemVOList = invoiceVO.getItemList();
 
             for (ItemVO itemVO : itemVOList) {
-                double totalDiscount =itemVO.getSellingQuantity()*itemVO.getPrice()*itemVO.getDiscountPercentage()/100;
-                totalInvoiceDiscount+=totalDiscount;
+                double totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
+                totalInvoiceDiscount += totalDiscount;
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());

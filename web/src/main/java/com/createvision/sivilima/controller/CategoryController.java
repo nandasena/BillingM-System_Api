@@ -17,7 +17,7 @@ public class CategoryController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/subCategory", method = RequestMethod.GET)
+    @RequestMapping(value = "/subCategory/", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Object> getAllSubCategory() throws Exception {
         ReturnVO returnVO = new ReturnVO();
