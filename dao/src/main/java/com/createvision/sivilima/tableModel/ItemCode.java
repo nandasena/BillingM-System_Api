@@ -27,4 +27,10 @@ public class ItemCode extends BaseObject implements Serializable {
     private int lastNumber;
     public int getLastNumber() { return lastNumber; }
     public void setLastNumber(int lastNumber) { this.lastNumber = lastNumber; }
+
+    @Basic
+    @Column(name = "is_delete" ,columnDefinition = "boolean default false")
+    private boolean isDelete;
+    public boolean isDelete() { return isDelete; }
+    public void setDelete(boolean delete) { isDelete = delete; }
 }

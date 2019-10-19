@@ -17,6 +17,7 @@ public class ItemCodeDaoImpl extends AbstractDaoImpl<ItemCode, Long> implements 
         Session session = getSession();
         Criteria criteria = session.createCriteria(ItemCode.class, "itemCode");
         criteria.add(Restrictions.eq("itemCode.codeName",code));
+        criteria.add(Restrictions.eq("itemCode.isDelete",false));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         criteria.setMaxResults(1);
         ItemCode result = (ItemCode) criteria.uniqueResult();
