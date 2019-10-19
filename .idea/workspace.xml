@@ -256,14 +256,7 @@
       <workItem from="1571315008513" duration="2500000" />
       <workItem from="1571406045593" duration="9401000" />
       <workItem from="1571445641592" duration="3277000" />
-      <workItem from="1571461509155" duration="15151000" />
-    </task>
-    <task id="LOCAL-00036" summary="remove default values and change api name">
-      <created>1569301978921</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1569301978921</updated>
+      <workItem from="1571461509155" duration="15469000" />
     </task>
     <task id="LOCAL-00037" summary="add new class to common function">
       <created>1569315466161</created>
@@ -601,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571495529290</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="add two decimal places">
+      <created>1571503105132</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1571503105132</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new function to create new user" />
     <MESSAGE value="add new variable" />
     <MESSAGE value="add new fild to invoice return object" />
     <MESSAGE value="change auth file" />
@@ -646,7 +645,8 @@
     <MESSAGE value="add new table called item_code" />
     <MESSAGE value="add item code dao" />
     <MESSAGE value="add new row and filter data" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new row and filter data" />
+    <MESSAGE value="add two decimal places" />
+    <option name="LAST_COMMIT_MESSAGE" value="add two decimal places" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

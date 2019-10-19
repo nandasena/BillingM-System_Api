@@ -62,6 +62,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty()?invoiceTmp.getCustomerName():"--");
             invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
             invoiceVO.setTotalAmount(Double.parseDouble(format.format(invoiceTmp.getTotalAmount())));
+            invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
             if (user != null) {
                 UserVO userVO = new UserVO();
                 //  BeanUtils.copyProperties(user, userVO);
