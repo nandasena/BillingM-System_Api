@@ -151,9 +151,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<CategoryVO> createMainCategory(List<CategoryVO> categoryVOS) throws Exception {
         try {
-            if(!categoryVOS.isEmpty()){
+            if (!categoryVOS.isEmpty()) {
                 for (CategoryVO categoryVO : categoryVOS) {
-                    MainCategory mainCategory =new MainCategory ();
+                    MainCategory mainCategory = new MainCategory();
                     mainCategory.setName(categoryVO.getName());
                     mainCategoryDao.save(mainCategory);
                 }
@@ -168,9 +168,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<CategoryVO> createSubCategory(List<CategoryVO> categoryVOS) throws Exception {
         try {
-            if(!categoryVOS.isEmpty()){
+            if (!categoryVOS.isEmpty()) {
                 for (CategoryVO categoryVO : categoryVOS) {
-                    SubCategory subCategory =new SubCategory ();
+                    SubCategory subCategory = new SubCategory();
                     subCategory.setName(categoryVO.getName());
                     MainCategory mainCategory = mainCategoryDao.get(categoryVO.getMainCategoryId());
                     subCategory.setMainCategory(mainCategory);
@@ -182,5 +182,47 @@ public class ItemServiceImpl implements ItemService {
 
         }
         return null;
+    }
+
+    @Override
+    public ItemVO getItemByItemCode(String itemCode) throws Exception {
+        ItemVO itemVO = null;
+        try {
+            Item selectedItem = itemDao.getItemByItemCode(itemCode);
+            if (selectedItem != null) {
+                Set<ItemDetail> itemDetail = new HashSet<>();
+                itemDetail = selectedItem.getItemDetails();
+                itemVO = new ItemVO();
+                Set<ItemDetailsVO> itemDetailList = new HashSet<>();
+                itemVO.setDescription(selectedItem.getDescription());
+                itemVO.setItemName(selectedItem.getName());
+                itemVO.setItemId(selectedItem.getId());
+                itemVO.setSubCategoryId(selectedItem.getSubCategory().getId());
+                itemVO.setItemCode(selectedItem.getItemCode());
+                for (ItemDetail temItem : itemDetail) {
+                    if (!temItem.isDelete()) {
+                        ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                        itemDetailsVO.setItemDetailId(temItem.getId());
+                        itemDetailsVO.setAvailableQuantity(temItem.getAvailableQuantity());
+                        itemDetailsVO.setFabricatorPrice(temItem.getFabricatorPrice());
+                        itemDetailsVO.setCustomerPrice(temItem.getCustomerPrice());
+                        itemDetailsVO.setMrpPrice(temItem.getMrpPrice());
+                        itemDetailsVO.setCostPrice(temItem.getCostPrice());
+                        itemDetailsVO.setQuantity(temItem.getQuantity());
+                        itemDetailsVO.setDelete(temItem.isDelete());
+
+
+                        itemDetailList.add(itemDetailsVO);
+                    }
+
+                }
+                itemVO.setItemDetailList(itemDetailList);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return itemVO;
     }
 }

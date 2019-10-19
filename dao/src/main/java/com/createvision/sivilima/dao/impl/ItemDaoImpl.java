@@ -15,12 +15,23 @@ public class ItemDaoImpl extends AbstractDaoImpl<Item, Long> implements ItemDao 
 
     @Override
     public List<Item> getAllItem() throws Exception {
-        Session session =getSession();
-        Criteria criteria= session.createCriteria(Item.class,"item");
-        criteria.createAlias("item.itemDetails","itemDetails",JoinType.LEFT_OUTER_JOIN);
-        criteria.add(Restrictions.eq("itemDetails.isDelete",false));
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(Item.class, "item");
+        criteria.createAlias("item.itemDetails", "itemDetails", JoinType.LEFT_OUTER_JOIN);
+        criteria.add(Restrictions.eq("itemDetails.isDelete", false));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        List<Item> result =criteria.list();
+        List<Item> result = criteria.list();
+        return result;
+    }
+
+    @Override
+    public Item getItemByItemCode(String itemCode) throws Exception {
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(Item.class, "item");
+        criteria.add(Restrictions.eq("item.itemCode",itemCode));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        criteria.setMaxResults(1);
+        Item result = (Item) criteria.uniqueResult();
         return result;
     }
 }

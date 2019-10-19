@@ -26,5 +26,7 @@ public interface ItemService {
 
     List<CategoryVO> createSubCategory(List<CategoryVO> categoryVOS)throws Exception;
 
+    ItemVO getItemByItemCode(String itemCode)throws Exception;
+
 
 }

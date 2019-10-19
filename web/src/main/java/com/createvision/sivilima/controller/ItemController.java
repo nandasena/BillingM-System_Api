@@ -52,5 +52,23 @@ public class ItemController {
             return ResponseEntity.ok(returnVO);
         }
     }
+
+    @RequestMapping(value = "/{itemCode}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getItemByItemCode(@PathVariable("itemCode") String itemCode) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            ItemVO itemVO = itemService.getItemByItemCode(itemCode);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(itemVO);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
 }
 
