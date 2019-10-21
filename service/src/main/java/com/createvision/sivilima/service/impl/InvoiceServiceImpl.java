@@ -59,6 +59,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         for (Invoice invoiceTmp : invoices) {
             User user = invoiceTmp.getUser();
             InvoiceVO invoiceVO = new InvoiceVO();
+            invoiceVO.setId(invoiceTmp.getId());
             invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
             invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
             invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
@@ -220,7 +221,9 @@ public class InvoiceServiceImpl implements InvoiceService {
                     itemDetailsVO.setQuantity(tem.getSellingQuantity());
                     itemDetailsVO.setTotalItemAmount(tem.getTotalAmount());
                     itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
+                    itemDetailsVO.setItemId(tem.getItem().getId());
                     itemDetailsVOList.add(itemDetailsVO);
+
 
                 }
             }
