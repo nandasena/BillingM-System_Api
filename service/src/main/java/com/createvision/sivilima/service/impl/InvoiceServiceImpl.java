@@ -4,6 +4,7 @@ import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 import com.createvision.sivilima.valuesObject.UserVO;
 import org.slf4j.Logger;
@@ -59,7 +60,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             User user = invoiceTmp.getUser();
             InvoiceVO invoiceVO = new InvoiceVO();
             invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
-            invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty()?invoiceTmp.getCustomerName():"--");
+            invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
             invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
             invoiceVO.setTotalAmount(Double.parseDouble(format.format(invoiceTmp.getTotalAmount())));
             invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
@@ -115,10 +116,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice saveInvoice = new Invoice();
         try {
             ItemCode itemCode = itemCodeDao.getItemCode("INVOICE");
-            String code =itemCode.getCode();
-            int lastNUmber =itemCode.getLastNumber();
-            String lastInvoiceNumber =new Integer(itemCode.getLastNumber()).toString();
-            String invoiceNumber =code+"-"+lastInvoiceNumber;
+            String code = itemCode.getCode();
+            int lastNUmber = itemCode.getLastNumber();
+            String lastInvoiceNumber = new Integer(itemCode.getLastNumber()).toString();
+            String invoiceNumber = code + "-" + lastInvoiceNumber;
             double totalInvoiceDiscount = 0;
             PaymentType paymentType = paymentTypeDao.get((long) 1);
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
@@ -204,5 +205,29 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
 
         return isTrue;
+    }
+
+    @Override
+    public List<ItemDetailsVO> getInvoiceDetailsByInvoiceId(Long invoiceId) throws Exception {
+        List<ItemDetailsVO> itemDetailsVOList = new ArrayList<>();
+        try {
+            List<InvoiceItemDetail> invoiceItemDetail = invoiceItemDetailDao.gteInvoiceDetailByInvoiceId(invoiceId);
+            if (!invoiceItemDetail.isEmpty()) {
+                for (InvoiceItemDetail tem : invoiceItemDetail) {
+                    ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                    itemDetailsVO.setMrpPrice(tem.getItemPrice());
+                    itemDetailsVO.setItemName(tem.getItem().getName());
+                    itemDetailsVO.setQuantity(tem.getSellingQuantity());
+                    itemDetailsVO.setTotalItemAmount(tem.getTotalAmount());
+                    itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
+                    itemDetailsVOList.add(itemDetailsVO);
+
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return itemDetailsVOList;
     }
 }

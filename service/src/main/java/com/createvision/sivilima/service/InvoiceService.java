@@ -2,6 +2,7 @@ package com.createvision.sivilima.service;
 
 import com.createvision.sivilima.tableModel.Invoice;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface InvoiceService {
     InvoiceVO createNewInvoice(InvoiceVO invoiceVO) throws Exception;
 
     boolean deleteInvoice(Long id) throws Exception;
+
+    List<ItemDetailsVO> getInvoiceDetailsByInvoiceId(Long invoiceId) throws Exception;
 
 }

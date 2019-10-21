@@ -12,6 +12,9 @@ public class ItemDetailsVO {
     private Long companyId;
     private String purchaseDate;
     private boolean isDelete;
+    private String itemName;
+    private double totalItemAmount;
+    private double totalItemDiscount;
 
 
 
@@ -48,5 +51,12 @@ public class ItemDetailsVO {
     public boolean isDelete() { return isDelete;}
     public void setDelete(boolean delete) { isDelete = delete;}
 
+    public String getItemName() { return itemName; }
+    public void setItemName(String itemName) { this.itemName = itemName; }
 
+    public double getTotalItemAmount() { return totalItemAmount; }
+    public void setTotalItemAmount(double totalItemAmount) { this.totalItemAmount = totalItemAmount; }
+
+    public double getTotalItemDiscount() { return totalItemDiscount; }
+    public void setTotalItemDiscount(double totalItemDiscount) { this.totalItemDiscount = totalItemDiscount; }
 }

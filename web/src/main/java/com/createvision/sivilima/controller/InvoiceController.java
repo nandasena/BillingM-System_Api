@@ -6,6 +6,7 @@ import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ReturnVO;
 import com.createvision.sivilima.valuesObject.UserVO;
 import org.slf4j.Logger;
@@ -98,4 +99,22 @@ public class InvoiceController {
         }
 
     }
+
+    @RequestMapping(value = "/{invoiceId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getInvoiceDetailsByInvoiceId(@PathVariable("invoiceId") Long invoiceId) throws Exception {
+
+        try {
+            List<ItemDetailsVO> invoiceVOS = invoiceService.getInvoiceDetailsByInvoiceId(invoiceId);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(invoiceVOS);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
+
 }
