@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -132,6 +133,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
             saveInvoice.setPaymentTypeId(paymentType);
             saveInvoice.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
+            saveInvoice.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
             itemCode.setLastNumber(++lastNUmber);
@@ -232,5 +234,41 @@ public class InvoiceServiceImpl implements InvoiceService {
             throw e;
         }
         return itemDetailsVOList;
+    }
+
+
+    @Override
+    public List<InvoiceVO> getInvoicesByDateRange(String fromDate, String toDate) throws Exception {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DecimalFormat format = new DecimalFormat("##.00");
+        List<InvoiceVO> invoiceVOS = new ArrayList<>();
+        try {
+            Date startDate = commonFunctions.getDateTimeByDateString(fromDate);
+            Date endDate = commonFunctions.getDateTimeByDateString(toDate);
+            List<Invoice> invoices = invoiceDao.getInvoiceByDateRange(startDate, endDate);
+
+            //LOGGER.info("Invoice count {}", invoices.size());
+            for (Invoice invoiceTmp : invoices) {
+                User user = invoiceTmp.getUser();
+                InvoiceVO invoiceVO = new InvoiceVO();
+                invoiceVO.setId(invoiceTmp.getId());
+                invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
+                invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
+                invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
+                invoiceVO.setTotalAmount(Double.parseDouble(format.format(invoiceTmp.getTotalAmount())));
+                invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
+                if (user != null) {
+                    UserVO userVO = new UserVO();
+                    //  BeanUtils.copyProperties(user, userVO);
+                    //invoiceVO.setUser(userVO);
+                }
+                invoiceVOS.add(invoiceVO);
+
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return invoiceVOS;
     }
 }

@@ -24,4 +24,6 @@ public interface InvoiceService {
 
     List<ItemDetailsVO> getInvoiceDetailsByInvoiceId(Long invoiceId) throws Exception;
 
+    List<InvoiceVO> getInvoicesByDateRange(String fromDate,String toDate) throws Exception;
+
 }

@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 import java.util.List;
 
 @Repository("invoiceDao")
@@ -14,8 +16,8 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
     @Override
     public List<Invoice> getInvoiceByAmount() throws Exception {
 
-        Criteria c= getSession().createCriteria(Invoice.class)
-        .add(Restrictions.eq("advanceAmount",2000.00));
+        Criteria c = getSession().createCriteria(Invoice.class)
+                .add(Restrictions.eq("advanceAmount", 2000.00));
 
         return c.list();
     }
@@ -23,12 +25,12 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
     @Override
     public List<Invoice> sampleJoinQuery() throws Exception {
 
-        Criteria IinCri= getSession().createCriteria(Invoice.class,"invoice");
-                 IinCri.createAlias("invoice.invoiceItemDetails","invoiceItemDetails");
-                 IinCri.createAlias("invoiceItemDetails.item","invoiceItem");
-                 IinCri.add(Restrictions.eq("invoiceItem.name","pasan"));
-                 IinCri.add(Restrictions.eq("invoice.advanceAmount",2000.00));
-                 List<Invoice> result =IinCri.list();
+        Criteria IinCri = getSession().createCriteria(Invoice.class, "invoice");
+        IinCri.createAlias("invoice.invoiceItemDetails", "invoiceItemDetails");
+        IinCri.createAlias("invoiceItemDetails.item", "invoiceItem");
+        IinCri.add(Restrictions.eq("invoiceItem.name", "pasan"));
+        IinCri.add(Restrictions.eq("invoice.advanceAmount", 2000.00));
+        List<Invoice> result = IinCri.list();
         return result;
     }
 
@@ -47,6 +49,15 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
                 "left JOIN items on iid.item_id = items.id " +
                 "where items.name =\"pasan\" and ins.advance_amount =2000;");
         List<Object[]> result = query.list();
+        return result;
+    }
+
+    @Override
+    public List<Invoice> getInvoiceByDateRange(Date fromDate, Date toDate) throws Exception {
+        Criteria criteria = getSession().createCriteria(Invoice.class);
+        criteria.add(Restrictions.ge("createdAt", fromDate));
+        criteria.add(Restrictions.lt("createdAt", toDate));
+        List<Invoice> result=criteria.list();
         return result;
     }
 }

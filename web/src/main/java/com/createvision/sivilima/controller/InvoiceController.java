@@ -117,4 +117,21 @@ public class InvoiceController {
         }
     }
 
+    @RequestMapping(value = "/fromDate/{fromDate}/toDate/{toDate}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getInvoiceBydatePeriod(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
+
+        try {
+            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate,toDate);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(invoiceVOS);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
+
 }
