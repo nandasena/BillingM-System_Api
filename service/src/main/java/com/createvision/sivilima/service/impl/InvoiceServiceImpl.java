@@ -225,8 +225,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                     itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
                     itemDetailsVO.setItemId(tem.getItem().getId());
                     itemDetailsVOList.add(itemDetailsVO);
-
-
                 }
             }
 
@@ -263,7 +261,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                     //invoiceVO.setUser(userVO);
                 }
                 invoiceVOS.add(invoiceVO);
-
             }
         } catch (Exception e) {
             throw e;
