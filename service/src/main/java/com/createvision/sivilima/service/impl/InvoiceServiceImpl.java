@@ -44,9 +44,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     CommonFunctionsImpl commonFunctions;
 
     @Autowired
-    PaymentTypeDao paymentTypeDao;
-
-    @Autowired
     ItemCodeDao itemCodeDao;
 
 
@@ -123,7 +120,6 @@ public class InvoiceServiceImpl implements InvoiceService {
             String lastInvoiceNumber = new Integer(itemCode.getLastNumber()).toString();
             String invoiceNumber = code + "-" + lastInvoiceNumber;
             double totalInvoiceDiscount = 0;
-            PaymentType paymentType = paymentTypeDao.get((long) 1);
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
             saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
             saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
@@ -131,7 +127,6 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setInvoiceNumber(invoiceNumber);
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             saveInvoice.setInvoiceDiscount(invoiceVO.getInvoiceDiscount());
-            saveInvoice.setPaymentTypeId(paymentType);
             saveInvoice.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
             saveInvoice.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             Long id = invoiceDao.save(saveInvoice);
