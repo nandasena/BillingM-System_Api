@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service("invoiceService")
 @Transactional
@@ -163,7 +162,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             insertedInvoice.setTotalDiscount(totalInvoiceDiscount);
             invoiceDao.save(insertedInvoice);
             List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
-            paymentDetailVOList = invoiceVO.getPaymentDetailVOList();
+            paymentDetailVOList = invoiceVO.getPaymentDetailList();
 
             if (paymentDetailVOList !=null) {
                 for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {

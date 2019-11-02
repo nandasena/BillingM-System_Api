@@ -22,7 +22,7 @@ public class InvoiceVO {
     private String invoiceDateOfString;
     private double invoiceDiscount;
     private Long customerId;
-    private List<PaymentDetailVO> paymentDetailVOList;
+    private List<PaymentDetailVO> paymentDetailList;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -66,6 +66,6 @@ public class InvoiceVO {
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long customerId) { this.customerId = customerId;}
 
-    public List<PaymentDetailVO> getPaymentDetailVOList() { return paymentDetailVOList; }
-    public void setPaymentDetailVOList(List<PaymentDetailVO> paymentDetailVOList) {this.paymentDetailVOList = paymentDetailVOList;}
+    public List<PaymentDetailVO> getPaymentDetailList() { return paymentDetailList; }
+    public void setPaymentDetailList(List<PaymentDetailVO> paymentDetailList) {this.paymentDetailList = paymentDetailList;}
 }

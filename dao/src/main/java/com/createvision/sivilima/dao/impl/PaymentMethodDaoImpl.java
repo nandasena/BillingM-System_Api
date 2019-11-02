@@ -15,7 +15,7 @@ public class PaymentMethodDaoImpl extends AbstractDaoImpl<PaymentMethod,Long> im
         try {
             Session session = getSession();
             Criteria criteria = session.createCriteria(PaymentMethod.class, "paymentMethod");
-            criteria.add(Restrictions.eq("paymentMethod.type_code",code));
+            criteria.add(Restrictions.eq("paymentMethod.typeCode",code));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             criteria.setMaxResults(1);
             PaymentMethod result = (PaymentMethod) criteria.uniqueResult();
