@@ -3,10 +3,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.service.InvoiceService;
-import com.createvision.sivilima.valuesObject.InvoiceVO;
-import com.createvision.sivilima.valuesObject.ItemDetailsVO;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.UserVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     ItemCodeDao itemCodeDao;
 
+    @Autowired
+    PaymentDetailDao paymentDetailDao;
+
+    @Autowired
+    PaymentMethodDao paymentMethodDao;
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -160,6 +162,21 @@ public class InvoiceServiceImpl implements InvoiceService {
             }
             insertedInvoice.setTotalDiscount(totalInvoiceDiscount);
             invoiceDao.save(insertedInvoice);
+            List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
+            paymentDetailVOList = invoiceVO.getPaymentDetailVOList();
+
+            if (paymentDetailVOList !=null) {
+                for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
+                    PaymentDetails paymentDetails = new PaymentDetails();
+                    PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    paymentDetails.setAmount(paymentDetailVO.getAmount());
+                    paymentDetails.setInvoice(insertedInvoice);
+                    paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
+                    paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
+                    paymentDetails.setPaymentMethod(paymentMethod);
+                    paymentDetailDao.save(paymentDetails);
+                }
+            }
 
         } catch (Exception e) {
             throw e;
