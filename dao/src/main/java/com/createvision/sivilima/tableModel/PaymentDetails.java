@@ -1,5 +1,7 @@
 package com.createvision.sivilima.tableModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -29,6 +31,10 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_invoice_id")
     private Invoice invoice;
 
+    @Basic
+    @Column(name = "is_clear",columnDefinition = "boolean default false")
+    private boolean isClear;
+
 
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
@@ -44,4 +50,7 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
+
+    public boolean isClear() { return isClear; }
+    public void setClear(boolean clear) { isClear = clear; }
 }
