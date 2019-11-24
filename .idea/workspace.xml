@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct spelling in function">
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PaymentDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PaymentMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/PaymentTypeDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/PaymentTypeImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/PaymentDetailDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/PaymentDetailDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/PaymentDetailDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/PaymentDetailDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PaymentDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PaymentDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/PaymentDetailVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/PaymentDetailVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" afterDir="false" />
@@ -27,6 +26,8 @@
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/model/User.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_scripts/getInvoiceDetailsBytypeCodAndDate.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_scripts/getInvoiceDetailsBytypeCodAndDate.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/InvoiceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/InvoiceService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/ItemService.class" afterDir="false" />
@@ -34,6 +35,7 @@
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/InvoiceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" afterDir="false" />
@@ -100,11 +102,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/db_scripts" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.1816092" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/db_scripts" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -270,49 +277,13 @@
       <workItem from="1572139936488" duration="7376000" />
       <workItem from="1572193166042" duration="214000" />
       <workItem from="1572538263433" duration="2300000" />
-      <workItem from="1572571705883" duration="1239000" />
-    </task>
-    <task id="LOCAL-00042" summary="add new column to item details table">
-      <created>1569400931130</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1569400931130</updated>
-    </task>
-    <task id="LOCAL-00043" summary="add new function to get item detail by item id">
-      <created>1569509448975</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1569509448976</updated>
-    </task>
-    <task id="LOCAL-00044" summary="change function name.">
-      <created>1569509860942</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1569509860942</updated>
-    </task>
-    <task id="LOCAL-00045" summary="modified get all item function">
-      <created>1569568926193</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1569568926193</updated>
-    </task>
-    <task id="LOCAL-00046" summary="change name in package">
-      <created>1569570930980</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1569570930980</updated>
-    </task>
-    <task id="LOCAL-00047" summary="add new function to delete item detail">
-      <created>1569575395500</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1569575395500</updated>
+      <workItem from="1572571705883" duration="9855000" />
+      <workItem from="1572656661083" duration="2424000" />
+      <workItem from="1572744833804" duration="476000" />
+      <workItem from="1572757529656" duration="5778000" />
+      <workItem from="1574475230184" duration="42000" />
+      <workItem from="1574475285750" duration="16584000" />
+      <workItem from="1574557328450" duration="143000" />
     </task>
     <task id="LOCAL-00048" summary="add new restriction when get item detail">
       <created>1569584602595</created>
@@ -615,7 +586,49 @@
       <option name="project" value="LOCAL" />
       <updated>1572153712214</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="remove payment type table and add new two table to save payment details">
+      <created>1572573734926</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1572573734927</updated>
+    </task>
+    <task id="LOCAL-00092" summary="add new dao file to payment details table">
+      <created>1572576333119</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1572576333119</updated>
+    </task>
+    <task id="LOCAL-00093" summary="add payment details of invoice">
+      <created>1572691393760</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1572691393760</updated>
+    </task>
+    <task id="LOCAL-00094" summary="change some errors when create invoice">
+      <created>1572711545493</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1572711545493</updated>
+    </task>
+    <task id="LOCAL-00095" summary="add new table to save credit payment details">
+      <created>1572762696325</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1572762696325</updated>
+    </task>
+    <task id="LOCAL-00096" summary="add new two store procedure to get credit payment details">
+      <created>1574486926899</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1574486926899</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,12 +648,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change sql table column name" />
-    <MESSAGE value="add new values object and modified some variable name" />
-    <MESSAGE value="change category to sub category" />
-    <MESSAGE value="get main category data" />
-    <MESSAGE value="add main category id" />
-    <MESSAGE value="add function to add main category." />
     <MESSAGE value="add new function to save sub category" />
     <MESSAGE value="add new column to save discount percentage and discount values." />
     <MESSAGE value="add new column to item detail table." />
@@ -660,7 +667,13 @@
     <MESSAGE value="get some required fid" />
     <MESSAGE value="add new api to get invoice by data range" />
     <MESSAGE value="remove unwanted line" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove unwanted line" />
+    <MESSAGE value="remove payment type table and add new two table to save payment details" />
+    <MESSAGE value="add new dao file to payment details table" />
+    <MESSAGE value="add payment details of invoice" />
+    <MESSAGE value="change some errors when create invoice" />
+    <MESSAGE value="add new table to save credit payment details" />
+    <MESSAGE value="add new two store procedure to get credit payment details" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new two store procedure to get credit payment details" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

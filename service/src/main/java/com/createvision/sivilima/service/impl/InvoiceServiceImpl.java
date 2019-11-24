@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Double.parseDouble;
+
 @Service("invoiceService")
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService {
@@ -62,7 +64,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
             invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
             invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
-            invoiceVO.setTotalAmount(Double.parseDouble(format.format(invoiceTmp.getTotalAmount())));
+            invoiceVO.setTotalAmount(parseDouble(format.format(invoiceTmp.getTotalAmount())));
             invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
             if (user != null) {
                 UserVO userVO = new UserVO();
@@ -164,7 +166,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
             paymentDetailVOList = invoiceVO.getPaymentDetailList();
 
-            if (paymentDetailVOList !=null) {
+            if (paymentDetailVOList != null) {
                 for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
                     PaymentDetails paymentDetails = new PaymentDetails();
                     PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
@@ -264,7 +266,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
                 invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
                 invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
-                invoiceVO.setTotalAmount(Double.parseDouble(format.format(invoiceTmp.getTotalAmount())));
+                invoiceVO.setTotalAmount(parseDouble(format.format(invoiceTmp.getTotalAmount())));
                 invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
                 if (user != null) {
                     UserVO userVO = new UserVO();
@@ -278,5 +280,24 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
 
         return invoiceVOS;
+    }
+
+    @Override
+    public List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate, String toDate, String type) throws Exception {
+
+        List<PaymentDetailVO> paymentDetailVOList =new ArrayList<>();
+        try {
+      List<Object[]>   paymentDetailList = paymentDetailDao.getPaymentDetailByDateAndType(fromDate,toDate,type);
+            for (Object[] tem:paymentDetailList) {
+                PaymentDetailVO paymentDetailVO =new PaymentDetailVO();
+                paymentDetailVO.setPaidAmount(parseDouble(tem[0].toString()));
+                paymentDetailVO.setInvoiceNumber(tem[4].toString());
+                paymentDetailVO.setAmount(parseDouble(tem[2].toString()));
+                paymentDetailVOList.add(paymentDetailVO);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return paymentDetailVOList;
     }
 }

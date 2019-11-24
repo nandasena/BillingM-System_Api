@@ -3,6 +3,7 @@ package com.createvision.sivilima.service;
 import com.createvision.sivilima.tableModel.Invoice;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
+import com.createvision.sivilima.valuesObject.PaymentDetailVO;
 
 import java.util.List;
 
@@ -25,5 +26,7 @@ public interface InvoiceService {
     List<ItemDetailsVO> getInvoiceDetailsByInvoiceId(Long invoiceId) throws Exception;
 
     List<InvoiceVO> getInvoicesByDateRange(String fromDate,String toDate) throws Exception;
+
+    List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate,String toDate,String type) throws Exception;
 
 }

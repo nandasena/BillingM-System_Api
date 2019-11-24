@@ -15,7 +15,7 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "amount")
-    private Long amount;
+    private double amount;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,8 +39,8 @@ public class PaymentDetails extends BaseObject implements Serializable {
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
 
-    public Long getAmount() { return amount; }
-    public void setAmount(Long amount) { this.amount = amount; }
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
 
     public PaymentMethod getPaymentMethod() { return paymentMethod; }
     public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }

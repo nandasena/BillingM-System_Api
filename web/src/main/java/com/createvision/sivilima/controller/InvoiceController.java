@@ -5,10 +5,7 @@ import com.createvision.sivilima.tableModel.User;
 import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;
-import com.createvision.sivilima.valuesObject.InvoiceVO;
-import com.createvision.sivilima.valuesObject.ItemDetailsVO;
-import com.createvision.sivilima.valuesObject.ReturnVO;
-import com.createvision.sivilima.valuesObject.UserVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -123,6 +120,40 @@ public class InvoiceController {
 
         try {
             List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate,toDate);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(invoiceVOS);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
+
+    @RequestMapping(value = "/paymentDetail/fromDate/{fromDate}/toDate/{toDate}/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getInvoicePaymentDetailByDate(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
+
+        try {
+            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate,toDate);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(invoiceVOS);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
+
+    @RequestMapping(value = "paymentDetail/fromDate/{fromDate}/toDate/{toDate}/type/{type}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getInvoicePaymentDetailByDateAndPaymentType(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate,@PathVariable("type") String type) throws Exception {
+
+        try {
+            List<PaymentDetailVO> invoiceVOS = invoiceService.getInvoicePaymentDetailByDateAndPaymentType(fromDate,toDate,type);
             ReturnVO returnVO = new ReturnVO();
             returnVO.setResult(invoiceVOS);
             returnVO.setSuccess(true);

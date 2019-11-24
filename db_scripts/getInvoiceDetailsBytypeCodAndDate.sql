@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS  getInvoiceDetailsBytypeCodeAndDate;
+DROP PROCEDURE IF EXISTS  getInvoiceDetailsByTypeCodeAndDate;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getInvoiceDetailsBytypeCodeAndDate`(IN type_code varchar(10),IN form_date varchar(20),IN to_date varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getInvoiceDetailsByTypeCodeAndDate`(IN type_code varchar(10),IN form_date varchar(20),IN to_date varchar(20))
 BEGIN
 
 	DROP TABLE IF EXISTS   Temp_lnRecordTable;
