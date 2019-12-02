@@ -12,6 +12,7 @@ public class PaymentDetailVO {
     private Long balanceAmount;
     private double paidAmount;
     private String invoiceNumber;
+    private String customerName;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -42,4 +43,7 @@ public class PaymentDetailVO {
 
     public String getInvoiceNumber() { return invoiceNumber; }
     public void setInvoiceNumber(String invoiceNumber) { this.invoiceNumber = invoiceNumber; }
+
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
 }

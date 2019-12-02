@@ -293,6 +293,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                 paymentDetailVO.setPaidAmount(parseDouble(tem[0].toString()));
                 paymentDetailVO.setInvoiceNumber(tem[4].toString());
                 paymentDetailVO.setAmount(parseDouble(tem[2].toString()));
+                paymentDetailVO.setCustomerName(tem[6]==null?"--":tem[6].toString());
+                paymentDetailVO.setInvoiceId(Long.parseLong(tem[3].toString()));
                 paymentDetailVOList.add(paymentDetailVO);
             }
         } catch (Exception e) {
