@@ -53,11 +53,11 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
     }
 
     @Override
-    public List<Invoice> getInvoiceByDateRange(Date fromDate, Date toDate) throws Exception {
-        Criteria criteria = getSession().createCriteria(Invoice.class);
-        criteria.add(Restrictions.ge("createdAt", fromDate));
-        criteria.add(Restrictions.lt("createdAt", toDate));
-        List<Invoice> result=criteria.list();
+    public List<Object[]> getInvoiceByDateRange(Date fromDate, Date toDate) throws Exception {
+        Query query = getSession().createSQLQuery("CALL getInvoiceByDateRange(?,?)");
+        query.setParameter(0,fromDate);
+        query.setParameter(1,toDate);
+        List<Object[]> result = query.list();
         return result;
     }
 }

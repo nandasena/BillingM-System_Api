@@ -23,6 +23,7 @@ public class InvoiceVO {
     private double invoiceDiscount;
     private Long customerId;
     private List<PaymentDetailVO> paymentDetailList;
+    private String paymentType;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -68,4 +69,7 @@ public class InvoiceVO {
 
     public List<PaymentDetailVO> getPaymentDetailList() { return paymentDetailList; }
     public void setPaymentDetailList(List<PaymentDetailVO> paymentDetailList) {this.paymentDetailList = paymentDetailList;}
+
+    public String getPaymentType() { return paymentType; }
+    public void setPaymentType(String paymentType) { this.paymentType = paymentType;}
 }

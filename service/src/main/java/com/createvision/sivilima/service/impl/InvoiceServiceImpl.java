@@ -256,23 +256,24 @@ public class InvoiceServiceImpl implements InvoiceService {
         try {
             Date startDate = commonFunctions.getDateTimeByDateString(fromDate);
             Date endDate = commonFunctions.getDateTimeByDateString(toDate);
-            List<Invoice> invoices = invoiceDao.getInvoiceByDateRange(startDate, endDate);
+            List<Object[]> invoices = invoiceDao.getInvoiceByDateRange(startDate, endDate);
 
             //LOGGER.info("Invoice count {}", invoices.size());
-            for (Invoice invoiceTmp : invoices) {
-                User user = invoiceTmp.getUser();
+            for (Object[] invoiceTmp : invoices) {
+//                User user = invoiceTmp.getUser();
                 InvoiceVO invoiceVO = new InvoiceVO();
-                invoiceVO.setId(invoiceTmp.getId());
-                invoiceVO.setInvoiceNumber(invoiceTmp.getInvoiceNumber());
-                invoiceVO.setCustomerName(!invoiceTmp.getCustomerName().isEmpty() ? invoiceTmp.getCustomerName() : "--");
-                invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp.getInvoiceDate()));
-                invoiceVO.setTotalAmount(parseDouble(format.format(invoiceTmp.getTotalAmount())));
-                invoiceVO.setInvoiceDiscount(invoiceTmp.getTotalDiscount());
-                if (user != null) {
-                    UserVO userVO = new UserVO();
-                    //  BeanUtils.copyProperties(user, userVO);
-                    //invoiceVO.setUser(userVO);
-                }
+                invoiceVO.setId(Long.parseLong(invoiceTmp[0].toString()));
+                invoiceVO.setInvoiceNumber(invoiceTmp[1].toString());
+                invoiceVO.setCustomerName(!invoiceTmp[2].toString().isEmpty() ? invoiceTmp[2].toString() : "--");
+                invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp[3]));
+                invoiceVO.setTotalAmount(parseDouble(format.format(invoiceTmp[4])));
+                invoiceVO.setInvoiceDiscount(parseDouble(invoiceTmp[5].toString()));
+                invoiceVO.setPaymentType(invoiceTmp[6].toString());
+//                if (user != null) {
+//                    UserVO userVO = new UserVO();
+//                    //  BeanUtils.copyProperties(user, userVO);
+//                    //invoiceVO.setUser(userVO);
+//                }
                 invoiceVOS.add(invoiceVO);
             }
         } catch (Exception e) {
