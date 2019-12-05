@@ -29,4 +29,6 @@ public interface InvoiceService {
 
     List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate,String toDate,String type) throws Exception;
 
+    PaymentDetailVO createCreditPayment (PaymentDetailVO paymentDetailVO) throws Exception;
+
 }

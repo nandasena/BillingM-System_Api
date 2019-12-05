@@ -13,6 +13,8 @@ public class PaymentDetailVO {
     private double paidAmount;
     private String invoiceNumber;
     private String customerName;
+    private Long paymentDetailId;
+    private String paymentType;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -46,4 +48,10 @@ public class PaymentDetailVO {
 
     public String getCustomerName() { return customerName; }
     public void setCustomerName(String customerName) { this.customerName = customerName; }
+
+    public Long getPaymentDetailId() { return paymentDetailId; }
+    public void setPaymentDetailId(Long paymentDetailId) { this.paymentDetailId = paymentDetailId; }
+
+    public String getPaymentType() { return paymentType; }
+    public void setPaymentType(String paymentType) { this.paymentType = paymentType; }
 }

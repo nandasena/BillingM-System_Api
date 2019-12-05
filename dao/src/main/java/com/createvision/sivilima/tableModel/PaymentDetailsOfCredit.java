@@ -21,7 +21,7 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "amount")
-    private String amount;
+    private double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_type_code",nullable = false,referencedColumnName = "type_code")
@@ -40,8 +40,8 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getAmount() { return amount; }
-    public void setAmount(String amount) { this.amount = amount; }
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
 
     public PaymentMethod getPaymentMethod() { return paymentMethod; }
     public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }

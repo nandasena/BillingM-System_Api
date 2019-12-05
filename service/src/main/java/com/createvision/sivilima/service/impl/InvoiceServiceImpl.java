@@ -50,6 +50,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     PaymentMethodDao paymentMethodDao;
 
+    @Autowired
+    PaymentDetailsOfCreditDao paymentDetailsOfCreditDao;
+
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -286,15 +289,15 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate, String toDate, String type) throws Exception {
 
-        List<PaymentDetailVO> paymentDetailVOList =new ArrayList<>();
+        List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
         try {
-      List<Object[]>   paymentDetailList = paymentDetailDao.getPaymentDetailByDateAndType(fromDate,toDate,type);
-            for (Object[] tem:paymentDetailList) {
-                PaymentDetailVO paymentDetailVO =new PaymentDetailVO();
+            List<Object[]> paymentDetailList = paymentDetailDao.getPaymentDetailByDateAndType(fromDate, toDate, type);
+            for (Object[] tem : paymentDetailList) {
+                PaymentDetailVO paymentDetailVO = new PaymentDetailVO();
                 paymentDetailVO.setPaidAmount(parseDouble(tem[0].toString()));
                 paymentDetailVO.setInvoiceNumber(tem[4].toString());
                 paymentDetailVO.setAmount(parseDouble(tem[2].toString()));
-                paymentDetailVO.setCustomerName(tem[6]==null?"--":tem[6].toString());
+                paymentDetailVO.setCustomerName(tem[6] == null ? "--" : tem[6].toString());
                 paymentDetailVO.setInvoiceId(Long.parseLong(tem[3].toString()));
                 paymentDetailVOList.add(paymentDetailVO);
             }
@@ -302,5 +305,31 @@ public class InvoiceServiceImpl implements InvoiceService {
             throw e;
         }
         return paymentDetailVOList;
+    }
+
+    @Override
+    public PaymentDetailVO createCreditPayment(PaymentDetailVO paymentDetailVO) throws Exception {
+             PaymentDetailVO insertObject =new PaymentDetailVO();
+        try {
+            PaymentDetails paymentDetails = paymentDetailDao.get(paymentDetailVO.getPaymentDetailId());
+            PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getPaymentType());
+            PaymentDetailsOfCredit paymentDetailsOfCredit = new PaymentDetailsOfCredit();
+            paymentDetailsOfCredit.setAmount(paymentDetailVO.getAmount());
+            paymentDetailsOfCredit.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+            paymentDetailsOfCredit.setDescription("");
+            paymentDetailsOfCredit.setPaymentDetails(paymentDetails);
+            paymentDetailsOfCredit.setPaymentMethod(paymentMethod);
+            Long insertId = paymentDetailsOfCreditDao.save(paymentDetailsOfCredit);
+            if (insertId!=null) {
+                insertObject = paymentDetailVO;
+            }else{
+                insertObject = null;
+            }
+
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return insertObject;
     }
 }

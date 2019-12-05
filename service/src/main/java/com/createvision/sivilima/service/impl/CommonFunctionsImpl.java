@@ -13,12 +13,17 @@ import java.util.Date;
 public class CommonFunctionsImpl {
 
     public Date getCurrentDateAndTimeByTimeZone(String timeZone) throws Exception {
-        LocalDateTime today = LocalDateTime.now();
-        ZoneId id = ZoneId.of(timeZone);  //Create timezone
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(today, id);  //Add timezone to
-        String formattedDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(zonedDateTime);
-        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(formattedDateTime);
-        return date;
+        try {
+            LocalDateTime today = LocalDateTime.now();
+            ZoneId id = ZoneId.of(timeZone);  //Create timezone
+            ZonedDateTime zonedDateTime = ZonedDateTime.of(today, id);  //Add timezone to
+            String formattedDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(zonedDateTime);
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(formattedDateTime);
+            return date;
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
     public Date getDateTimeByDateString(String dateString) throws Exception {

@@ -119,7 +119,7 @@ public class InvoiceController {
     public ResponseEntity<Object> getInvoiceBydatePeriod(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
 
         try {
-            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate,toDate);
+            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate, toDate);
             ReturnVO returnVO = new ReturnVO();
             returnVO.setResult(invoiceVOS);
             returnVO.setSuccess(true);
@@ -136,7 +136,7 @@ public class InvoiceController {
     public ResponseEntity<Object> getInvoicePaymentDetailByDate(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
 
         try {
-            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate,toDate);
+            List<InvoiceVO> invoiceVOS = invoiceService.getInvoicesByDateRange(fromDate, toDate);
             ReturnVO returnVO = new ReturnVO();
             returnVO.setResult(invoiceVOS);
             returnVO.setSuccess(true);
@@ -150,10 +150,10 @@ public class InvoiceController {
 
     @RequestMapping(value = "paymentDetail/fromDate/{fromDate}/toDate/{toDate}/type/{type}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getInvoicePaymentDetailByDateAndPaymentType(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate,@PathVariable("type") String type) throws Exception {
+    public ResponseEntity<Object> getInvoicePaymentDetailByDateAndPaymentType(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate, @PathVariable("type") String type) throws Exception {
 
         try {
-            List<PaymentDetailVO> invoiceVOS = invoiceService.getInvoicePaymentDetailByDateAndPaymentType(fromDate,toDate,type);
+            List<PaymentDetailVO> invoiceVOS = invoiceService.getInvoicePaymentDetailByDateAndPaymentType(fromDate, toDate, type);
             ReturnVO returnVO = new ReturnVO();
             returnVO.setResult(invoiceVOS);
             returnVO.setSuccess(true);
@@ -163,6 +163,32 @@ public class InvoiceController {
             e.printStackTrace();
             return ResponseEntity.ok(e);
         }
+    }
+
+    @RequestMapping(value = "/creditPayment", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> createCreditPayment(@RequestBody PaymentDetailVO paymentDetailVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            PaymentDetailVO ReturnPaymentDetailVO = invoiceService.createCreditPayment(paymentDetailVO);
+            returnVO.setResult(ReturnPaymentDetailVO);
+            if (ReturnPaymentDetailVO != null) {
+                returnVO.setSuccess(true);
+                returnVO.setStatusCode(200);
+            } else {
+                returnVO.setSuccess(false);
+                returnVO.setStatusCode(500);
+            }
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
     }
 
 }
