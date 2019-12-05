@@ -31,6 +31,14 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_payment_detail_id")
     private PaymentDetails paymentDetails;
 
+    @Basic
+    @Column(name = "cheque_number")
+    private String chequeNumber;
+
+    @Basic
+    @Column(name = "card_number")
+    private double cardNumber;
+
     public String getPayee() { return payee; }
     public void setPayee(String payee) { this.payee = payee; }
 
@@ -48,4 +56,10 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     public PaymentDetails getPaymentDetails() { return paymentDetails; }
     public void setPaymentDetails(PaymentDetails paymentDetails) { this.paymentDetails = paymentDetails; }
+
+    public String getChequeNumber() { return chequeNumber; }
+    public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
+
+    public double getCardNumber() { return cardNumber; }
+    public void setCardNumber(double cardNumber) { this.cardNumber = cardNumber; }
 }
