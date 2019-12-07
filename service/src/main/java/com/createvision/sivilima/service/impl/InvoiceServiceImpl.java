@@ -315,12 +315,14 @@ public class InvoiceServiceImpl implements InvoiceService {
         try {
             PaymentDetails paymentDetails = paymentDetailDao.get(paymentDetailVO.getPaymentDetailId());
             PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+
             PaymentDetailsOfCredit paymentDetailsOfCredit = new PaymentDetailsOfCredit();
             paymentDetailsOfCredit.setAmount(paymentDetailVO.getAmount());
             paymentDetailsOfCredit.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             paymentDetailsOfCredit.setDescription("");
             paymentDetailsOfCredit.setPaymentDetails(paymentDetails);
             paymentDetailsOfCredit.setPaymentMethod(paymentMethod);
+            paymentDetailsOfCredit.setCardNumber(paymentDetailVO.getCardNumber()==null?"--":paymentDetailVO.getCardNumber());
             Long insertId = paymentDetailsOfCreditDao.save(paymentDetailsOfCredit);
             if (insertId!=null) {
                 insertObject = paymentDetailVO;

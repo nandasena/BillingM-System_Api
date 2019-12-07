@@ -37,7 +37,7 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "card_number")
-    private double cardNumber;
+    private String cardNumber;
 
     public String getPayee() { return payee; }
     public void setPayee(String payee) { this.payee = payee; }
@@ -60,6 +60,6 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
 
-    public double getCardNumber() { return cardNumber; }
-    public void setCardNumber(double cardNumber) { this.cardNumber = cardNumber; }
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
 }
