@@ -165,7 +165,7 @@ public class InvoiceController {
         }
     }
 
-    @RequestMapping(value = "/creditPayment", method = RequestMethod.POST)
+    @RequestMapping(value = "/creditPayment/", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> createCreditPayment(@RequestBody PaymentDetailVO paymentDetailVO) throws Exception {
         ReturnVO returnVO = new ReturnVO();

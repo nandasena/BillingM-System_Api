@@ -12,10 +12,12 @@ BEGIN
     payment_id bigint,
     invoice_number varchar(255),
     customer_id int,
-    first_name varchar(255)
+    first_name varchar(255),
+    type varchar (10),
+    payment_detail_id int
 );
 
-INSERT into Temp_lnRecordTable (invoice_id,amount,payment_id,invoice_number,customer_id,first_name)
+INSERT into Temp_lnRecordTable (invoice_id,amount,payment_id,invoice_number,customer_id,first_name,type,payment_detail_id)
 (
 	SELECT
 		i.id AS invoice_id ,
@@ -23,7 +25,9 @@ INSERT into Temp_lnRecordTable (invoice_id,amount,payment_id,invoice_number,cust
         pd.id AS payment_id,
         i.invoice_number AS invoice_number,
 		i.customer_id AS customer_id,
-	    c.first_name AS first_name
+	    c.first_name AS first_name,
+	    pd.fk_type_code AS type,
+	    pd.id AS payment_detail_id
 
 		FROM
 		invoices i
@@ -38,7 +42,9 @@ SELECT SUM(IFNULL(pdc.amount,0)) AS paid_amount,
                 ipd.invoice_id,
                 ipd.invoice_number,
                 ipd.customer_id,
-                ipd.first_name
+                ipd.first_name,
+                ipd.type,
+                ipd.payment_detail_id
 
 FROM  Temp_lnRecordTable AS ipd
 LEFT JOIN payment_detail_of_credit pdc ON pdc.fk_payment_detail_id = ipd.payment_id

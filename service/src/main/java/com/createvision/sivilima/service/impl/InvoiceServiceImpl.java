@@ -299,6 +299,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                 paymentDetailVO.setAmount(parseDouble(tem[2].toString()));
                 paymentDetailVO.setCustomerName(tem[6] == null ? "--" : tem[6].toString());
                 paymentDetailVO.setInvoiceId(Long.parseLong(tem[3].toString()));
+                paymentDetailVO.setTypeCode(tem[7].toString());
+                paymentDetailVO.setPaymentDetailId(Long.parseLong(tem[8].toString()));
                 paymentDetailVOList.add(paymentDetailVO);
             }
         } catch (Exception e) {
@@ -312,7 +314,7 @@ public class InvoiceServiceImpl implements InvoiceService {
              PaymentDetailVO insertObject =new PaymentDetailVO();
         try {
             PaymentDetails paymentDetails = paymentDetailDao.get(paymentDetailVO.getPaymentDetailId());
-            PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getPaymentType());
+            PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
             PaymentDetailsOfCredit paymentDetailsOfCredit = new PaymentDetailsOfCredit();
             paymentDetailsOfCredit.setAmount(paymentDetailVO.getAmount());
             paymentDetailsOfCredit.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
