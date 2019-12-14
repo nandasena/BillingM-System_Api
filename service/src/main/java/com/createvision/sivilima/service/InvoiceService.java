@@ -25,10 +25,13 @@ public interface InvoiceService {
 
     List<ItemDetailsVO> getInvoiceDetailsByInvoiceId(Long invoiceId) throws Exception;
 
-    List<InvoiceVO> getInvoicesByDateRange(String fromDate,String toDate) throws Exception;
+    List<InvoiceVO> getInvoicesByDateRange(String fromDate, String toDate) throws Exception;
 
-    List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate,String toDate,String type) throws Exception;
+    List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate, String toDate, String type) throws Exception;
 
-    PaymentDetailVO createCreditPayment (PaymentDetailVO paymentDetailVO) throws Exception;
+    PaymentDetailVO createCreditPayment(PaymentDetailVO paymentDetailVO) throws Exception;
+
+    InvoiceVO getInvoiceReprintData(Long id) throws Exception;
+
 
 }

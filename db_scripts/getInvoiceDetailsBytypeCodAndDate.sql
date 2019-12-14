@@ -48,7 +48,7 @@ SELECT SUM(IFNULL(pdc.amount,0)) AS paid_amount,
 
 FROM  Temp_lnRecordTable AS ipd
 LEFT JOIN payment_detail_of_credit pdc ON pdc.fk_payment_detail_id = ipd.payment_id
-GROUP BY  ipd.payment_id;
+GROUP BY  ipd.payment_id,pdc.amount;
 
 
 END//

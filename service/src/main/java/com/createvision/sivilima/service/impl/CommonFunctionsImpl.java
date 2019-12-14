@@ -2,6 +2,7 @@ package com.createvision.sivilima.service.impl;
 
 import org.springframework.stereotype.Repository;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -34,6 +35,12 @@ public class CommonFunctionsImpl {
             throw e;
         }
         return date;
+    }
+
+    public String getDateOfString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return dateFormat.format(date);
     }
 
 

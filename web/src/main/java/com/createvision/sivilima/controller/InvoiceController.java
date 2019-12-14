@@ -191,4 +191,25 @@ public class InvoiceController {
 
     }
 
+    @RequestMapping(value = "/getInvoiceReprintData/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getInvoiceReprintData(@PathVariable("id") Long id) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            InvoiceVO invoiceVO = invoiceService.getInvoiceReprintData(id);
+
+            returnVO.setResult(invoiceVO);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
 }
