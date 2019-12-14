@@ -346,7 +346,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         try {
              Invoice invoice = invoiceDao.get(id);
                 invoiceVO.setInvoiceNumber(invoice.getInvoiceNumber());
-                invoiceVO.setInvoiceDate(commonFunctions.getDateOfString(invoice.getInvoiceDate()));
+                invoiceVO.setInvoiceDate(commonFunctions.convertDateToString(invoice.getInvoiceDate()));
                 invoiceVO.setTotalAmount(invoice.getTotalAmount());
                 invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
                 invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());

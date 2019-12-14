@@ -37,7 +37,7 @@ public class CommonFunctionsImpl {
         return date;
     }
 
-    public String getDateOfString(Date date){
+    public String convertDateToString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         return dateFormat.format(date);
