@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "payment_detail")
@@ -35,6 +36,19 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @Column(name = "is_clear",columnDefinition = "boolean default false")
     private boolean isClear;
 
+    @Basic
+    @Column(name = "cheque_date")
+    private Date chequeDate;
+
+    @Basic
+    @Column(name = "cheque_description")
+    private String chequeDescription;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_bank_id")
+    private BankDetail bankDetail;
+
 
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
@@ -53,4 +67,13 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     public boolean isClear() { return isClear; }
     public void setClear(boolean clear) { isClear = clear; }
+
+    public Date getChequeDate() {return chequeDate; }
+    public void setChequeDate(Date chequeDate) { this.chequeDate = chequeDate; }
+
+    public String getChequeDescription() { return chequeDescription; }
+    public void setChequeDescription(String chequeDescription) { this.chequeDescription = chequeDescription; }
+
+    public BankDetail getBankDetail() { return bankDetail; }
+    public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
 }
