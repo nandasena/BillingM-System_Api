@@ -2,6 +2,7 @@ package com.createvision.sivilima.tableModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "payment_detail_of_credit")
@@ -39,6 +40,25 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     @Column(name = "card_number")
     private String cardNumber;
 
+    @Basic
+    @Column(name = "is_clear",columnDefinition = "boolean default false")
+    private boolean isClear;
+
+    @Basic
+    @Column(name = "cheque_date")
+    private Date chequeDate;
+
+    @Basic
+    @Column(name = "cheque_description")
+    private String chequeDescription;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_bank_id")
+    private BankDetail bankDetail;
+
+
+
     public String getPayee() { return payee; }
     public void setPayee(String payee) { this.payee = payee; }
 
@@ -62,4 +82,16 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     public String getCardNumber() { return cardNumber; }
     public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+
+    public boolean isClear() { return isClear; }
+    public void setClear(boolean clear) { isClear = clear; }
+
+    public Date getChequeDate() { return chequeDate; }
+    public void setChequeDate(Date chequeDate) { this.chequeDate = chequeDate; }
+
+    public String getChequeDescription() { return chequeDescription; }
+    public void setChequeDescription(String chequeDescription) { this.chequeDescription = chequeDescription; }
+
+    public BankDetail getBankDetail() { return bankDetail; }
+    public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
 }
