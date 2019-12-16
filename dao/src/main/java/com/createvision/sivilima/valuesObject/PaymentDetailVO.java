@@ -14,6 +14,10 @@ public class PaymentDetailVO {
     private String invoiceNumber;
     private String customerName;
     private Long paymentDetailId;
+    private String chequeDate;
+    private String description;
+    private Long bankId;
+
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -51,4 +55,12 @@ public class PaymentDetailVO {
     public Long getPaymentDetailId() { return paymentDetailId; }
     public void setPaymentDetailId(Long paymentDetailId) { this.paymentDetailId = paymentDetailId; }
 
+    public String getChequeDate() { return chequeDate; }
+    public void setChequeDate(String chequeDate) { this.chequeDate = chequeDate; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public Long getBankId() { return bankId; }
+    public void setBankId(Long bankId) { this.bankId = bankId;}
 }

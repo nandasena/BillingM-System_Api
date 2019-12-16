@@ -54,6 +54,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     PaymentDetailsOfCreditDao paymentDetailsOfCreditDao;
 
+    @Autowired
+    BankDetailDao bankDetailDao;
+
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,9 +167,9 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetailDao.save(invoiceItemDetail);
                 itemDetailDao.save(itemDetail);
             }
-            insertedInvoice.setTotalDiscount(totalInvoiceDiscount);
+            insertedInvoice.setTotalDiscount(commonFunctions.DecimalFormat(totalInvoiceDiscount));
             invoiceDao.save(insertedInvoice);
-            invoiceVO.setInvoiceDiscount(totalInvoiceDiscount);
+            invoiceVO.setInvoiceDiscount(commonFunctions.DecimalFormat(totalInvoiceDiscount));
             invoiceVO.setInvoiceNumber(insertedInvoice.getInvoiceNumber());
             invoiceVO.setCustomerName(insertedInvoice.getCustomerName() == null ? "--" : insertedInvoice.getCustomerName());
             List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
@@ -180,6 +183,14 @@ public class InvoiceServiceImpl implements InvoiceService {
                     paymentDetails.setInvoice(insertedInvoice);
                     paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
                     paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
+                    paymentDetails.setChequeDate(paymentDetailVO.getChequeDate()==null?null:commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                    paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
+                    if(paymentDetailVO.getBankId()!=null){
+                        BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                        paymentDetails.setBankDetail(bankDetail);
+                    }else {
+                        paymentDetails.setBankDetail(null);
+                    }
                     paymentDetails.setPaymentMethod(paymentMethod);
                     paymentDetailDao.save(paymentDetails);
                 }

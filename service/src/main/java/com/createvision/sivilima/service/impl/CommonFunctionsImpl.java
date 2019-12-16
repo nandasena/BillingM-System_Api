@@ -2,7 +2,9 @@ package com.createvision.sivilima.service.impl;
 
 import org.springframework.stereotype.Repository;
 
+import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -41,6 +43,12 @@ public class CommonFunctionsImpl {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         return dateFormat.format(date);
+    }
+
+    public double DecimalFormat(double value){
+         DecimalFormat df2 = new DecimalFormat("#.##");
+         df2.setRoundingMode(RoundingMode.DOWN);
+         return Double.valueOf(df2.format(value)) ;
     }
 
 
