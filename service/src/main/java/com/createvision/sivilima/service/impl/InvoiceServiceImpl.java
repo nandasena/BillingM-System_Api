@@ -337,6 +337,16 @@ public class InvoiceServiceImpl implements InvoiceService {
             paymentDetailsOfCredit.setPaymentDetails(paymentDetails);
             paymentDetailsOfCredit.setPaymentMethod(paymentMethod);
             paymentDetailsOfCredit.setCardNumber(paymentDetailVO.getCardNumber() == null ? "--" : paymentDetailVO.getCardNumber());
+            if(paymentDetailVO.getBankId()!= null ){
+                BankDetail bankDetail =bankDetailDao.get(paymentDetailVO.getBankId());
+                paymentDetailsOfCredit.setBankDetail(bankDetail);
+            }else {
+                paymentDetailsOfCredit.setBankDetail(null);
+            }
+            paymentDetailsOfCredit.setChequeDescription(paymentDetailVO.getDescription());
+            paymentDetailsOfCredit.setChequeDate(paymentDetailVO.getChequeDate()== null ? null:commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+            paymentDetailsOfCredit.setChequeNumber(paymentDetailVO.getChequeNumber());
+
             Long insertId = paymentDetailsOfCreditDao.save(paymentDetailsOfCredit);
             if (insertId != null) {
                 insertObject = paymentDetailVO;
