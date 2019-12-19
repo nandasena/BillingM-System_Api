@@ -24,6 +24,10 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
     private double  totalDiscount;
 
     @Basic
+    @Column(name = "discount_percentage")
+    private double  discountPercentage;
+
+    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_item_id")
     private Item item;
@@ -34,51 +38,25 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
     private PurchaseOrder purchaseOrder;
 
 
-    public double getPrice() {
-        return price;
-    }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    public double getQty() { return qty; }
+    public void setQty(double qty) { this.qty = qty; }
 
-    public double getQty() {
-        return qty;
-    }
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
 
-    public void setQty(double qty) {
-        this.qty = qty;
-    }
+    public double getTotalDiscount() { return totalDiscount; }
+    public void setTotalDiscount(double totalDiscount) { this.totalDiscount = totalDiscount; }
 
-    public double getTotal() {
-        return total;
-    }
+    public double getDiscountPercentage() { return discountPercentage; }
+    public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
+    public Item getItem() { return item; }
+    public void setItem(Item item) { this.item = item; }
 
-    public double getTotalDiscount() {
-        return totalDiscount;
-    }
+    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
 
-    public void setTotalDiscount(double totalDiscount) {
-        this.totalDiscount = totalDiscount;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
 }
