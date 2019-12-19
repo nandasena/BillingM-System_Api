@@ -1,0 +1,7 @@
+package com.createvision.sivilima.dao.impl;
+
+import com.createvision.sivilima.dao.PurchaseOrderDetailDao;
+import com.createvision.sivilima.tableModel.PurchaseOrderDetail;
+
+public class PurchaseOrderDetailDaoImpl extends AbstractDaoImpl<PurchaseOrderDetail,Long> implements PurchaseOrderDetailDao {
+}
