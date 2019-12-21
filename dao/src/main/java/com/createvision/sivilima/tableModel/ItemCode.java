@@ -23,10 +23,10 @@ public class ItemCode extends BaseObject implements Serializable {
     public void setCode(String code) { this.code = code;}
 
     @Basic
-    @Column(name = "last_number")
-    private int lastNumber;
-    public int getLastNumber() { return lastNumber; }
-    public void setLastNumber(int lastNumber) { this.lastNumber = lastNumber; }
+    @Column(name = "next_number")
+    private int nextNumber;
+    public int getNextNumber() { return nextNumber; }
+    public void setNextNumber(int lastNumber) { this.nextNumber = lastNumber; }
 
     @Basic
     @Column(name = "is_delete" ,columnDefinition = "boolean default false")
