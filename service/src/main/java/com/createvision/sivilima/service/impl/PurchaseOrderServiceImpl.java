@@ -116,24 +116,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 purchaseOrderVO.setEstimationDate(purchaseOrder[6].toString());
                 purchaseOrderVO.setTotalAmount(parseDouble(purchaseOrder[7].toString()));
                 purchaseOrderVO.setTotalDiscount(parseDouble(purchaseOrder[8].toString()));
-                purchaseOrderVO.setUserId(Long.parseLong(purchaseOrder[9].toString()) );
+                purchaseOrderVO.setUserId(Long.parseLong(purchaseOrder[9].toString()));
                 purchaseOrderVO.setSupplierId(Long.parseLong(purchaseOrder[9].toString()));
 
-//                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrder.getPurchaseOrderDetails();
-//
-//                List<ItemVO> itemVOList = new ArrayList<>();
-//                for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
-//                    ItemVO itemVO = new ItemVO();
-//                    itemVO.setPrice(purchaseOrderDetail.getPrice());
-//                    itemVO.setPurchaseQuantity(purchaseOrderDetail.getQty());
-//                    itemVO.setTotal(purchaseOrderDetail.getTotal());
-//                    itemVO.setDiscountPercentage(purchaseOrderDetail.getDiscountPercentage());
-//                    itemVO.setItemName(purchaseOrderDetail.getItem().getName());
-//                    itemVO.setItemCode(purchaseOrderDetail.getItem().getItemCode());
-//
-//                    itemVOList.add(itemVO);
-//                }
-//                purchaseOrderVO.setItemList(itemVOList);
                 purchaseOrderVOList.add(purchaseOrderVO);
 
             }
