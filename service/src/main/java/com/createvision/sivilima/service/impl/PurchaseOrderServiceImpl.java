@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static java.lang.Double.parseDouble;
 
 @Service("purchaseOrderService")
 @Transactional
@@ -96,40 +99,41 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
     }
 
     @Override
-    public List<PurchaseOrderVO> getAllPurchaseOrder() throws Exception {
+    public List<PurchaseOrderVO> getAllPurchaseOrder(String fromDate,String toDate) throws Exception {
         List<PurchaseOrderVO> purchaseOrderVOList = new ArrayList<>();
         try {
-            List<PurchaseOrder> purchaseOrderList = purchaseOrderDao.getAll();
+           // List<PurchaseOrder> purchaseOrderList = purchaseOrderList.getAll();
+            List<Object[]> purchaseOrderList =purchaseOrderDao.getAllPurchaseOrder(commonFunction.getDateTimeByDateString(fromDate),commonFunction.getDateTimeByDateString(toDate));
 
-            for (PurchaseOrder purchaseOrder : purchaseOrderList) {
+            for (Object[] purchaseOrder : purchaseOrderList) {
                 PurchaseOrderVO purchaseOrderVO = new PurchaseOrderVO();
 
-                purchaseOrderVO.setPurchaseCode(purchaseOrder.getPurchaseCode());
-                purchaseOrderVO.setSupplierName(purchaseOrder.getSupplier().getName());
-                purchaseOrderVO.setAddress1(purchaseOrder.getSupplier().getAddress1());
-                purchaseOrderVO.setAddress2(purchaseOrder.getSupplier().getAddress2());
-                purchaseOrderVO.setUserName(purchaseOrder.getUser().getUserName());
-                purchaseOrderVO.setEstimationDate(commonFunction.convertDateToString(purchaseOrder.getEstimateReceiveDate()));
-                purchaseOrderVO.setTotalAmount(purchaseOrder.getTotalAmount());
-                purchaseOrderVO.setTotalDiscount(purchaseOrder.getTotalDiscount());
-                purchaseOrderVO.setUserId(purchaseOrder.getUser().getId());
-                purchaseOrderVO.setSupplierId(purchaseOrder.getSupplier().getId());
+                purchaseOrderVO.setPurchaseCode(purchaseOrder[1].toString());
+                purchaseOrderVO.setSupplierName(purchaseOrder[2].toString());
+                purchaseOrderVO.setAddress1(purchaseOrder[3].toString());
+                purchaseOrderVO.setAddress2(purchaseOrder[4].toString());
+                purchaseOrderVO.setUserName(purchaseOrder[5].toString());
+                purchaseOrderVO.setEstimationDate(purchaseOrder[6].toString());
+                purchaseOrderVO.setTotalAmount(parseDouble(purchaseOrder[7].toString()));
+                purchaseOrderVO.setTotalDiscount(parseDouble(purchaseOrder[8].toString()));
+                purchaseOrderVO.setUserId(Long.parseLong(purchaseOrder[9].toString()) );
+                purchaseOrderVO.setSupplierId(Long.parseLong(purchaseOrder[9].toString()));
 
-                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrder.getPurchaseOrderDetails();
-
-                List<ItemVO> itemVOList = new ArrayList<>();
-                for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
-                    ItemVO itemVO = new ItemVO();
-                    itemVO.setPrice(purchaseOrderDetail.getPrice());
-                    itemVO.setPurchaseQuantity(purchaseOrderDetail.getQty());
-                    itemVO.setTotal(purchaseOrderDetail.getTotal());
-                    itemVO.setDiscountPercentage(purchaseOrderDetail.getDiscountPercentage());
-                    itemVO.setItemName(purchaseOrderDetail.getItem().getName());
-                    itemVO.setItemCode(purchaseOrderDetail.getItem().getItemCode());
-
-                    itemVOList.add(itemVO);
-                }
-                purchaseOrderVO.setItemList(itemVOList);
+//                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrder.getPurchaseOrderDetails();
+//
+//                List<ItemVO> itemVOList = new ArrayList<>();
+//                for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
+//                    ItemVO itemVO = new ItemVO();
+//                    itemVO.setPrice(purchaseOrderDetail.getPrice());
+//                    itemVO.setPurchaseQuantity(purchaseOrderDetail.getQty());
+//                    itemVO.setTotal(purchaseOrderDetail.getTotal());
+//                    itemVO.setDiscountPercentage(purchaseOrderDetail.getDiscountPercentage());
+//                    itemVO.setItemName(purchaseOrderDetail.getItem().getName());
+//                    itemVO.setItemCode(purchaseOrderDetail.getItem().getItemCode());
+//
+//                    itemVOList.add(itemVO);
+//                }
+//                purchaseOrderVO.setItemList(itemVOList);
                 purchaseOrderVOList.add(purchaseOrderVO);
 
             }

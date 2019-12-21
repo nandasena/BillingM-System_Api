@@ -7,10 +7,7 @@ import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,13 +40,13 @@ public class PurchaseOrderController {
         }
 
     }
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/fromDate/{fromDate}/toDate/{toDate}/", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getAllPurchaseOrder(PurchaseOrderVO purchaseOrderVO) {
+    public ResponseEntity<Object> getAllPurchaseOrder(@PathVariable("fromDate") String fromDate,@PathVariable("toDate") String toDate) {
         ReturnVO returnVO = new ReturnVO();
 
         try {
-            List<PurchaseOrderVO> returnPurchaseOrderVO = purchaseOrderService.getAllPurchaseOrder();
+            List<PurchaseOrderVO> returnPurchaseOrderVO = purchaseOrderService.getAllPurchaseOrder(fromDate,toDate);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(returnPurchaseOrderVO);

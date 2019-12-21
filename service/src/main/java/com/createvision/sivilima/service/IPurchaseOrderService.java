@@ -7,5 +7,5 @@ import java.util.List;
 public interface IPurchaseOrderService {
 
     PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception;
-    List <PurchaseOrderVO> getAllPurchaseOrder() throws Exception;
+    List <PurchaseOrderVO> getAllPurchaseOrder(String fromDate, String toDate) throws Exception;
 }
