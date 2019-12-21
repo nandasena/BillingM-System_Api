@@ -127,8 +127,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("INVOICE");
             ItemCode itemCode =itemCodeList.get(itemCodeList.size()-1);
             String code = itemCode.getCode();
-            int lastNUmber = itemCode.getLastNumber();
-            String lastInvoiceNumber = new Integer(itemCode.getLastNumber()).toString();
+            int lastNUmber = itemCode.getNextNumber();
+            String lastInvoiceNumber = new Integer(itemCode.getNextNumber()).toString();
             String invoiceNumber = code + "-" + lastInvoiceNumber;
             double totalInvoiceDiscount = 0;
             saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
@@ -141,7 +141,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
-            itemCode.setLastNumber(++lastNUmber);
+            itemCode.setNextNumber(++lastNUmber);
             itemCodeDao.save(itemCode);
 
             List<ItemVO> itemVOList = new ArrayList<>();

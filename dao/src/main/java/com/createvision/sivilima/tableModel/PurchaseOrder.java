@@ -1,8 +1,11 @@
 package com.createvision.sivilima.tableModel;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "purchase_order")
@@ -16,6 +19,10 @@ public class PurchaseOrder extends BaseObject implements Serializable {
     @Basic
     @Column(name = "estimate_receive_date")
     private Date estimateReceiveDate;
+
+    @Basic
+    @Column(name = "purchase_code")
+    private String purchaseCode;
 
     @Basic
     @Column(name = "total_amount")
@@ -35,51 +42,32 @@ public class PurchaseOrder extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_user_id")
     private User user;
 
-    public String getDescription() {
-        return description;
-    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+    @Fetch(FetchMode.SELECT)
+    private List<PurchaseOrderDetail> purchaseOrderDetails = new ArrayList<>(0);
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    public Date getEstimateReceiveDate() {
-        return estimateReceiveDate;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setEstimateReceiveDate(Date estimateReceiveDate) {
-        this.estimateReceiveDate = estimateReceiveDate;
-    }
+    public Date getEstimateReceiveDate() { return estimateReceiveDate; }
+    public void setEstimateReceiveDate(Date estimateReceiveDate) { this.estimateReceiveDate = estimateReceiveDate; }
 
-    public double getTotalAmount() {
-        return totalAmount;
-    }
+    public String getPurchaseCode() { return purchaseCode; }
+    public void setPurchaseCode(String purchaseCode) { this.purchaseCode = purchaseCode; }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+    public double getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
 
-    public double getTotalDiscount() {
-        return totalDiscount;
-    }
+    public double getTotalDiscount() { return totalDiscount; }
+    public void setTotalDiscount(double totalDiscount) { this.totalDiscount = totalDiscount; }
 
-    public void setTotalDiscount(double totalDiscount) {
-        this.totalDiscount = totalDiscount;
-    }
+    public Supplier getSupplier() { return supplier; }
+    public void setSupplier(Supplier supplier) { this.supplier = supplier; }
 
-    public Supplier getSupplier() {
-        return supplier;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public List<PurchaseOrderDetail> getPurchaseOrderDetails() { return purchaseOrderDetails; }
+    public void setPurchaseOrderDetails(List<PurchaseOrderDetail> purchaseOrderDetails) { this.purchaseOrderDetails = purchaseOrderDetails; }
 }
