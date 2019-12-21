@@ -124,7 +124,8 @@ public class InvoiceServiceImpl implements InvoiceService {
         InvoiceVO invoiceVO1 = new InvoiceVO();
         Invoice saveInvoice = new Invoice();
         try {
-            ItemCode itemCode = itemCodeDao.getItemCode("INVOICE");
+            List<ItemCode> itemCodeList = itemCodeDao.getItemCode("INVOICE");
+            ItemCode itemCode =itemCodeList.get(itemCodeList.size()-1);
             String code = itemCode.getCode();
             int lastNUmber = itemCode.getLastNumber();
             String lastInvoiceNumber = new Integer(itemCode.getLastNumber()).toString();

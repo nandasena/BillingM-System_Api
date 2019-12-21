@@ -2,6 +2,8 @@ package com.createvision.sivilima.dao;
 
 import com.createvision.sivilima.tableModel.ItemCode;
 
+import java.util.List;
+
 public interface ItemCodeDao extends AbstractDao<ItemCode, Long> {
-    ItemCode getItemCode (String code) throws Exception;
+    List<ItemCode> getItemCode (String code) throws Exception;
 }
