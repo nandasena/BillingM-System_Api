@@ -28,6 +28,10 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
     private double  discountPercentage;
 
     @Basic
+    @Column(name = "received_qty",columnDefinition = "double default 0")
+    private double  receivedQTY;
+
+    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_item_id")
     private Item item;
@@ -36,6 +40,8 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_purchase_order_id")
     private PurchaseOrder purchaseOrder;
+
+
 
 
     public double getPrice() { return price; }
@@ -52,6 +58,9 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
 
     public double getDiscountPercentage() { return discountPercentage; }
     public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
+
+    public double getReceivedQTY() { return receivedQTY; }
+    public void setReceivedQTY(double receivedQTY) { this.receivedQTY = receivedQTY; }
 
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }

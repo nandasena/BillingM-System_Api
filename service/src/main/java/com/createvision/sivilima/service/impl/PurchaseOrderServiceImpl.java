@@ -3,16 +3,14 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.IPurchaseOrderService;
 import com.createvision.sivilima.tableModel.*;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.PaymentDetailVO;
 import com.createvision.sivilima.valuesObject.PurchaseOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static java.lang.Double.parseDouble;
@@ -73,11 +71,11 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             for (ItemVO itemVO : itemVOList) {
                 PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
                 Item item = itemDao.get(itemVO.getItemId());
-                double itemTotal = itemVO.getPrice() * itemVO.getPurchaseQuantity();
-                double discountTotal = itemVO.getDiscountPercentage() * itemVO.getPurchaseQuantity();
+                double itemTotal = itemVO.getPrice() * itemVO.getOrderQuantity();
+                double discountTotal = itemVO.getDiscountPercentage() * itemVO.getOrderQuantity();
                 purchaseOrderDetail.setTotal(itemTotal);
                 purchaseOrderDetail.setPrice(itemVO.getPrice());
-                purchaseOrderDetail.setQty(itemVO.getPurchaseQuantity());
+                purchaseOrderDetail.setQty(itemVO.getOrderQuantity());
                 purchaseOrderDetail.setItem(item);
                 purchaseOrderDetailDao.save(purchaseOrderDetail);
                 totalAmount += itemTotal;
@@ -99,15 +97,15 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
     }
 
     @Override
-    public List<PurchaseOrderVO> getAllPurchaseOrder(String fromDate,String toDate) throws Exception {
+    public List<PurchaseOrderVO> getAllPurchaseOrder(String fromDate, String toDate) throws Exception {
         List<PurchaseOrderVO> purchaseOrderVOList = new ArrayList<>();
         try {
-           // List<PurchaseOrder> purchaseOrderList = purchaseOrderList.getAll();
-            List<Object[]> purchaseOrderList =purchaseOrderDao.getAllPurchaseOrder(commonFunction.getDateTimeByDateString(fromDate),commonFunction.getDateTimeByDateString(toDate));
+            List<Object[]> purchaseOrderList = purchaseOrderDao.getAllPurchaseOrder(commonFunction.getDateTimeByDateString(fromDate), commonFunction.getDateTimeByDateString(toDate));
 
             for (Object[] purchaseOrder : purchaseOrderList) {
                 PurchaseOrderVO purchaseOrderVO = new PurchaseOrderVO();
 
+                purchaseOrderVO.setPurchaseOrderId(Long.parseLong(purchaseOrder[0].toString()));
                 purchaseOrderVO.setPurchaseCode(purchaseOrder[1].toString());
                 purchaseOrderVO.setSupplierName(purchaseOrder[2].toString());
                 purchaseOrderVO.setAddress1(purchaseOrder[3].toString());
@@ -117,7 +115,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 purchaseOrderVO.setTotalAmount(parseDouble(purchaseOrder[7].toString()));
                 purchaseOrderVO.setTotalDiscount(parseDouble(purchaseOrder[8].toString()));
                 purchaseOrderVO.setUserId(Long.parseLong(purchaseOrder[9].toString()));
-                purchaseOrderVO.setSupplierId(Long.parseLong(purchaseOrder[9].toString()));
+                purchaseOrderVO.setSupplierCode(purchaseOrder[10].toString());
 
                 purchaseOrderVOList.add(purchaseOrderVO);
 
@@ -126,5 +124,31 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             throw e;
         }
         return purchaseOrderVOList;
+    }
+
+    @Override
+    public List<ItemDetailsVO> getPurchaseOrderDetailById(Long id) throws Exception {
+        List<ItemDetailsVO>itemDetailsVOList =new ArrayList<>();
+        try {
+            PurchaseOrder purchaseOrderList =purchaseOrderDao.get(id);
+            List<PurchaseOrderDetail> purchaseOrderDetailList =purchaseOrderList.getPurchaseOrderDetails();
+
+            for (PurchaseOrderDetail purchaseOrderDetail:purchaseOrderDetailList) {
+                ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                itemDetailsVO.setCostPrice(purchaseOrderDetail.getPrice());
+                itemDetailsVO.setQuantity(purchaseOrderDetail.getQty());
+                itemDetailsVO.setTotalItemAmount(purchaseOrderDetail.getTotal());
+                itemDetailsVO.setTotalItemDiscount(purchaseOrderDetail.getTotalDiscount());
+                itemDetailsVO.setReceivedQuantity(purchaseOrderDetail.getReceivedQTY());
+                itemDetailsVO.setItemName(purchaseOrderDetail.getItem().getName());
+                itemDetailsVO.setItemId(purchaseOrderDetail.getItem().getId());
+
+                itemDetailsVOList.add(itemDetailsVO);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return itemDetailsVOList;
     }
 }

@@ -15,6 +15,8 @@ public class PurchaseOrderVO {
     private String userName;
     private double totalAmount;
     private double totalDiscount;
+    private Long purchaseOrderId;
+    private String supplierCode;
 
 
     public String getDescription() { return description; }
@@ -52,4 +54,10 @@ public class PurchaseOrderVO {
 
     public double getTotalDiscount() { return totalDiscount; }
     public void setTotalDiscount(double totalDiscount) { this.totalDiscount = totalDiscount; }
+
+    public Long getPurchaseOrderId() { return purchaseOrderId; }
+    public void setPurchaseOrderId(Long purchaseOrderId) { this.purchaseOrderId = purchaseOrderId; }
+
+    public String getSupplierCode() { return supplierCode; }
+    public void setSupplierCode(String supplierCode) { this.supplierCode = supplierCode; }
 }

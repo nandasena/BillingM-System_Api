@@ -15,6 +15,7 @@ public class ItemDetailsVO {
     private String itemName;
     private double totalItemAmount;
     private double totalItemDiscount;
+    private double receivedQuantity;
 
 
 
@@ -59,4 +60,7 @@ public class ItemDetailsVO {
 
     public double getTotalItemDiscount() { return totalItemDiscount; }
     public void setTotalItemDiscount(double totalItemDiscount) { this.totalItemDiscount = totalItemDiscount; }
+
+    public double getReceivedQuantity() { return receivedQuantity; }
+    public void setReceivedQuantity(double receivedQuantity) { this.receivedQuantity = receivedQuantity; }
 }

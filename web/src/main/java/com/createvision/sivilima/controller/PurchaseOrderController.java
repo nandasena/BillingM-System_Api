@@ -2,6 +2,8 @@ package com.createvision.sivilima.controller;
 
 
 import com.createvision.sivilima.service.IPurchaseOrderService;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
+import com.createvision.sivilima.valuesObject.ItemVO;
 import com.createvision.sivilima.valuesObject.PurchaseOrderVO;
 import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,27 @@ public class PurchaseOrderController {
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(returnPurchaseOrderVO);
+            return ResponseEntity.ok(returnVO);
+
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
+    @RequestMapping(value = "/getPurchaseOrderDetailById/{id}/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getPurchaseOrderDetailById(@PathVariable("id") Long id) {
+        ReturnVO returnVO = new ReturnVO();
+
+        try {
+            List<ItemDetailsVO> purchaseOrderDetailLisr = purchaseOrderService.getPurchaseOrderDetailById(id);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(purchaseOrderDetailLisr);
             return ResponseEntity.ok(returnVO);
 
         } catch (Exception e) {

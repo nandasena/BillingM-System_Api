@@ -15,7 +15,7 @@ public class ItemVO {
     private double discountPercentage;
     private double total;
     private double price;
-    private double purchaseQuantity;
+    private double orderQuantity;
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
@@ -53,6 +53,6 @@ public class ItemVO {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price;}
 
-    public double getPurchaseQuantity() { return purchaseQuantity; }
-    public void setPurchaseQuantity(double purchaseQuantity) { this.purchaseQuantity = purchaseQuantity; }
+    public double getOrderQuantity() { return orderQuantity; }
+    public void setOrderQuantity(double orderQuantity) { this.orderQuantity = orderQuantity; }
 }
