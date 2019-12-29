@@ -39,4 +39,10 @@ public class Customer extends BaseObject implements Serializable {
     private String email;
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email;}
+
+    @Basic
+    @Column(name = "fk_branch_id")
+    private Brand  brand;
+    public Brand getBrand() { return brand; }
+    public void setBrand(Brand brand) { this.brand = brand; }
 }

@@ -31,6 +31,11 @@ public class Supplier extends BaseObject implements Serializable {
     @Column(name = "phone_number")
     private String  phoneNumber;
 
+    @Basic
+    @Column(name = "fk_branch_id")
+    private Brand  brand;
+
+
     public String getSupplierId() {
         return supplierId;
     }
@@ -69,5 +74,13 @@ public class Supplier extends BaseObject implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 }

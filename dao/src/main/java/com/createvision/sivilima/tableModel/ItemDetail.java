@@ -55,6 +55,20 @@ public class ItemDetail extends BaseObject implements Serializable {
     private boolean isDelete;
 
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_brand_id",nullable = false)
+    @JsonIgnore
+    private Brand brand;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_supplier_id",nullable = false)
+    @JsonIgnore
+    private Supplier supplier;
+
+
+
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
 
@@ -84,4 +98,12 @@ public class ItemDetail extends BaseObject implements Serializable {
 
     public double getCustomerPrice() { return customerPrice; }
     public void setCustomerPrice(double customerPrice) { this.customerPrice = customerPrice; }
+
+    public Brand getBrand() { return brand; }
+    public void setBrand(Brand brand) { this.brand = brand; }
+
+    public Supplier getSupplier() { return supplier; }
+    public void setSupplier(Supplier supplier) { this.supplier = supplier; }
+
+
 }

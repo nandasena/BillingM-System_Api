@@ -92,6 +92,7 @@ public class ItemServiceImpl implements ItemService {
             item.setCreateDate(date);
             item.setDescription(itemVO.getDescription());
             item.setName(itemVO.getItemName());
+            item.setItemCode(itemVO.getItemCode());
             Long createItemId = itemDao.save(item);
             itemVO.setItemId(createItemId);
 

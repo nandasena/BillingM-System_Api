@@ -38,6 +38,12 @@ public class /**/Invoice extends BaseObject implements Serializable {
     public void setInvoiceDiscount(double invoiceDiscount) { this.invoiceDiscount = invoiceDiscount; }
 
     @Basic
+    @Column(name = "invoice_type")
+    public String invoiceType;
+    public String getInvoiceType() { return invoiceType; }
+    public void setInvoiceType(String invoiceType) { this.invoiceType = invoiceType; }
+
+    @Basic
     @Column(name = "total_amount")
     private double totalAmount;
     public double getTotalAmount() {
@@ -59,20 +65,15 @@ public class /**/Invoice extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "delivary_date")
-    private Date delivaryDate;
-    public Date getElivaryDate() {
-        return delivaryDate;
-    }
-    public void setElivaryDate(Date delivaryDate) {
-        this.delivaryDate = delivaryDate;
-    }
+    private Date deliveryDate;
+
+    public Date getDeliveryDate() { return deliveryDate; }
+    public void setDeliveryDate(Date deliveryDate) { this.deliveryDate = deliveryDate; }
 
     @Basic
     @Column(name = "invoice_date")
     private Date invoiceDate;
-    public Date getInvoiceDate() {
-        return invoiceDate;
-    }
+    public Date getInvoiceDate() { return invoiceDate; }
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
@@ -127,4 +128,6 @@ public class /**/Invoice extends BaseObject implements Serializable {
     private Long customerId;
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long customerId) { this.customerId = customerId;}
+
+
 }
