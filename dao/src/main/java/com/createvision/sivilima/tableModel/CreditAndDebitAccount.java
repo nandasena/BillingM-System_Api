@@ -22,7 +22,7 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_type_code",nullable = false,referencedColumnName = "type_code")
+    @JoinColumn(name = "fk_payment_type_code",nullable = false,referencedColumnName = "type_code")
     private PaymentMethod paymentMethod;
 
 
