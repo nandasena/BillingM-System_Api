@@ -17,6 +17,9 @@ public class PaymentDetailVO {
     private String chequeDate;
     private String description;
     private Long bankId;
+    private int incomeOrCost;
+    private Long supplierId;
+    private Long customerId;
 
 
     public Long getInvoiceId() { return invoiceId; }
@@ -63,4 +66,13 @@ public class PaymentDetailVO {
 
     public Long getBankId() { return bankId; }
     public void setBankId(Long bankId) { this.bankId = bankId;}
+
+    public int getIncomeOrCost() { return incomeOrCost; }
+    public void setIncomeOrCost(int incomeOrCost) { this.incomeOrCost = incomeOrCost; }
+
+    public Long getSupplierId() { return supplierId;}
+    public void setSupplierId(Long supplierId) { this.supplierId = supplierId; }
+
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId; }
 }

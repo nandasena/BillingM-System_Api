@@ -21,10 +21,13 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     private double debit;
 
     @Basic
+    @Column(name = "income_or_cost")
+    private String incomeOrCost;
+
+    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_payment_type_code",nullable = false,referencedColumnName = "type_code")
     private PaymentMethod paymentMethod;
-
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,6 +53,18 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     @JsonIgnore
     private PurchaseOrder purchaseOrder;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_cheque_detail_id")
+    @JsonIgnore
+    private ChequePaymentDetail chequePaymentDetail;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_bank_id")
+    @JsonIgnore
+    private BankDetail bankDetail;
+
 
     public String getPaymentDescription() { return paymentDescription; }
     public void setPaymentDescription(String paymentDescription) { this.paymentDescription = paymentDescription; }
@@ -74,4 +89,13 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
     public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
+
+    public ChequePaymentDetail getChequePaymentDetail() { return chequePaymentDetail; }
+    public void setChequePaymentDetail(ChequePaymentDetail chequePaymentDetail) { this.chequePaymentDetail = chequePaymentDetail;}
+
+    public BankDetail getBankDetail() { return bankDetail; }
+    public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
+
+    public String getIncomeOrCost() { return incomeOrCost; }
+    public void setIncomeOrCost(String incomeOrCost) { this.incomeOrCost = incomeOrCost; }
 }
