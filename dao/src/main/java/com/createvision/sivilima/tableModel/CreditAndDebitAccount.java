@@ -14,11 +14,11 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     @Basic
     @Column(name = "credit")
-    private String credit;
+    private double credit;
 
     @Basic
     @Column(name = "debit")
-    private String debit;
+    private double debit;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,5 +51,27 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     private PurchaseOrder purchaseOrder;
 
 
+    public String getPaymentDescription() { return paymentDescription; }
+    public void setPaymentDescription(String paymentDescription) { this.paymentDescription = paymentDescription; }
 
+    public double getCredit() { return credit; }
+    public void setCredit(double credit) { this.credit = credit; }
+
+    public double getDebit() {return debit; }
+    public void setDebit(double debit) { this.debit = debit; }
+
+    public PaymentMethod getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public Supplier getSupplier() { return supplier; }
+    public void setSupplier(Supplier supplier) { this.supplier = supplier; }
+
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public Invoice getInvoice() { return invoice; }
+    public void setInvoice(Invoice invoice) { this.invoice = invoice; }
+
+    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
 }

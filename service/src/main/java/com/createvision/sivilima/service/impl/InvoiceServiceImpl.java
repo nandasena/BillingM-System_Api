@@ -57,6 +57,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     BankDetailDao bankDetailDao;
 
+    @Autowired
+    CreditAndDebitAccountDao creditAndDebitAccountDao;
+
+    @Autowired
+    CustomerDao customerDao;
+
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -125,7 +131,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice saveInvoice = new Invoice();
         try {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("INVOICE");
-            ItemCode itemCode =itemCodeList.get(itemCodeList.size()-1);
+            ItemCode itemCode = itemCodeList.get(itemCodeList.size() - 1);
             String code = itemCode.getCode();
             int lastNUmber = itemCode.getNextNumber();
             String lastInvoiceNumber = new Integer(itemCode.getNextNumber()).toString();
@@ -179,23 +185,51 @@ public class InvoiceServiceImpl implements InvoiceService {
             if (paymentDetailVOList != null) {
                 for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
                     PaymentDetails paymentDetails = new PaymentDetails();
-                    PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    PaymentMethod  paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
                     paymentDetails.setAmount(paymentDetailVO.getAmount());
                     paymentDetails.setInvoice(insertedInvoice);
                     paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
                     paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
-                    paymentDetails.setChequeDate(paymentDetailVO.getChequeDate()==null?null:commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                    paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                     paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
-                    if(paymentDetailVO.getBankId()!=null){
+                    if (paymentDetailVO.getBankId() != null) {
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                         paymentDetails.setBankDetail(bankDetail);
-                    }else {
+                    } else {
                         paymentDetails.setBankDetail(null);
                     }
                     paymentDetails.setPaymentMethod(paymentMethod);
                     paymentDetailDao.save(paymentDetails);
                 }
             }
+
+            Customer customer =new Customer();
+            if(invoiceVO.getCustomerId() != null){
+                customer = customerDao.get(invoiceVO.getCustomerId());
+            }else {
+                customer =null;
+            }
+
+            CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
+            creditAndDebitAccount.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+            creditAndDebitAccount.setInvoice(insertedInvoice);
+            creditAndDebitAccount.setCustomer(customer);
+
+            if (paymentDetailVOList != null) {
+                for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
+                    PaymentMethod  paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    creditAndDebitAccount.setPaymentMethod(paymentMethod);
+                    if (paymentMethod.getId() == 4) {
+                        creditAndDebitAccount.setCredit(paymentDetailVO.getAmount());
+                    } else {
+                        creditAndDebitAccount.setDebit(paymentDetailVO.getAmount());
+                    }
+                    creditAndDebitAccountDao.save(creditAndDebitAccount);
+                }
+
+            }
+
+
 
         } catch (Exception e) {
             throw e;
@@ -338,14 +372,14 @@ public class InvoiceServiceImpl implements InvoiceService {
             paymentDetailsOfCredit.setPaymentDetails(paymentDetails);
             paymentDetailsOfCredit.setPaymentMethod(paymentMethod);
             paymentDetailsOfCredit.setCardNumber(paymentDetailVO.getCardNumber() == null ? "--" : paymentDetailVO.getCardNumber());
-            if(paymentDetailVO.getBankId()!= null ){
-                BankDetail bankDetail =bankDetailDao.get(paymentDetailVO.getBankId());
+            if (paymentDetailVO.getBankId() != null) {
+                BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                 paymentDetailsOfCredit.setBankDetail(bankDetail);
-            }else {
+            } else {
                 paymentDetailsOfCredit.setBankDetail(null);
             }
             paymentDetailsOfCredit.setChequeDescription(paymentDetailVO.getDescription());
-            paymentDetailsOfCredit.setChequeDate(paymentDetailVO.getChequeDate()== null ? null:commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+            paymentDetailsOfCredit.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
             paymentDetailsOfCredit.setChequeNumber(paymentDetailVO.getChequeNumber());
 
             Long insertId = paymentDetailsOfCreditDao.save(paymentDetailsOfCredit);
@@ -364,26 +398,26 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceVO getInvoiceReprintData(Long id) throws Exception {
-          InvoiceVO invoiceVO = new InvoiceVO();
+        InvoiceVO invoiceVO = new InvoiceVO();
         try {
-             Invoice invoice = invoiceDao.get(id);
-                invoiceVO.setInvoiceNumber(invoice.getInvoiceNumber());
-                invoiceVO.setInvoiceDate(commonFunctions.convertDateToString(invoice.getInvoiceDate()));
-                invoiceVO.setTotalAmount(invoice.getTotalAmount());
-                invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
-                invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
-                Set<InvoiceItemDetail> invoiceItemDetails = invoice.getInvoiceItemDetails();
-                List<ItemVO> itemVOList = new ArrayList<>();
-                for (InvoiceItemDetail temInvoiceItemDetail : invoiceItemDetails) {
-                    ItemVO itemVO = new ItemVO();
-                    itemVO.setItemName(temInvoiceItemDetail.getItem().getName());
-                    itemVO.setItemDiscount(temInvoiceItemDetail.getTotalItemDiscount());
-                    itemVO.setTotal(temInvoiceItemDetail.getTotalAmount());
-                    itemVO.setPrice(temInvoiceItemDetail.getItemPrice());
-                    itemVO.setSellingQuantity(temInvoiceItemDetail.getSellingQuantity());
-                    itemVOList.add(itemVO);
-                }
-                invoiceVO.setItemList(itemVOList);
+            Invoice invoice = invoiceDao.get(id);
+            invoiceVO.setInvoiceNumber(invoice.getInvoiceNumber());
+            invoiceVO.setInvoiceDate(commonFunctions.convertDateToString(invoice.getInvoiceDate()));
+            invoiceVO.setTotalAmount(invoice.getTotalAmount());
+            invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
+            invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
+            Set<InvoiceItemDetail> invoiceItemDetails = invoice.getInvoiceItemDetails();
+            List<ItemVO> itemVOList = new ArrayList<>();
+            for (InvoiceItemDetail temInvoiceItemDetail : invoiceItemDetails) {
+                ItemVO itemVO = new ItemVO();
+                itemVO.setItemName(temInvoiceItemDetail.getItem().getName());
+                itemVO.setItemDiscount(temInvoiceItemDetail.getTotalItemDiscount());
+                itemVO.setTotal(temInvoiceItemDetail.getTotalAmount());
+                itemVO.setPrice(temInvoiceItemDetail.getItemPrice());
+                itemVO.setSellingQuantity(temInvoiceItemDetail.getSellingQuantity());
+                itemVOList.add(itemVO);
+            }
+            invoiceVO.setItemList(itemVOList);
 
         } catch (Exception e) {
 
