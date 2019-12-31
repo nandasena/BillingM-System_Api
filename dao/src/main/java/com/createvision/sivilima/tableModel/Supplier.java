@@ -39,7 +39,6 @@ public class Supplier extends BaseObject implements Serializable {
     public String getSupplierId() {
         return supplierId;
     }
-
     public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
@@ -47,7 +46,6 @@ public class Supplier extends BaseObject implements Serializable {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -55,7 +53,6 @@ public class Supplier extends BaseObject implements Serializable {
     public String getAddress1() {
         return address1;
     }
-
     public void setAddress1(String address1) {
         this.address1 = address1;
     }
@@ -63,7 +60,6 @@ public class Supplier extends BaseObject implements Serializable {
     public String getAddress2() {
         return address2;
     }
-
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
@@ -71,7 +67,6 @@ public class Supplier extends BaseObject implements Serializable {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -79,7 +74,6 @@ public class Supplier extends BaseObject implements Serializable {
     public Brand getBrand() {
         return brand;
     }
-
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
