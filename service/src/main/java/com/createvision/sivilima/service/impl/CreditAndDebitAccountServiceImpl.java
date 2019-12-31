@@ -49,7 +49,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                 chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
                 chequePaymentDetail.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
                 BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
-                creditAndDebitAccount.setBankDetail(bankDetail);
+                chequePaymentDetail.setBankDetail(bankDetail);
                 Long id = chequePaymentDetailDao.save(chequePaymentDetail);
                 chequePaymentDetail = chequePaymentDetailDao.get(id);
                 creditAndDebitAccount.setChequePaymentDetail(chequePaymentDetail);
@@ -81,9 +81,8 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
 
 
         } catch (Exception e) {
-
-
+            throw e;
         }
-        return null;
+        return paymentDetailVO;
     }
 }

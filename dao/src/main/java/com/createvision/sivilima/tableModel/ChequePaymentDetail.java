@@ -1,9 +1,6 @@
 package com.createvision.sivilima.tableModel;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +23,11 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
     @Column(name = "cheque_number")
     private String chequeNumber;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_bank_id")
+    private BankDetail bankDetail;
+
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
@@ -37,4 +39,7 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
 
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber;}
+
+    public BankDetail getBankDetail() { return bankDetail; }
+    public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
 }
