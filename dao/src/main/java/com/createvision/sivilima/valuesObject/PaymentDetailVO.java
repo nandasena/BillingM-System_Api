@@ -1,5 +1,7 @@
 package com.createvision.sivilima.valuesObject;
 
+import java.util.Date;
+
 public class PaymentDetailVO {
 
     private Long invoiceId;
@@ -20,7 +22,7 @@ public class PaymentDetailVO {
     private int incomeOrCost;
     private Long supplierId;
     private Long customerId;
-
+    private String paymentDate;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -75,4 +77,7 @@ public class PaymentDetailVO {
 
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long customerId) { this.customerId = customerId; }
+
+    public String getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(String paymentDate) { this.paymentDate = paymentDate; }
 }

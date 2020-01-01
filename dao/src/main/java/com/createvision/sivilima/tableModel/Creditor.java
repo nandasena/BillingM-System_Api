@@ -23,14 +23,9 @@ public class Creditor extends BaseObject implements Serializable {
     private String description;
 
     @Basic
-    @Column(name = "credit_date")
-    private Date creditDate;
+    @Column(name = "payment_date")
+    private Date paymentDate;
 
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_customer_id")
-    @JsonIgnore
-    private Customer customer;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,68 +45,26 @@ public class Creditor extends BaseObject implements Serializable {
     @JsonIgnore
     private PurchaseOrder purchaseOrder;
 
-    public double getCredit() {
-        return credit;
-    }
+    public double getCredit() { return credit; }
+    public void setCredit(double credit) { this.credit = credit; }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
+    public double getDebit() { return debit; }
+    public void setDebit(double debit) { this.debit = debit; }
 
-    public double getDebit() {
-        return debit;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setDebit(double debit) {
-        this.debit = debit;
-    }
+    public Date getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(Date creditDate) { this.paymentDate = creditDate; }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public Invoice getInvoice() { return invoice; }
+    public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
-    public Date getCreditDate() {
-        return creditDate;
-    }
+    public Supplier getSupplier() { return supplier; }
+    public void setSupplier(Supplier supplier) { this.supplier = supplier; }
 
-    public void setCreditDate(Date creditDate) {
-        this.creditDate = creditDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
+    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
 }
 

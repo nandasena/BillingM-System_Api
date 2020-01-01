@@ -65,6 +65,17 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     @JsonIgnore
     private BankDetail bankDetail;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_debtor_id")
+    @JsonIgnore
+    private Debtor debtor;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_creditor_id")
+    @JsonIgnore
+    private Creditor creditor;
 
     public String getPaymentDescription() { return paymentDescription; }
     public void setPaymentDescription(String paymentDescription) { this.paymentDescription = paymentDescription; }
@@ -98,4 +109,10 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     public String getIncomeOrCost() { return incomeOrCost; }
     public void setIncomeOrCost(String incomeOrCost) { this.incomeOrCost = incomeOrCost; }
+
+    public Debtor getDebtor() { return debtor; }
+    public void setDebtor(Debtor debtor) { this.debtor = debtor; }
+
+    public Creditor getCreditor() { return creditor; }
+    public void setCreditor(Creditor creditor) { this.creditor = creditor; }
 }

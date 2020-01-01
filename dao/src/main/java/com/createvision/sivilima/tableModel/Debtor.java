@@ -23,8 +23,8 @@ public class Debtor extends BaseObject implements Serializable {
     private String description;
 
     @Basic
-    @Column(name = "debit_date")
-    private Date debitDate;
+    @Column(name = "payment_date")
+    private Date paymentDate;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,51 +38,21 @@ public class Debtor extends BaseObject implements Serializable {
     @JsonIgnore
     private Invoice invoice;
 
-    public double getCredit() {
-        return credit;
-    }
+    public double getCredit() { return credit; }
+    public void setCredit(double credit) { this.credit = credit; }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
+    public double getDebit() { return debit; }
+    public void setDebit(double debit) { this.debit = debit; }
 
-    public double getDebit() {
-        return debit;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setDebit(double debit) {
-        this.debit = debit;
-    }
+    public Date getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(Date debitDate) { this.paymentDate = debitDate; }
 
-    public String getDescription() {
-        return description;
-    }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDebitDate() {
-        return debitDate;
-    }
-
-    public void setDebitDate(Date debitDate) {
-        this.debitDate = debitDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
+    public Invoice getInvoice() { return invoice; }
+    public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 }

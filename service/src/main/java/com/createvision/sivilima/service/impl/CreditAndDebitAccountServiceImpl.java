@@ -34,6 +34,13 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
     @Autowired
     CustomerDao customerDao;
 
+    @Autowired
+    CreditorDao creditorDao;
+
+    @Autowired
+    DedtorDao dedtorDao;
+
+
     @Override
     public PaymentDetailVO createNewPayment(PaymentDetailVO paymentDetailVO) throws Exception {
 
@@ -41,7 +48,8 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
             ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
             CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
-
+            Creditor creditor =new Creditor();
+            Debtor debtor =new Debtor();
             if (paymentMethod.getId() == 5) {
 
                 chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
@@ -63,10 +71,26 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             if (paymentDetailVO.getSupplierId() != null) {
                 Supplier supplier = supplierDao.get(paymentDetailVO.getSupplierId());
                 creditAndDebitAccount.setSupplier(supplier);
+
+                creditor.setSupplier(supplier);
+                creditor.setDebit(paymentDetailVO.getPaidAmount());
+                creditor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                creditor.setPaymentDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getPaymentDate()));
+                creditor.setDescription(paymentDetailVO.getDescription());
+                creditorDao.save(creditor);
+
             }
             if (paymentDetailVO.getCustomerId() != null) {
                 Customer customer = customerDao.get(paymentDetailVO.getCustomerId());
                 creditAndDebitAccount.setCustomer(customer);
+
+                debtor.setCustomer(customer);
+                debtor.setPaymentDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getPaymentDate()));
+                debtor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                debtor.setDescription(paymentDetailVO.getDescription());
+                debtor.setCredit(paymentDetailVO.getPaidAmount());
+                dedtorDao.save(debtor);
+
             }
             if (paymentDetailVO.getIncomeOrCost() == 1) {
                 creditAndDebitAccount.setDebit(paymentDetailVO.getPaidAmount());

@@ -63,6 +63,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     CustomerDao customerDao;
 
+    @Autowired
+    DedtorDao dedtorDao;
+
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -185,7 +188,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             if (paymentDetailVOList != null) {
                 for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
                     PaymentDetails paymentDetails = new PaymentDetails();
-                    PaymentMethod  paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
                     paymentDetails.setAmount(paymentDetailVO.getAmount());
                     paymentDetails.setInvoice(insertedInvoice);
                     paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
@@ -203,11 +206,11 @@ public class InvoiceServiceImpl implements InvoiceService {
                 }
             }
 
-            Customer customer =new Customer();
-            if(invoiceVO.getCustomerId() != null){
+            Customer customer = new Customer();
+            if (invoiceVO.getCustomerId() != null) {
                 customer = customerDao.get(invoiceVO.getCustomerId());
-            }else {
-                customer =null;
+            } else {
+                customer = null;
             }
 
             CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
@@ -217,19 +220,28 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             if (paymentDetailVOList != null) {
                 for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
-                    PaymentMethod  paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
                     creditAndDebitAccount.setPaymentMethod(paymentMethod);
                     if (paymentMethod.getId() == 4) {
-                        creditAndDebitAccount.setCredit(paymentDetailVO.getAmount());
+                        Debtor debtor = new Debtor();
+                        debtor.setDebit(paymentDetailVO.getAmount());
+                        debtor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        debtor.setCustomer(customer);
+                        debtor.setPaymentDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
+                        debtor.setDescription(paymentDetailVO.getDescription());
+                        debtor.setInvoice(insertedInvoice);
+                        dedtorDao.save(debtor);
+
                     } else {
                         creditAndDebitAccount.setDebit(paymentDetailVO.getAmount());
+                        creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(1).name);
+                        creditAndDebitAccountDao.save(creditAndDebitAccount);
                     }
-                    creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(1).name);
-                    creditAndDebitAccountDao.save(creditAndDebitAccount);
+
+
                 }
 
             }
-
 
 
         } catch (Exception e) {
@@ -390,6 +402,14 @@ public class InvoiceServiceImpl implements InvoiceService {
                 insertObject = null;
             }
 
+            Debtor debtor = new Debtor();
+            debtor.setCredit(paymentDetailVO.getAmount());
+            debtor.setInvoice(paymentDetails.getInvoice());
+            debtor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+            debtor.setCustomer(customerDao.get(paymentDetails.getInvoice().getCustomerId()));
+            Long id = dedtorDao.save(debtor);
+            Debtor insertedDebtor =dedtorDao.get(id);
+
             CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
             creditAndDebitAccount.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             creditAndDebitAccount.setInvoice(paymentDetails.getInvoice());
@@ -398,8 +418,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
             creditAndDebitAccount.setPaymentMethod(paymentMethod);
             creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(1).name);
+            creditAndDebitAccount.setDebtor(insertedDebtor);
             creditAndDebitAccountDao.save(creditAndDebitAccount);
-
 
 
         } catch (Exception e) {
