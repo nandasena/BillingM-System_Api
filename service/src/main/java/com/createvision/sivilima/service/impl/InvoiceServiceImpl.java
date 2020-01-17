@@ -64,7 +64,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     CustomerDao customerDao;
 
     @Autowired
-    DedtorDao dedtorDao;
+    DebtorDao debtorDao;
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -230,7 +230,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                         debtor.setPaymentDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
                         debtor.setDescription(paymentDetailVO.getDescription());
                         debtor.setInvoice(insertedInvoice);
-                        dedtorDao.save(debtor);
+                        debtorDao.save(debtor);
 
                     } else {
                         creditAndDebitAccount.setDebit(paymentDetailVO.getAmount());
@@ -407,8 +407,9 @@ public class InvoiceServiceImpl implements InvoiceService {
             debtor.setInvoice(paymentDetails.getInvoice());
             debtor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             debtor.setCustomer(customerDao.get(paymentDetails.getInvoice().getCustomerId()));
-            Long id = dedtorDao.save(debtor);
-            Debtor insertedDebtor =dedtorDao.get(id);
+            debtor.setPaymentDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getPaymentDate()));
+            Long id = debtorDao.save(debtor);
+            Debtor insertedDebtor = debtorDao.get(id);
 
             CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
             creditAndDebitAccount.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));

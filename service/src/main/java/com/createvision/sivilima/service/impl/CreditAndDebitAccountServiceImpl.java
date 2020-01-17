@@ -3,11 +3,15 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.CreditAndDebitAccountService;
 import com.createvision.sivilima.tableModel.*;
+import com.createvision.sivilima.valuesObject.CustomerPaymentVO;
 import com.createvision.sivilima.valuesObject.PaymentDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository("creditAndDebitAccountService")
 @Transactional
@@ -38,7 +42,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
     CreditorDao creditorDao;
 
     @Autowired
-    DedtorDao dedtorDao;
+    DebtorDao debtorDao;
 
 
     @Override
@@ -48,8 +52,8 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
             ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
             CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
-            Creditor creditor =new Creditor();
-            Debtor debtor =new Debtor();
+            Creditor creditor = new Creditor();
+            Debtor debtor = new Debtor();
             if (paymentMethod.getId() == 5) {
 
                 chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
@@ -89,7 +93,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                 debtor.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
                 debtor.setDescription(paymentDetailVO.getDescription());
                 debtor.setCredit(paymentDetailVO.getPaidAmount());
-                dedtorDao.save(debtor);
+                debtorDao.save(debtor);
 
             }
             if (paymentDetailVO.getIncomeOrCost() == 1) {
@@ -100,13 +104,40 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             }
             creditAndDebitAccount.setPaymentMethod(paymentMethod);
             creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
-            creditAndDebitAccount.setCredit(paymentDetailVO.getPaidAmount());
             creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(paymentDetailVO.getIncomeOrCost()).name);
+            creditAndDebitAccountDao.save(creditAndDebitAccount);
 
 
         } catch (Exception e) {
             throw e;
         }
         return paymentDetailVO;
+    }
+
+    @Override
+    public List<CustomerPaymentVO> getCustomerPaymentDetailById(Long id) throws Exception {
+        try {
+            List<CustomerPaymentVO> customerPaymentVOList = new ArrayList<>();
+            List<Debtor> debtorList = debtorDao.getDebtorByCustomerId(id);
+            for (Debtor debtor : debtorList) {
+                CreditAndDebitAccount creditAndDebitAccount = creditAndDebitAccountDao.getPaymentDetailByDebtorId(debtor.getId());
+
+                CustomerPaymentVO customerPaymentVO = new CustomerPaymentVO();
+
+                customerPaymentVO.setPaymentDate(commonFunctions.convertDateToString(debtor.getPaymentDate()));
+                customerPaymentVO.setDebitAmount(debtor.getDebit());
+                customerPaymentVO.setCreditAmount(debtor.getCredit());
+                customerPaymentVO.setInvoiceId(debtor.getInvoice() != null ? debtor.getInvoice().getId() : null);
+                customerPaymentVO.setDescription(debtor.getDescription() != null ? debtor.getDescription() : "--");
+                customerPaymentVO.setPaymentType(creditAndDebitAccount!=null?creditAndDebitAccount.getPaymentMethod().getTypeCode():"--");
+
+                customerPaymentVOList.add(customerPaymentVO);
+
+            }
+            return customerPaymentVOList;
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 }
