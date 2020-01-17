@@ -87,7 +87,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
             insertedOrder.setAddress1(supplier.getAddress1());
             insertedOrder.setAddress2(supplier.getAddress2());
-            insertedOrder.setSupplierName(supplier.getName());
+            insertedOrder.setSupplierName(supplier.getFirstName());
             insertedOrder.setPurchaseCode(purchaseCode);
 
         } catch (Exception e) {

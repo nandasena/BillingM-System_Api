@@ -16,8 +16,12 @@ public class Supplier extends BaseObject implements Serializable {
     private String  supplierId;
 
     @Basic
-    @Column(name = "name")
-    private String  name;
+    @Column(name = "first_name")
+    private String  firstName;
+
+    @Basic
+    @Column(name = "last_name")
+    private String  lastName;
 
     @Basic
     @Column(name = "address_1")
@@ -41,13 +45,6 @@ public class Supplier extends BaseObject implements Serializable {
     }
     public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAddress1() {
@@ -77,4 +74,10 @@ public class Supplier extends BaseObject implements Serializable {
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName;}
 }

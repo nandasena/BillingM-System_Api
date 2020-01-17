@@ -7,6 +7,7 @@ public class CustomerVO {
     private String firstName;
     private String lastName;
     private Long customerId;
+    private Long supplierId;
 
 
     public String getFirstName() { return firstName; }
@@ -18,7 +19,6 @@ public class CustomerVO {
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long customerId) { this.customerId = customerId;}
 
-
-
-
+    public Long getSupplierId() { return supplierId; }
+    public void setSupplierId(Long supplierId) { this.supplierId = supplierId; }
 }
