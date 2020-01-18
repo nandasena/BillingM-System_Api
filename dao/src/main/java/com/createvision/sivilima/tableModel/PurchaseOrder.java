@@ -39,6 +39,11 @@ public class PurchaseOrder extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_branch_id")
+    private Branch branch;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user_id")
     private User user;
 
