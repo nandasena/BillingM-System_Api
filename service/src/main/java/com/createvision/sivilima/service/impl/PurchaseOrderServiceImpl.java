@@ -3,6 +3,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.IPurchaseOrderService;
 import com.createvision.sivilima.tableModel.*;
+import com.createvision.sivilima.valuesObject.BranchVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 import com.createvision.sivilima.valuesObject.PurchaseOrderVO;
@@ -39,6 +40,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
     @Autowired
     ItemCodeDao itemCodeDao;
+
+    @Autowired
+    BranchDao branchDao;
 
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
@@ -128,12 +132,12 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
     @Override
     public List<ItemDetailsVO> getPurchaseOrderDetailById(Long id) throws Exception {
-        List<ItemDetailsVO>itemDetailsVOList =new ArrayList<>();
+        List<ItemDetailsVO> itemDetailsVOList = new ArrayList<>();
         try {
-            PurchaseOrder purchaseOrderList =purchaseOrderDao.get(id);
-            List<PurchaseOrderDetail> purchaseOrderDetailList =purchaseOrderList.getPurchaseOrderDetails();
+            PurchaseOrder purchaseOrderList = purchaseOrderDao.get(id);
+            List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrderList.getPurchaseOrderDetails();
 
-            for (PurchaseOrderDetail purchaseOrderDetail:purchaseOrderDetailList) {
+            for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
                 ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
                 itemDetailsVO.setCostPrice(purchaseOrderDetail.getPrice());
                 itemDetailsVO.setQuantity(purchaseOrderDetail.getQty());
@@ -150,5 +154,28 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             throw e;
         }
         return itemDetailsVOList;
+    }
+
+    @Override
+    public List<BranchVO> getBranch() throws Exception {
+        try {
+            List<BranchVO> branchVOList = new ArrayList<>();
+            List<Branch> branchList = branchDao.getAll();
+            if (!branchList.isEmpty()) {
+                for (Branch b : branchList) {
+
+                    BranchVO branchVO = new BranchVO();
+                    branchVO.setId(b.getId());
+                    branchVO.setName(b.getName());
+
+                    branchVOList.add(branchVO);
+                }
+            }
+            return branchVOList;
+        } catch (Exception e) {
+            throw e;
+
+        }
+
     }
 }

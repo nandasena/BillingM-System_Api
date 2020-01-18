@@ -2,10 +2,7 @@ package com.createvision.sivilima.controller;
 
 
 import com.createvision.sivilima.service.IPurchaseOrderService;
-import com.createvision.sivilima.valuesObject.ItemDetailsVO;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.PurchaseOrderVO;
-import com.createvision.sivilima.valuesObject.ReturnVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,13 +39,14 @@ public class PurchaseOrderController {
         }
 
     }
+
     @RequestMapping(value = "/fromDate/{fromDate}/toDate/{toDate}/", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getAllPurchaseOrder(@PathVariable("fromDate") String fromDate,@PathVariable("toDate") String toDate) {
+    public ResponseEntity<Object> getAllPurchaseOrder(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) {
         ReturnVO returnVO = new ReturnVO();
 
         try {
-            List<PurchaseOrderVO> returnPurchaseOrderVO = purchaseOrderService.getAllPurchaseOrder(fromDate,toDate);
+            List<PurchaseOrderVO> returnPurchaseOrderVO = purchaseOrderService.getAllPurchaseOrder(fromDate, toDate);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(returnPurchaseOrderVO);
@@ -69,10 +67,10 @@ public class PurchaseOrderController {
         ReturnVO returnVO = new ReturnVO();
 
         try {
-            List<ItemDetailsVO> purchaseOrderDetailLisr = purchaseOrderService.getPurchaseOrderDetailById(id);
+            List<ItemDetailsVO> purchaseOrderDetailList = purchaseOrderService.getPurchaseOrderDetailById(id);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
-            returnVO.setResult(purchaseOrderDetailLisr);
+            returnVO.setResult(purchaseOrderDetailList);
             return ResponseEntity.ok(returnVO);
 
         } catch (Exception e) {
@@ -82,5 +80,23 @@ public class PurchaseOrderController {
             return ResponseEntity.ok(returnVO);
         }
 
+    }
+
+    @RequestMapping(value = "/getBranch/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getBranch() {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<BranchVO>branchVOList =purchaseOrderService.getBranch();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(branchVOList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
     }
 }
