@@ -84,12 +84,14 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                     PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
                     Item item = itemDao.get(itemVO.getItemId());
                     double itemTotal = itemVO.getPrice() * itemVO.getSellingQuantity();
-                    double discountTotal = itemVO.getDiscountPercentage() * itemVO.getOrderQuantity();
+                    double discountTotal = (itemVO.getDiscountPercentage() * itemVO.getSellingQuantity()*itemVO.getPrice()/100);
                     purchaseOrderDetail.setTotal(itemTotal);
                     purchaseOrderDetail.setPrice(itemVO.getPrice());
-                    purchaseOrderDetail.setQty(itemVO.getOrderQuantity());
+                    purchaseOrderDetail.setQty(itemVO.getSellingQuantity());
                     purchaseOrderDetail.setItem(item);
                     purchaseOrderDetail.setPurchaseOrder(insertedPurchaseOrder);
+                    purchaseOrderDetail.setTotalDiscount(discountTotal);
+                    purchaseOrderDetail.setDiscountPercentage(itemVO.getDiscountPercentage());
                     purchaseOrderDetailDao.save(purchaseOrderDetail);
                     totalAmount += itemTotal;
                     totalDiscount += discountTotal;
@@ -104,6 +106,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             insertedOrder.setAddress2(supplier.getAddress2());
             insertedOrder.setSupplierName(supplier.getFirstName());
             insertedOrder.setPurchaseCode(purchaseCode);
+            insertedOrder.setTotalDiscount(totalDiscount);
+            insertedOrder.setTotalAmount(totalAmount);
+            insertedOrder.setPurchaseOrderDate(commonFunction.convertDateToString(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo")));
 
         } catch (Exception e) {
             throw e;
