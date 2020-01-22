@@ -21,7 +21,7 @@ public class PurchaseOrderController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object> createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) {
+    public ResponseEntity<Object> createPurchaseOrder(@RequestBody PurchaseOrderVO purchaseOrderVO) {
         ReturnVO returnVO = new ReturnVO();
 
         try {

@@ -4,26 +4,27 @@ import java.util.List;
 
 public class PurchaseOrderVO {
     private String description;
-    private String estimationDate;
+    private String estimateReceiveDate;
     private Long supplierId;
     private Long userId;
     private String purchaseCode;
     private String supplierName;
     private String address1;
     private String address2;
-    private List<ItemVO> ItemList;
+    private List<ItemVO> itemVOList;
     private String userName;
     private double totalAmount;
     private double totalDiscount;
     private Long purchaseOrderId;
     private String supplierCode;
+    private Long branchId;
 
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getEstimationDate() { return estimationDate; }
-    public void setEstimationDate(String estimationDate) { this.estimationDate = estimationDate; }
+    public String getEstimateReceiveDate() { return estimateReceiveDate; }
+    public void setEstimateReceiveDate(String estimateReceiveDate) { this.estimateReceiveDate = estimateReceiveDate; }
 
     public Long getSupplierId() { return supplierId; }
     public void setSupplierId(Long supplierId) { this.supplierId = supplierId; }
@@ -31,8 +32,8 @@ public class PurchaseOrderVO {
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
 
-    public List<ItemVO> getItemList() { return ItemList; }
-    public void setItemList(List<ItemVO> itemList) { ItemList = itemList; }
+    public List<ItemVO> getItemVOList() { return itemVOList; }
+    public void setItemVOList(List<ItemVO> itemVOList) { this.itemVOList = itemVOList; }
 
     public String getPurchaseCode() { return purchaseCode; }
     public void setPurchaseCode(String purchaseCode) { this.purchaseCode = purchaseCode; }
@@ -60,4 +61,7 @@ public class PurchaseOrderVO {
 
     public String getSupplierCode() { return supplierCode; }
     public void setSupplierCode(String supplierCode) { this.supplierCode = supplierCode; }
+
+    public Long getBranchId() { return branchId; }
+    public void setBranchId(Long branchId) { this.branchId = branchId;}
 }

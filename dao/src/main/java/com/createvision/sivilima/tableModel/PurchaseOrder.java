@@ -75,4 +75,7 @@ public class PurchaseOrder extends BaseObject implements Serializable {
 
     public List<PurchaseOrderDetail> getPurchaseOrderDetails() { return purchaseOrderDetails; }
     public void setPurchaseOrderDetails(List<PurchaseOrderDetail> purchaseOrderDetails) { this.purchaseOrderDetails = purchaseOrderDetails; }
+
+    public Branch getBranch() { return branch; }
+    public void setBranch(Branch branch) { this.branch = branch; }
 }

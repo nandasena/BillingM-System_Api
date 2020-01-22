@@ -46,7 +46,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
-        PurchaseOrderVO insertedOrder = purchaseOrderVO;
+        PurchaseOrderVO insertedOrder = new PurchaseOrderVO();
         try {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("PURCHASE");
             ItemCode itemCode = itemCodeList.get(itemCodeList.size() - 1);
@@ -55,36 +55,47 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             String lastPurchaseCode = new Integer(itemCode.getNextNumber()).toString();
             String purchaseCode = code + "-" + lastPurchaseCode;
             itemCode.setNextNumber(++lastNUmber);
+
             itemCodeDao.save(itemCode);
 
             Supplier supplier = supplierDao.get(purchaseOrderVO.getSupplierId());
             User user = userDao.get(purchaseOrderVO.getUserId());
+            Branch branch = branchDao.get(purchaseOrderVO.getBranchId());
+
             PurchaseOrder purchaseOrder = new PurchaseOrder();
+
             purchaseOrder.setDescription(purchaseOrderVO.getDescription());
             purchaseOrder.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
-            purchaseOrder.setEstimateReceiveDate(commonFunction.getDateTimeByDateString(purchaseOrderVO.getEstimationDate()));
+            purchaseOrder.setEstimateReceiveDate(commonFunction.getDateTimeByDateString(purchaseOrderVO.getEstimateReceiveDate()));
             purchaseOrder.setSupplier(supplier);
             purchaseOrder.setUser(user);
             purchaseOrder.setPurchaseCode(purchaseCode);
+            purchaseOrder.setBranch(branch);
+
             Long id = purchaseOrderDao.save(purchaseOrder);
             PurchaseOrder insertedPurchaseOrder = purchaseOrderDao.get(id);
 
             double totalAmount = 0;
             double totalDiscount = 0;
-            List<ItemVO> itemVOList = purchaseOrderVO.getItemList();
-            for (ItemVO itemVO : itemVOList) {
-                PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-                Item item = itemDao.get(itemVO.getItemId());
-                double itemTotal = itemVO.getPrice() * itemVO.getOrderQuantity();
-                double discountTotal = itemVO.getDiscountPercentage() * itemVO.getOrderQuantity();
-                purchaseOrderDetail.setTotal(itemTotal);
-                purchaseOrderDetail.setPrice(itemVO.getPrice());
-                purchaseOrderDetail.setQty(itemVO.getOrderQuantity());
-                purchaseOrderDetail.setItem(item);
-                purchaseOrderDetailDao.save(purchaseOrderDetail);
-                totalAmount += itemTotal;
-                totalDiscount += discountTotal;
+            List<ItemVO> itemVOList =new ArrayList<>();
+            itemVOList = purchaseOrderVO.getItemVOList();
+            if (!itemVOList.isEmpty()) {
+                for (ItemVO itemVO : itemVOList) {
+                    PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
+                    Item item = itemDao.get(itemVO.getItemId());
+                    double itemTotal = itemVO.getPrice() * itemVO.getSellingQuantity();
+                    double discountTotal = itemVO.getDiscountPercentage() * itemVO.getOrderQuantity();
+                    purchaseOrderDetail.setTotal(itemTotal);
+                    purchaseOrderDetail.setPrice(itemVO.getPrice());
+                    purchaseOrderDetail.setQty(itemVO.getOrderQuantity());
+                    purchaseOrderDetail.setItem(item);
+                    purchaseOrderDetail.setPurchaseOrder(insertedPurchaseOrder);
+                    purchaseOrderDetailDao.save(purchaseOrderDetail);
+                    totalAmount += itemTotal;
+                    totalDiscount += discountTotal;
+                }
             }
+
             insertedPurchaseOrder.setTotalAmount(totalAmount);
             insertedPurchaseOrder.setTotalDiscount(totalDiscount);
             purchaseOrderDao.save(insertedPurchaseOrder);
@@ -115,7 +126,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 purchaseOrderVO.setAddress1(purchaseOrder[3].toString());
                 purchaseOrderVO.setAddress2(purchaseOrder[4].toString());
                 purchaseOrderVO.setUserName(purchaseOrder[5].toString());
-                purchaseOrderVO.setEstimationDate(purchaseOrder[6].toString());
+                purchaseOrderVO.setEstimateReceiveDate(purchaseOrder[6].toString());
                 purchaseOrderVO.setTotalAmount(parseDouble(purchaseOrder[7].toString()));
                 purchaseOrderVO.setTotalDiscount(parseDouble(purchaseOrder[8].toString()));
                 purchaseOrderVO.setUserId(Long.parseLong(purchaseOrder[9].toString()));

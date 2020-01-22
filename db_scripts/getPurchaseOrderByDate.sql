@@ -7,7 +7,7 @@ BEGIN
 
 SELECT  po.id ,
         po.purchase_code,
-        sp.name AS supplier_name,
+        sp.first_name AS supplier_name,
         sp.address_1,
         sp.address_2,
         us.name AS user_name,
