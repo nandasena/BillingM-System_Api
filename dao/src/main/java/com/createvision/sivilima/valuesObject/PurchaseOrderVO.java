@@ -19,7 +19,7 @@ public class PurchaseOrderVO {
     private String supplierCode;
     private Long branchId;
     private String purchaseOrderDate;
-
+    private String branchName;
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -68,4 +68,7 @@ public class PurchaseOrderVO {
 
     public String getPurchaseOrderDate() { return purchaseOrderDate; }
     public void setPurchaseOrderDate(String purchaseOrderDate) { this.purchaseOrderDate = purchaseOrderDate; }
+
+    public String getBranchName() { return branchName; }
+    public void setBranchName(String branchName) { this.branchName = branchName; }
 }

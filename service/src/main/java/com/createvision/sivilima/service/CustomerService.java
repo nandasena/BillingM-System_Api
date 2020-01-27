@@ -1,10 +1,10 @@
 package com.createvision.sivilima.service;
 
-import com.createvision.sivilima.valuesObject.CustomerVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
 
 import java.util.List;
 
 public interface CustomerService {
 
-    List<CustomerVO> getAllCustomer() throws Exception;
+    List<CustomerSupplierVO> getAllCustomer() throws Exception;
 }

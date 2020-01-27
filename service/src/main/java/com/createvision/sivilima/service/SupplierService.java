@@ -1,9 +1,10 @@
 package com.createvision.sivilima.service;
 
-import com.createvision.sivilima.valuesObject.CustomerVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
 
 import java.util.List;
 
 public interface SupplierService {
-    List<CustomerVO>getAllSupplier() throws Exception;
+    List<CustomerSupplierVO>getAllSupplier() throws Exception;
+    CustomerSupplierVO createSupplier(List<CustomerSupplierVO> customerSupplierVOS) throws Exception;
 }

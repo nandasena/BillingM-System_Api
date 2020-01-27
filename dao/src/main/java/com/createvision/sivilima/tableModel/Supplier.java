@@ -30,10 +30,25 @@ public class Supplier extends BaseObject implements Serializable {
     @Basic
     @Column(name = "address_2")
     private String  address2;
+    @Basic
+    @Column(name = "address_3")
+    private String  address3;
 
     @Basic
     @Column(name = "phone_number")
     private String  phoneNumber;
+
+    @Basic
+    @Column(name = "email")
+    private String  email;
+
+    @Basic
+    @Column(name = "NIC")
+    private String  NIC;
+
+    @Basic
+    @Column(name = "remark")
+    private String  remark;
 
     @Basic
     @Column(name = "fk_branch_id")
@@ -61,6 +76,9 @@ public class Supplier extends BaseObject implements Serializable {
         this.address2 = address2;
     }
 
+    public String getAddress3() { return address3; }
+    public void setAddress3(String address3) { this.address3 = address3; }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -80,4 +98,13 @@ public class Supplier extends BaseObject implements Serializable {
 
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName;}
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getNIC() { return NIC; }
+    public void setNIC(String NIC) { this.NIC = NIC; }
+
+    public String getRemark() { return remark; }
+    public void setRemark(String remark) { this.remark = remark; }
 }

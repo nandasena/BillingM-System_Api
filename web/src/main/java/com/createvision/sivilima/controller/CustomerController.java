@@ -1,7 +1,7 @@
 package com.createvision.sivilima.controller;
 
 import com.createvision.sivilima.service.CustomerService;
-import com.createvision.sivilima.valuesObject.CustomerVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
 import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +26,10 @@ public class CustomerController {
     public ResponseEntity<Object> getAllCustomer() throws Exception {
         ReturnVO returnVO = new ReturnVO();
         try {
-            List<CustomerVO> customerVOList = customerService.getAllCustomer();
+            List<CustomerSupplierVO> customerSupplierVOList = customerService.getAllCustomer();
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
-            returnVO.setResult(customerVOList);
+            returnVO.setResult(customerSupplierVOList);
             return ResponseEntity.ok(returnVO);
         } catch (Exception e) {
             returnVO.setResult(e);

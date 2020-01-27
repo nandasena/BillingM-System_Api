@@ -3,7 +3,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.CustomerDao;
 import com.createvision.sivilima.service.CustomerService;
 import com.createvision.sivilima.tableModel.Customer;
-import com.createvision.sivilima.valuesObject.CustomerVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -19,25 +19,25 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerDao customerDao;
 
     @Override
-    public List<CustomerVO> getAllCustomer() throws Exception {
-        List<CustomerVO> customerVOList = new ArrayList<>();
+    public List<CustomerSupplierVO> getAllCustomer() throws Exception {
+        List<CustomerSupplierVO> customerSupplierVOList = new ArrayList<>();
         try {
             List<Customer> customerList = customerDao.getAll();
             if (!customerList.isEmpty()) {
 
                 for (Customer tem : customerList) {
-                    CustomerVO customerVO = new CustomerVO();
-                    customerVO.setCustomerId(tem.getId());
-                    customerVO.setFirstName(tem.getFirstName());
-                    customerVO.setLastName(tem.getLastName());
+                    CustomerSupplierVO customerSupplierVO = new CustomerSupplierVO();
+                    customerSupplierVO.setCustomerId(tem.getId());
+                    customerSupplierVO.setFirstName(tem.getFirstName());
+                    customerSupplierVO.setLastName(tem.getLastName());
 
-                    customerVOList.add(customerVO);
+                    customerSupplierVOList.add(customerSupplierVO);
                 }
             }
 
         } catch (Exception e) {
             throw e;
         }
-        return customerVOList;
+        return customerSupplierVOList;
     }
 }
