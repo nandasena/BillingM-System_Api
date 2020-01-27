@@ -21,10 +21,7 @@ public class ItemCodeDaoImpl extends AbstractDaoImpl<ItemCode, Long> implements 
         criteria.add(Restrictions.eq("itemCode.codeName",code));
         criteria.add(Restrictions.eq("itemCode.isDelete",false));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        criteria.setFirstResult(1);
-        criteria.setMaxResults(1);
         List<ItemCode> list = criteria.list();
-     //   ItemCode result = (ItemCode) criteria.uniqueResult();
         return list;
 
     }
