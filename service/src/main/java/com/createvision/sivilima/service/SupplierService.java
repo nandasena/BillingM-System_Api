@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SupplierService {
     List<CustomerSupplierVO>getAllSupplier() throws Exception;
-    CustomerSupplierVO createSupplier(List<CustomerSupplierVO> customerSupplierVOS) throws Exception;
+    Boolean createSupplier(List<CustomerSupplierVO> customerSupplierVOS) throws Exception;
 }

@@ -3,6 +3,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.CustomerDao;
 import com.createvision.sivilima.service.CustomerService;
 import com.createvision.sivilima.tableModel.Customer;
+import com.createvision.sivilima.tableModel.Supplier;
 import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,32 @@ public class CustomerServiceImpl implements CustomerService {
             throw e;
         }
         return customerSupplierVOList;
+    }
+
+
+    @Override
+    public Boolean createCustomer(List<CustomerSupplierVO> customerSupplierVOs) throws Exception {
+        try {
+            if(!customerSupplierVOs.isEmpty()){
+                for (CustomerSupplierVO customerVO:customerSupplierVOs) {
+                    Customer customer =new Customer();
+                    customer.setAddress1(customerVO.getAddress1());
+                    customer.setAddress2(customerVO.getAddress2());
+                    customer.setAddress3(customerVO.getAddress3());
+                    customer.setFirstName(customerVO.getFirstName());
+                    customer.setLastName(customerVO.getLastName());
+                    customer.setEmail(customerVO.getEmail());
+                    customer.setNIC(customerVO.getNIC());
+                    customer.setRemark(customerVO.getRemark());
+
+                    customerDao.save(customer);
+                }
+            }
+
+            return true;
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 }

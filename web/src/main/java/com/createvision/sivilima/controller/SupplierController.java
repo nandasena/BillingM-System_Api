@@ -42,11 +42,18 @@ public class SupplierController {
     public ResponseEntity<Object> createSupplier(@RequestBody List<CustomerSupplierVO> customerSupplierVOS) throws Exception {
         ReturnVO returnVO = new ReturnVO();
         try {
-            CustomerSupplierVO customerSupplierVOList = supplierService.createSupplier(customerSupplierVOS);
-            returnVO.setStatusCode(200);
-            returnVO.setSuccess(true);
-            returnVO.setResult(customerSupplierVOList);
-            return ResponseEntity.ok(returnVO);
+            Boolean trueOrFalse = supplierService.createSupplier(customerSupplierVOS);
+            if (trueOrFalse) {
+                returnVO.setStatusCode(200);
+                returnVO.setSuccess(true);
+                returnVO.setResult("");
+                return ResponseEntity.ok(returnVO);
+            }else {
+                returnVO.setStatusCode(5001);
+                returnVO.setSuccess(false);
+                returnVO.setResult("");
+                return ResponseEntity.ok(returnVO);
+            }
         } catch (Exception e) {
             returnVO.setResult(e);
             returnVO.setStatusCode(5001);

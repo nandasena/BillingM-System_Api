@@ -46,7 +46,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public CustomerSupplierVO createSupplier(List<CustomerSupplierVO> customerSupplierVOS) throws Exception {
+    public Boolean createSupplier(List<CustomerSupplierVO> customerSupplierVOS) throws Exception {
         try {
             if(!customerSupplierVOS.isEmpty()){
                 for (CustomerSupplierVO supplierVo:customerSupplierVOS) {
@@ -63,9 +63,7 @@ public class SupplierServiceImpl implements SupplierService {
                     supplierDao.save(supplier);
                 }
             }
-
-
-            return null;
+            return true;
         }catch (Exception e){
             throw e;
         }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface CustomerService {
 
     List<CustomerSupplierVO> getAllCustomer() throws Exception;
+    Boolean createCustomer(List<CustomerSupplierVO> customerSupplierVOs)throws Exception;
 }
