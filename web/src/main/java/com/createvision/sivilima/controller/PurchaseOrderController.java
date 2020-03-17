@@ -99,4 +99,22 @@ public class PurchaseOrderController {
             return ResponseEntity.ok(returnVO);
         }
     }
+
+    @RequestMapping(value = "/getPurchaseOrderIds/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getPurchaseOrderIds() {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<PurchaseOrderVO>branchVOList =purchaseOrderService.getPurchaseOrderIds();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(branchVOList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
 }

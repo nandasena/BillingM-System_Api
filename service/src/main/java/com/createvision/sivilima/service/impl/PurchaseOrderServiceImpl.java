@@ -77,14 +77,14 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
             double totalAmount = 0;
             double totalDiscount = 0;
-            List<ItemVO> itemVOList =new ArrayList<>();
+            List<ItemVO> itemVOList = new ArrayList<>();
             itemVOList = purchaseOrderVO.getItemVOList();
             if (!itemVOList.isEmpty()) {
                 for (ItemVO itemVO : itemVOList) {
                     PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
                     Item item = itemDao.get(itemVO.getItemId());
                     double itemTotal = itemVO.getPrice() * itemVO.getSellingQuantity();
-                    double discountTotal = (itemVO.getDiscountPercentage() * itemVO.getSellingQuantity()*itemVO.getPrice()/100);
+                    double discountTotal = (itemVO.getDiscountPercentage() * itemVO.getSellingQuantity() * itemVO.getPrice() / 100);
                     purchaseOrderDetail.setTotal(itemTotal);
                     purchaseOrderDetail.setPrice(itemVO.getPrice());
                     purchaseOrderDetail.setQty(itemVO.getSellingQuantity());
@@ -191,6 +191,32 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
         } catch (Exception e) {
             throw e;
 
+        }
+
+    }
+
+    @Override
+    public List<PurchaseOrderVO> getPurchaseOrderIds() throws Exception {
+        try {
+            List<PurchaseOrderVO> purchaseOrderVOList = new ArrayList();
+            List<PurchaseOrder> purchaseOrderList = purchaseOrderDao.getAll();
+            for (PurchaseOrder purchaseOrder : purchaseOrderList) {
+                PurchaseOrderVO purchaseOrderVO =new PurchaseOrderVO();
+                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrder.getPurchaseOrderDetails();
+
+                for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
+                    if (purchaseOrderDetail.getQty() != purchaseOrderDetail.getReceivedQTY()) {
+                        purchaseOrderVO.setPurchaseOrderId(purchaseOrder.getId());
+                        purchaseOrderVO.setPurchaseCode(purchaseOrder.getPurchaseCode());
+                        purchaseOrderVOList.add(purchaseOrderVO);
+                        break;
+                    }
+                }
+
+            }
+            return purchaseOrderVOList;
+        } catch (Exception e) {
+            throw e;
         }
 
     }

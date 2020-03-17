@@ -13,4 +13,5 @@ public interface IPurchaseOrderService {
     List <PurchaseOrderVO> getAllPurchaseOrder(String fromDate, String toDate) throws Exception;
     List<ItemDetailsVO> getPurchaseOrderDetailById(Long id)throws Exception;
     List<BranchVO> getBranch()throws Exception;
+    List<PurchaseOrderVO> getPurchaseOrderIds()throws Exception;
 }

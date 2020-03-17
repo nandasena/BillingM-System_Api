@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CreditAndDebitAccountService {
 
-    PaymentDetailVO createNewPayment(PaymentDetailVO paymentDetailVO) throws Exception;
+     PaymentDetailVO createNewPayment(PaymentDetailVO paymentDetailVO) throws Exception;
     List<CustomerPaymentVO> getCustomerPaymentDetailById(Long id) throws Exception;
 }
