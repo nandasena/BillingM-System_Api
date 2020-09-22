@@ -17,6 +17,10 @@ public class GoodReceiveDetail extends BaseObject implements Serializable {
     private double  receivedQTY;
 
     @Basic
+    @Column(name = "good_received_date")
+    private Date  goodReceivedDate;
+
+    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_item_id")
     private Item item;
@@ -31,6 +35,9 @@ public class GoodReceiveDetail extends BaseObject implements Serializable {
 
     public double getReceivedQTY() { return receivedQTY; }
     public void setReceivedQTY(double receivedQTY) { this.receivedQTY = receivedQTY; }
+
+    public Date getGoodReceivedDate() { return goodReceivedDate; }
+    public void setGoodReceivedDate(Date goodReceivedDate) { this.goodReceivedDate = goodReceivedDate; }
 
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }

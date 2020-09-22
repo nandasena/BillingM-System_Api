@@ -117,4 +117,28 @@ public class PurchaseOrderController {
             return ResponseEntity.ok(returnVO);
         }
     }
+
+
+    @RequestMapping(value = "/goodReceive/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> goodReceive(@RequestBody GoodReceivedVO goodReceivedVO) {
+        ReturnVO returnVO = new ReturnVO();
+
+        try {
+            GoodReceivedVO returnGoodReceivedVO = purchaseOrderService.saveGoodReceived(goodReceivedVO);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(returnGoodReceivedVO);
+            return ResponseEntity.ok(returnVO);
+
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
+
 }

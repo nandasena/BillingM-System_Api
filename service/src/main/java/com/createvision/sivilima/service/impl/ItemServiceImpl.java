@@ -226,4 +226,27 @@ public class ItemServiceImpl implements ItemService {
 
         return itemVO;
     }
+
+    @Override
+    public List<ItemVO> createNewItemList(List<ItemVO> itemVOList) throws Exception {
+        try {
+            for (ItemVO itemVO:itemVOList) {
+                Date date = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
+                Item item = new Item();
+                SubCategory subCategory = subCategoryDao.get(itemVO.getSubCategoryId());
+                item.setSubCategory(subCategory);
+                item.setCreateDate(date);
+                item.setDescription(itemVO.getDescription());
+                item.setName(itemVO.getItemName());
+                item.setItemCode(itemVO.getItemCode());
+                Long createItemId = itemDao.save(item);
+                itemVO.setItemId(createItemId);
+            }
+
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return itemVOList;
+    }
 }

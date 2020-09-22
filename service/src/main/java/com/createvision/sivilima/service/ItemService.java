@@ -28,5 +28,7 @@ public interface ItemService {
 
     ItemVO getItemByItemCode(String itemCode)throws Exception;
 
+    List<ItemVO> createNewItemList(List<ItemVO> itemVO) throws Exception;
+
 
 }

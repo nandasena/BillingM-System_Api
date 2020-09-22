@@ -3,10 +3,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.IPurchaseOrderService;
 import com.createvision.sivilima.tableModel.*;
-import com.createvision.sivilima.valuesObject.BranchVO;
-import com.createvision.sivilima.valuesObject.ItemDetailsVO;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.PurchaseOrderVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Double.longBitsToDouble;
 import static java.lang.Double.parseDouble;
 
 @Service("purchaseOrderService")
@@ -43,6 +41,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
     @Autowired
     BranchDao branchDao;
+
+    @Autowired
+    GoodReceivedDao goodReceivedDao;
 
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
@@ -201,7 +202,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             List<PurchaseOrderVO> purchaseOrderVOList = new ArrayList();
             List<PurchaseOrder> purchaseOrderList = purchaseOrderDao.getAll();
             for (PurchaseOrder purchaseOrder : purchaseOrderList) {
-                PurchaseOrderVO purchaseOrderVO =new PurchaseOrderVO();
+                PurchaseOrderVO purchaseOrderVO = new PurchaseOrderVO();
                 List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrder.getPurchaseOrderDetails();
 
                 for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
@@ -219,5 +220,30 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
             throw e;
         }
 
+    }
+
+    @Override
+    public GoodReceivedVO saveGoodReceived(GoodReceivedVO goodReceivedVO) throws Exception {
+
+        try {
+            PurchaseOrder purchaseOrder = purchaseOrderDao.get(goodReceivedVO.getPurchaseOrderId());
+            User user = userDao.get((long) 1);
+            GoodReceived goodReceived =new GoodReceived();
+
+            goodReceived.setPurchaseOrder(purchaseOrder);
+            goodReceived.setUser(user);
+            goodReceived.setReceivedDate(commonFunction.getDateTimeByDateString(goodReceivedVO.getReceivedDate()));
+            Long saveId = goodReceivedDao.save(goodReceived);
+            List<ItemDetailsVO> itemDetailsVOList =goodReceivedVO.getItemDetailsVOList();
+
+            for (ItemDetailsVO item:itemDetailsVOList) {
+
+            }
+
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 }
