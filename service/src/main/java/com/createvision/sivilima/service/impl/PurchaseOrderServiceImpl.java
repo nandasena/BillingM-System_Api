@@ -4,6 +4,8 @@ import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.IPurchaseOrderService;
 import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.valuesObject.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ import static java.lang.Double.parseDouble;
 @Service("purchaseOrderService")
 @Transactional
 public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PurchaseOrderServiceImpl.class);
     @Autowired
     PurchaseOrderDao purchaseOrderDao;
 
@@ -44,6 +46,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
     @Autowired
     GoodReceivedDao goodReceivedDao;
+
+    @Autowired
+    GoodReceivedDetailDao goodReceivedDetailDao;
 
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
@@ -228,15 +233,42 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
         try {
             PurchaseOrder purchaseOrder = purchaseOrderDao.get(goodReceivedVO.getPurchaseOrderId());
             User user = userDao.get((long) 1);
-            GoodReceived goodReceived =new GoodReceived();
+            GoodReceived goodReceived = new GoodReceived();
 
             goodReceived.setPurchaseOrder(purchaseOrder);
             goodReceived.setUser(user);
             goodReceived.setReceivedDate(commonFunction.getDateTimeByDateString(goodReceivedVO.getReceivedDate()));
             Long saveId = goodReceivedDao.save(goodReceived);
-            List<ItemDetailsVO> itemDetailsVOList =goodReceivedVO.getItemDetailsVOList();
+            GoodReceived insertedGoodReceivedObject = goodReceivedDao.get(saveId);
+            List<ItemDetailsVO> itemDetailsVOList = goodReceivedVO.getItemDetailsVOList();
 
-            for (ItemDetailsVO item:itemDetailsVOList) {
+            for (ItemDetailsVO itemDetail : itemDetailsVOList) {
+
+                GoodReceiveDetail goodReceiveDetail = new GoodReceiveDetail();
+                Item item = itemDao.get(itemDetail.getItemId());
+                goodReceiveDetail.setItem(item);
+                goodReceiveDetail.setGoodReceived(insertedGoodReceivedObject);
+                goodReceiveDetail.setReceivedQTY(itemDetail.getReceiveQuantity());
+                goodReceiveDetail.setGoodReceivedDate(commonFunction.getDateTimeByDateString(goodReceivedVO.getReceivedDate()));
+
+                goodReceivedDetailDao.save(goodReceiveDetail);
+
+                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrderDetailDao.getPurchaseOrderByIdAndItemId(itemDetail.getItemId(),goodReceivedVO.getPurchaseOrderId());
+                for (PurchaseOrderDetail purchaseOrderDetail:purchaseOrderDetailList) {
+                    double receivedQTY = purchaseOrderDetail.getReceivedQTY();
+                    double orderQuantity = purchaseOrderDetail.getQty();
+                    receivedQTY = receivedQTY + itemDetail.getReceiveQuantity();
+                    if(orderQuantity >= receivedQTY){
+                        purchaseOrderDetail.setReceivedQTY(receivedQTY);
+                        purchaseOrderDetailDao.save(purchaseOrderDetail);
+                    }else{
+
+                    }
+
+                }
+
+
+
 
             }
 
