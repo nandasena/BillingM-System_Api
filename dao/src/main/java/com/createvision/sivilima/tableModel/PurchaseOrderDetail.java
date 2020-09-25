@@ -2,6 +2,7 @@ package com.createvision.sivilima.tableModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "purchase_order_detail")
@@ -38,6 +39,11 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_item_detail_id")
+    private ItemDetail itemDetail;
+
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_purchase_order_id")
     private PurchaseOrder purchaseOrder;
 
@@ -68,4 +74,6 @@ public class PurchaseOrderDetail extends BaseObject implements Serializable {
     public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
     public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
 
+    public ItemDetail getItemDetail() {return itemDetail;}
+    public void setItemDetail(ItemDetail itemDetail) {this.itemDetail = itemDetail;}
 }
