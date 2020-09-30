@@ -23,6 +23,7 @@ public class PaymentDetailVO {
     private Long supplierId;
     private Long customerId;
     private String paymentDate;
+    private String invoiceDate;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -80,4 +81,7 @@ public class PaymentDetailVO {
 
     public String getPaymentDate() { return paymentDate; }
     public void setPaymentDate(String paymentDate) { this.paymentDate = paymentDate; }
+
+    public String getInvoiceDate() {return invoiceDate;}
+    public void setInvoiceDate(String invoiceDate) {this.invoiceDate = invoiceDate;}
 }

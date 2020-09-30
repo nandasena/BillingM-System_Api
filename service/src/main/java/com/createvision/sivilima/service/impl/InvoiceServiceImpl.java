@@ -350,7 +350,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<PaymentDetailVO> getInvoicePaymentDetailByDateAndPaymentType(String fromDate, String toDate, String type) throws Exception {
-
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<PaymentDetailVO> paymentDetailVOList = new ArrayList<>();
         try {
             List<Object[]> paymentDetailList = paymentDetailDao.getPaymentDetailByDateAndType(fromDate, toDate, type);
@@ -363,6 +363,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 paymentDetailVO.setInvoiceId(Long.parseLong(tem[3].toString()));
                 paymentDetailVO.setTypeCode(tem[7].toString());
                 paymentDetailVO.setPaymentDetailId(Long.parseLong(tem[8].toString()));
+                paymentDetailVO.setInvoiceDate(dateFormat.format(tem[9]));
                 paymentDetailVOList.add(paymentDetailVO);
             }
         } catch (Exception e) {
