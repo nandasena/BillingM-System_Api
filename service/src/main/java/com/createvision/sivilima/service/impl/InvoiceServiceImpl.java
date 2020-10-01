@@ -382,6 +382,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             paymentDetailsOfCredit.setAmount(paymentDetailVO.getAmount());
             paymentDetailsOfCredit.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             paymentDetailsOfCredit.setDescription("");
+            paymentDetailsOfCredit.setPaymentDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getPaymentDate()));
             paymentDetailsOfCredit.setPaymentDetails(paymentDetails);
             paymentDetailsOfCredit.setPaymentMethod(paymentMethod);
             paymentDetailsOfCredit.setCardNumber(paymentDetailVO.getCardNumber() == null ? "--" : paymentDetailVO.getCardNumber());
