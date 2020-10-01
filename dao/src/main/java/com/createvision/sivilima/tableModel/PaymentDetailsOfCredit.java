@@ -9,6 +9,10 @@ import java.util.Date;
 public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     @Basic
+    @Column(name = "payment_date")
+    private Date paymentDate;
+
+    @Basic
     @Column(name = "payee")
     private String payee;
 
@@ -58,6 +62,8 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     private BankDetail bankDetail;
 
 
+    public Date getPaymentDate() {return paymentDate;}
+    public void setPaymentDate(Date paymentDate) {this.paymentDate = paymentDate;}
 
     public String getPayee() { return payee; }
     public void setPayee(String payee) { this.payee = payee; }
