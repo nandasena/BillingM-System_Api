@@ -9,4 +9,5 @@ public interface CreditAndDebitAccountService {
 
      PaymentDetailVO createNewPayment(PaymentDetailVO paymentDetailVO) throws Exception;
     List<CustomerPaymentVO> getCustomerPaymentDetailById(Long id) throws Exception;
+    List<PaymentDetailVO> getCreditPaymentDetailsById(Long id) throws  Exception;
 }

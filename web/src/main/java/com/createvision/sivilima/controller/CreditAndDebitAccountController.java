@@ -54,4 +54,22 @@ public class CreditAndDebitAccountController {
             return ResponseEntity.ok(returnVO);
         }
     }
+
+    @RequestMapping(value = "getCreditPaymentDetailsById/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getCreditPaymentDetailsById(@PathVariable("id") Long id) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<PaymentDetailVO> customerPaymentVO = creditAndDebitAccountService.getCreditPaymentDetailsById(id);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(customerPaymentVO);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
 }

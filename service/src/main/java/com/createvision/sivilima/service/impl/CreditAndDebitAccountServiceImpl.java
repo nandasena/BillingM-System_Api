@@ -44,6 +44,8 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
     @Autowired
     DebtorDao debtorDao;
 
+    @Autowired
+    PaymentDetailsOfCreditDao paymentDetailsOfCreditDao;
 
     @Override
     public PaymentDetailVO createNewPayment(PaymentDetailVO paymentDetailVO) throws Exception {
@@ -129,12 +131,38 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                 customerPaymentVO.setCreditAmount(debtor.getCredit());
                 customerPaymentVO.setInvoiceId(debtor.getInvoice() != null ? debtor.getInvoice().getId() : null);
                 customerPaymentVO.setDescription(debtor.getDescription() != null ? debtor.getDescription() : "--");
-                customerPaymentVO.setPaymentType(creditAndDebitAccount!=null?creditAndDebitAccount.getPaymentMethod().getTypeCode():"--");
+                customerPaymentVO.setPaymentType(creditAndDebitAccount != null ? creditAndDebitAccount.getPaymentMethod().getTypeCode() : "--");
 
                 customerPaymentVOList.add(customerPaymentVO);
 
             }
             return customerPaymentVOList;
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    @Override
+    public List<PaymentDetailVO> getCreditPaymentDetailsById(Long id) throws Exception {
+        try {
+            List<PaymentDetailVO> PaymentDetailVOList = new ArrayList<>();
+            List<PaymentDetailsOfCredit> paymentDetailsOfCredits = paymentDetailsOfCreditDao.getPaymentDetailsById(id);
+
+            for (PaymentDetailsOfCredit paymentDetailsOfCredit : paymentDetailsOfCredits) {
+                PaymentDetailVO paymentDetailVO = new PaymentDetailVO();
+                paymentDetailVO.setPaidAmount(paymentDetailsOfCredit.getAmount());
+                paymentDetailVO.setPaymentType(paymentDetailsOfCredit.getPaymentMethod().getName());
+                paymentDetailVO.setPaymentDate(commonFunctions.convertDateToString(paymentDetailsOfCredit.getPaymentDate()));
+                paymentDetailVO.setChequeNumber(paymentDetailsOfCredit.getChequeNumber() == null ? "--" :
+                        paymentDetailsOfCredit.getChequeNumber().isEmpty() ? "--" : paymentDetailsOfCredit.getChequeNumber());
+                paymentDetailVO.setChequeDate(paymentDetailsOfCredit.getChequeDate() != null ? commonFunctions.convertDateToString(paymentDetailsOfCredit.getChequeDate()) : "--");
+                paymentDetailVO.setCardNumber(paymentDetailsOfCredit.getCardNumber().isEmpty() ? "--" : paymentDetailsOfCredit.getCardNumber());
+
+                PaymentDetailVOList.add(paymentDetailVO);
+
+            }
+            return PaymentDetailVOList;
         } catch (Exception e) {
             throw e;
         }
