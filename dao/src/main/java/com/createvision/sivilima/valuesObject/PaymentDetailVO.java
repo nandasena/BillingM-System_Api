@@ -25,6 +25,7 @@ public class PaymentDetailVO {
     private String paymentDate;
     private String invoiceDate;
     private String paymentType;
+    private String bankName;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -88,4 +89,7 @@ public class PaymentDetailVO {
 
     public String getPaymentType() {return paymentType;}
     public void setPaymentType(String paymentType) {this.paymentType = paymentType;}
+
+    public String getBankName() {return bankName;}
+    public void setBankName(String bankName) {this.bankName = bankName;}
 }

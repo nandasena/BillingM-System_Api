@@ -158,6 +158,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                         paymentDetailsOfCredit.getChequeNumber().isEmpty() ? "--" : paymentDetailsOfCredit.getChequeNumber());
                 paymentDetailVO.setChequeDate(paymentDetailsOfCredit.getChequeDate() != null ? commonFunctions.convertDateToString(paymentDetailsOfCredit.getChequeDate()) : "--");
                 paymentDetailVO.setCardNumber(paymentDetailsOfCredit.getCardNumber().isEmpty() ? "--" : paymentDetailsOfCredit.getCardNumber());
+                paymentDetailVO.setBankName(paymentDetailsOfCredit.getBankDetail() != null ? paymentDetailsOfCredit.getBankDetail().getBankName() : "--");
 
                 PaymentDetailVOList.add(paymentDetailVO);
 
