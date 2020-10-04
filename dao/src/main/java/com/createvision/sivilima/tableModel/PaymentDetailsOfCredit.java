@@ -61,6 +61,14 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_bank_id")
     private BankDetail bankDetail;
 
+    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_cheque_status_id")
+    private ChequePaymentDetail chequePaymentDetail;
+
+
+
+
 
     public Date getPaymentDate() {return paymentDate;}
     public void setPaymentDate(Date paymentDate) {this.paymentDate = paymentDate;}
@@ -89,9 +97,6 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     public String getCardNumber() { return cardNumber; }
     public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
 
-//    public Boolean isClear() { return isClear; }
-//    public void setClear(Boolean clear) { isClear = clear; }
-
     public Date getChequeDate() { return chequeDate; }
     public void setChequeDate(Date chequeDate) { this.chequeDate = chequeDate; }
 
@@ -103,4 +108,7 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     public Boolean getClear() {return isClear;}
     public void setClear(Boolean clear) {this.isClear = clear;}
+
+    public ChequePaymentDetail getChequePaymentDetail() {return chequePaymentDetail;}
+    public void setChequePaymentDetail(ChequePaymentDetail chequePaymentDetail) {this.chequePaymentDetail = chequePaymentDetail;}
 }

@@ -23,10 +23,17 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
     @Column(name = "cheque_number")
     private String chequeNumber;
 
+    @Enumerated(EnumType.STRING)
+    private ChequeStatus cheque_status;
+
+
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_bank_id")
     private BankDetail bankDetail;
+
+
+
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -42,4 +49,7 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
 
     public BankDetail getBankDetail() { return bankDetail; }
     public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
+
+    public ChequeStatus getCheque_status() {return cheque_status;}
+    public void setCheque_status(ChequeStatus cheque_status) {this.cheque_status = cheque_status;}
 }
