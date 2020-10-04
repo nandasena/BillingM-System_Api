@@ -26,6 +26,7 @@ public class PaymentDetailVO {
     private String invoiceDate;
     private String paymentType;
     private String bankName;
+    private String isClear;
 
     public Long getInvoiceId() { return invoiceId; }
     public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
@@ -92,4 +93,7 @@ public class PaymentDetailVO {
 
     public String getBankName() {return bankName;}
     public void setBankName(String bankName) {this.bankName = bankName;}
+
+    public String getIsClear() {return isClear;}
+    public void setIsClear(String isClear) {this.isClear = isClear;}
 }

@@ -45,8 +45,8 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     private String cardNumber;
 
     @Basic
-    @Column(name = "is_clear",columnDefinition = "boolean default false")
-    private boolean isClear;
+    @Column(name = "is_clear")
+    private Boolean isClear;
 
     @Basic
     @Column(name = "cheque_date")
@@ -89,8 +89,8 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
     public String getCardNumber() { return cardNumber; }
     public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
 
-    public boolean isClear() { return isClear; }
-    public void setClear(boolean clear) { isClear = clear; }
+//    public Boolean isClear() { return isClear; }
+//    public void setClear(Boolean clear) { isClear = clear; }
 
     public Date getChequeDate() { return chequeDate; }
     public void setChequeDate(Date chequeDate) { this.chequeDate = chequeDate; }
@@ -100,4 +100,7 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     public BankDetail getBankDetail() { return bankDetail; }
     public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
+
+    public Boolean getClear() {return isClear;}
+    public void setClear(Boolean clear) {this.isClear = clear;}
 }
