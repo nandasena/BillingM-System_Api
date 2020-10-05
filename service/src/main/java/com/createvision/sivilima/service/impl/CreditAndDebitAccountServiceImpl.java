@@ -62,6 +62,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                 chequePaymentDetail.setClearingDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                 chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
                 chequePaymentDetail.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                chequePaymentDetail.setCheque_status(ChequeStatus.PENDING);
                 BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                 chequePaymentDetail.setBankDetail(bankDetail);
                 Long id = chequePaymentDetailDao.save(chequePaymentDetail);

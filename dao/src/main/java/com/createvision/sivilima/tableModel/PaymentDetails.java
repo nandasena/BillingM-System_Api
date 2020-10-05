@@ -49,6 +49,14 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_bank_id")
     private BankDetail bankDetail;
 
+    @Basic
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_cheque_detail_id")
+    private ChequePaymentDetail chequePaymentDetail;
+
+
+
+
 
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber; }
@@ -76,4 +84,7 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     public BankDetail getBankDetail() { return bankDetail; }
     public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
+
+    public ChequePaymentDetail getChequePaymentDetail() {return chequePaymentDetail;}
+    public void setChequePaymentDetail(ChequePaymentDetail chequePaymentDetail) {this.chequePaymentDetail = chequePaymentDetail;}
 }

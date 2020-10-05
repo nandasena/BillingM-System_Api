@@ -66,6 +66,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     DebtorDao debtorDao;
 
+    @Autowired
+    ChequePaymentDetailDao chequePaymentDetailDao;
+
+
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -195,13 +199,33 @@ public class InvoiceServiceImpl implements InvoiceService {
                     paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
                     paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                     paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
+
                     if (paymentDetailVO.getBankId() != null) {
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                         paymentDetails.setBankDetail(bankDetail);
                     } else {
                         paymentDetails.setBankDetail(null);
                     }
+
+                    ChequePaymentDetail saveChequePaymentDetail = new ChequePaymentDetail();
+                    if (paymentDetailVO.getTypeCode().equals("CQ")) {
+                        ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
+
+                        BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                        chequePaymentDetail.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        chequePaymentDetail.setCheque_status(ChequeStatus.PENDING);
+                        chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
+                        chequePaymentDetail.setChequeDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                        chequePaymentDetail.setBankDetail(bankDetail);
+                        chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
+
+                        Long chequeDetailId = chequePaymentDetailDao.save(chequePaymentDetail);
+                        saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+
+                    }
+
                     paymentDetails.setPaymentMethod(paymentMethod);
+                    paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
                     paymentDetailDao.save(paymentDetails);
                 }
             }
@@ -395,10 +419,27 @@ public class InvoiceServiceImpl implements InvoiceService {
             paymentDetailsOfCredit.setChequeDescription(paymentDetailVO.getDescription());
             paymentDetailsOfCredit.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
             paymentDetailsOfCredit.setChequeNumber(paymentDetailVO.getChequeNumber());
-            if(paymentDetailVO.getChequeNumber()!=""){
+            if (paymentDetailVO.getChequeNumber() != "") {
                 paymentDetailsOfCredit.setClear(false);
-            }else {
+            } else {
                 paymentDetailsOfCredit.setClear(null);
+            }
+
+
+            if (paymentDetailVO.getTypeCode().equals("CQ")) {
+                ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
+
+                BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                chequePaymentDetail.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                chequePaymentDetail.setCheque_status(ChequeStatus.PENDING);
+                chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
+                chequePaymentDetail.setChequeDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                chequePaymentDetail.setBankDetail(bankDetail);
+                chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
+
+                Long chequeDetailId = chequePaymentDetailDao.save(chequePaymentDetail);
+                ChequePaymentDetail saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+                paymentDetailsOfCredit.setChequePaymentDetail(saveChequePaymentDetail);
             }
 
 

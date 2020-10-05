@@ -16,6 +16,10 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
     private Date clearingDate;
 
     @Basic
+    @Column(name = "cheque_date")
+    private Date chequeDate;
+
+    @Basic
     @Column(name = "is_clear",columnDefinition = "boolean default false")
     private boolean isClear;
 
@@ -40,6 +44,9 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
 
     public Date getClearingDate() { return clearingDate; }
     public void setClearingDate(Date clearingDate) { this.clearingDate = clearingDate; }
+
+    public Date getChequeDate() {return chequeDate;}
+    public void setChequeDate(Date chequeDate) {this.chequeDate = chequeDate;}
 
     public boolean isClear() { return isClear; }
     public void setClear(boolean clear) { isClear = clear; }
