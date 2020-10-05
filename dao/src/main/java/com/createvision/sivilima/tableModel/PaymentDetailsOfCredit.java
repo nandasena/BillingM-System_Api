@@ -63,7 +63,7 @@ public class PaymentDetailsOfCredit extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_cheque_status_id")
+    @JoinColumn(name = "fk_cheque_payment_detail_id")
     private ChequePaymentDetail chequePaymentDetail;
 
 
