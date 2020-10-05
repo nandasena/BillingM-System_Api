@@ -38,10 +38,11 @@ public class /**/Invoice extends BaseObject implements Serializable {
     public void setInvoiceDiscount(double invoiceDiscount) { this.invoiceDiscount = invoiceDiscount; }
 
     @Basic
-    @Column(name = "invoice_type")
-    public String invoiceType;
-    public String getInvoiceType() { return invoiceType; }
-    public void setInvoiceType(String invoiceType) { this.invoiceType = invoiceType; }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "invoice_type")
+    public PaymentMethod invoiceType;
+    public PaymentMethod getInvoiceType() {return invoiceType;}
+    public void setInvoiceType(PaymentMethod invoiceType) {this.invoiceType = invoiceType;}
 
     @Basic
     @Column(name = "total_amount")

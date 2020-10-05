@@ -199,6 +199,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
                     paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                     paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
+                    insertedInvoice.setInvoiceType(paymentMethod);
 
                     if (paymentDetailVO.getBankId() != null) {
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
@@ -207,7 +208,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                         paymentDetails.setBankDetail(null);
                     }
 
-                    ChequePaymentDetail saveChequePaymentDetail = new ChequePaymentDetail();
                     if (paymentDetailVO.getTypeCode().equals("CQ")) {
                         ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
 
@@ -220,12 +220,14 @@ public class InvoiceServiceImpl implements InvoiceService {
                         chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
 
                         Long chequeDetailId = chequePaymentDetailDao.save(chequePaymentDetail);
-                        saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+                        invoiceDao.save(insertedInvoice);
+                        ChequePaymentDetail saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+                        paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
 
                     }
 
                     paymentDetails.setPaymentMethod(paymentMethod);
-                    paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
+
                     paymentDetailDao.save(paymentDetails);
                 }
             }
