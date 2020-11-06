@@ -17,6 +17,9 @@ public class ItemDetailsVO {
     private double totalItemDiscount;
     private double receivedQuantity;
     private double receiveQuantity;
+    private long brandId;
+    private long supplierId;
+
 
 
 
@@ -67,4 +70,10 @@ public class ItemDetailsVO {
 
     public double getReceiveQuantity() { return receiveQuantity;}
     public void setReceiveQuantity(double receiveQuantity) {this.receiveQuantity = receiveQuantity;}
+
+    public long getBrandId() {return brandId;}
+    public void setBrandId(long brandId) {this.brandId = brandId;}
+
+    public long getSupplierId() {return supplierId;}
+    public void setSupplierId(long supplierId) {this.supplierId = supplierId;}
 }

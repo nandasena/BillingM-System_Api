@@ -1,11 +1,7 @@
 package com.createvision.sivilima.service.impl;
 
-import com.createvision.sivilima.tableModel.CompanyDetail;
-import com.createvision.sivilima.tableModel.Item;
-import com.createvision.sivilima.tableModel.ItemDetail;
-import com.createvision.sivilima.dao.CompanyDao;
-import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.dao.ItemDetailDao;
+import com.createvision.sivilima.dao.*;
+import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.service.ItemDetailService;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +27,13 @@ public class ItemDetailServiceImpl implements ItemDetailService {
 
     @Autowired
     CommonFunctionsImpl commonFunctions;
+
+    @Autowired
+     BrandDao brandDao;
+
+    @Autowired
+    SupplierDao supplierDao;
+
 
     @Override
     public List<ItemDetailsVO> getItemDetailByItemId(Long id) throws Exception {
@@ -67,6 +70,8 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             CompanyDetail companyDetail = companyDao.get(itemDetailsVO.getCompanyId());
             Date createdDate = commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo");
             Date purchaseDate = commonFunctions.getDateTimeByDateString(itemDetailsVO.getPurchaseDate());
+            Brand brand = brandDao.get(itemDetailsVO.getBrandId());
+            Supplier supplier =supplierDao.get(itemDetailsVO.getSupplierId());
 
             ItemDetail itemDetail = new ItemDetail();
             itemDetail.setItem(item);
@@ -77,6 +82,8 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             itemDetail.setAvailableQuantity(itemDetailsVO.getAvailableQuantity());
             itemDetail.setCostPrice(itemDetailsVO.getCostPrice());
             itemDetail.setFabricatorPrice(itemDetailsVO.getFabricatorPrice());
+            itemDetail.setSupplier(supplier);
+            itemDetail.setBrand(brand);
 
             Long id = itemDetailDao.save(itemDetail);
 
