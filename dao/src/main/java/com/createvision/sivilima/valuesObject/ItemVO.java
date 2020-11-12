@@ -16,6 +16,9 @@ public class ItemVO {
     private double total;
     private double price;
     private double orderQuantity;
+    private int typeOfPrice;
+    private int typeOfDiscount;
+    private double priceDiscount;
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
@@ -55,4 +58,13 @@ public class ItemVO {
 
     public double getOrderQuantity() { return orderQuantity; }
     public void setOrderQuantity(double orderQuantity) { this.orderQuantity = orderQuantity; }
+
+    public int getTypeOfPrice() {return typeOfPrice;}
+    public void setTypeOfPrice(int typeOfPrice) {this.typeOfPrice = typeOfPrice;}
+
+    public int getTypeOfDiscount() {return typeOfDiscount;}
+    public void setTypeOfDiscount(int typeOfDiscount) {this.typeOfDiscount = typeOfDiscount;}
+
+    public double getPriceDiscount() {return priceDiscount;}
+    public void setPriceDiscount(double priceDiscount) {this.priceDiscount = priceDiscount;}
 }

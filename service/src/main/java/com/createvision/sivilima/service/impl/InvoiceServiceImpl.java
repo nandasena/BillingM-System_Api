@@ -161,9 +161,19 @@ public class InvoiceServiceImpl implements InvoiceService {
             itemVOList = invoiceVO.getItemList();
 
             for (ItemVO itemVO : itemVOList) {
-                double totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
-                totalInvoiceDiscount += totalDiscount;
                 InvoiceItemDetail invoiceItemDetail = new InvoiceItemDetail();
+                double totalDiscount = 0.00;
+                double cashDiscount = 0.00;
+
+                if (itemVO.getTypeOfDiscount() == 1) {
+                    invoiceItemDetail.setDiscount_type(DiscountType.CASH_DISCOUNT);
+                    totalDiscount = itemVO.getPriceDiscount();
+                } else {
+                    invoiceItemDetail.setDiscount_type(DiscountType.PERCENTAGE_DISCOUNT);
+                    totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
+                }
+                totalInvoiceDiscount += totalDiscount;
+
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
                 double availableQty = itemDetail.getAvailableQuantity();
@@ -177,6 +187,14 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetail.setItemPrice(itemVO.getPrice());
                 invoiceItemDetail.setTotalItemDiscount(totalDiscount);
                 invoiceItemDetail.setTotalAmount(itemVO.getTotal());
+
+                if (itemVO.getTypeOfPrice() == 1) {
+                    invoiceItemDetail.setPrice_type(PriceType.MRP_PRICE);
+                } else if (itemVO.getTypeOfPrice() == 2) {
+                    invoiceItemDetail.setPrice_type(PriceType.FABRICATOR_PRICE);
+                } else {
+                    invoiceItemDetail.setPrice_type(PriceType.CUSTOMER_PRICE);
+                }
 
                 invoiceItemDetailDao.save(invoiceItemDetail);
                 itemDetailDao.save(itemDetail);

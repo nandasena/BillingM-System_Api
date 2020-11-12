@@ -47,11 +47,19 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     @Column(name = "total_amount")
     private double totalAmount;
 
+    @Enumerated(EnumType.STRING)
+    private PriceType price_type;
+
+    @Enumerated(EnumType.STRING)
+    private DiscountType discount_type;
+
+
+
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
     public Item getItem() { return item; }
-    public void setItem(Item item) {this.item = item; }
+    public void setItem(Item item) {this.item = item;}
 
     public ItemDetail getItemDetail() {return itemDetail;}
     public void setItemDetail(ItemDetail itemDetail) { this.itemDetail = itemDetail; }
@@ -70,4 +78,10 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount;}
+
+    public PriceType getPrice_type() {return price_type;}
+    public void setPrice_type(PriceType price_type) {this.price_type = price_type;}
+
+    public DiscountType getDiscount_type() {return discount_type;}
+    public void setDiscount_type(DiscountType discount_type) {this.discount_type = discount_type;}
 }
