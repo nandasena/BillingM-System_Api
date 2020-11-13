@@ -92,7 +92,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 for (ItemVO itemVO : itemVOList) {
                     PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
                     Item item = itemDao.get(itemVO.getItemId());
-                    ItemDetail itemDetail =itemDetailDao.get(itemVO.getItemDetailId());
+                    ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
                     double itemTotal = itemVO.getPrice() * itemVO.getSellingQuantity();
                     double discountTotal = (itemVO.getDiscountPercentage() * itemVO.getSellingQuantity() * itemVO.getPrice() / 100);
                     purchaseOrderDetail.setTotal(itemTotal);
@@ -253,10 +253,15 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
                 GoodReceiveDetail goodReceiveDetail = new GoodReceiveDetail();
                 Item item = itemDao.get(itemDetail.getItemId());
-                ItemDetail itemDetailInfor =itemDetailDao.get(itemDetail.getItemDetailId());
+                ItemDetail itemDetailInfor = itemDetailDao.get(itemDetail.getItemDetailId());
                 double availableQTY = itemDetailInfor.getAvailableQuantity();
-                availableQTY = availableQTY+itemDetail.getReceiveQuantity();
+                double NowAVGCost = itemDetailInfor.getCostPrice();
+                double NewAVGCost = commonFunction.DecimalFormat((availableQTY * NowAVGCost + itemDetail.getReceiveQuantity() * itemDetail.getCostPrice())/ (availableQTY + itemDetail.getReceiveQuantity()));
+                availableQTY = availableQTY + itemDetail.getReceiveQuantity();
+
                 itemDetailInfor.setAvailableQuantity(availableQTY);
+                itemDetailInfor.setCostPrice(NewAVGCost);
+
                 goodReceiveDetail.setItem(item);
                 goodReceiveDetail.setGoodReceived(insertedGoodReceivedObject);
                 goodReceiveDetail.setReceivedQTY(itemDetail.getReceiveQuantity());
@@ -265,16 +270,16 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 goodReceivedDetailDao.save(goodReceiveDetail);
                 itemDetailDao.save(itemDetailInfor);
 
-                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrderDetailDao.getPurchaseOrderByIdAndItemId(itemDetail.getItemId(),goodReceivedVO.getPurchaseOrderId());
-                for (PurchaseOrderDetail purchaseOrderDetail:purchaseOrderDetailList) {
+                List<PurchaseOrderDetail> purchaseOrderDetailList = purchaseOrderDetailDao.getPurchaseOrderByIdAndItemId(itemDetail.getItemId(), goodReceivedVO.getPurchaseOrderId());
+                for (PurchaseOrderDetail purchaseOrderDetail : purchaseOrderDetailList) {
                     double receivedQTY = purchaseOrderDetail.getReceivedQTY();
                     double orderQuantity = purchaseOrderDetail.getQty();
                     receivedQTY = receivedQTY + itemDetail.getReceiveQuantity();
-                    if(orderQuantity >= receivedQTY){
+                    if (orderQuantity >= receivedQTY) {
                         purchaseOrderDetail.setReceivedQTY(receivedQTY);
                         purchaseOrderDetailDao.save(purchaseOrderDetail);
 
-                    }else{
+                    } else {
 
                     }
                 }
