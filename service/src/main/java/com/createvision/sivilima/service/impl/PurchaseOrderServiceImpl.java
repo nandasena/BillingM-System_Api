@@ -220,6 +220,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                     if (purchaseOrderDetail.getQty() != purchaseOrderDetail.getReceivedQTY()) {
                         purchaseOrderVO.setPurchaseOrderId(purchaseOrder.getId());
                         purchaseOrderVO.setPurchaseCode(purchaseOrder.getPurchaseCode());
+                        purchaseOrderVO.setSupplierId(purchaseOrder.getSupplier().getId());
                         purchaseOrderVOList.add(purchaseOrderVO);
                         break;
                     }
