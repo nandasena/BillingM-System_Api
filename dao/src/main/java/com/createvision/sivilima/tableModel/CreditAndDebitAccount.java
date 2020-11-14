@@ -49,9 +49,9 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_purchase_order_id")
+    @JoinColumn(name = "fk_good_received_id")
     @JsonIgnore
-    private PurchaseOrder purchaseOrder;
+    private GoodReceived goodReceived;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -98,8 +98,8 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
-    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
+    public GoodReceived getGoodReceived() {return goodReceived;}
+    public void setGoodReceived(GoodReceived goodReceived) {this.goodReceived = goodReceived;}
 
     public ChequePaymentDetail getChequePaymentDetail() { return chequePaymentDetail; }
     public void setChequePaymentDetail(ChequePaymentDetail chequePaymentDetail) { this.chequePaymentDetail = chequePaymentDetail;}

@@ -41,9 +41,9 @@ public class Creditor extends BaseObject implements Serializable {
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_purchase_order_id")
+    @JoinColumn(name = "fk_good_received_id")
     @JsonIgnore
-    private PurchaseOrder purchaseOrder;
+    private GoodReceived goodReceived;
 
     public double getCredit() { return credit; }
     public void setCredit(double credit) { this.credit = credit; }
@@ -64,7 +64,7 @@ public class Creditor extends BaseObject implements Serializable {
     public Supplier getSupplier() { return supplier; }
     public void setSupplier(Supplier supplier) { this.supplier = supplier; }
 
-    public PurchaseOrder getPurchaseOrder() { return purchaseOrder; }
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) { this.purchaseOrder = purchaseOrder; }
+    public GoodReceived getGoodReceived() {return goodReceived;}
+    public void setGoodReceived(GoodReceived goodReceived) {this.goodReceived = goodReceived;}
 }
 
