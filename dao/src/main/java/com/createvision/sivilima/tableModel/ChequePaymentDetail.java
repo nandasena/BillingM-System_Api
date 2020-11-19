@@ -36,6 +36,11 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
     @JoinColumn(name = "fk_bank_id")
     private BankDetail bankDetail;
 
+    @Basic
+    @Column(name = "received_or_given")
+    @Enumerated(EnumType.STRING)
+    private ReceivedOrGivenCheque receivedOrGivenCheque;
+
 
 
 
@@ -59,4 +64,7 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
 
     public ChequeStatus getCheque_status() {return cheque_status;}
     public void setCheque_status(ChequeStatus cheque_status) {this.cheque_status = cheque_status;}
+
+    public ReceivedOrGivenCheque getReceivedOrGivenCheque() {return receivedOrGivenCheque;}
+    public void setReceivedOrGivenCheque(ReceivedOrGivenCheque receivedOrGivenCheque) {this.receivedOrGivenCheque = receivedOrGivenCheque;}
 }

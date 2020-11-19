@@ -6,6 +6,7 @@ public class GoodReceivedVO {
     private String receivedDate;
     private Long purchaseOrderId;
     private List<ItemDetailsVO> itemDetailsVOList;
+    private List<PaymentDetailVO> paymentDetailsList;
 
 
     public String getReceivedDate() { return receivedDate; }
@@ -16,4 +17,7 @@ public class GoodReceivedVO {
 
     public List<ItemDetailsVO> getItemDetailsVOList() { return itemDetailsVOList; }
     public void setItemDetailsVOList(List<ItemDetailsVO> itemDetailsVOList) { this.itemDetailsVOList = itemDetailsVOList; }
+
+    public List<PaymentDetailVO> getPaymentDetailsList() {return paymentDetailsList;}
+    public void setPaymentDetailsList(List<PaymentDetailVO> paymentDetailsList) {this.paymentDetailsList = paymentDetailsList;}
 }

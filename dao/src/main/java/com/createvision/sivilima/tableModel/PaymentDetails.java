@@ -1,5 +1,7 @@
 package com.createvision.sivilima.tableModel;
 
+import com.createvision.sivilima.dao.GoodReceivedDao;
+import com.createvision.sivilima.dao.GoodReceivedDetailDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -33,6 +35,11 @@ public class PaymentDetails extends BaseObject implements Serializable {
     private Invoice invoice;
 
     @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_goodReceived_id")
+    private GoodReceived goodReceived;
+
+    @Basic
     @Column(name = "is_clear",columnDefinition = "boolean default false")
     private boolean isClear;
 
@@ -55,6 +62,12 @@ public class PaymentDetails extends BaseObject implements Serializable {
     private ChequePaymentDetail chequePaymentDetail;
 
 
+    @Basic
+    @Column(name = "income_or_expenses")
+    @Enumerated(EnumType.STRING)
+    private IncomeOrExpenses incomeOrExpenses;
+
+
 
 
 
@@ -73,6 +86,9 @@ public class PaymentDetails extends BaseObject implements Serializable {
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
+    public GoodReceived getGoodReceived() { return goodReceived;}
+    public void setGoodReceived(GoodReceived goodReceived) {this.goodReceived = goodReceived;}
+
     public boolean isClear() { return isClear; }
     public void setClear(boolean clear) { isClear = clear; }
 
@@ -87,4 +103,7 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     public ChequePaymentDetail getChequePaymentDetail() {return chequePaymentDetail;}
     public void setChequePaymentDetail(ChequePaymentDetail chequePaymentDetail) {this.chequePaymentDetail = chequePaymentDetail;}
+
+    public IncomeOrExpenses getIncomeOrExpenses() {return incomeOrExpenses;}
+    public void setIncomeOrExpenses(IncomeOrExpenses incomeOrExpenses) {this.incomeOrExpenses = incomeOrExpenses;}
 }

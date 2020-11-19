@@ -77,6 +77,13 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     @JsonIgnore
     private Creditor creditor;
 
+
+    @Basic
+    @Column(name = "income_or_expenses")
+    @Enumerated(EnumType.STRING)
+    private IncomeOrExpenses incomeOrExpenses;
+
+
     public String getPaymentDescription() { return paymentDescription; }
     public void setPaymentDescription(String paymentDescription) { this.paymentDescription = paymentDescription; }
 
@@ -115,4 +122,7 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
 
     public Creditor getCreditor() { return creditor; }
     public void setCreditor(Creditor creditor) { this.creditor = creditor; }
+
+    public IncomeOrExpenses getIncomeOrExpenses() {return incomeOrExpenses;}
+    public void setIncomeOrExpenses(IncomeOrExpenses incomeOrExpenses) {this.incomeOrExpenses = incomeOrExpenses;}
 }

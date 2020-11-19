@@ -53,6 +53,22 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
     @Autowired
     ItemDetailDao itemDetailDao;
 
+    @Autowired
+    PaymentDetailDao paymentDetailDao;
+
+    @Autowired
+    BankDetailDao bankDetailDao;
+
+    @Autowired
+    ChequePaymentDetailDao chequePaymentDetailDao;
+
+    @Autowired
+    CreditAndDebitAccountDao creditAndDebitAccountDao;
+
+    @Autowired
+    PaymentMethodDao paymentMethodDao;
+
+
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
         PurchaseOrderVO insertedOrder = new PurchaseOrderVO();
@@ -256,7 +272,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                 ItemDetail itemDetailInfor = itemDetailDao.get(itemDetail.getItemDetailId());
                 double availableQTY = itemDetailInfor.getAvailableQuantity();
                 double NowAVGCost = itemDetailInfor.getCostPrice();
-                double NewAVGCost = commonFunction.DecimalFormat((availableQTY * NowAVGCost + itemDetail.getReceiveQuantity() * itemDetail.getCostPrice())/ (availableQTY + itemDetail.getReceiveQuantity()));
+                double NewAVGCost = commonFunction.DecimalFormat((availableQTY * NowAVGCost + itemDetail.getReceiveQuantity() * itemDetail.getCostPrice()) / (availableQTY + itemDetail.getReceiveQuantity()));
                 availableQTY = availableQTY + itemDetail.getReceiveQuantity();
 
                 itemDetailInfor.setAvailableQuantity(availableQTY);
@@ -282,6 +298,51 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                     } else {
 
                     }
+                }
+            }
+
+            List<PaymentDetailVO> paymentDetailsList = goodReceivedVO.getPaymentDetailsList();
+
+            if (paymentDetailsList != null) {
+                for (PaymentDetailVO paymentDetailVO : paymentDetailsList) {
+                    PaymentDetails paymentDetails = new PaymentDetails();
+                    PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                    paymentDetails.setAmount(paymentDetailVO.getAmount());
+                    paymentDetails.setIncomeOrExpenses(IncomeOrExpenses.EXPENSES);
+                    paymentDetails.setGoodReceived(insertedGoodReceivedObject);
+                    paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
+                    paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
+                    paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunction.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                    paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
+
+                    if (paymentDetailVO.getBankId() != null) {
+                        BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                        paymentDetails.setBankDetail(bankDetail);
+                    } else {
+                        paymentDetails.setBankDetail(null);
+                    }
+
+                    if (paymentDetailVO.getTypeCode().equals("CQ")) {
+                        ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
+
+                        BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                        chequePaymentDetail.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        chequePaymentDetail.setCheque_status(ChequeStatus.PENDING);
+                        chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
+                        chequePaymentDetail.setChequeDate(commonFunction.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                        chequePaymentDetail.setBankDetail(bankDetail);
+                        chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
+
+                        Long chequeDetailId = chequePaymentDetailDao.save(chequePaymentDetail);
+                        ChequePaymentDetail saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+                        paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
+
+                    }
+
+                    paymentDetails.setPaymentMethod(paymentMethod);
+
+                    paymentDetailDao.save(paymentDetails);/**/
+
                 }
             }
 
