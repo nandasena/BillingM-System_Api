@@ -33,6 +33,10 @@ public class Creditor extends BaseObject implements Serializable {
     @JsonIgnore
     private Invoice invoice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_payment_type_code",nullable = false,referencedColumnName = "type_code")
+    private PaymentMethod paymentMethod;
+
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_supplier_id")
@@ -66,5 +70,8 @@ public class Creditor extends BaseObject implements Serializable {
 
     public GoodReceived getGoodReceived() {return goodReceived;}
     public void setGoodReceived(GoodReceived goodReceived) {this.goodReceived = goodReceived;}
+
+    public PaymentMethod getPaymentMethod() {return paymentMethod;}
+    public void setPaymentMethod(PaymentMethod paymentMethod) {this.paymentMethod = paymentMethod;}
 }
 

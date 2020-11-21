@@ -375,7 +375,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                         creditor.setDescription(paymentDetailVO.getDescription());
                         creditor.setPaymentDate(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
                         creditor.setSupplier(insertedGoodReceivedObject.getPurchaseOrder().getSupplier());
-                        
+                        creditor.setPaymentMethod(paymentMethodDao.get((long)1));
                         creditorDao.save(creditor);
 
                     }

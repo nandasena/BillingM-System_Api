@@ -3,10 +3,9 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.CreditAndDebitAccountService;
 import com.createvision.sivilima.tableModel.*;
-import com.createvision.sivilima.valuesObject.CustomerPaymentVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierPaymentVO;
 import com.createvision.sivilima.valuesObject.PaymentDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -117,14 +116,14 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
     }
 
     @Override
-    public List<CustomerPaymentVO> getCustomerPaymentDetailById(Long id) throws Exception {
+    public List<CustomerSupplierPaymentVO> getCustomerPaymentDetailById(Long id) throws Exception {
         try {
-            List<CustomerPaymentVO> customerPaymentVOList = new ArrayList<>();
+            List<CustomerSupplierPaymentVO> customerPaymentVOList = new ArrayList<>();
             List<Debtor> debtorList = debtorDao.getDebtorByCustomerId(id);
             for (Debtor debtor : debtorList) {
                 CreditAndDebitAccount creditAndDebitAccount = creditAndDebitAccountDao.getPaymentDetailByDebtorId(debtor.getId());
 
-                CustomerPaymentVO customerPaymentVO = new CustomerPaymentVO();
+                CustomerSupplierPaymentVO customerPaymentVO = new CustomerSupplierPaymentVO();
 
                 customerPaymentVO.setPaymentDate(commonFunctions.convertDateToString(debtor.getPaymentDate()));
                 customerPaymentVO.setDebitAmount(debtor.getDebit());
@@ -159,7 +158,7 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
                 paymentDetailVO.setChequeDate(paymentDetailsOfCredit.getChequeDate() != null ? commonFunctions.convertDateToString(paymentDetailsOfCredit.getChequeDate()) : "--");
                 paymentDetailVO.setCardNumber(paymentDetailsOfCredit.getCardNumber().isEmpty() ? "--" : paymentDetailsOfCredit.getCardNumber());
                 paymentDetailVO.setBankName(paymentDetailsOfCredit.getBankDetail() != null ? paymentDetailsOfCredit.getBankDetail().getBankName() : "--");
-                paymentDetailVO.setIsClear(paymentDetailsOfCredit.getClear() != null ? paymentDetailsOfCredit.getClear().toString() :"--");
+                paymentDetailVO.setIsClear(paymentDetailsOfCredit.getClear() != null ? paymentDetailsOfCredit.getClear().toString() : "--");
 
                 PaymentDetailVOList.add(paymentDetailVO);
 
@@ -169,5 +168,32 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             throw e;
         }
 
+    }
+
+    @Override
+    public List<CustomerSupplierPaymentVO> getSupplierPaymentDetailsById(Long id) throws Exception {
+        try {
+            List<CustomerSupplierPaymentVO> supplierPaymentVOList = new ArrayList<>();
+            List<Creditor> creditorList = creditorDao.getSupplierListById(id);
+
+            for (Creditor creditor : creditorList) {
+                CustomerSupplierPaymentVO supplierPaymentVo =new CustomerSupplierPaymentVO();
+
+                supplierPaymentVo.setCreditAmount(creditor.getCredit());
+                supplierPaymentVo.setDebitAmount(creditor.getDebit());
+                supplierPaymentVo.setDescription(creditor.getDescription());
+                supplierPaymentVo.setPaymentDate(commonFunctions.convertDateToString(creditor.getPaymentDate()));
+                supplierPaymentVo.setPaymentType(creditor.getPaymentMethod().getTypeCode());
+                supplierPaymentVo.setGoodReceivedId(creditor.getGoodReceived() != null ? creditor.getGoodReceived().getId() : null );
+
+                supplierPaymentVOList.add(supplierPaymentVo);
+
+
+            }
+
+            return supplierPaymentVOList;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.createvision.sivilima.controller;
 
 import com.createvision.sivilima.service.CreditAndDebitAccountService;
-import com.createvision.sivilima.valuesObject.CustomerPaymentVO;
+import com.createvision.sivilima.valuesObject.CustomerSupplierPaymentVO;
 import com.createvision.sivilima.valuesObject.PaymentDetailVO;
 import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class CreditAndDebitAccountController {
     public ResponseEntity<Object> getCustomerPaymentDetailById(@PathVariable("id") Long id) throws Exception {
         ReturnVO returnVO = new ReturnVO();
         try {
-            List<CustomerPaymentVO> customerPaymentVO = creditAndDebitAccountService.getCustomerPaymentDetailById(id);
+            List<CustomerSupplierPaymentVO> customerPaymentVO = creditAndDebitAccountService.getCustomerPaymentDetailById(id);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(customerPaymentVO);
@@ -64,6 +64,24 @@ public class CreditAndDebitAccountController {
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
             returnVO.setResult(customerPaymentVO);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+    @RequestMapping(value = "supplier/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getSupplierPaymentDetailById(@PathVariable("id") Long id) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<CustomerSupplierPaymentVO> supplierPaymentVOList = creditAndDebitAccountService.getSupplierPaymentDetailsById(id);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(supplierPaymentVOList);
             return ResponseEntity.ok(returnVO);
         } catch (Exception e) {
             returnVO.setResult(e);

@@ -1,6 +1,6 @@
 package com.createvision.sivilima.valuesObject;
 
-public class CustomerPaymentVO {
+public class CustomerSupplierPaymentVO {
     private double creditAmount;
     private double debitAmount;
     private String createDate;
@@ -8,6 +8,7 @@ public class CustomerPaymentVO {
     private Long invoiceId;
     private String description;
     private String paymentType;
+    private Long goodReceivedId;
 
     public double getCreditAmount() { return creditAmount; }
     public void setCreditAmount(double creditAmount) { this.creditAmount = creditAmount; }
@@ -29,4 +30,7 @@ public class CustomerPaymentVO {
 
     public String getPaymentType() { return paymentType; }
     public void setPaymentType(String paymentType) { this.paymentType = paymentType; }
+
+    public Long getGoodReceivedId() {return goodReceivedId;}
+    public void setGoodReceivedId(Long goodReceivedId) {this.goodReceivedId = goodReceivedId;}
 }
