@@ -107,7 +107,6 @@ public class CreditAndDebitAccountServiceImpl implements CreditAndDebitAccountSe
             }
             creditAndDebitAccount.setPaymentMethod(paymentMethod);
             creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
-            creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(paymentDetailVO.getIncomeOrCost()).name);
             creditAndDebitAccountDao.save(creditAndDebitAccount);
 
 

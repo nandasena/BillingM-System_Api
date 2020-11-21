@@ -21,10 +21,6 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     private double debit;
 
     @Basic
-    @Column(name = "income_or_cost")
-    private String incomeOrCost;
-
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_payment_type_code",nullable = false,referencedColumnName = "type_code")
     private PaymentMethod paymentMethod;
@@ -77,11 +73,12 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     @JsonIgnore
     private Creditor creditor;
 
-
     @Basic
-    @Column(name = "income_or_expenses")
+    @Column(name="cash_in_cash_out")
     @Enumerated(EnumType.STRING)
-    private IncomeOrExpenses incomeOrExpenses;
+    private CashInOut cashInOut;
+
+
 
 
     public String getPaymentDescription() { return paymentDescription; }
@@ -114,15 +111,12 @@ public class CreditAndDebitAccount extends BaseObject implements Serializable {
     public BankDetail getBankDetail() { return bankDetail; }
     public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }
 
-    public String getIncomeOrCost() { return incomeOrCost; }
-    public void setIncomeOrCost(String incomeOrCost) { this.incomeOrCost = incomeOrCost; }
-
     public Debtor getDebtor() { return debtor; }
     public void setDebtor(Debtor debtor) { this.debtor = debtor; }
 
     public Creditor getCreditor() { return creditor; }
     public void setCreditor(Creditor creditor) { this.creditor = creditor; }
 
-    public IncomeOrExpenses getIncomeOrExpenses() {return incomeOrExpenses;}
-    public void setIncomeOrExpenses(IncomeOrExpenses incomeOrExpenses) {this.incomeOrExpenses = incomeOrExpenses;}
+    public CashInOut getCashInOut() {return cashInOut;}
+    public void setCashInOut(CashInOut cashInOut) {this.cashInOut = cashInOut;}
 }

@@ -68,6 +68,9 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
     @Autowired
     PaymentMethodDao paymentMethodDao;
 
+    @Autowired
+    CreditorDao creditorDao;
+
 
     @Override
     public PurchaseOrderVO createPurchaseOrder(PurchaseOrderVO purchaseOrderVO) throws Exception {
@@ -315,6 +318,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                     paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunction.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                     paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
 
+
                     if (paymentDetailVO.getBankId() != null) {
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                         paymentDetails.setBankDetail(bankDetail);
@@ -324,6 +328,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 
                     if (paymentDetailVO.getTypeCode().equals("CQ")) {
                         ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
+                        CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
 
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
                         chequePaymentDetail.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
@@ -337,11 +342,47 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
                         ChequePaymentDetail saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
                         paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
 
+
+                        creditAndDebitAccount.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        creditAndDebitAccount.setCredit(paymentDetailVO.getAmount());
+                        creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
+                        creditAndDebitAccount.setChequePaymentDetail(saveChequePaymentDetail);
+                        creditAndDebitAccount.setGoodReceived(insertedGoodReceivedObject);
+                        creditAndDebitAccount.setPaymentMethod(paymentMethod);
+                        creditAndDebitAccount.setCashInOut(CashInOut.CashOut);
+                        creditAndDebitAccountDao.save(creditAndDebitAccount);
+
+
+                    }
+                    if (paymentDetailVO.getTypeCode().equals("CH")) {
+                        CreditAndDebitAccount creditAndDebitAccount = new CreditAndDebitAccount();
+                        creditAndDebitAccount.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        creditAndDebitAccount.setCredit(paymentDetailVO.getAmount());
+                        creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
+                        creditAndDebitAccount.setGoodReceived(insertedGoodReceivedObject);
+                        creditAndDebitAccount.setPaymentMethod(paymentMethod);
+                        creditAndDebitAccount.setCashInOut(CashInOut.CashOut);
+                        creditAndDebitAccountDao.save(creditAndDebitAccount);
+
+                    }
+
+                    if (paymentDetailVO.getTypeCode().equals("CR")) {
+
+                        Creditor creditor = new Creditor();
+                        creditor.setCreatedAt(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        creditor.setCredit(paymentDetailVO.getAmount());
+                        creditor.setGoodReceived(insertedGoodReceivedObject);
+                        creditor.setDescription(paymentDetailVO.getDescription());
+                        creditor.setPaymentDate(commonFunction.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        creditor.setSupplier(insertedGoodReceivedObject.getPurchaseOrder().getSupplier());
+                        
+                        creditorDao.save(creditor);
+
                     }
 
                     paymentDetails.setPaymentMethod(paymentMethod);
 
-                    paymentDetailDao.save(paymentDetails);/**/
+                    paymentDetailDao.save(paymentDetails);
 
                 }
             }

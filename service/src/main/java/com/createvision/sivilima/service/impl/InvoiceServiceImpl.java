@@ -278,7 +278,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
                     } else {
                         creditAndDebitAccount.setDebit(paymentDetailVO.getAmount());
-                        creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(1).name);
                         creditAndDebitAccountDao.save(creditAndDebitAccount);
                     }
 
@@ -486,7 +485,6 @@ public class InvoiceServiceImpl implements InvoiceService {
             creditAndDebitAccount.setDebit(paymentDetailVO.getAmount());
             creditAndDebitAccount.setPaymentDescription(paymentDetailVO.getDescription());
             creditAndDebitAccount.setPaymentMethod(paymentMethod);
-            creditAndDebitAccount.setIncomeOrCost(commonFunctions.getPaymentType(1).name);
             creditAndDebitAccount.setDebtor(insertedDebtor);
             creditAndDebitAccountDao.save(creditAndDebitAccount);
 
