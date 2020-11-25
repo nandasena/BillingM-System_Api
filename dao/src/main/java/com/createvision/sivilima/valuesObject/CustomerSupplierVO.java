@@ -1,22 +1,19 @@
 package com.createvision.sivilima.valuesObject;
 
-import sun.java2d.pipe.SolidTextRenderer;
-
-import java.lang.invoke.LambdaConversionException;
-
 public class CustomerSupplierVO {
 
     private String firstName;
     private String lastName;
     private Long customerId;
     private Long supplierId;
-    private String telephoneNumber;
+    private String contactNumber;
     private String email;
     private String remark;
     private String address1;
     private String address2;
     private String address3;
     private String NIC;
+    private Long branchId;
 
 
     public String getFirstName() { return firstName; }
@@ -31,8 +28,8 @@ public class CustomerSupplierVO {
     public Long getSupplierId() { return supplierId; }
     public void setSupplierId(Long supplierId) { this.supplierId = supplierId; }
 
-    public String getTelephoneNumber() { return telephoneNumber; }
-    public void setTelephoneNumber(String telephoneNumber) { this.telephoneNumber = telephoneNumber; }
+    public String getContactNumber() { return contactNumber; }
+    public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
@@ -51,4 +48,7 @@ public class CustomerSupplierVO {
 
     public String getNIC() { return NIC; }
     public void setNIC(String NIC) { this.NIC = NIC; }
+
+    public Long getBranchId() {return branchId;}
+    public void setBranchId(Long branchId) {this.branchId = branchId;}
 }

@@ -1,7 +1,9 @@
 package com.createvision.sivilima.service.impl;
 
+import com.createvision.sivilima.dao.BranchDao;
 import com.createvision.sivilima.dao.CustomerDao;
 import com.createvision.sivilima.service.CustomerService;
+import com.createvision.sivilima.tableModel.Branch;
 import com.createvision.sivilima.tableModel.Customer;
 import com.createvision.sivilima.tableModel.Supplier;
 import com.createvision.sivilima.valuesObject.CustomerSupplierVO;
@@ -19,6 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerDao customerDao;
 
+    @Autowired
+    BranchDao branchDao;
+
     @Override
     public List<CustomerSupplierVO> getAllCustomer() throws Exception {
         List<CustomerSupplierVO> customerSupplierVOList = new ArrayList<>();
@@ -31,6 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
                     customerSupplierVO.setCustomerId(tem.getId());
                     customerSupplierVO.setFirstName(tem.getFirstName());
                     customerSupplierVO.setLastName(tem.getLastName());
+                    customerSupplierVO.setAddress1(tem.getAddress1());
 
                     customerSupplierVOList.add(customerSupplierVO);
                 }
@@ -48,6 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             if(!customerSupplierVOs.isEmpty()){
                 for (CustomerSupplierVO customerVO:customerSupplierVOs) {
+                    Branch branch = branchDao.get(customerVO.getBranchId());
                     Customer customer =new Customer();
                     customer.setAddress1(customerVO.getAddress1());
                     customer.setAddress2(customerVO.getAddress2());
@@ -57,6 +64,8 @@ public class CustomerServiceImpl implements CustomerService {
                     customer.setEmail(customerVO.getEmail());
                     customer.setNIC(customerVO.getNIC());
                     customer.setRemark(customerVO.getRemark());
+                    customer.setTelephoneNo(customerVO.getContactNumber());
+                    customer.setBranch(branch);
 
                     customerDao.save(customer);
                 }

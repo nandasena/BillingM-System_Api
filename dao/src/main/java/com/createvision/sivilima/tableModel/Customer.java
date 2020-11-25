@@ -1,9 +1,8 @@
 package com.createvision.sivilima.tableModel;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -65,12 +64,10 @@ public class Customer extends BaseObject implements Serializable {
     public void setRemark(String remark) { this.remark = remark; }
 
     @Basic
-    @Column(name = "fk_branch_id")
-    private Brand  brand;
-    public Brand getBrand() { return brand; }
-    public void setBrand(Brand brand) { this.brand = brand; }
-
-
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_branch_id")
+    @JsonIgnore
+    private Branch  branch;
+    public Branch getBranch() {return branch;}
+    public void setBranch(Branch branch) {this.branch = branch;}
 }
