@@ -9,7 +9,7 @@ import java.util.Date;
 public class ChequePaymentDetail extends BaseObject implements Serializable {
     @Basic
     @Column(name = "description")
-    String description;
+    private String description;
 
     @Basic
     @Column(name = "clearing_date")
@@ -27,9 +27,12 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
     @Column(name = "cheque_number")
     private String chequeNumber;
 
+    @Basic
+    @Column(name = "clearing_details")
+    private String clearingDetails;
+
     @Enumerated(EnumType.STRING)
     private ChequeStatus cheque_status;
-
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,6 +61,9 @@ public class ChequePaymentDetail extends BaseObject implements Serializable {
 
     public String getChequeNumber() { return chequeNumber; }
     public void setChequeNumber(String chequeNumber) { this.chequeNumber = chequeNumber;}
+
+    public String getClearingDetails() {return clearingDetails;}
+    public void setClearingDetails(String clearingDetails) {this.clearingDetails = clearingDetails;}
 
     public BankDetail getBankDetail() { return bankDetail; }
     public void setBankDetail(BankDetail bankDetail) { this.bankDetail = bankDetail; }

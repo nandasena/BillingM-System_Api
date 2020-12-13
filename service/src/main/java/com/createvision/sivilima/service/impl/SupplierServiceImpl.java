@@ -40,6 +40,7 @@ public class SupplierServiceImpl implements SupplierService {
                     supplierObject.setSupplierId(supplier.getId());
                     supplierObject.setFirstName(supplier.getFirstName());
                     supplierObject.setLastName(supplier.getLastName());
+                    supplierObject.setContactNumber(supplier.getPhoneNumber());
 
                     supplierVOList.add(supplierObject);
 

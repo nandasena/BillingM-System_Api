@@ -47,6 +47,7 @@ public class ItemDetailServiceImpl implements ItemDetailService {
                 itemDetailVO.setAvailableQuantity(tempItemDetail.getAvailableQuantity());
                 itemDetailVO.setQuantity(tempItemDetail.getQuantity());
                 itemDetailVO.setCostPrice(tempItemDetail.getCostPrice());
+                itemDetailVO.setCustomerPrice(tempItemDetail.getCustomerPrice());
                 itemDetailVO.setFabricatorPrice(tempItemDetail.getFabricatorPrice());
                 itemDetailVO.setItemDetailId(tempItemDetail.getId());
                 itemDetailVO.setDelete(tempItemDetail.isDelete());
@@ -81,6 +82,8 @@ public class ItemDetailServiceImpl implements ItemDetailService {
             itemDetail.setQuantity(itemDetailsVO.getQuantity());
             itemDetail.setAvailableQuantity(itemDetailsVO.getAvailableQuantity());
             itemDetail.setCostPrice(itemDetailsVO.getCostPrice());
+            itemDetail.setCustomerPrice(itemDetailsVO.getCustomerPrice());
+            itemDetail.setMrpPrice(itemDetailsVO.getMrpPrice());
             itemDetail.setFabricatorPrice(itemDetailsVO.getFabricatorPrice());
             itemDetail.setSupplier(supplier);
             itemDetail.setBrand(brand);
