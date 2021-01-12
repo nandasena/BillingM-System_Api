@@ -24,6 +24,7 @@ public class InvoiceVO {
     private Long customerId;
     private List<PaymentDetailVO> paymentDetailList;
     private String paymentType;
+    private TempCustomerVO tempCustomerVO;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -72,4 +73,7 @@ public class InvoiceVO {
 
     public String getPaymentType() { return paymentType; }
     public void setPaymentType(String paymentType) { this.paymentType = paymentType;}
+
+    public TempCustomerVO getTempCustomerVO() {return tempCustomerVO;}
+    public void setTempCustomerVO(TempCustomerVO tempCustomerVO) {this.tempCustomerVO = tempCustomerVO;}
 }

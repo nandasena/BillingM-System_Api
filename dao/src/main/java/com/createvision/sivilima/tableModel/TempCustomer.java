@@ -1,9 +1,6 @@
 package com.createvision.sivilima.tableModel;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -33,4 +30,11 @@ public class TempCustomer extends BaseObject implements Serializable {
     private String telephoneNo;
     public String getTelephoneNo() {return telephoneNo;}
     public void setTelephoneNo(String telephoneNo) {this.telephoneNo = telephoneNo;}
+
+    @Basic
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_invoice_id")
+    private Invoice invoice;
+    public Invoice getInvoice() {return invoice;}
+    public void setInvoice(Invoice invoice) {this.invoice = invoice;}
 }

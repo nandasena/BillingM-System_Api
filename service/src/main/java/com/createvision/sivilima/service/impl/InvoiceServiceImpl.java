@@ -69,6 +69,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     ChequePaymentDetailDao chequePaymentDetailDao;
 
+    @Autowired
+    TempCustomerDao tempCustomerDao;
+
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -167,7 +170,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
                 if (itemVO.getTypeOfDiscount() == 1) {
                     invoiceItemDetail.setDiscount_type(DiscountType.CASH_DISCOUNT);
-                    totalDiscount = itemVO.getPriceDiscount();
+                    totalDiscount = itemVO.getPriceDiscount() * itemVO.getSellingQuantity() ;
                 } else {
                     invoiceItemDetail.setDiscount_type(DiscountType.PERCENTAGE_DISCOUNT);
                     totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
@@ -286,6 +289,17 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             }
 
+            TempCustomer tempCustomer = new TempCustomer();
+
+            TempCustomerVO tempCustomerVO=invoiceVO.getTempCustomerVO();
+            tempCustomer.setFirstName(tempCustomerVO.getFirstName());
+            tempCustomer.setAddress1(tempCustomerVO.getAddress1());
+            tempCustomer.setTelephoneNo(tempCustomerVO.getContactNumber());
+            tempCustomer.setInvoice(insertedInvoice);
+            Long insertedTempCustomerId = tempCustomerDao.save(tempCustomer);
+            if (insertedTempCustomerId != null) {
+                invoiceVO.setTempCustomerVO(tempCustomerVO);
+            }
 
         } catch (Exception e) {
             throw e;
@@ -500,11 +514,29 @@ public class InvoiceServiceImpl implements InvoiceService {
         InvoiceVO invoiceVO = new InvoiceVO();
         try {
             Invoice invoice = invoiceDao.get(id);
+            TempCustomer tempCustomer = tempCustomerDao.getCustomerDetailsById(id);
+
             invoiceVO.setInvoiceNumber(invoice.getInvoiceNumber());
             invoiceVO.setInvoiceDate(commonFunctions.convertDateToString(invoice.getInvoiceDate()));
             invoiceVO.setTotalAmount(invoice.getTotalAmount());
             invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
             invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
+
+            if(tempCustomer !=null){
+                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+                tempCustomerVO.setFirstName(tempCustomer.getFirstName());
+                tempCustomerVO.setAddress1(tempCustomer.getAddress1());
+                tempCustomerVO.setContactNumber(tempCustomer.getTelephoneNo());
+                invoiceVO.setTempCustomerVO(tempCustomerVO);
+            }else{
+                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+                tempCustomerVO.setFirstName("");
+                tempCustomerVO.setAddress1("");
+                tempCustomerVO.setContactNumber("");
+                invoiceVO.setTempCustomerVO(tempCustomerVO);
+            }
+
+
             Set<InvoiceItemDetail> invoiceItemDetails = invoice.getInvoiceItemDetails();
             List<ItemVO> itemVOList = new ArrayList<>();
             for (InvoiceItemDetail temInvoiceItemDetail : invoiceItemDetails) {
