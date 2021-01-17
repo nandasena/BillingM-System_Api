@@ -10,6 +10,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" value="788f6016-4d72-448a-8e25-6560e8e21226" />
+          <factory-entry name="dao" value="788f6016-4d72-448a-8e25-6560e8e21226" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

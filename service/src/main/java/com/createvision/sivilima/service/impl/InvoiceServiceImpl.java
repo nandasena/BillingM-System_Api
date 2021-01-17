@@ -221,6 +221,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                     paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
                     paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
                     insertedInvoice.setInvoiceType(paymentMethod);
+                    insertedInvoice.setAdvanceAmount(paymentDetailVO.getAdvancePayment());
+                    invoiceVO.setAdvanceAmount(paymentDetailVO.getAdvancePayment());
 
                     if (paymentDetailVO.getBankId() != null) {
                         BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
@@ -360,6 +362,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
                     itemDetailsVO.setItemId(tem.getItem().getId());
                     itemDetailsVOList.add(itemDetailsVO);
+
                 }
             }
 
@@ -521,6 +524,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoiceVO.setTotalAmount(invoice.getTotalAmount());
             invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
             invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
+            invoiceVO.setAdvanceAmount(invoice.getAdvanceAmount());
 
             if(tempCustomer !=null){
                 TempCustomerVO tempCustomerVO =new TempCustomerVO();
