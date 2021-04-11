@@ -37,6 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
                     customerSupplierVO.setFirstName(tem.getFirstName());
                     customerSupplierVO.setLastName(tem.getLastName());
                     customerSupplierVO.setAddress1(tem.getAddress1());
+                    customerSupplierVO.setAddress2(tem.getAddress2());
+                    customerSupplierVO.setContactNumber(tem.getTelephoneNo());
 
                     customerSupplierVOList.add(customerSupplierVO);
                 }

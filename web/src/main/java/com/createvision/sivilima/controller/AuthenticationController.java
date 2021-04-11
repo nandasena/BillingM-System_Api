@@ -43,11 +43,14 @@ public class AuthenticationController {
 
             if (!user.isDelete()) {
 
+                String userRole = "admin";
+                userRole = userRole.replaceFirst("\\s", "");
                 Algorithm algorithm = Algorithm.HMAC256("sivilima-secret");
 
                 String jwtToken = JWT.create()
                         .withClaim("email", user.getUserName())
                         .withClaim("name", user.getName())
+                        .withClaim("role", userRole)
                         .withClaim("picture", "assets/images/avatar.png")
                         .withClaim("userId", user.getId())
                         .sign(algorithm);

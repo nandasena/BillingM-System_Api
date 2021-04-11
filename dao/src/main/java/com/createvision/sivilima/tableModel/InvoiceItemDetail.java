@@ -53,7 +53,9 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     @Enumerated(EnumType.STRING)
     private DiscountType discount_type;
 
-
+    @Basic
+    @Column(name = "item_cost")
+    private double itemCost;
 
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
@@ -84,4 +86,7 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
 
     public DiscountType getDiscount_type() {return discount_type;}
     public void setDiscount_type(DiscountType discount_type) {this.discount_type = discount_type;}
+
+    public double getItemCost() {return itemCost;}
+    public void setItemCost(double itemCost) {this.itemCost = itemCost;}
 }

@@ -190,6 +190,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItemDetail.setItemPrice(itemVO.getPrice());
                 invoiceItemDetail.setTotalItemDiscount(totalDiscount);
                 invoiceItemDetail.setTotalAmount(itemVO.getTotal());
+                invoiceItemDetail.setItemCost(itemDetail.getCostPrice());
 
                 if (itemVO.getTypeOfPrice() == 1) {
                     invoiceItemDetail.setPrice_type(PriceType.MRP_PRICE);
