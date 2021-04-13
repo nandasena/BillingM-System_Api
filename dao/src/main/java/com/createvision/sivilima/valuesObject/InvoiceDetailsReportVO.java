@@ -12,6 +12,9 @@ public class InvoiceDetailsReportVO {
    private double totalItemDiscount;
    private double itemCost;
    private String discountType;
+   private double totalCost;
+   private String itemName;
+   private double profitOrLost;
 
     public Long getInvoiceId() {return invoiceId;}
     public void setInvoiceId(Long invoiceId) {this.invoiceId = invoiceId;}
@@ -45,4 +48,13 @@ public class InvoiceDetailsReportVO {
 
     public String getDiscountType() {return discountType;}
     public void setDiscountType(String discountType) {this.discountType = discountType;}
+
+    public double getTotalCost() {return totalCost;}
+    public void setTotalCost(double totalCost) {this.totalCost = totalCost;}
+
+    public String getItemName() {return itemName;}
+    public void setItemName(String itemName) {this.itemName = itemName;}
+
+    public double getProfitOrLost() {return profitOrLost;}
+    public void setProfitOrLost(double profitOrLost) {this.profitOrLost = profitOrLost;}
 }
