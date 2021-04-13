@@ -30,7 +30,7 @@ public class ReportController {
            List<InvoiceDetailsReportVO> returnPurchaseOrderVO = reportService.getInvoiceDetailsByDateRange(fromDate, toDate);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
-//            returnVO.setResult(returnPurchaseOrderVO);
+            returnVO.setResult(returnPurchaseOrderVO);
             return ResponseEntity.ok(returnVO);
 
         } catch (Exception e) {

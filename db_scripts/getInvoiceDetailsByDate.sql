@@ -22,7 +22,7 @@ select iid.*,it.name from (select
                                TRUNCATE(
                                        (IFNULL(id.item_cost,0)* IFNULL(id.selling_quantity,0)),2)
                                    as total_cost
-                           from (select * from invoices  where date (invoice_date) >=form_date and date (invoice_date) <=form_date) i
+                           from (select * from invoices  where date (invoice_date) >=form_date and date (invoice_date) <=to_date) i
                               inner join invoice_item_Details  id
                                          on i.id =id.invoice_id)AS iid
 inner join items it on iid.item_id = it.id;
