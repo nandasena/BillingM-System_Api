@@ -39,13 +39,13 @@ public class ReportServiceImpl implements IReportService {
                 invoiceDetailsReportVO.setTotalDiscount(Double.parseDouble(tem[4].toString()));
                 invoiceDetailsReportVO.setInvoiceDate(tem[5].toString());
                 invoiceDetailsReportVO.setItemPrice(Double.parseDouble(tem[6].toString()));
-                invoiceDetailsReportVO.setSellingQuantity(Double.parseDouble(tem[7].toString()));
-                invoiceDetailsReportVO.setTotalItemDiscount(Double.parseDouble(tem[8].toString()));
-                invoiceDetailsReportVO.setItemCost(Double.parseDouble(tem[9].toString()));
-                invoiceDetailsReportVO.setDiscountType(tem[11].toString());
-                invoiceDetailsReportVO.setTotalCost(Double.parseDouble(tem[12].toString()));
-                invoiceDetailsReportVO.setItemName(tem[13].toString());
-                invoiceDetailsReportVO.setProfitOrLost(Double.parseDouble(tem[2].toString())-Double.parseDouble(tem[12].toString()));
+//                invoiceDetailsReportVO.setSellingQuantity(Double.parseDouble(tem[7].toString()));
+//                invoiceDetailsReportVO.setTotalItemDiscount(Double.parseDouble(tem[8].toString()));
+//                invoiceDetailsReportVO.setItemCost(Double.parseDouble(tem[9].toString()));
+//                invoiceDetailsReportVO.setDiscountType(tem[11].toString());
+                invoiceDetailsReportVO.setTotalCost(Double.parseDouble(tem[13].toString()));
+
+                invoiceDetailsReportVO.setProfitOrLost(Double.parseDouble(tem[2].toString())-(Double.parseDouble(tem[13].toString())+Double.parseDouble(tem[4].toString())));
                 invoiceDetailsReportVOList.add(invoiceDetailsReportVO);
             }
 

@@ -197,7 +197,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 } else if (itemVO.getTypeOfPrice() == 2) {
                     invoiceItemDetail.setPrice_type(PriceType.FABRICATOR_PRICE);
                 } else {
-                    invoiceItemDetail.setPrice_type(PriceType.CUSTOMER_PRICE);
+                    invoiceItemDetail.setPrice_type(PriceType.SHOWROOM_PRICE);
                 }
 
                 invoiceItemDetailDao.save(invoiceItemDetail);
