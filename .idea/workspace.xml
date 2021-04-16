@@ -10,8 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct some errors when create credit payment.">
+      <change afterPath="$PROJECT_DIR$/db_scripts/getItemWiseProfitDetails.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PriceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/PriceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/InvoiceDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/InvoiceDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/InvoiceItemDetailDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/dao/ItemDao.class" afterDir="false" />
@@ -26,12 +28,13 @@
       <change beforePath="$PROJECT_DIR$/dao/target/classes/com/createvision/sivilima/model/User.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_scripts/getInvoiceDetailsByDate.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_scripts/getInvoiceDetailsByDate.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/IReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/IReportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ReportServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/ReportController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" afterDir="false" />
@@ -121,6 +124,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.tomcat_server">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="sivilima [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -478,14 +492,8 @@
       <workItem from="1618067216381" duration="481000" />
       <workItem from="1618107072292" duration="4585000" />
       <workItem from="1618281616333" duration="10744000" />
-      <workItem from="1618367586830" duration="2389000" />
-    </task>
-    <task id="LOCAL-00127" summary="add new function to save payment against customers and supplier.">
-      <created>1577726536192</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1577726536192</updated>
+      <workItem from="1618367586830" duration="2651000" />
+      <workItem from="1618575502272" duration="6909000" />
     </task>
     <task id="LOCAL-00128" summary="add new table and modified some service.">
       <created>1577800431234</created>
@@ -823,7 +831,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618333399767</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="correct some errors when get data for rpofit on invoice report">
+      <created>1618420202955</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1618420202956</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -842,7 +857,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new enum class to save cheque status" />
     <MESSAGE value="add new column and add new mapping column to save cheque details." />
     <MESSAGE value="add cheque details to separate table." />
     <MESSAGE value="change table column name" />
@@ -867,7 +881,8 @@
     <MESSAGE value="add new function to get invoice details by date range" />
     <MESSAGE value="add new function to get invoice details and cost invoice by invoice" />
     <MESSAGE value="add new variables to invoice details report" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new variables to invoice details report" />
+    <MESSAGE value="correct some errors when get data for rpofit on invoice report" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct some errors when get data for rpofit on invoice report" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

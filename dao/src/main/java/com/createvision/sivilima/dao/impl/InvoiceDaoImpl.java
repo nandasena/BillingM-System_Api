@@ -68,4 +68,13 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Long> implements In
         List<Object[]> result = query.list();
         return result;
     }
+
+    @Override
+    public List<Object[]> getItemWiseDetailsByDateRange(Date fromDate, Date toDate) throws Exception {
+        Query query = getSession().createSQLQuery("CALL getItemWiseDetailsByDateRange(?,?)");
+        query.setParameter(0,fromDate);
+        query.setParameter(1,toDate);
+        List<Object[]> result = query.list();
+        return result;
+    }
 }

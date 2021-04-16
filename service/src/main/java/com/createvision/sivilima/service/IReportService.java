@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IReportService {
     public List<InvoiceDetailsReportVO> getInvoiceDetailsByDateRange(String fromDate,String toDate) throws Exception;
+    public List<InvoiceDetailsReportVO> getSellingItemDetailsByDate(String fromDate,String toDate) throws Exception;
 }

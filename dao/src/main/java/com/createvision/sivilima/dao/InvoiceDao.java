@@ -13,4 +13,5 @@ public interface InvoiceDao extends AbstractDao<Invoice, Long> {
     public List<Object[]> sampleNativeQuery() throws Exception;
     List<Object[]> getInvoiceByDateRange(Date fromDate, Date toDate) throws Exception;
     List<Object[]> getInvoiceDetailsByDateRange(Date fromDate, Date toDate)throws Exception;
+    List<Object[]> getItemWiseDetailsByDateRange(Date fromDate, Date toDate) throws Exception;
 }

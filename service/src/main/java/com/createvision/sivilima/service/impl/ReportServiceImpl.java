@@ -28,10 +28,10 @@ public class ReportServiceImpl implements IReportService {
             Date FromDate = commonFunctions.getDateTimeByDateString(fromDate);
             Date ToDate = commonFunctions.getDateTimeByDateString(toDate);
 
-            List<Object[]> invoiceDetailsListObject =invoiceDao.getInvoiceDetailsByDateRange(FromDate,ToDate);
+            List<Object[]> invoiceDetailsListObject = invoiceDao.getInvoiceDetailsByDateRange(FromDate, ToDate);
 
-            for (Object[] tem : invoiceDetailsListObject ) {
-                InvoiceDetailsReportVO invoiceDetailsReportVO =new InvoiceDetailsReportVO();
+            for (Object[] tem : invoiceDetailsListObject) {
+                InvoiceDetailsReportVO invoiceDetailsReportVO = new InvoiceDetailsReportVO();
                 invoiceDetailsReportVO.setInvoiceId(Long.parseLong(tem[0].toString()));
                 invoiceDetailsReportVO.setInvoiceNumber(tem[1].toString());
                 invoiceDetailsReportVO.setTotalAmount(Double.parseDouble(tem[2].toString()));
@@ -45,11 +45,38 @@ public class ReportServiceImpl implements IReportService {
 //                invoiceDetailsReportVO.setDiscountType(tem[11].toString());
                 invoiceDetailsReportVO.setTotalCost(Double.parseDouble(tem[13].toString()));
 
-                invoiceDetailsReportVO.setProfitOrLost(Double.parseDouble(tem[2].toString())-(Double.parseDouble(tem[13].toString())+Double.parseDouble(tem[4].toString())));
+                invoiceDetailsReportVO.setProfitOrLost(Double.parseDouble(tem[2].toString()) - (Double.parseDouble(tem[13].toString()) + Double.parseDouble(tem[4].toString())));
                 invoiceDetailsReportVOList.add(invoiceDetailsReportVO);
             }
 
             return invoiceDetailsReportVOList;
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    @Override
+    public List<InvoiceDetailsReportVO> getSellingItemDetailsByDate(String fromDate, String toDate) throws Exception {
+        List<InvoiceDetailsReportVO> itemDetailsReportVOList = new ArrayList<>();
+        try {
+            Date FromDate = commonFunctions.getDateTimeByDateString(fromDate);
+            Date ToDate = commonFunctions.getDateTimeByDateString(toDate);
+
+            List<Object[]> itemDetailsListObject = invoiceDao.getItemWiseDetailsByDateRange(FromDate, ToDate);
+            for (Object[] tem : itemDetailsListObject) {
+
+                InvoiceDetailsReportVO itemDetailsList = new InvoiceDetailsReportVO();
+                itemDetailsList.setInvoiceDate(tem[0].toString());
+                itemDetailsList.setSellingQuantity(Double.parseDouble(tem[1].toString()));
+                itemDetailsList.setTotalAmount(Double.parseDouble(tem[2].toString()));
+                itemDetailsList.setTotalDiscount(Double.parseDouble(tem[3].toString()));
+                itemDetailsList.setItemCost((Double.parseDouble(tem[4].toString())*Double.parseDouble(tem[1].toString()))-Double.parseDouble(tem[3].toString()));
+                itemDetailsList.setItemName(tem[7].toString());
+                itemDetailsList.setProfitOrLost(Double.parseDouble(tem[2].toString())-(Double.parseDouble(tem[4].toString())*Double.parseDouble(tem[1].toString())));
+                itemDetailsReportVOList.add(itemDetailsList);
+            }
+            return itemDetailsReportVOList;
         } catch (Exception e) {
             throw e;
         }

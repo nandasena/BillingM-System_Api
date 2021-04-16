@@ -23,14 +23,35 @@ public class ReportController {
 
     @RequestMapping(value = "/invoiceByDateRange/fromDate/{fromDate}/toDate/{toDate}/", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> getAllPurchaseOrder(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) {
+    public ResponseEntity<Object> getInvoiceDetailsByDateRange(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) {
         ReturnVO returnVO = new ReturnVO();
 
         try {
-           List<InvoiceDetailsReportVO> returnPurchaseOrderVO = reportService.getInvoiceDetailsByDateRange(fromDate, toDate);
+           List<InvoiceDetailsReportVO> returnInvoiceDetailsVOList = reportService.getInvoiceDetailsByDateRange(fromDate, toDate);
             returnVO.setStatusCode(200);
             returnVO.setSuccess(true);
-            returnVO.setResult(returnPurchaseOrderVO);
+            returnVO.setResult(returnInvoiceDetailsVOList);
+            return ResponseEntity.ok(returnVO);
+
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
+    @RequestMapping(value = "/itemDetailsByDateRange/fromDate/{fromDate}/toDate/{toDate}/", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getSellingItemDetailsByDate(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) {
+        ReturnVO returnVO = new ReturnVO();
+
+        try {
+            List<InvoiceDetailsReportVO> returnItemDetailsVOList = reportService.getSellingItemDetailsByDate(fromDate, toDate);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(returnItemDetailsVOList);
             return ResponseEntity.ok(returnVO);
 
         } catch (Exception e) {
