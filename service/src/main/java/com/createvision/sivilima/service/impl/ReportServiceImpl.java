@@ -69,11 +69,11 @@ public class ReportServiceImpl implements IReportService {
                 InvoiceDetailsReportVO itemDetailsList = new InvoiceDetailsReportVO();
                 itemDetailsList.setInvoiceDate(tem[0].toString());
                 itemDetailsList.setSellingQuantity(Double.parseDouble(tem[1].toString()));
-                itemDetailsList.setTotalAmount(Double.parseDouble(tem[2].toString()));
+                itemDetailsList.setTotalAmount(Double.parseDouble(tem[2].toString())+Double.parseDouble(tem[3].toString()));
                 itemDetailsList.setTotalDiscount(Double.parseDouble(tem[3].toString()));
-                itemDetailsList.setItemCost((Double.parseDouble(tem[4].toString())*Double.parseDouble(tem[1].toString()))-Double.parseDouble(tem[3].toString()));
-                itemDetailsList.setItemName(tem[7].toString());
-                itemDetailsList.setProfitOrLost(Double.parseDouble(tem[2].toString())-(Double.parseDouble(tem[4].toString())*Double.parseDouble(tem[1].toString())));
+                itemDetailsList.setItemCost((Double.parseDouble(tem[4].toString())));
+                itemDetailsList.setItemName(tem[6].toString());
+                itemDetailsList.setProfitOrLost(Double.parseDouble(tem[2].toString())-(Double.parseDouble(tem[4].toString())));
                 itemDetailsReportVOList.add(itemDetailsList);
             }
             return itemDetailsReportVOList;
