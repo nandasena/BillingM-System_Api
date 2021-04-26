@@ -10,8 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="correct some errors when create credit payment.">
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/filter/AccessControlFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/web_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/web_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/OtherExpensesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/OtherExpensesDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/OtherExpenses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/OtherExpensesVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/JobService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/JobController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/ExpensesType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/ExpensesType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobDetails.java" afterDir="false" />
@@ -32,8 +37,6 @@
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/com/createvision/sivilima/controller/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/classes/spring-integration-config.xml" afterDir="false" />
@@ -45,7 +48,6 @@
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/service-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/service-1.0.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/web/web.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +86,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -131,6 +133,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.tomcat_server">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="sivilima [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -496,14 +511,7 @@
       <workItem from="1619235647049" duration="6477000" />
       <workItem from="1619315650591" duration="1078000" />
       <workItem from="1619431003417" duration="875000" />
-      <workItem from="1619432839317" duration="1662000" />
-    </task>
-    <task id="LOCAL-00132" summary="add new function to get all suppliers">
-      <created>1579273925411</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1579273925411</updated>
+      <workItem from="1619432839317" duration="4611000" />
     </task>
     <task id="LOCAL-00133" summary="add new table">
       <created>1579276875199</created>
@@ -841,7 +849,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619266048009</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="add new function to avoid cross origin">
+      <created>1619434810251</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1619434810251</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -860,7 +875,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new dao files and set it to item details table." />
     <MESSAGE value="change repository name." />
     <MESSAGE value="add new table column and add values to that." />
     <MESSAGE value="add supplier id when get purchase order details" />
@@ -885,7 +899,8 @@
     <MESSAGE value="correct some errors in report store procedures" />
     <MESSAGE value="add new tables to create new jobs function" />
     <MESSAGE value="remove schema from stored procedure" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove schema from stored procedure" />
+    <MESSAGE value="add new function to avoid cross origin" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new function to avoid cross origin" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sivilima$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1618676547151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
