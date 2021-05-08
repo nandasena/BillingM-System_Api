@@ -29,7 +29,7 @@ public class ItemDetailsVO {
     public double getFabricatorPrice() { return fabricatorPrice; }
     public void setFabricatorPrice(double fabricatorPrice) { this.fabricatorPrice = fabricatorPrice;}
 
-    public double getMrpPrice() { return mrpPrice; }
+    public double getMrpPrice() {return mrpPrice;}
     public void setMrpPrice(double mrpPrice) { this.mrpPrice = mrpPrice; }
 
     public double getCustomerPrice() { return customerPrice;}

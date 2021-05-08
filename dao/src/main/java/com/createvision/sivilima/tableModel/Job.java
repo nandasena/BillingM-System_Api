@@ -9,14 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "jobs")
-public class Jobs extends BaseObject implements Serializable {
+public class Job extends BaseObject implements Serializable {
 
     @Basic
-    @Column(name = "job_id")
-    private Long jobId;
-    public Long getJobId() {return jobId;}
-    public void setJobId(Long jobId) {this.jobId = jobId;}
-
+    @Column(name = "job_number", unique = true, nullable = false)
+    private String jobNumber;
+    public String getJobNumber() {return jobNumber;}
+    public void setJobNumber(String jobNumber) {this.jobNumber = jobNumber;}
 
     @Basic
     @Column(name = "name")
@@ -32,6 +31,18 @@ public class Jobs extends BaseObject implements Serializable {
     public void setDescription(String description) {this.description = description;}
 
     @Basic
+    @Column(name = "rate_per_square_feet")
+    private double ratePerSqareFeet;
+    public double getRatePerSqareFeet() {return ratePerSqareFeet;}
+    public void setRatePerSqareFeet(double ratePerSqareFeet) {this.ratePerSqareFeet = ratePerSqareFeet;}
+
+    @Basic
+    @Column(name = "total_square_feet")
+    private double totalSquareFeet;
+    public double getTotalSquareFeet() {return totalSquareFeet;}
+    public void setTotalSquareFeet(double totalSquareFeet) {this.totalSquareFeet = totalSquareFeet;}
+
+    @Basic
     @Column(name = "start_date")
     private Date startDate;
     public Date getStartDate() {return startDate;}
@@ -40,7 +51,6 @@ public class Jobs extends BaseObject implements Serializable {
     @Basic
     @Column(name = "end_date")
     private Date endDate;
-
     public Date getEndDate() {return endDate;}
     public void setEndDate(Date endDate) {this.endDate = endDate;}
 
@@ -50,6 +60,11 @@ public class Jobs extends BaseObject implements Serializable {
     public double getAmount() {return amount;}
     public void setAmount(double amount) {this.amount = amount;}
 
+    @Basic
+    @Column(name = "cost")
+    private double cost;
+    public double getCost() {return cost;}
+    public void setCost(double cost) {this.cost = cost;}
 
     @Basic
     @Column(name = "discount")
@@ -85,6 +100,7 @@ public class Jobs extends BaseObject implements Serializable {
     public Set<JobDetails> getInvoiceItemDetails() {return jobDetails;}
     public void setInvoiceItemDetails(Set<JobDetails> jobDetails) { this.jobDetails = jobDetails;}
 
-
+    public Set<JobDetails> getJobDetails() {return jobDetails;}
+    public void setJobDetails(Set<JobDetails> jobDetails) {this.jobDetails = jobDetails;}
 
 }

@@ -1,27 +1,43 @@
 package com.createvision.sivilima.tableModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 @Entity
 @Table(name = "jobDetails")
 public class JobDetails extends BaseObject implements Serializable {
 
+    @Basic
+    @Column(name = "description")
+    private String description;
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
 
     @Basic
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id",nullable = false)
-    @JsonIgnore
-    private Item item;
-    public Item getItem() {return item;}
-    public void setItem(Item item) {this.item = item;}
+    @Column(name = "expenses")
+    private double expenses;
+    public double getExpenses() {return expenses;}
+    public void setExpenses(double expenses) {this.expenses = expenses;}
+
+    @Basic
+    @Column(name = "net_expenses")
+    private double netExpenses;
+    public double getNetExpenses() {return netExpenses;}
+    public void setNetExpenses(double netExpenses) {this.netExpenses = netExpenses;}
+
+    @Basic
+    @Column(name = "expenses_type")
+    @Enumerated(EnumType.STRING)
+    private ExpensesType expensesType;
+    public ExpensesType getExpensesType() {return expensesType;}
+    public void setExpensesType(ExpensesType expensesType) {this.expensesType = expensesType;}
+
+    @Basic
+    @Column(name = "total_item_discount")
+    private double totalItemDiscount;
+    public double getTotalItemDiscount() {return totalItemDiscount;}
+    public void setTotalItemDiscount(double totalItemDiscount) {this.totalItemDiscount = totalItemDiscount;}
 
     @Basic
     @Column(name = "item_cost")
@@ -30,26 +46,33 @@ public class JobDetails extends BaseObject implements Serializable {
     public void setItemCost(double itemCost) {this.itemCost = itemCost;}
 
     @Basic
-    @Column(name = "expenses")
-    private double expenses;
-    public double getExpenses() {return expenses;}
-    public void setExpenses(double expenses) {this.expenses = expenses;}
+    @Column(name = "item_qty")
+    private double itemQuantity;
+    public double getItemQuantity() {return itemQuantity;}
+    public void setItemQuantity(double itemQuantity) {this.itemQuantity = itemQuantity;}
 
-
-    @Basic
-    @Column(name = "wages")
     @Enumerated(EnumType.STRING)
-    private ExpensesType expensesType;
-    public ExpensesType getExpensesType() {return expensesType;}
-    public void setExpensesType(ExpensesType expensesType) {this.expensesType = expensesType;}
+    private PriceType price_type;
+    public PriceType getPrice_type() {return price_type;}
+    public void setPrice_type(PriceType price_type) {this.price_type = price_type;}
 
-    @Basic
+    @Enumerated(EnumType.STRING)
+    private DiscountType discount_type;
+    public DiscountType getDiscount_type() {return discount_type;}
+    public void setDiscount_type(DiscountType discount_type) {this.discount_type = discount_type;}
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id",nullable = false)
+    @JsonIgnore
+    private Item item;
+    public Item getItem() {return item;}
+    public void setItem(Item item) {this.item = item;}
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id",nullable = false)
     @JsonIgnore
-    private Jobs job;
-
-
-
-
+    private Job job;
+    public Job getJob() {return job;}
+    public void setJob(Job job) {this.job = job;}
 }
