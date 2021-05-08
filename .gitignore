@@ -1,7 +1,4 @@
 
-/dao/target/
-/service/target/
-/web/target/
-/dao/target/
-/service/target/
-/web/target/
+/dao/target/*
+/service/target/*
+/web/target/*
