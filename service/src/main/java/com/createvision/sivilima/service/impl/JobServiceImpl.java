@@ -84,6 +84,7 @@ public class JobServiceImpl implements JobService {
 
             // job
             double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
+            amount = Math.round(amount * 100.0) / 100.0;
             Job job = new Job();
             job.setJobName(jobVO.getName());
             job.setDescription(jobVO.getDescription());
@@ -94,6 +95,7 @@ public class JobServiceImpl implements JobService {
             job.setStartDate(commonFunctions.getDateTimeByDateString(jobVO.getStartDate()));
             job.setEndDate(commonFunctions.getDateTimeByDateString(jobVO.getEndDate()));
             job.setTotalSquareFeet(jobVO.getSquareFeet());
+            job.setRatePerSqareFeet(jobVO.getRatePerSquareFeet());
 
             Long jobId = jobDao.save(job);
             //
@@ -101,7 +103,7 @@ public class JobServiceImpl implements JobService {
             // job Details
             double totalJobDiscount = 0;
             double totalItemDiscount = 0;
-            double totalItemCost=0;
+            double totalItemCost = 0;
             List<ItemVO> itemVOList = new ArrayList<>();
             itemVOList = jobVO.getItemVOList();
 
@@ -109,18 +111,8 @@ public class JobServiceImpl implements JobService {
                 JobDetails jobDetails = new JobDetails();
                 double totalDiscount = 0.00;
                 double cashDiscount = 0.00;
-
-                if (itemVO.getTypeOfDiscount() == 1) {
-                    jobDetails.setDiscount_type(DiscountType.CASH_DISCOUNT);
-                    totalDiscount = itemVO.getPriceDiscount() * itemVO.getSellingQuantity();
-                } else {
-                    jobDetails.setDiscount_type(DiscountType.PERCENTAGE_DISCOUNT);
-                    totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
-                }
-
+                jobDetails.setDiscount_type(DiscountType.NONE);
                 totalJobDiscount += totalDiscount;
-
-
                 Item item = itemDao.get(itemVO.getItemId());
                 ItemDetail itemDetail = itemDetailDao.get(itemVO.getItemDetailId());
                 double availableQty = itemDetail.getAvailableQuantity();
@@ -129,32 +121,20 @@ public class JobServiceImpl implements JobService {
 
                 jobDetails.setItem(item);
                 jobDetails.setTotalItemDiscount(totalDiscount);
-                jobDetails.setExpenses(itemVO.getSellingQuantity() * itemDetail.getCostPrice());
-                jobDetails.setNetExpenses((itemVO.getSellingQuantity() * itemDetail.getCostPrice())-totalDiscount);
+                jobDetails.setExpenses(Math.round((itemVO.getSellingQuantity() * itemDetail.getCostPrice()) * 100.0) / 100.0);
+                jobDetails.setNetExpenses(Math.round(((itemVO.getSellingQuantity() * itemDetail.getCostPrice()) - totalDiscount) * 100.0) / 100.0);
                 jobDetails.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
                 jobDetails.setItemQuantity(itemVO.getSellingQuantity());
                 jobDetails.setItemCost(itemDetail.getCostPrice());
-
-
-                if (itemVO.getTypeOfPrice() == 1) {
-                    jobDetails.setPrice_type(PriceType.MRP_PRICE);
-                } else if (itemVO.getTypeOfPrice() == 2) {
-                    jobDetails.setPrice_type(PriceType.FABRICATOR_PRICE);
-                } else {
-                    jobDetails.setPrice_type(PriceType.SHOWROOM_PRICE);
-                }
-
-
+                jobDetails.setPrice_type(PriceType.Cost);
                 jobDetails.setJob(jobDao.get(jobId));
+                jobDetails.setExpensesType(ExpensesType.Item);
                 jobDetailsDao.save(jobDetails);
                 itemDetailDao.save(itemDetail);
 
             }
-
             Job insertJob = jobDao.get(jobId);
             insertJob.setDiscount(totalJobDiscount);
-
-
             //
 
         } catch (Exception e) {

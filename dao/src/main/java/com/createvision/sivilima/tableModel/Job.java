@@ -72,19 +72,12 @@ public class Job extends BaseObject implements Serializable {
     public double getDiscount() {return discount;}
     public void setDiscount(double discount) {this.discount = discount;}
 
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_customer_id")
     private Customer customerId;
     public Customer getCustomerId() { return customerId;}
     public void setCustomerId(Customer customerId) {this.customerId = customerId;}
 
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_type_code",nullable = false,referencedColumnName = "type_code")
-    private PaymentMethod paymentMethod;
-    public PaymentMethod getPaymentMethod() {return paymentMethod;}
-    public void setPaymentMethod(PaymentMethod paymentMethod) {this.paymentMethod = paymentMethod;}
 
     @Basic
     @Column(name = "status")
