@@ -146,4 +146,24 @@ public class JobServiceImpl implements JobService {
 
         return null;
     }
+
+    @Override
+    public List<JobVO> getJobList() throws Exception {
+        List<JobVO> jobVOList = new ArrayList<>();
+        try {
+            List<Job> jobList = jobDao.getJobList();
+
+            for (Job j:jobList) {
+                JobVO jobVO =new JobVO();
+                jobVO.setName(j.getJobName());
+                jobVO.setJobNumber(j.getJobNumber());
+                jobVOList.add(jobVO);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return jobVOList;
+    }
 }

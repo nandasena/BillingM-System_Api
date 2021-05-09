@@ -7,6 +7,7 @@ import java.util.List;
 public interface JobService {
     public List<OtherExpensesVO> getAllOtherExpenses() throws Exception;
     public JobVO createJob(JobVO jobVO) throws Exception;
+    public List<JobVO>getJobList()throws Exception;
 
 
 }

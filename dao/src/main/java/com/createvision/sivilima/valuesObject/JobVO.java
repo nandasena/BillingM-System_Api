@@ -15,6 +15,7 @@ public class JobVO {
     private double squareFeet;
     private int costType;
     private int paymentType;
+    private String jobNumber;
     private List<ItemVO> itemVOList;
 
     public String getName() {return name;}
@@ -52,6 +53,9 @@ public class JobVO {
 
     public int getPaymentType() {return paymentType;}
     public void setPaymentType(int paymentType) {this.paymentType = paymentType;}
+
+    public String getJobNumber() {return jobNumber;}
+    public void setJobNumber(String jobNumber) {this.jobNumber = jobNumber;}
 
     public List<ItemVO> getItemVOList() {return itemVOList;}
     public void setItemVOList(List<ItemVO> itemVOList) {this.itemVOList = itemVOList;}

@@ -57,4 +57,23 @@ public class JobController {
         }
     }
 
+    @RequestMapping(value = "/getJobList/",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object>getJobList()throws Exception{
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<JobVO> jobListList = jobService.getJobList();
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(jobListList);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
+
 }
