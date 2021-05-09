@@ -96,6 +96,7 @@ public class JobServiceImpl implements JobService {
             job.setEndDate(commonFunctions.getDateTimeByDateString(jobVO.getEndDate()));
             job.setTotalSquareFeet(jobVO.getSquareFeet());
             job.setRatePerSqareFeet(jobVO.getRatePerSquareFeet());
+            job.setJobStatus(JobStatus.valueOf("CREATE"));
 
             Long jobId = jobDao.save(job);
             //
@@ -118,7 +119,7 @@ public class JobServiceImpl implements JobService {
                 double availableQty = itemDetail.getAvailableQuantity();
                 availableQty = availableQty - itemVO.getSellingQuantity();
                 itemDetail.setAvailableQuantity(availableQty);
-
+                totalItemCost += Math.round(((itemVO.getSellingQuantity() * itemDetail.getCostPrice()) - totalDiscount) * 100.0) / 100.0;
                 jobDetails.setItem(item);
                 jobDetails.setTotalItemDiscount(totalDiscount);
                 jobDetails.setExpenses(Math.round((itemVO.getSellingQuantity() * itemDetail.getCostPrice()) * 100.0) / 100.0);
@@ -135,6 +136,8 @@ public class JobServiceImpl implements JobService {
             }
             Job insertJob = jobDao.get(jobId);
             insertJob.setDiscount(totalJobDiscount);
+            insertJob.setCost(totalItemCost);
+            jobDao.save(insertJob);
             //
 
         } catch (Exception e) {
