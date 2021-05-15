@@ -62,7 +62,7 @@ public class JobDetails extends BaseObject implements Serializable {
     public void setDiscount_type(DiscountType discount_type) {this.discount_type = discount_type;}
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id",nullable = false)
+    @JoinColumn(name = "item_id")
     @JsonIgnore
     private Item item;
     public Item getItem() {return item;}

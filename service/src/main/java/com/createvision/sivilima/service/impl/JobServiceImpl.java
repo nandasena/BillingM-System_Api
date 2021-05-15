@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service("jobService")
 @Transactional
@@ -129,6 +130,7 @@ public class JobServiceImpl implements JobService {
                 jobDetails.setItemCost(itemDetail.getCostPrice());
                 jobDetails.setPrice_type(PriceType.Cost);
                 jobDetails.setJob(jobDao.get(jobId));
+                jobDetails.setDescription("");
                 jobDetails.setExpensesType(ExpensesType.Item);
                 jobDetailsDao.save(jobDetails);
                 itemDetailDao.save(itemDetail);
@@ -136,7 +138,7 @@ public class JobServiceImpl implements JobService {
             }
             Job insertJob = jobDao.get(jobId);
             insertJob.setDiscount(totalJobDiscount);
-            insertJob.setCost(totalItemCost);
+            insertJob.setCost(Math.round(totalItemCost * 100.0) / 100.0);
             jobDao.save(insertJob);
             //
 
@@ -153,8 +155,9 @@ public class JobServiceImpl implements JobService {
         try {
             List<Job> jobList = jobDao.getJobList();
 
-            for (Job j:jobList) {
-                JobVO jobVO =new JobVO();
+            for (Job j : jobList) {
+                JobVO jobVO = new JobVO();
+                jobVO.setJobId(j.getId());
                 jobVO.setName(j.getJobName());
                 jobVO.setJobNumber(j.getJobNumber());
                 jobVOList.add(jobVO);
@@ -165,5 +168,76 @@ public class JobServiceImpl implements JobService {
         }
 
         return jobVOList;
+    }
+
+    @Override
+    public JobVO getJobListById(Long JobId) throws Exception {
+        JobVO jobVO = new JobVO();
+        List<ItemVO> itemVOList = new ArrayList<>();
+        try {
+            Job job = jobDao.get(JobId);
+            if (job != null) {
+                Set<JobDetails> jobDetailsList = job.getJobDetails();
+                jobVO.setJobId(job.getId());
+                jobVO.setJobNumber(job.getJobNumber());
+                jobVO.setName(job.getJobName());
+                JobStatus jobStatus = job.getJobStatus();
+                jobVO.setStatus(jobStatus.name());
+                jobVO.setStartDate(commonFunctions.convertDateToString(job.getStartDate()));
+                jobVO.setEndDate(commonFunctions.convertDateToString(job.getEndDate()));
+                jobVO.setSquareFeet(job.getTotalSquareFeet());
+                jobVO.setRatePerSquareFeet(job.getRatePerSqareFeet());
+
+                for (JobDetails jd : jobDetailsList) {
+                    ItemVO itemVO = new ItemVO();
+                    itemVO.setItemDetailId(jd.getId());
+                    itemVO.setItemName(jd.getItem()!=null ? jd.getItem().getName():"");
+                    itemVO.setSellingQuantity(jd.getItemQuantity());
+                    itemVOList.add(itemVO);
+
+                }
+                jobVO.setItemVOList(itemVOList);
+            }
+
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return jobVO;
+    }
+
+    @Override
+    public JobVO addExpensesById(JobVO jobVO) throws Exception {
+
+        try {
+            Job job = jobDao.get(jobVO.getJobId());
+            double totalExpenses=0.00;
+            for (OtherExpensesVO e : jobVO.getOtherExpensesVOList()) {
+                JobDetails jobDetails = new JobDetails();
+                totalExpenses+=e.getAmount();
+                jobDetails.setExpenses(e.getAmount());
+                jobDetails.setDiscount_type(DiscountType.NONE);
+                jobDetails.setPrice_type(PriceType.Cost);
+                jobDetails.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+
+                jobDetails.setJob(job);
+                jobDetails.setDescription(e.getDescription());
+                if (e.getId() == 1) {
+                    jobDetails.setExpensesType(ExpensesType.TRANSPORT);
+                } else if (e.getId() == 2) {
+                    jobDetails.setExpensesType(ExpensesType.WAGES);
+                } else if (e.getId() == 3) {
+                    jobDetails.setExpensesType(ExpensesType.OTHER);
+                }
+                jobDetailsDao.save(jobDetails);
+            }
+               job.setCost(Math.round((job.getCost()+totalExpenses) * 100.0) / 100.0);
+               jobDao.save(job);
+
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return jobVO;
     }
 }
