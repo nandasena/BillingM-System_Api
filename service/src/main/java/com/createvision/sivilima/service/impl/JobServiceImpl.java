@@ -191,9 +191,29 @@ public class JobServiceImpl implements JobService {
                 jobVO.setEndDate(commonFunctions.convertDateToString(job.getEndDate()));
                 jobVO.setSquareFeet(job.getTotalSquareFeet());
                 jobVO.setRatePerSquareFeet(job.getRatePerSqareFeet());
-
+                List<Long> itemDetailsIdList = new ArrayList<>();
                 for (JobDetails jd : jobDetailsList) {
+                    boolean isFoundItemDetailId = false;
+                    double receivedQuantity = 0;
                     ItemVO itemVO = new ItemVO();
+                    for (Long i : itemDetailsIdList) {
+                        if (i == jd.getItemDetail().getId()) {
+                            isFoundItemDetailId = true;
+                            break;
+                        }
+                    }
+                    if (!isFoundItemDetailId) {
+                        List<ItemReceived> itemReceived = receivedItemDao.getReceivedItemById(job.getId(), jd.getItemDetail().getId());
+                        if (itemReceived != null) {
+                            itemDetailsIdList.add(jd.getItemDetail().getId());
+                            for (ItemReceived r : itemReceived) {
+                                if (jd.getItemDetail().getId() == r.getItemDetail().getId()) {
+                                    receivedQuantity = receivedQuantity + r.getReceivedQuantity();
+                                }
+                            }
+                        }
+                    }
+                    itemVO.setReceivedQuantity(receivedQuantity);
                     itemVO.setItemId(jd.getItem() != null ? jd.getItem().getId() : null);
                     itemVO.setItemDetailId(jd.getItemDetail() != null ? jd.getItemDetail().getId() : null);
                     itemVO.setItemName(jd.getItem() != null ? jd.getItem().getName() : "");
@@ -284,6 +304,7 @@ public class JobServiceImpl implements JobService {
                 jobDetails.setJob(jobDao.get(selectedJob.getId()));
                 jobDetails.setDescription("");
                 jobDetails.setExpensesType(ExpensesType.Item);
+                jobDetails.setItemDetail(itemDetail);
                 jobDetailsDao.save(jobDetails);
                 itemDetailDao.save(itemDetail);
             }
@@ -304,8 +325,8 @@ public class JobServiceImpl implements JobService {
             List<ItemVO> itemVOList = jobVO.getItemVOList();
             Job job = jobDao.get(jobVO.getJobId());
             for (ItemVO i : itemVOList) {
-                double avalableQuantityl =0;
-                ItemReceived itemReceived =new ItemReceived();
+                double avalableQuantityl = 0;
+                ItemReceived itemReceived = new ItemReceived();
                 ItemDetail itemDetail = itemDetailDao.get(i.getItemDetailId());
                 Item item = itemDao.get(i.getItemId());
                 itemReceived.setReceivedQuantity(i.getReceivedQuantity());
@@ -316,9 +337,47 @@ public class JobServiceImpl implements JobService {
                 receivedItemDao.save(itemReceived);
 
                 avalableQuantityl = itemDetail.getAvailableQuantity();
-                avalableQuantityl =avalableQuantityl+i.getReceivedQuantity();
+                avalableQuantityl = avalableQuantityl + i.getReceivedQuantity();
                 itemDetail.setAvailableQuantity(avalableQuantityl);
                 itemDetailDao.save(itemDetail);
+
+                List<JobDetails> jobDetails = jobDetailsDao.getItemListByItemDetailIdAndJobId(job.getId(), i.getItemDetailId());
+                double itemCost = 0;
+                double reduceCost = 0;
+                if (jobDetails.size() > 1) {
+                    double itemQuantity = 0;
+                    double receivedQuantity = i.getReceivedQuantity();
+                    for (JobDetails j : jobDetails) {
+
+                        itemQuantity = (j.getItemQuantity() - j.getReceivedQty());
+                        if (itemQuantity == 0) {
+                            continue;
+                        }
+                        if (itemQuantity >= receivedQuantity) {
+                            itemCost = j.getItemCost();
+                            reduceCost += itemCost * receivedQuantity;
+                            job.setCost(job.getCost() - reduceCost);
+                            receivedQuantity += j.getReceivedQty();
+                            j.setReceivedQty(receivedQuantity);
+                            jobDetailsDao.save(j);
+                            break;
+                        } else {
+                            receivedQuantity = receivedQuantity - itemQuantity;
+                            itemCost = j.getItemCost();
+                            reduceCost += itemCost * itemQuantity;
+                            j.setReceivedQty(j.getReceivedQty() + itemQuantity);
+                            jobDetailsDao.save(j);
+
+                        }
+                    }
+                } else {
+                    itemCost = jobDetails.get(0).getItemCost();
+                    reduceCost = itemCost * i.getReceivedQuantity();
+                    job.setCost(job.getCost() - reduceCost);
+
+                }
+
+                jobDao.save(job);
             }
 
 

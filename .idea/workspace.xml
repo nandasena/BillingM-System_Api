@@ -10,20 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="commit target files">
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ReceivedItemDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ReceivedItemDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/ItemReceived.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/JobDetailsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/JobDetailsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ReceivedItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/ReceivedItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/JobDetailsDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/JobDetailsDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ReceivedItemDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/ReceivedItemDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/ItemVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/ItemVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/JobService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/JobController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima.war" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" afterDir="false" />
@@ -510,13 +507,7 @@
       <workItem from="1621353787756" duration="935000" />
       <workItem from="1621738648533" duration="1038000" />
       <workItem from="1622259781255" duration="6569000" />
-    </task>
-    <task id="LOCAL-00141" summary="correct some errors">
-      <created>1584423851746</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1584423851747</updated>
+      <workItem from="1622343382995" duration="22399000" />
     </task>
     <task id="LOCAL-00142" summary="add purchase order function">
       <created>1600783082777</created>
@@ -854,7 +845,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621085606098</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="add new function to save received item">
+      <created>1622343579550</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1622343579551</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -873,7 +871,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new function to get supplier payment list,change class name in value object, add new column to creditor table." />
     <MESSAGE value="modified customer create and customer get function." />
     <MESSAGE value="modified supplier create function" />
     <MESSAGE value="add new column and some column to send to UI" />
@@ -898,7 +895,8 @@
     <MESSAGE value="set status to job" />
     <MESSAGE value="add new function to get job list by filter status" />
     <MESSAGE value="add new function to add job expenses" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new function to add job expenses" />
+    <MESSAGE value="add new function to save received item" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new function to save received item" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/big$tomcat_server.ic" NAME="tomcat_server Coverage Results" MODIFIED="1568687270715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

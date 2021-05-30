@@ -51,6 +51,12 @@ public class JobDetails extends BaseObject implements Serializable {
     public double getItemQuantity() {return itemQuantity;}
     public void setItemQuantity(double itemQuantity) {this.itemQuantity = itemQuantity;}
 
+    @Basic
+    @Column(name = "received_qty",columnDefinition ="double default 0")
+    private double receivedQty;
+    public double getReceivedQty() {return receivedQty;}
+    public void setReceivedQty(double receivedQty) {this.receivedQty = receivedQty;}
+
     @Enumerated(EnumType.STRING)
     private PriceType price_type;
     public PriceType getPrice_type() {return price_type;}
