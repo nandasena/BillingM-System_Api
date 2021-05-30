@@ -107,6 +107,45 @@ public class JobController {
         }
 
     }
+    @RequestMapping(value = "/addItemsById/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> addItemsById(@RequestBody JobVO jobVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            JobVO addedExpenses = jobService.addItmById(jobVO);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(addedExpenses);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
+    @RequestMapping(value = "/removeReceivedItemsById/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> removeReceivedItemsById(@RequestBody JobVO jobVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            JobVO addedExpenses = jobService.removeReceivedItemsById(jobVO);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(addedExpenses);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
+
 
 
 }

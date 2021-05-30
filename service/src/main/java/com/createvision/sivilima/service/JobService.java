@@ -10,5 +10,7 @@ public interface JobService {
     public List<JobVO>getJobList()throws Exception;
     public JobVO getJobListById(Long JobId)throws Exception;
     public JobVO addExpensesById(JobVO jobVO) throws Exception;
+    public JobVO addItmById(JobVO jobVO) throws Exception;
+    public JobVO removeReceivedItemsById(JobVO jobVO) throws Exception;
 
 }

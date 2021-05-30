@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -55,7 +56,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/mainCategory/",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Object>createMainCategory(@RequestBody List<CategoryVO> categoryVO)throws Exception{
+    public ResponseEntity<Object>createMainCategory(@RequestBody List<CategoryVO> categoryVO, HttpServletRequest req)throws Exception{
         ReturnVO returnVO = new ReturnVO();
         try {
             List<CategoryVO> categoryList = itemService.createMainCategory(categoryVO);

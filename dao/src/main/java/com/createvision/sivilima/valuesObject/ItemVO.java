@@ -9,6 +9,7 @@ public class ItemVO {
     private  Long subCategoryId;
     private  Long itemDetailId;
     private  double sellingQuantity;
+    private  double receivedQuantity;
     private  Set<ItemDetailsVO> itemDetailList;
     private String itemCode;
     private double itemDiscount;
@@ -37,6 +38,9 @@ public class ItemVO {
 
     public double getSellingQuantity() { return sellingQuantity; }
     public void setSellingQuantity(double sellingQuantity) { this.sellingQuantity = sellingQuantity; }
+
+    public double getReceivedQuantity() {return receivedQuantity;}
+    public void setReceivedQuantity(double receivedQuantity) {this.receivedQuantity = receivedQuantity;}
 
     public Set<ItemDetailsVO> getItemDetailList() { return itemDetailList; }
     public void setItemDetailList(Set<ItemDetailsVO> itemDetailList) { this.itemDetailList = itemDetailList; }

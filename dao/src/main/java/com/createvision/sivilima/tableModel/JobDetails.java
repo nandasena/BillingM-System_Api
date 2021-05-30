@@ -68,6 +68,12 @@ public class JobDetails extends BaseObject implements Serializable {
     public Item getItem() {return item;}
     public void setItem(Item item) {this.item = item;}
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_detail_id")
+    @JsonIgnore
+    private ItemDetail itemDetail;
+    public ItemDetail getItemDetail() {return itemDetail;}
+    public void setItemDetail(ItemDetail itemDetail) {this.itemDetail = itemDetail;}
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id",nullable = false)
