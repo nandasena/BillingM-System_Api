@@ -11,9 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import static java.lang.Double.parseDouble;
 
 @Service("jobService")
 @Transactional
@@ -193,35 +199,36 @@ public class JobServiceImpl implements JobService {
                 jobVO.setRatePerSquareFeet(job.getRatePerSqareFeet());
                 List<Long> itemDetailsIdList = new ArrayList<>();
                 for (JobDetails jd : jobDetailsList) {
-                    boolean isFoundItemDetailId = false;
-                    double receivedQuantity = 0;
-                    ItemVO itemVO = new ItemVO();
-                    for (Long i : itemDetailsIdList) {
-                        if (i == jd.getItemDetail().getId()) {
-                            isFoundItemDetailId = true;
-                            break;
+                    if (jd.getExpensesType().equals(ExpensesType.Item)) {
+                        boolean isFoundItemDetailId = false;
+                        double receivedQuantity = 0;
+                        ItemVO itemVO = new ItemVO();
+                        for (Long i : itemDetailsIdList) {
+                            if (i == jd.getItemDetail().getId()) {
+                                isFoundItemDetailId = true;
+                                break;
+                            }
                         }
-                    }
-                    if (!isFoundItemDetailId) {
-                        List<ItemReceived> itemReceived = receivedItemDao.getReceivedItemById(job.getId(), jd.getItemDetail().getId());
-                        if (itemReceived != null) {
-                            itemDetailsIdList.add(jd.getItemDetail().getId());
-                            for (ItemReceived r : itemReceived) {
-                                if (jd.getItemDetail().getId() == r.getItemDetail().getId()) {
-                                    receivedQuantity = receivedQuantity + r.getReceivedQuantity();
+                        if (!isFoundItemDetailId) {
+                            List<ItemReceived> itemReceived = receivedItemDao.getReceivedItemById(job.getId(), jd.getItemDetail().getId());
+                            if (itemReceived != null) {
+                                itemDetailsIdList.add(jd.getItemDetail().getId());
+                                for (ItemReceived r : itemReceived) {
+                                    if (jd.getItemDetail().getId() == r.getItemDetail().getId()) {
+                                        receivedQuantity = receivedQuantity + r.getReceivedQuantity();
+                                    }
                                 }
                             }
                         }
+                        itemVO.setReceivedQuantity(receivedQuantity);
+                        itemVO.setItemId(jd.getItem() != null ? jd.getItem().getId() : null);
+                        itemVO.setItemDetailId(jd.getItemDetail() != null ? jd.getItemDetail().getId() : null);
+                        itemVO.setItemName(jd.getItem() != null ? jd.getItem().getName() : "");
+                        itemVO.setSellingQuantity(jd.getItemQuantity());
+                        itemVO.setPrice(jd.getItemCost());
+                        itemVO.setTotal(jd.getExpenses());
+                        itemVOList.add(itemVO);
                     }
-                    itemVO.setReceivedQuantity(receivedQuantity);
-                    itemVO.setItemId(jd.getItem() != null ? jd.getItem().getId() : null);
-                    itemVO.setItemDetailId(jd.getItemDetail() != null ? jd.getItemDetail().getId() : null);
-                    itemVO.setItemName(jd.getItem() != null ? jd.getItem().getName() : "");
-                    itemVO.setSellingQuantity(jd.getItemQuantity());
-                    itemVO.setPrice(jd.getItemCost());
-                    itemVO.setTotal(jd.getExpenses());
-                    itemVOList.add(itemVO);
-
                 }
                 jobVO.setItemVOList(itemVOList);
             }
@@ -371,9 +378,14 @@ public class JobServiceImpl implements JobService {
                         }
                     }
                 } else {
+                    JobDetails j = jobDetails.get(0);
+                    j.setReceivedQty(j.getReceivedQty() + i.getReceivedQuantity() );
                     itemCost = jobDetails.get(0).getItemCost();
                     reduceCost = itemCost * i.getReceivedQuantity();
                     job.setCost(job.getCost() - reduceCost);
+                    jobDetailsDao.save(j);
+
+
 
                 }
 
@@ -385,5 +397,33 @@ public class JobServiceImpl implements JobService {
             throw e;
         }
         return null;
+    }
+    @Override
+    public List<JobVO> getInvoiceDetailsByInvoice(String fromDate,String toDate) throws Exception {
+        List<JobVO> jobVOList = new ArrayList<>();
+        DecimalFormat format = new DecimalFormat("##.00");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date FromDate = commonFunctions.getDateTimeByDateString(fromDate);
+            Date ToDate   = commonFunctions.getDateTimeByDateString(toDate);
+            List<Object[]>jobList =jobDao.getJobByDateRange(FromDate,ToDate);
+            for (Object[] job : jobList) {
+                JobVO jobVO =new JobVO();
+                jobVO.setStartDate(dateFormat.format(job[0]));
+                jobVO.setAmount(parseDouble(format.format(job[1])));
+                jobVO.setCost(parseDouble(format.format(job[2])));
+                jobVO.setEndDate(dateFormat.format(job[3]));
+                jobVO.setName(job[4].toString());
+                jobVO.setJobNumber(job[5].toString());
+                jobVO.setStatus(job[6].toString());
+                jobVO.setSquareFeet(parseDouble(format.format(job[7])));
+                jobVO.setRatePerSquareFeet(parseDouble(format.format(job[8])));
+
+                jobVOList.add(jobVO);
+            }
+            return jobVOList;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

@@ -1,17 +1,17 @@
 package com.createvision.sivilima.service.impl;
 
+import com.createvision.sivilima.dao.ItemDao;
+import com.createvision.sivilima.dao.ItemDetailDao;
 import com.createvision.sivilima.dao.MainCategoryDao;
 import com.createvision.sivilima.dao.SubCategoryDao;
-import com.createvision.sivilima.dao.ItemDao;
-import com.createvision.sivilima.tableModel.MainCategory;
-import com.createvision.sivilima.tableModel.SubCategory;
+import com.createvision.sivilima.service.ItemService;
 import com.createvision.sivilima.tableModel.Item;
 import com.createvision.sivilima.tableModel.ItemDetail;
-import com.createvision.sivilima.service.ItemService;
+import com.createvision.sivilima.tableModel.MainCategory;
+import com.createvision.sivilima.tableModel.SubCategory;
 import com.createvision.sivilima.valuesObject.CategoryVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
-import org.apache.log4j.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemDao itemDao;
+
+    @Autowired
+    ItemDetailDao itemDetailDao;
 
     @Autowired
     private SubCategoryDao subCategoryDao;
@@ -40,8 +43,8 @@ public class ItemServiceImpl implements ItemService {
         try {
             List<Item> itemList = itemDao.getAll();
             for (Item temp : itemList) {
-                Set<ItemDetail> itemDetail = new HashSet<>();
-                itemDetail = temp.getItemDetails();
+
+                List<ItemDetail> itemDetail = temp.getItemDetails();
                 ItemVO itemVO = new ItemVO();
                 Set<ItemDetailsVO> itemDetailList = new HashSet<>();
                 itemVO.setDescription(temp.getDescription());
@@ -58,6 +61,7 @@ public class ItemServiceImpl implements ItemService {
                         itemDetailsVO.setFabricatorPrice(temItem.getFabricatorPrice());
                         itemDetailsVO.setCustomerPrice(temItem.getCustomerPrice());
                         itemDetailsVO.setMrpPrice(temItem.getMrpPrice());
+                        itemDetailsVO.setFabricatorPrice(temItem.getFabricatorPrice());
                         itemDetailsVO.setCostPrice(temItem.getCostPrice());
                         itemDetailsVO.setQuantity(temItem.getQuantity());
                         itemDetailsVO.setDelete(temItem.isDelete());
@@ -103,11 +107,21 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void updateItem(long id, Item item) throws Exception {
-        Item itemDB = getItemById(id);
-        //set new item details
+    public ItemDetailsVO updateItem(ItemDetailsVO itemVo) throws Exception {
+        try {
 
-        itemDao.update(itemDB);
+            ItemDetail itemDetail =itemDetailDao.get(itemVo.getItemDetailId());
+            itemDetail.setCustomerPrice(itemVo.getCustomerPrice());
+            itemDetail.setCostPrice(itemVo.getCostPrice());
+            itemDetail.setMrpPrice(itemVo.getMrpPrice());
+            itemDetail.setFabricatorPrice(itemVo.getFabricatorPrice());
+            itemDetailDao.save(itemDetail);
+
+            return itemVo;
+        }catch (Exception e){
+            throw e;
+        }
+
 
     }
 
@@ -191,8 +205,8 @@ public class ItemServiceImpl implements ItemService {
         try {
             Item selectedItem = itemDao.getItemByItemCode(itemCode);
             if (selectedItem != null) {
-                Set<ItemDetail> itemDetail = new HashSet<>();
-                itemDetail = selectedItem.getItemDetails();
+
+                List<ItemDetail> itemDetail = selectedItem.getItemDetails();
                 itemVO = new ItemVO();
                 Set<ItemDetailsVO> itemDetailList = new HashSet<>();
                 itemVO.setDescription(selectedItem.getDescription());

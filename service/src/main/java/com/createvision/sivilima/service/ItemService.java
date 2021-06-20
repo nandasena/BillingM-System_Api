@@ -2,6 +2,7 @@ package com.createvision.sivilima.service;
 
 import com.createvision.sivilima.tableModel.Item;
 import com.createvision.sivilima.valuesObject.CategoryVO;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface ItemService {
 
     ItemVO createNewItem(ItemVO itemVO) throws Exception;
 
-    void updateItem(long id, Item item) throws  Exception;
+    ItemDetailsVO updateItem(ItemDetailsVO item) throws  Exception;
 
     void deleteItem(long id) throws Exception;
 

@@ -144,7 +144,22 @@ public class JobController {
         }
 
     }
+    @RequestMapping(value = "/fromDate/{fromDate}/toDate/{toDate}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> getJobBydatePeriod(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
 
+        try {
+            List<JobVO> jobVOList = jobService.getInvoiceDetailsByInvoice(fromDate, toDate);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(jobVOList);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
 
 
 

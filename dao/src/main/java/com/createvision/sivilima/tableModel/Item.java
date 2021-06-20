@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,7 +37,7 @@ public class Item  extends BaseObject implements Serializable {
     private Set<InvoiceItemDetail> invoiceItemDetails = new HashSet<InvoiceItemDetail>(0);
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-    private Set<ItemDetail> itemDetails = new HashSet<ItemDetail>(0);
+    private List<ItemDetail> itemDetails;
 
     @Basic
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,8 +65,10 @@ public class Item  extends BaseObject implements Serializable {
     public Set<InvoiceItemDetail> getInvoiceItemDetails() { return invoiceItemDetails; }
     public void setInvoiceItemDetails(Set<InvoiceItemDetail> invoiceItemDetails) { this.invoiceItemDetails = invoiceItemDetails; }
 
-    public Set<ItemDetail> getItemDetails() { return itemDetails; }
-    public void setItemDetails(Set<ItemDetail> itemDetails) { this.itemDetails = itemDetails;}
+    public List<ItemDetail> getItemDetails() {
+        return itemDetails;
+    }
+   public void setItemDetails(List<ItemDetail> itemDetails) {this.itemDetails = itemDetails;}
 
     public SubCategory getSubCategory() { return subCategory; }
     public void setSubCategory(SubCategory subCategory) { this.subCategory = subCategory;}

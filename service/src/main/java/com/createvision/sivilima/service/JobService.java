@@ -12,5 +12,6 @@ public interface JobService {
     public JobVO addExpensesById(JobVO jobVO) throws Exception;
     public JobVO addItmById(JobVO jobVO) throws Exception;
     public JobVO removeReceivedItemsById(JobVO jobVO) throws Exception;
+    public List<JobVO> getInvoiceDetailsByInvoice(String fromDate,String toDate) throws Exception;
 
 }

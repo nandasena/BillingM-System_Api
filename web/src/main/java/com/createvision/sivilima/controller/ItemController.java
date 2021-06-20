@@ -1,6 +1,7 @@
 package com.createvision.sivilima.controller;
 
 import com.createvision.sivilima.service.ItemService;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.ItemVO;
 import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,24 @@ public class ItemController {
             return ResponseEntity.ok(returnVO);
         }
     }
+
+    @RequestMapping(value = "updateItem/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> updateItem(@RequestBody ItemDetailsVO itemVO) throws Exception {
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            ItemDetailsVO updateItemVO = itemService.updateItem(itemVO);
+            returnVO.setStatusCode(200);
+            returnVO.setSuccess(true);
+            returnVO.setResult(updateItemVO);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+    }
+
 }
 
