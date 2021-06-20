@@ -5,6 +5,7 @@ import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.JobService;
 import com.createvision.sivilima.tableModel.*;
 import com.createvision.sivilima.valuesObject.ItemVO;
+import com.createvision.sivilima.valuesObject.JobSquareFeetDetailVO;
 import com.createvision.sivilima.valuesObject.JobVO;
 import com.createvision.sivilima.valuesObject.OtherExpensesVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,10 @@ public class JobServiceImpl implements JobService {
     @Autowired
     ReceivedItemDao receivedItemDao;
 
+    @Autowired
+    JobSquareFeetDetailsDao jobSquareFeetDetailsDao;
+
+
     @Override
     public List<OtherExpensesVO> getAllOtherExpenses() throws Exception {
         List<OtherExpensesVO> otherExpensesVOList = new ArrayList<>();
@@ -93,13 +98,13 @@ public class JobServiceImpl implements JobService {
             //
 
             // job
-            double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
-            amount = Math.round(amount * 100.0) / 100.0;
+            //   double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
+
             Job job = new Job();
             job.setJobName(jobVO.getName());
             job.setDescription(jobVO.getDescription());
             job.setJobNumber(jobNumber);
-            job.setAmount(amount);
+            //  job.setAmount(amount);
             job.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
             job.setCustomerId(customerDao.get(jobVO.getCustomerId()));
             job.setStartDate(commonFunctions.getDateTimeByDateString(jobVO.getStartDate()));
@@ -109,6 +114,7 @@ public class JobServiceImpl implements JobService {
             job.setJobStatus(JobStatus.valueOf("CREATE"));
 
             Long jobId = jobDao.save(job);
+
             //
 
             // job Details
@@ -149,8 +155,29 @@ public class JobServiceImpl implements JobService {
             Job insertJob = jobDao.get(jobId);
             insertJob.setDiscount(totalJobDiscount);
             insertJob.setCost(Math.round(totalItemCost * 100.0) / 100.0);
-            jobDao.save(insertJob);
+
             //
+            //set job square feet
+
+            List<JobSquareFeetDetailVO> jobSquareFeetDetailsList = jobVO.getJobSquareFeetDetailVOList();
+            double totalAmount = 0.00;
+            for (JobSquareFeetDetailVO squareFeet : jobSquareFeetDetailsList) {
+                double amount = squareFeet.getSquareFeet() * squareFeet.getRatePerSquareFeet();
+                totalAmount = amount + totalAmount;
+                amount = Math.round(amount * 100.0) / 100.0;
+                JobSquareFeetDetails jobSquareFeetDetails = new JobSquareFeetDetails();
+                jobSquareFeetDetails.setDescription(squareFeet.getDescription());
+                jobSquareFeetDetails.setSquareFeet(squareFeet.getSquareFeet());
+                jobSquareFeetDetails.setRatePerSqareFeet(squareFeet.getRatePerSquareFeet());
+                jobSquareFeetDetails.setAmount(amount);
+                jobSquareFeetDetails.setJob(insertJob);
+                jobSquareFeetDetailsDao.save(jobSquareFeetDetails);
+
+            }
+
+            //
+            insertJob.setAmount(totalAmount);
+            jobDao.save(insertJob);
 
         } catch (Exception e) {
             throw e;
@@ -379,12 +406,11 @@ public class JobServiceImpl implements JobService {
                     }
                 } else {
                     JobDetails j = jobDetails.get(0);
-                    j.setReceivedQty(j.getReceivedQty() + i.getReceivedQuantity() );
+                    j.setReceivedQty(j.getReceivedQty() + i.getReceivedQuantity());
                     itemCost = jobDetails.get(0).getItemCost();
                     reduceCost = itemCost * i.getReceivedQuantity();
                     job.setCost(job.getCost() - reduceCost);
                     jobDetailsDao.save(j);
-
 
 
                 }
@@ -398,17 +424,18 @@ public class JobServiceImpl implements JobService {
         }
         return null;
     }
+
     @Override
-    public List<JobVO> getInvoiceDetailsByInvoice(String fromDate,String toDate) throws Exception {
+    public List<JobVO> getInvoiceDetailsByInvoice(String fromDate, String toDate) throws Exception {
         List<JobVO> jobVOList = new ArrayList<>();
         DecimalFormat format = new DecimalFormat("##.00");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date FromDate = commonFunctions.getDateTimeByDateString(fromDate);
-            Date ToDate   = commonFunctions.getDateTimeByDateString(toDate);
-            List<Object[]>jobList =jobDao.getJobByDateRange(FromDate,ToDate);
+            Date ToDate = commonFunctions.getDateTimeByDateString(toDate);
+            List<Object[]> jobList = jobDao.getJobByDateRange(FromDate, ToDate);
             for (Object[] job : jobList) {
-                JobVO jobVO =new JobVO();
+                JobVO jobVO = new JobVO();
                 jobVO.setStartDate(dateFormat.format(job[0]));
                 jobVO.setAmount(parseDouble(format.format(job[1])));
                 jobVO.setCost(parseDouble(format.format(job[2])));

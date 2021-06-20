@@ -21,6 +21,7 @@ public class JobVO {
     private String jobNumber;
     private List<ItemVO> itemVOList;
     private List<OtherExpensesVO>otherExpensesVOList;
+    private List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList;
 
     public Long getJobId() {return jobId;}
     public void setJobId(Long jobId) {this.jobId = jobId;}
@@ -75,4 +76,7 @@ public class JobVO {
 
     public List<OtherExpensesVO> getOtherExpensesVOList() {return otherExpensesVOList;}
     public void setOtherExpensesVOList(List<OtherExpensesVO> otherExpensesVOList) {this.otherExpensesVOList = otherExpensesVOList;}
+
+    public List<JobSquareFeetDetailVO> getJobSquareFeetDetailVOList() {return jobSquareFeetDetailVOList;}
+    public void setJobSquareFeetDetailVOList(List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList) {this.jobSquareFeetDetailVOList = jobSquareFeetDetailVOList;}
 }

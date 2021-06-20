@@ -4,9 +4,8 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 @Entity
 @Table(name = "jobs")
 public class Job extends BaseObject implements Serializable {
@@ -96,4 +95,10 @@ public class Job extends BaseObject implements Serializable {
     public Set<JobDetails> getJobDetails() {return jobDetails;}
     public void setJobDetails(Set<JobDetails> jobDetails) {this.jobDetails = jobDetails;}
 
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+    @Fetch(FetchMode.SELECT)
+    private List<JobSquareFeetDetails>jobSquareFeetDetailsList = new ArrayList<>();
+    public List<JobSquareFeetDetails> getJobSquareFeetDetailsList() {return jobSquareFeetDetailsList;}
+    public void setJobSquareFeetDetailsList(List<JobSquareFeetDetails> jobSquareFeetDetailsList) {this.jobSquareFeetDetailsList = jobSquareFeetDetailsList;}
 }
