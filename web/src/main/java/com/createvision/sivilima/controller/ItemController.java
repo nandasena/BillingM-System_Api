@@ -90,7 +90,7 @@ public class ItemController {
         }
     }
 
-    @RequestMapping(value = "updateItem/", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateItem/", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> updateItem(@RequestBody ItemDetailsVO itemVO) throws Exception {
         ReturnVO returnVO = new ReturnVO();

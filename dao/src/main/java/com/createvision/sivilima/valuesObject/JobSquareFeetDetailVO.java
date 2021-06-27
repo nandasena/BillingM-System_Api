@@ -1,10 +1,15 @@
 package com.createvision.sivilima.valuesObject;
 
 public class JobSquareFeetDetailVO {
+    private int id;
     private double amount;
     private String description;
     private double ratePerSquareFeet;
     private double squareFeet;
+
+
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}

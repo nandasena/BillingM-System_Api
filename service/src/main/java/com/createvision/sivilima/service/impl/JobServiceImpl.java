@@ -176,7 +176,7 @@ public class JobServiceImpl implements JobService {
             }
 
             //
-            insertJob.setAmount(totalAmount);
+            insertJob.setAmount(Math.round(totalAmount * 100.0) / 100.0);
             jobDao.save(insertJob);
 
         } catch (Exception e) {
@@ -211,6 +211,7 @@ public class JobServiceImpl implements JobService {
     public JobVO getJobListById(Long JobId) throws Exception {
         JobVO jobVO = new JobVO();
         List<ItemVO> itemVOList = new ArrayList<>();
+        List<JobSquareFeetDetailVO>jobSquareFeetDetailVOList=new ArrayList<>();
         try {
             Job job = jobDao.get(JobId);
             if (job != null) {
@@ -225,6 +226,7 @@ public class JobServiceImpl implements JobService {
                 jobVO.setSquareFeet(job.getTotalSquareFeet());
                 jobVO.setRatePerSquareFeet(job.getRatePerSqareFeet());
                 List<Long> itemDetailsIdList = new ArrayList<>();
+                List<JobSquareFeetDetails> jobSquareFeetDetailsList =job.getJobSquareFeetDetailsList();
                 for (JobDetails jd : jobDetailsList) {
                     if (jd.getExpensesType().equals(ExpensesType.Item)) {
                         boolean isFoundItemDetailId = false;
@@ -258,6 +260,18 @@ public class JobServiceImpl implements JobService {
                     }
                 }
                 jobVO.setItemVOList(itemVOList);
+                int count =1;
+                for (JobSquareFeetDetails j:jobSquareFeetDetailsList) {
+                    JobSquareFeetDetailVO jobSquareFeetDetailVO= new JobSquareFeetDetailVO();
+                    jobSquareFeetDetailVO.setId(count);
+                    jobSquareFeetDetailVO.setSquareFeet(j.getSquareFeet());
+                    jobSquareFeetDetailVO.setRatePerSquareFeet(j.getRatePerSqareFeet());
+                    jobSquareFeetDetailVO.setAmount(j.getAmount());
+                    jobSquareFeetDetailVO.setDescription(j.getDescription());
+                    jobSquareFeetDetailVOList.add(jobSquareFeetDetailVO);
+                    count++;
+                }
+                jobVO.setJobSquareFeetDetailVOList(jobSquareFeetDetailVOList);
             }
 
 
@@ -305,14 +319,13 @@ public class JobServiceImpl implements JobService {
     @Override
     public JobVO addItmById(JobVO jobVO) throws Exception {
         try {
-            double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
-            amount = Math.round(amount * 100.0) / 100.0;
+//            double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
+//            amount = Math.round(amount * 100.0) / 100.0;
             Job selectedJob = jobDao.get(jobVO.getJobId());
             selectedJob.setStartDate(commonFunctions.getDateTimeByDateString(jobVO.getStartDate()));
             selectedJob.setEndDate(commonFunctions.getDateTimeByDateString(jobVO.getEndDate()));
             selectedJob.setTotalSquareFeet(jobVO.getSquareFeet());
             selectedJob.setRatePerSqareFeet(jobVO.getRatePerSquareFeet());
-            selectedJob.setAmount(amount);
             double totalItemCost = 0;
             double totalJobDiscount = 0;
             for (ItemVO itemVO : jobVO.getItemVOList()) {
@@ -344,7 +357,26 @@ public class JobServiceImpl implements JobService {
             }
             totalItemCost += selectedJob.getCost();
             selectedJob.setCost(Math.round(totalItemCost * 100.0) / 100.0);
+            jobSquareFeetDetailsDao.delete(jobVO.getJobId());
+            List<JobSquareFeetDetailVO> jobSquareFeetDetailsList = jobVO.getJobSquareFeetDetailVOList();
+            double totalAmount = 0.00;
+            for (JobSquareFeetDetailVO squareFeet : jobSquareFeetDetailsList) {
+                double amount = squareFeet.getSquareFeet() * squareFeet.getRatePerSquareFeet();
+                totalAmount = amount + totalAmount;
+                amount = Math.round(amount * 100.0) / 100.0;
+                JobSquareFeetDetails jobSquareFeetDetails = new JobSquareFeetDetails();
+                jobSquareFeetDetails.setDescription(squareFeet.getDescription());
+                jobSquareFeetDetails.setSquareFeet(squareFeet.getSquareFeet());
+                jobSquareFeetDetails.setRatePerSqareFeet(squareFeet.getRatePerSquareFeet());
+                jobSquareFeetDetails.setAmount(amount);
+                jobSquareFeetDetails.setJob(selectedJob);
+                jobSquareFeetDetailsDao.save(jobSquareFeetDetails);
+
+            }
+            selectedJob.setAmount(Math.round(totalAmount * 100.0) / 100.0);
             jobDao.save(selectedJob);
+
+
 
             return jobVO;
         } catch (Exception e) {
