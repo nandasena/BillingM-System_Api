@@ -211,7 +211,7 @@ public class JobServiceImpl implements JobService {
     public JobVO getJobListById(Long JobId) throws Exception {
         JobVO jobVO = new JobVO();
         List<ItemVO> itemVOList = new ArrayList<>();
-        List<JobSquareFeetDetailVO>jobSquareFeetDetailVOList=new ArrayList<>();
+        List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList = new ArrayList<>();
         try {
             Job job = jobDao.get(JobId);
             if (job != null) {
@@ -226,7 +226,7 @@ public class JobServiceImpl implements JobService {
                 jobVO.setSquareFeet(job.getTotalSquareFeet());
                 jobVO.setRatePerSquareFeet(job.getRatePerSqareFeet());
                 List<Long> itemDetailsIdList = new ArrayList<>();
-                List<JobSquareFeetDetails> jobSquareFeetDetailsList =job.getJobSquareFeetDetailsList();
+                List<JobSquareFeetDetails> jobSquareFeetDetailsList = job.getJobSquareFeetDetailsList();
                 for (JobDetails jd : jobDetailsList) {
                     if (jd.getExpensesType().equals(ExpensesType.Item)) {
                         boolean isFoundItemDetailId = false;
@@ -260,9 +260,9 @@ public class JobServiceImpl implements JobService {
                     }
                 }
                 jobVO.setItemVOList(itemVOList);
-                int count =1;
-                for (JobSquareFeetDetails j:jobSquareFeetDetailsList) {
-                    JobSquareFeetDetailVO jobSquareFeetDetailVO= new JobSquareFeetDetailVO();
+                int count = 1;
+                for (JobSquareFeetDetails j : jobSquareFeetDetailsList) {
+                    JobSquareFeetDetailVO jobSquareFeetDetailVO = new JobSquareFeetDetailVO();
                     jobSquareFeetDetailVO.setId(count);
                     jobSquareFeetDetailVO.setSquareFeet(j.getSquareFeet());
                     jobSquareFeetDetailVO.setRatePerSquareFeet(j.getRatePerSqareFeet());
@@ -377,7 +377,6 @@ public class JobServiceImpl implements JobService {
             jobDao.save(selectedJob);
 
 
-
             return jobVO;
         } catch (Exception e) {
             throw e;
@@ -458,7 +457,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<JobVO> getInvoiceDetailsByInvoice(String fromDate, String toDate) throws Exception {
+    public List<JobVO> getJobDetailsByInvoice(String fromDate, String toDate) throws Exception {
         List<JobVO> jobVOList = new ArrayList<>();
         DecimalFormat format = new DecimalFormat("##.00");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -467,6 +466,8 @@ public class JobServiceImpl implements JobService {
             Date ToDate = commonFunctions.getDateTimeByDateString(toDate);
             List<Object[]> jobList = jobDao.getJobByDateRange(FromDate, ToDate);
             for (Object[] job : jobList) {
+                List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList = new ArrayList<>();
+                List<ItemVO> itemVOList =new ArrayList<>();
                 JobVO jobVO = new JobVO();
                 jobVO.setStartDate(dateFormat.format(job[0]));
                 jobVO.setAmount(parseDouble(format.format(job[1])));
@@ -477,12 +478,60 @@ public class JobServiceImpl implements JobService {
                 jobVO.setStatus(job[6].toString());
                 jobVO.setSquareFeet(parseDouble(format.format(job[7])));
                 jobVO.setRatePerSquareFeet(parseDouble(format.format(job[8])));
+                jobVO.setJobProfit(parseDouble(format.format(job[1])) - parseDouble(format.format(job[2])));
+                jobVO.setJobId(Long.parseLong(job[10].toString()));
+                Job job1 = jobDao.get(Long.parseLong(job[10].toString()));
+                jobVO.setStatusId(JobStatus.valueOf(job1.getJobStatus().getName()).getId());
+                jobVO.setStatus(JobStatus.valueOf(job1.getJobStatus().getName()).getName());
+                List<JobSquareFeetDetails> jobSquareFeetDetailsList = job1.getJobSquareFeetDetailsList();
+                Set<JobDetails> jobDetailsList = job1.getInvoiceItemDetails();
+                for (JobSquareFeetDetails jsq : jobSquareFeetDetailsList) {
 
+                    JobSquareFeetDetailVO jobSquareFeetDetailVO = new JobSquareFeetDetailVO();
+
+                    jobSquareFeetDetailVO.setSquareFeet(jsq.getSquareFeet());
+                    jobSquareFeetDetailVO.setRatePerSquareFeet(jsq.getRatePerSqareFeet());
+                    jobSquareFeetDetailVO.setAmount(jsq.getAmount());
+                    jobSquareFeetDetailVO.setDescription(jsq.getDescription());
+                    jobSquareFeetDetailVOList.add(jobSquareFeetDetailVO);
+                }
+                for (JobDetails j : jobDetailsList) {
+                    ItemVO itemVO =new ItemVO();
+                    itemVO.setReceivedQuantity(j.getReceivedQty());
+                    itemVO.setItemName(j.getItemDetail()!=null?j.getItemDetail().getItem().getName():"--");
+                    itemVO.setPrice(j.getItemCost());
+                    itemVO.setSellingQuantity(j.getItemQuantity());
+                    itemVO.setTotal(j.getExpenses());
+                    itemVO.setExpensesType(j.getExpensesType().name());
+                    itemVOList.add(itemVO);
+
+                }
+                jobVO.setJobSquareFeetDetailVOList(jobSquareFeetDetailVOList);
+                jobVO.setItemVOList(itemVOList);
                 jobVOList.add(jobVO);
             }
             return jobVOList;
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @Override
+    public boolean changeJobStatus(Long jobId, int statusId) throws Exception {
+
+        try {
+            Job job = jobDao.get(jobId);
+            job.setJobStatus(JobStatus.getJobType(statusId));
+            Long id = jobDao.save(job);
+            if(id!=null){
+                return true;
+            }else{
+                return false;
+            }
+
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 }

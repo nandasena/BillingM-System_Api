@@ -149,7 +149,7 @@ public class JobController {
     public ResponseEntity<Object> getJobBydatePeriod(@PathVariable("fromDate") String fromDate, @PathVariable("toDate") String toDate) throws Exception {
 
         try {
-            List<JobVO> jobVOList = jobService.getInvoiceDetailsByInvoice(fromDate, toDate);
+            List<JobVO> jobVOList = jobService.getJobDetailsByInvoice(fromDate, toDate);
             ReturnVO returnVO = new ReturnVO();
             returnVO.setResult(jobVOList);
             returnVO.setSuccess(true);
@@ -160,6 +160,23 @@ public class JobController {
             return ResponseEntity.ok(e);
         }
     }
+
+    @RequestMapping(value = "/jobId/{jobId}/statusId/{statusId}/",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object> changeJobStatus(@PathVariable("jobId") Long jobId,@PathVariable("statusId") int statusId) throws Exception{
+        try {
+            boolean isTrue = jobService.changeJobStatus(jobId, statusId);
+            ReturnVO returnVO = new ReturnVO();
+            returnVO.setResult(isTrue);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(e);
+        }
+    }
+
 
 
 

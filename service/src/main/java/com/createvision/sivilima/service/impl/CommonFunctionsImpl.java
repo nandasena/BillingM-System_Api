@@ -79,6 +79,4 @@ public class CommonFunctionsImpl {
         }
         return null;
     }
-
-
 }

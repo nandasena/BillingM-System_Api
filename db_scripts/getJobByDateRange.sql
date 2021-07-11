@@ -6,14 +6,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getJobByDateRange`(IN form_date var
 BEGIN
 
 SELECT created_at,
-       amount,cost,
+       amount,
+       cost,
        end_date,
        name,
        job_number,
        status,
        total_square_feet,
        rate_per_square_feet,
-       fk_customer_id
+       fk_customer_id,
+       id
 FROM   jobs
 WHERE  DATE(created_at)>=form_date and date(created_at)<to_date;
 

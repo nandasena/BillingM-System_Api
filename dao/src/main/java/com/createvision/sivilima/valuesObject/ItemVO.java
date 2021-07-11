@@ -20,6 +20,7 @@ public class ItemVO {
     private int typeOfPrice;
     private int typeOfDiscount;
     private double priceDiscount;
+    private String expensesType;
 
     public Long getItemId() {return itemId;}
     public void setItemId(Long itemId) {this.itemId = itemId;}
@@ -71,4 +72,7 @@ public class ItemVO {
 
     public double getPriceDiscount() {return priceDiscount;}
     public void setPriceDiscount(double priceDiscount) {this.priceDiscount = priceDiscount;}
+
+    public String getExpensesType() {return expensesType;}
+    public void setExpensesType(String expensesType) {this.expensesType = expensesType;}
 }

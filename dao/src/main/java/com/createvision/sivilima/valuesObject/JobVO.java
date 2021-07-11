@@ -8,7 +8,7 @@ public class JobVO {
     private String description;
     private String startDate;
     private String endDate;
-    private int state;
+    private int statusId;
     private String status;
     private Long customerId;
     private double amount;
@@ -16,6 +16,7 @@ public class JobVO {
     private double ratePerSquareFeet;
     private double squareFeet;
     private double cost;
+    private double jobProfit;
     private int costType;
     private int paymentType;
     private String jobNumber;
@@ -38,8 +39,8 @@ public class JobVO {
     public String getEndDate() {return endDate;}
     public void setEndDate(String endDate) {this.endDate = endDate;}
 
-    public int getState() {return state;}
-    public void setState(int state) {this.state = state;}
+    public int getStatusId() {return statusId;}
+    public void setStatusId(int statusId) {this.statusId = statusId;}
 
     public String getStatus() {return status;}
     public void setStatus(String status) {this.status = status;}
@@ -79,4 +80,7 @@ public class JobVO {
 
     public List<JobSquareFeetDetailVO> getJobSquareFeetDetailVOList() {return jobSquareFeetDetailVOList;}
     public void setJobSquareFeetDetailVOList(List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList) {this.jobSquareFeetDetailVOList = jobSquareFeetDetailVOList;}
+
+    public double getJobProfit() {return jobProfit;}
+    public void setJobProfit(double jobProfit) {this.jobProfit = jobProfit;}
 }
