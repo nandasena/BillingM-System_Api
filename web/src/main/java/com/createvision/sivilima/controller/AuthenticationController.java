@@ -1,8 +1,10 @@
 package com.createvision.sivilima.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.createvision.sivilima.service.ISecurityService;
 import com.createvision.sivilima.service.IUserService;
-import com.createvision.sivilima.service.impl.UserServiceImpl;
 import com.createvision.sivilima.tableModel.User;
 import com.createvision.sivilima.valuesObject.ErrorModel;
 import com.createvision.sivilima.valuesObject.LoginModalVO;
@@ -11,13 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.AuthenticationException;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.JWT;
 
 @Controller
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -53,6 +52,7 @@ public class AuthenticationController {
                         .withClaim("role", userRole)
                         .withClaim("picture", "assets/images/avatar.png")
                         .withClaim("userId", user.getId())
+                        .withClaim("roleId", user.getUserRoleId().getRoleId())
                         .sign(algorithm);
 
                 String jsonResponseString = "{\r\n" +

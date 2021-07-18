@@ -23,7 +23,6 @@ public enum JobStatus {
 
     public static JobStatus getJobType(int id) {
         for (JobStatus e : values()) {
-            System.out.printf(" Come loop== "+e.getId());
             if(e.id == id) {
                 return e;
             }

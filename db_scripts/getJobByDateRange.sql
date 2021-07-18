@@ -17,7 +17,7 @@ SELECT created_at,
        fk_customer_id,
        id
 FROM   jobs
-WHERE  DATE(created_at)>=form_date and date(created_at)<to_date;
+WHERE  DATE(created_at)>=form_date and date(created_at)<=to_date;
 
 END //
 

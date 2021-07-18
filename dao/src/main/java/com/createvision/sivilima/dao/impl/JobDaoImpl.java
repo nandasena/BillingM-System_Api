@@ -17,7 +17,10 @@ public class JobDaoImpl extends AbstractDaoImpl<Job, Long> implements JobDao {
     public List<Job> getJobList() throws Exception {
         Session session = getSession();
         Criteria criteria = session.createCriteria(Job.class, "job");
-        criteria.add(Restrictions.eq("job.jobStatus", JobStatus.valueOf("CREATE")));
+        criteria.add(Restrictions.disjunction()
+                .add(Restrictions.eq("job.jobStatus", JobStatus.valueOf("CREATE")))
+                .add(Restrictions.eq("job.jobStatus", JobStatus.valueOf("START")))
+                .add(Restrictions.eq("job.jobStatus", JobStatus.valueOf("PENDING"))));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<Job> result = criteria.list();
         return result;

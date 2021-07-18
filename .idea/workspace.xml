@@ -11,18 +11,14 @@
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="add edit function to item details and change some part in create job">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/JobDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/JobDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/JobStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/ItemVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/ItemVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/JobVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/JobVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_scripts/getJobByDateRange.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_scripts/getJobByDateRange.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/JobService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/CommonFunctionsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/CommonFunctionsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima.war" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/target/sivilima/WEB-INF/lib/dao-1.0.1.jar" afterDir="false" />
@@ -531,14 +527,13 @@
       <workItem from="1625325963601" duration="710000" />
       <workItem from="1625844403223" duration="285000" />
       <workItem from="1625895009826" duration="1662000" />
-      <workItem from="1625977105963" duration="13451000" />
-    </task>
-    <task id="LOCAL-00146" summary="add payment date to table">
-      <created>1601536599274</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1601536599275</updated>
+      <workItem from="1625977105963" duration="14656000" />
+      <workItem from="1626098866213" duration="1748000" />
+      <workItem from="1626268314514" duration="89000" />
+      <workItem from="1626268496821" duration="2489000" />
+      <workItem from="1626456737220" duration="979000" />
+      <workItem from="1626523818993" duration="118000" />
+      <workItem from="1626605870940" duration="195000" />
     </task>
     <task id="LOCAL-00147" summary="add new column table">
       <created>1601536707234</created>
@@ -876,7 +871,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624770910116</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="edit job and update status">
+      <created>1626028992056</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1626028992057</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -895,7 +897,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new table and save data to that table" />
     <MESSAGE value="add advance amount to system." />
     <MESSAGE value="add item cost for invoice and add role for token" />
     <MESSAGE value="add new function to get invoice details by date range" />
@@ -920,7 +921,8 @@
     <MESSAGE value="add edit function to item details and change some part in create job" />
     <MESSAGE value="add job square feet details separately" />
     <MESSAGE value="modified edit function to edit item square feet" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified edit function to edit item square feet" />
+    <MESSAGE value="edit job and update status" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit job and update status" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
