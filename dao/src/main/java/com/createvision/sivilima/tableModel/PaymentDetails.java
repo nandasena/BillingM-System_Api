@@ -1,9 +1,5 @@
 package com.createvision.sivilima.tableModel;
 
-import com.createvision.sivilima.dao.GoodReceivedDao;
-import com.createvision.sivilima.dao.GoodReceivedDetailDao;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +16,7 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @Column(name = "amount")
     private double amount;
 
-    @Basic
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_type_code",nullable = false,referencedColumnName = "type_code")
     private PaymentMethod paymentMethod;
@@ -29,12 +25,15 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @Basic
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_invoice_id")
     private Invoice invoice;
 
-    @Basic
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_job_id")
+    private Job job;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_goodReceived_id")
     private GoodReceived goodReceived;
@@ -51,16 +50,13 @@ public class PaymentDetails extends BaseObject implements Serializable {
     @Column(name = "cheque_description")
     private String chequeDescription;
 
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_bank_id")
     private BankDetail bankDetail;
 
-    @Basic
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_cheque_detail_id")
     private ChequePaymentDetail chequePaymentDetail;
-
 
     @Basic
     @Column(name = "income_or_expenses")
@@ -85,6 +81,9 @@ public class PaymentDetails extends BaseObject implements Serializable {
 
     public Invoice getInvoice() { return invoice; }
     public void setInvoice(Invoice invoice) { this.invoice = invoice; }
+
+    public Job getJob() { return job;}
+    public void setJob(Job job) {this.job = job;}
 
     public GoodReceived getGoodReceived() { return goodReceived;}
     public void setGoodReceived(GoodReceived goodReceived) {this.goodReceived = goodReceived;}

@@ -19,10 +19,12 @@ public class JobVO {
     private double jobProfit;
     private int costType;
     private int paymentType;
+    private double totalPaymentAmount;
     private String jobNumber;
     private List<ItemVO> itemVOList;
     private List<OtherExpensesVO>otherExpensesVOList;
     private List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList;
+    private List<PaymentDetailVO>paymentDetailList;
 
     public Long getJobId() {return jobId;}
     public void setJobId(Long jobId) {this.jobId = jobId;}
@@ -69,6 +71,9 @@ public class JobVO {
     public int getPaymentType() {return paymentType;}
     public void setPaymentType(int paymentType) {this.paymentType = paymentType;}
 
+    public double getTotalPaymentAmount() {return totalPaymentAmount;}
+    public void setTotalPaymentAmount(double totalPaymentAmount) {this.totalPaymentAmount = totalPaymentAmount;}
+
     public String getJobNumber() {return jobNumber;}
     public void setJobNumber(String jobNumber) {this.jobNumber = jobNumber;}
 
@@ -83,4 +88,7 @@ public class JobVO {
 
     public double getJobProfit() {return jobProfit;}
     public void setJobProfit(double jobProfit) {this.jobProfit = jobProfit;}
+
+    public List<PaymentDetailVO> getPaymentDetailList() {return paymentDetailList;}
+    public void setPaymentDetailList(List<PaymentDetailVO> paymentDetailList) {this.paymentDetailList = paymentDetailList;}
 }

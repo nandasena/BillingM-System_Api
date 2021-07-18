@@ -4,10 +4,7 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.JobService;
 import com.createvision.sivilima.tableModel.*;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.JobSquareFeetDetailVO;
-import com.createvision.sivilima.valuesObject.JobVO;
-import com.createvision.sivilima.valuesObject.OtherExpensesVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +51,18 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     JobSquareFeetDetailsDao jobSquareFeetDetailsDao;
+
+    @Autowired
+    PaymentDetailDao paymentDetailDao;
+
+    @Autowired
+    PaymentMethodDao paymentMethodDao;
+
+    @Autowired
+    BankDetailDao bankDetailDao;
+
+    @Autowired
+    ChequePaymentDetailDao chequePaymentDetailDao;
 
 
     @Override
@@ -114,6 +123,8 @@ public class JobServiceImpl implements JobService {
             job.setJobStatus(JobStatus.valueOf("CREATE"));
 
             Long jobId = jobDao.save(job);
+
+            addPaymentDetails(jobVO.getPaymentDetailList(), jobDao.get(jobId));
 
             //
 
@@ -272,6 +283,14 @@ public class JobServiceImpl implements JobService {
                     count++;
                 }
                 jobVO.setJobSquareFeetDetailVOList(jobSquareFeetDetailVOList);
+
+                List<PaymentDetails> paymentDetailsList =paymentDetailDao.getPaymentDetailsByJobId(JobId);
+                double totalPaymentAmount =0;
+                for (PaymentDetails p:paymentDetailsList) {
+                    totalPaymentAmount += p.getAmount();
+
+                }
+                jobVO.setTotalPaymentAmount(totalPaymentAmount);
             }
 
 
@@ -322,6 +341,7 @@ public class JobServiceImpl implements JobService {
 //            double amount = jobVO.getRatePerSquareFeet() * jobVO.getSquareFeet();
 //            amount = Math.round(amount * 100.0) / 100.0;
             Job selectedJob = jobDao.get(jobVO.getJobId());
+            addPaymentDetails(jobVO.getPaymentDetailList(),selectedJob);
             selectedJob.setStartDate(commonFunctions.getDateTimeByDateString(jobVO.getStartDate()));
             selectedJob.setEndDate(commonFunctions.getDateTimeByDateString(jobVO.getEndDate()));
             selectedJob.setTotalSquareFeet(jobVO.getSquareFeet());
@@ -467,7 +487,7 @@ public class JobServiceImpl implements JobService {
             List<Object[]> jobList = jobDao.getJobByDateRange(FromDate, ToDate);
             for (Object[] job : jobList) {
                 List<JobSquareFeetDetailVO> jobSquareFeetDetailVOList = new ArrayList<>();
-                List<ItemVO> itemVOList =new ArrayList<>();
+                List<ItemVO> itemVOList = new ArrayList<>();
                 JobVO jobVO = new JobVO();
                 jobVO.setStartDate(dateFormat.format(job[0]));
                 jobVO.setAmount(parseDouble(format.format(job[1])));
@@ -496,9 +516,9 @@ public class JobServiceImpl implements JobService {
                     jobSquareFeetDetailVOList.add(jobSquareFeetDetailVO);
                 }
                 for (JobDetails j : jobDetailsList) {
-                    ItemVO itemVO =new ItemVO();
+                    ItemVO itemVO = new ItemVO();
                     itemVO.setReceivedQuantity(j.getReceivedQty());
-                    itemVO.setItemName(j.getItemDetail()!=null?j.getItemDetail().getItem().getName():"--");
+                    itemVO.setItemName(j.getItemDetail() != null ? j.getItemDetail().getItem().getName() : "--");
                     itemVO.setPrice(j.getItemCost());
                     itemVO.setSellingQuantity(j.getItemQuantity());
                     itemVO.setTotal(j.getExpenses());
@@ -523,15 +543,72 @@ public class JobServiceImpl implements JobService {
             Job job = jobDao.get(jobId);
             job.setJobStatus(JobStatus.getJobType(statusId));
             Long id = jobDao.save(job);
-            if(id!=null){
+            if (id != null) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
 
+    }
+
+    public boolean addPaymentDetails(List<PaymentDetailVO> paymentDetailVOList, Job job) throws Exception {
+        DecimalFormat format = new DecimalFormat("##.00");
+        Long paymentDetailsId = null;
+        if (paymentDetailVOList != null) {
+            for (PaymentDetailVO paymentDetailVO : paymentDetailVOList) {
+                PaymentDetails paymentDetails = new PaymentDetails();
+                PaymentMethod paymentMethod = paymentMethodDao.getPaymentMethodByTypeCode(paymentDetailVO.getTypeCode());
+                paymentDetails.setAmount(Double.parseDouble(format.format((paymentDetailVO.getAmount()+ paymentDetailVO.getAdvancePayment()))));
+                paymentDetails.setJob(job);
+                paymentDetails.setCardNumber(paymentDetailVO.getCardNumber() != null ? paymentDetailVO.getCardNumber() : "-");
+                paymentDetails.setChequeNumber(paymentDetailVO.getChequeNumber() != null ? paymentDetailVO.getChequeNumber() : "-");
+                paymentDetails.setChequeDate(paymentDetailVO.getChequeDate() == null ? null : commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                paymentDetails.setChequeDescription(paymentDetailVO.getDescription());
+                paymentDetails.setIncomeOrExpenses(IncomeOrExpenses.INCOME);
+                paymentDetails.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+//                insertedInvoice.setInvoiceType(paymentMethod);
+//                insertedInvoice.setAdvanceAmount(paymentDetailVO.getAdvancePayment());
+//                invoiceVO.setAdvanceAmount(paymentDetailVO.getAdvancePayment());
+
+                if (paymentDetailVO.getBankId() != null) {
+                    BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                    paymentDetails.setBankDetail(bankDetail);
+                } else {
+                    paymentDetails.setBankDetail(null);
+                }
+
+                if (paymentDetailVO.getTypeCode().equals("CQ")) {
+                    ChequePaymentDetail chequePaymentDetail = new ChequePaymentDetail();
+
+                    BankDetail bankDetail = bankDetailDao.get(paymentDetailVO.getBankId());
+                    chequePaymentDetail.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                    chequePaymentDetail.setCheque_status(ChequeStatus.PENDING);
+                    chequePaymentDetail.setChequeNumber(paymentDetailVO.getChequeNumber());
+                    chequePaymentDetail.setChequeDate(commonFunctions.getDateTimeByDateString(paymentDetailVO.getChequeDate()));
+                    chequePaymentDetail.setBankDetail(bankDetail);
+                    chequePaymentDetail.setDescription(paymentDetailVO.getDescription());
+
+                    Long chequeDetailId = chequePaymentDetailDao.save(chequePaymentDetail);
+//                    invoiceDao.save(insertedInvoice);
+                    ChequePaymentDetail saveChequePaymentDetail = chequePaymentDetailDao.get(chequeDetailId);
+                    paymentDetails.setChequePaymentDetail(saveChequePaymentDetail);
+
+                }
+
+                paymentDetails.setPaymentMethod(paymentMethod);
+                paymentDetailsId = paymentDetailDao.save(paymentDetails);
+
+            }
+        }
+        if (paymentDetailsId != null) {
+            return true;
+
+        } else {
+            return false;
+        }
     }
 }

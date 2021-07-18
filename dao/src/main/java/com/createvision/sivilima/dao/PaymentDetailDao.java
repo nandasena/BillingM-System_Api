@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PaymentDetailDao extends AbstractDao<PaymentDetails, Long>  {
     List<Object[]> getPaymentDetailByDateAndType(String fromDate,String toDate,String type) throws Exception;
+    List<PaymentDetails> getPaymentDetailsByJobId(Long jobId) throws Exception;
 }

@@ -1,9 +1,11 @@
 package com.createvision.sivilima.dao.impl;
 
-import com.createvision.sivilima.dao.AbstractDao;
 import com.createvision.sivilima.dao.PaymentDetailDao;
+import com.createvision.sivilima.tableModel.IncomeOrExpenses;
 import com.createvision.sivilima.tableModel.PaymentDetails;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +21,16 @@ public class PaymentDetailDaoImpl extends AbstractDaoImpl<PaymentDetails,Long> i
         query.setParameter(2,toDate);
         List<Object[]> result = query.list();
         return result;
+    }
+
+    @Override
+    public List<PaymentDetails> getPaymentDetailsByJobId(Long jobId) throws Exception {
+        Criteria IinCri = getSession().createCriteria(PaymentDetails.class, "paymentDetails");
+        IinCri.createAlias("paymentDetails.job", "job");
+        IinCri.add(Restrictions.eq("job.id", jobId));
+        IinCri.add(Restrictions.eq("paymentDetails.incomeOrExpenses", IncomeOrExpenses.INCOME));
+        List<PaymentDetails> result = IinCri.list();
+        return result;
+
     }
 }
