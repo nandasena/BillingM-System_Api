@@ -316,11 +316,11 @@ public class JobServiceImpl implements JobService {
 
                 jobDetails.setJob(job);
                 jobDetails.setDescription(e.getDescription());
-                if (e.getId() == 1) {
+                if (e.getExpensesTypeId() == 1) {
                     jobDetails.setExpensesType(ExpensesType.TRANSPORT);
-                } else if (e.getId() == 2) {
+                } else if (e.getExpensesTypeId() == 2) {
                     jobDetails.setExpensesType(ExpensesType.WAGES);
-                } else if (e.getId() == 3) {
+                } else if (e.getExpensesTypeId() == 3) {
                     jobDetails.setExpensesType(ExpensesType.OTHER);
                 }
                 jobDetailsDao.save(jobDetails);

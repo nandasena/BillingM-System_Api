@@ -63,7 +63,6 @@ public class Customer extends BaseObject implements Serializable {
     public String getRemark() { return remark; }
     public void setRemark(String remark) { this.remark = remark; }
 
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_branch_id")
     @JsonIgnore

@@ -14,7 +14,8 @@ SELECT I.id,
                P.fk_type_code
 FROM invoices I
 INNER JOIN payment_detail P ON I.id =P.fk_invoice_id
-WHERE  DATE(I.created_at)>=form_date and date(I.created_at)<to_date;
+WHERE  DATE(I.created_at)>=form_date and date(I.created_at)<to_date
+order by I.id DESC;
 
 END //
 

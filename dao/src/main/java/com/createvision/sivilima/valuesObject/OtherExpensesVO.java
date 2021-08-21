@@ -5,6 +5,7 @@ public class OtherExpensesVO {
     private String name;
     private String description;
     private double amount;
+    private Long expensesTypeId;
 
 
     public Long getId() {return id;}
@@ -18,4 +19,7 @@ public class OtherExpensesVO {
 
     public double getAmount() {return amount;}
     public void setAmount(double amount) {this.amount = amount;}
+
+    public Long getExpensesTypeId() {return expensesTypeId;}
+    public void setExpensesTypeId(Long expensesTypeId) {this.expensesTypeId = expensesTypeId;}
 }

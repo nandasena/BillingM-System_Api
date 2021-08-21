@@ -141,6 +141,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice saveInvoice = new Invoice();
         try {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("INVOICE");
+            TempCustomerVO tempCustomerVO=invoiceVO.getTempCustomerVO();
             ItemCode itemCode = itemCodeList.get(itemCodeList.size() - 1);
             String code = itemCode.getCode();
             int lastNUmber = itemCode.getNextNumber();
@@ -155,6 +156,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             saveInvoice.setCustomerName(invoiceVO.getCustomerName());
             saveInvoice.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
             saveInvoice.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+            saveInvoice.setCustomerName(tempCustomerVO.getFirstName());
             Long id = invoiceDao.save(saveInvoice);
             Invoice insertedInvoice = invoiceDao.get(id);
             itemCode.setNextNumber(++lastNUmber);
@@ -295,7 +297,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             TempCustomer tempCustomer = new TempCustomer();
 
-            TempCustomerVO tempCustomerVO=invoiceVO.getTempCustomerVO();
+
             tempCustomer.setFirstName(tempCustomerVO.getFirstName());
             tempCustomer.setAddress1(tempCustomerVO.getAddress1());
             tempCustomer.setTelephoneNo(tempCustomerVO.getContactNumber());
