@@ -13,8 +13,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/ItemServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/database.properties" afterDir="false" />
@@ -547,14 +547,7 @@
       <workItem from="1628766356734" duration="2505000" />
       <workItem from="1628943297325" duration="295000" />
       <workItem from="1629518915293" duration="2129000" />
-      <workItem from="1629614458020" duration="1130000" />
-    </task>
-    <task id="LOCAL-00150" summary="change is clear field in PaymentDetailsOfCredit table.">
-      <created>1601778983489</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1601778983491</updated>
+      <workItem from="1629614458020" duration="1434000" />
     </task>
     <task id="LOCAL-00151" summary="add new enum class to save cheque status">
       <created>1601795789570</created>
@@ -892,7 +885,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629519524076</updated>
     </task>
-    <option name="localTasksCounter" value="199" />
+    <task id="LOCAL-00199" summary="add description when add new item">
+      <created>1629641608325</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1629641608325</updated>
+    </task>
+    <option name="localTasksCounter" value="200" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -911,7 +911,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new function to get invoice details and cost invoice by invoice" />
     <MESSAGE value="add new variables to invoice details report" />
     <MESSAGE value="correct some errors when get data for rpofit on invoice report" />
     <MESSAGE value="add new function to get item wise profit list by date range" />
@@ -936,7 +935,8 @@
     <MESSAGE value="add user role to token and update status change" />
     <MESSAGE value="add payment details in job" />
     <MESSAGE value="correct error when add job expenses" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct error when add job expenses" />
+    <MESSAGE value="add description when add new item" />
+    <option name="LAST_COMMIT_MESSAGE" value="add description when add new item" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
