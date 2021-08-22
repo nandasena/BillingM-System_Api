@@ -11,14 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="add edit function to item details and change some part in create job">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/OtherExpensesVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/valuesObject/OtherExpensesVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_scripts/getInvoiceByDateRange.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_scripts/getInvoiceByDateRange.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_scripts/getJobByDateRange.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_scripts/getJobByDateRange.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/InvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/JobServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/ItemServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/sivilima-service.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/sivilima-service.jar" afterDir="false" />
@@ -551,14 +546,8 @@
       <workItem from="1628591336428" duration="2122000" />
       <workItem from="1628766356734" duration="2505000" />
       <workItem from="1628943297325" duration="295000" />
-      <workItem from="1629518915293" duration="186000" />
-    </task>
-    <task id="LOCAL-00149" summary="add new variable call bank name add send to UI">
-      <created>1601724626032</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1601724626032</updated>
+      <workItem from="1629518915293" duration="2129000" />
+      <workItem from="1629614458020" duration="1130000" />
     </task>
     <task id="LOCAL-00150" summary="change is clear field in PaymentDetailsOfCredit table.">
       <created>1601778983489</created>
@@ -896,7 +885,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626632450740</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="correct error when add job expenses">
+      <created>1629519524076</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1629519524076</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -915,7 +911,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new function to get invoice details by date range" />
     <MESSAGE value="add new function to get invoice details and cost invoice by invoice" />
     <MESSAGE value="add new variables to invoice details report" />
     <MESSAGE value="correct some errors when get data for rpofit on invoice report" />
@@ -940,7 +935,8 @@
     <MESSAGE value="edit job and update status" />
     <MESSAGE value="add user role to token and update status change" />
     <MESSAGE value="add payment details in job" />
-    <option name="LAST_COMMIT_MESSAGE" value="add payment details in job" />
+    <MESSAGE value="correct error when add job expenses" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct error when add job expenses" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

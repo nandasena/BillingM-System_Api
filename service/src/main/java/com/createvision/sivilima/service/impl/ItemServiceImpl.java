@@ -250,7 +250,7 @@ public class ItemServiceImpl implements ItemService {
                 SubCategory subCategory = subCategoryDao.get(itemVO.getSubCategoryId());
                 item.setSubCategory(subCategory);
                 item.setCreateDate(date);
-                item.setDescription(itemVO.getDescription());
+                item.setDescription(itemVO.getItemName());
                 item.setName(itemVO.getItemName());
                 item.setItemCode(itemVO.getItemCode());
                 Long createItemId = itemDao.save(item);
