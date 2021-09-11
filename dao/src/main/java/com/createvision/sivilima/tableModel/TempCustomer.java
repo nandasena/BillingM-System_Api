@@ -31,10 +31,16 @@ public class TempCustomer extends BaseObject implements Serializable {
     public String getTelephoneNo() {return telephoneNo;}
     public void setTelephoneNo(String telephoneNo) {this.telephoneNo = telephoneNo;}
 
-    @Basic
+
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_invoice_id")
     private Invoice invoice;
     public Invoice getInvoice() {return invoice;}
     public void setInvoice(Invoice invoice) {this.invoice = invoice;}
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_invoice_id")
+    private Quotation quotation;
+    public Quotation getQuotation() {return quotation;}
+    public void setQuotation(Quotation quotation) {this.quotation = quotation;}
 }

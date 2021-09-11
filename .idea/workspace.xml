@@ -10,7 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a679fb-9282-439e-8a11-944c0a60ff7a" name="Default Changelist" comment="add edit function to item details and change some part in create job">
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/QuotationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/QuotationDetailsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/QuotationDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/dao/impl/QuotationDetailDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/Quotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/QuotationDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/QuotationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/createvision/sivilima/service/impl/QuotationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/com/createvision/sivilima/controller/QuotationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/TempCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/createvision/sivilima/tableModel/TempCustomer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dao/target/sivilima-dao.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/createvision/sivilima/service/impl/InvoiceServiceImpl.class" afterDir="false" />
@@ -118,6 +128,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.tomcat_server">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="sivilima [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -547,14 +568,11 @@
       <workItem from="1628766356734" duration="2505000" />
       <workItem from="1628943297325" duration="295000" />
       <workItem from="1629518915293" duration="2129000" />
-      <workItem from="1629614458020" duration="1434000" />
-    </task>
-    <task id="LOCAL-00151" summary="add new enum class to save cheque status">
-      <created>1601795789570</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
-      <option name="project" value="LOCAL" />
-      <updated>1601795789570</updated>
+      <workItem from="1629614458020" duration="2086000" />
+      <workItem from="1629975675634" duration="569000" />
+      <workItem from="1630209837895" duration="1806000" />
+      <workItem from="1630815576706" duration="1256000" />
+      <workItem from="1631337900372" duration="8892000" />
     </task>
     <task id="LOCAL-00152" summary="add new column and add new mapping column to save cheque details.">
       <created>1601795972762</created>
@@ -892,7 +910,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629641608325</updated>
     </task>
-    <option name="localTasksCounter" value="200" />
+    <task id="LOCAL-00200" summary="test change">
+      <created>1629646680921</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1629646680921</updated>
+    </task>
+    <option name="localTasksCounter" value="201" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -911,7 +936,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new variables to invoice details report" />
     <MESSAGE value="correct some errors when get data for rpofit on invoice report" />
     <MESSAGE value="add new function to get item wise profit list by date range" />
     <MESSAGE value="correct some errors in report store procedures" />
@@ -936,7 +960,8 @@
     <MESSAGE value="add payment details in job" />
     <MESSAGE value="correct error when add job expenses" />
     <MESSAGE value="add description when add new item" />
-    <option name="LAST_COMMIT_MESSAGE" value="add description when add new item" />
+    <MESSAGE value="test change" />
+    <option name="LAST_COMMIT_MESSAGE" value="test change" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
