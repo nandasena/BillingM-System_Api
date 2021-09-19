@@ -39,7 +39,7 @@ public class TempCustomer extends BaseObject implements Serializable {
     public void setInvoice(Invoice invoice) {this.invoice = invoice;}
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_invoice_id")
+    @JoinColumn(name = "fk_quotation_id")
     private Quotation quotation;
     public Quotation getQuotation() {return quotation;}
     public void setQuotation(Quotation quotation) {this.quotation = quotation;}

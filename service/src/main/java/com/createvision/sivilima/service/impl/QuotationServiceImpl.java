@@ -20,22 +20,22 @@ import java.util.List;
 public class QuotationServiceImpl implements QuotationService {
 
     @Autowired
-    private ItemCodeDao itemCodeDao;
+    ItemCodeDao itemCodeDao;
 
     @Autowired
     CommonFunctionsImpl commonFunctions;
 
     @Autowired
-    private QuotationDao quotationDao;
+    QuotationDao quotationDao;
 
     @Autowired
-    private QuotationDetailsDao quotationDetailsDao;
+    QuotationDetailsDao quotationDetailsDao;
 
     @Autowired
-    private ItemDao itemDao;
+    ItemDao itemDao;
 
     @Autowired
-    private ItemDetailDao itemDetailDao;
+    ItemDetailDao itemDetailDao;
 
     @Autowired
     CustomerDao customerDao;
@@ -47,7 +47,7 @@ public class QuotationServiceImpl implements QuotationService {
     public InvoiceVO createInvoiceQuotation(InvoiceVO invoiceVO) throws Exception {
 
         InvoiceVO invoiceVO1 = new InvoiceVO();
-        Quotation saveInvoice = new Quotation();
+        Quotation saveQuotation = new Quotation();
         try {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("QUOTATION");
             TempCustomerVO tempCustomerVO = invoiceVO.getTempCustomerVO();
@@ -57,16 +57,16 @@ public class QuotationServiceImpl implements QuotationService {
             String lastInvoiceNumber = new Integer(itemCode.getNextNumber()).toString();
             String invoiceNumber = code + "-" + lastInvoiceNumber;
             double totalInvoiceDiscount = 0;
-            saveInvoice.setTotalAmount(invoiceVO.getTotalAmount());
-            saveInvoice.setAdvanceAmount(invoiceVO.getAdvanceAmount());
-            saveInvoice.setBalanceAmount(invoiceVO.getBalanceAmount());
-            saveInvoice.setInvoiceDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
-            saveInvoice.setInvoiceNumber(invoiceNumber);
-            saveInvoice.setCustomerName(invoiceVO.getCustomerName());
-            saveInvoice.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
-            saveInvoice.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
-            saveInvoice.setCustomerName(tempCustomerVO.getFirstName());
-            Long id = quotationDao.save(saveInvoice);
+            saveQuotation.setTotalAmount(invoiceVO.getTotalAmount());
+            saveQuotation.setAdvanceAmount(invoiceVO.getAdvanceAmount());
+            saveQuotation.setBalanceAmount(invoiceVO.getBalanceAmount());
+            saveQuotation.setInvoiceDate(commonFunctions.getDateTimeByDateString(invoiceVO.getInvoiceDate()));
+            saveQuotation.setInvoiceNumber(invoiceNumber);
+            saveQuotation.setCustomerName(invoiceVO.getCustomerName());
+            saveQuotation.setCustomerId(invoiceVO.getCustomerId() != null ? invoiceVO.getCustomerId() : null);
+            saveQuotation.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+            saveQuotation.setCustomerName(tempCustomerVO.getFirstName());
+            Long id = quotationDao.save(saveQuotation);
             Quotation insertedQuotation = quotationDao.get(id);
             itemCode.setNextNumber(++lastNUmber);
             itemCodeDao.save(itemCode);

@@ -18,7 +18,7 @@ public class QuotationDetails extends BaseObject implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invoice_id",nullable = false)
+    @JoinColumn(name = "quotation_id",nullable = false)
     @JsonIgnore
     private Quotation quotation;
 
