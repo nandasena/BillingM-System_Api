@@ -3,16 +3,20 @@ package com.createvision.sivilima.service.impl;
 import com.createvision.sivilima.dao.*;
 import com.createvision.sivilima.service.QuotationService;
 import com.createvision.sivilima.tableModel.*;
-import com.createvision.sivilima.valuesObject.InvoiceVO;
-import com.createvision.sivilima.valuesObject.ItemVO;
-import com.createvision.sivilima.valuesObject.PaymentDetailVO;
-import com.createvision.sivilima.valuesObject.TempCustomerVO;
+import com.createvision.sivilima.valuesObject.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import static java.lang.Double.parseDouble;
 
 
 @Service("quotationService")
@@ -141,6 +145,106 @@ public class QuotationServiceImpl implements QuotationService {
             throw e;
         }
 
+        return invoiceVO;
+    }
+
+
+    @Override
+    public List<InvoiceVO> invoice(String fromDate, String toDate) throws Exception {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DecimalFormat format = new DecimalFormat("##.00");
+        List<InvoiceVO> invoiceVOS = new ArrayList<>();
+        //LOGGER.info("Invoice count {}", invoices.size());
+        Date startDate = commonFunctions.getDateTimeByDateString(fromDate);
+        Date endDate = commonFunctions.getDateTimeByDateString(toDate);
+        List<Object[]> QuotationInvoicesList = quotationDao.getInvoiceByDateRange(startDate, endDate);
+        for (Object[] invoiceTmp : QuotationInvoicesList) {
+            InvoiceVO invoiceVO = new InvoiceVO();
+            invoiceVO.setId(Long.parseLong(invoiceTmp[0].toString()));
+            invoiceVO.setInvoiceNumber(invoiceTmp[1].toString());
+            invoiceVO.setCustomerName(!invoiceTmp[2].toString().isEmpty() ? invoiceTmp[2].toString() : "--");
+            invoiceVO.setInvoiceDateOfString(dateFormat.format(invoiceTmp[3]));
+            invoiceVO.setTotalAmount(parseDouble(format.format(invoiceTmp[4])));
+            invoiceVO.setInvoiceDiscount(parseDouble(invoiceTmp[5].toString()));
+//            invoiceVO.setPaymentType(invoiceTmp[6].toString());
+            invoiceVOS.add(invoiceVO);
+
+        }
+        return invoiceVOS;
+
+    }
+
+    @Override
+    public List<ItemDetailsVO> invoiceDetailsById(Long id) throws Exception {
+        List<ItemDetailsVO> itemDetailsVOList = new ArrayList<>();
+        try {
+            List<QuotationDetails> invoiceItemDetail = quotationDetailsDao.gteInvoiceDetailByInvoiceId(id);
+            if (!invoiceItemDetail.isEmpty()) {
+                for (QuotationDetails tem : invoiceItemDetail) {
+                    ItemDetailsVO itemDetailsVO = new ItemDetailsVO();
+                    itemDetailsVO.setMrpPrice(tem.getItemPrice());
+                    itemDetailsVO.setItemName(tem.getItem().getName());
+                    itemDetailsVO.setQuantity(tem.getSellingQuantity());
+                    itemDetailsVO.setTotalItemAmount(tem.getTotalAmount());
+                    itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
+                    itemDetailsVO.setItemId(tem.getItem().getId());
+                    itemDetailsVOList.add(itemDetailsVO);
+
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return itemDetailsVOList;
+    }
+
+    @Override
+    public InvoiceVO getInvoiceReprintData(Long id) throws Exception {
+        InvoiceVO invoiceVO = new InvoiceVO();
+        try {
+            Quotation invoice = quotationDao.get(id);
+         //   TempCustomer tempCustomer = tempCustomerDao.getCustomerDetailsById(id);
+
+            invoiceVO.setInvoiceNumber(invoice.getInvoiceNumber());
+            invoiceVO.setInvoiceDate(commonFunctions.convertDateToString(invoice.getInvoiceDate()));
+            invoiceVO.setTotalAmount(invoice.getTotalAmount());
+            invoiceVO.setCustomerName(invoice.getCustomerName() == null ? "--" : invoice.getCustomerName());
+            invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
+            invoiceVO.setAdvanceAmount(invoice.getAdvanceAmount());
+
+//            if(tempCustomer !=null){
+//                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+//                tempCustomerVO.setFirstName(tempCustomer.getFirstName());
+//                tempCustomerVO.setAddress1(tempCustomer.getAddress1());
+//                tempCustomerVO.setContactNumber(tempCustomer.getTelephoneNo());
+//                invoiceVO.setTempCustomerVO(tempCustomerVO);
+//            }else{
+                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+                tempCustomerVO.setFirstName("");
+                tempCustomerVO.setAddress1("");
+                tempCustomerVO.setContactNumber("");
+                invoiceVO.setTempCustomerVO(tempCustomerVO);
+//            }
+
+
+            Set<QuotationDetails> invoiceItemDetails = invoice.getInvoiceItemDetails();
+            List<ItemVO> itemVOList = new ArrayList<>();
+            for (QuotationDetails temInvoiceItemDetail : invoiceItemDetails) {
+                ItemVO itemVO = new ItemVO();
+                itemVO.setItemName(temInvoiceItemDetail.getItem().getName());
+                itemVO.setItemDiscount(temInvoiceItemDetail.getTotalItemDiscount());
+                itemVO.setTotal(temInvoiceItemDetail.getTotalAmount());
+                itemVO.setPrice(temInvoiceItemDetail.getItemPrice());
+                itemVO.setSellingQuantity(temInvoiceItemDetail.getSellingQuantity());
+                itemVOList.add(itemVO);
+            }
+            invoiceVO.setItemList(itemVOList);
+
+        } catch (Exception e) {
+
+        }
         return invoiceVO;
     }
 }

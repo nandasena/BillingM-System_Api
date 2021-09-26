@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class QuotationDetails extends BaseObject implements Serializable {
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id",nullable = false)
     @JsonIgnore
     private Item item;

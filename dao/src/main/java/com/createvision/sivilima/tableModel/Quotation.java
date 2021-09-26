@@ -105,13 +105,13 @@ public class Quotation extends BaseObject implements Serializable {
         this.invoiceNumber = invoiceNumber;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "invoice")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quotation")
     @Fetch(FetchMode.SELECT)
-    private Set<InvoiceItemDetail> invoiceItemDetails = new HashSet<InvoiceItemDetail>(0);
-    public Set<InvoiceItemDetail> getInvoiceItemDetails() {
+    private Set<QuotationDetails> invoiceItemDetails = new HashSet<QuotationDetails>(0);
+    public Set<QuotationDetails> getInvoiceItemDetails() {
         return invoiceItemDetails;
     }
-    public void setInvoiceItemDetails(Set<InvoiceItemDetail> invoiceItemDetails) { this.invoiceItemDetails = invoiceItemDetails; }
+    public void setInvoiceItemDetails(Set<QuotationDetails> invoiceItemDetails) { this.invoiceItemDetails = invoiceItemDetails; }
 
     @Basic
     @Column(name = "is_delete",columnDefinition = "boolean default false")
