@@ -72,6 +72,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     TempCustomerDao tempCustomerDao;
 
+    @Autowired
+    InvoiceItemReturnDao invoiceItemReturnDao;
+
 
     @Override
     public List<InvoiceVO> getAllInvoices() throws Exception {
@@ -141,7 +144,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice saveInvoice = new Invoice();
         try {
             List<ItemCode> itemCodeList = itemCodeDao.getItemCode("INVOICE");
-            TempCustomerVO tempCustomerVO=invoiceVO.getTempCustomerVO();
+            TempCustomerVO tempCustomerVO = invoiceVO.getTempCustomerVO();
             ItemCode itemCode = itemCodeList.get(itemCodeList.size() - 1);
             String code = itemCode.getCode();
             int lastNUmber = itemCode.getNextNumber();
@@ -172,7 +175,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
                 if (itemVO.getTypeOfDiscount() == 1) {
                     invoiceItemDetail.setDiscount_type(DiscountType.CASH_DISCOUNT);
-                    totalDiscount = itemVO.getPriceDiscount() * itemVO.getSellingQuantity() ;
+                    totalDiscount = itemVO.getPriceDiscount() * itemVO.getSellingQuantity();
                 } else {
                     invoiceItemDetail.setDiscount_type(DiscountType.PERCENTAGE_DISCOUNT);
                     totalDiscount = itemVO.getSellingQuantity() * itemVO.getPrice() * itemVO.getDiscountPercentage() / 100;
@@ -366,6 +369,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                     itemDetailsVO.setTotalItemDiscount(tem.getTotalItemDiscount());
                     itemDetailsVO.setItemId(tem.getItem().getId());
                     itemDetailsVOList.add(itemDetailsVO);
+                    itemDetailsVO.setItemDetailId(tem.getItemDetail().getId());
+                    itemDetailsVO.setReceivedQuantity(tem.getReturnQuantity());
 
                 }
             }
@@ -530,14 +535,14 @@ public class InvoiceServiceImpl implements InvoiceService {
             invoiceVO.setInvoiceDiscount(invoice.getTotalDiscount());
             invoiceVO.setAdvanceAmount(invoice.getAdvanceAmount());
 
-            if(tempCustomer !=null){
-                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+            if (tempCustomer != null) {
+                TempCustomerVO tempCustomerVO = new TempCustomerVO();
                 tempCustomerVO.setFirstName(tempCustomer.getFirstName());
                 tempCustomerVO.setAddress1(tempCustomer.getAddress1());
                 tempCustomerVO.setContactNumber(tempCustomer.getTelephoneNo());
                 invoiceVO.setTempCustomerVO(tempCustomerVO);
-            }else{
-                TempCustomerVO tempCustomerVO =new TempCustomerVO();
+            } else {
+                TempCustomerVO tempCustomerVO = new TempCustomerVO();
                 tempCustomerVO.setFirstName("");
                 tempCustomerVO.setAddress1("");
                 tempCustomerVO.setContactNumber("");
@@ -562,5 +567,55 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         }
         return invoiceVO;
+    }
+
+    @Override
+    public List<InvoiceVO> addReturnInvoiceItem(InvoiceVO invoiceVO) throws Exception {
+
+        try {
+            List<ItemVO> invoiceItemDetail = invoiceVO.getItemList();
+            Invoice invoice = invoiceDao.get(invoiceVO.getId());
+            Set<InvoiceItemDetail> invoiceItemDetailList = invoice.getInvoiceItemDetails();
+            for (ItemVO item : invoiceItemDetail) {
+                for (InvoiceItemDetail invoiceItem : invoiceItemDetailList) {
+                    if ( invoiceItem.getItem().getId().equals(item.getItemId())) {
+                        invoiceItem.setReturnQuantity(invoiceItem.getReturnQuantity() + item.getReceivedQuantity());
+                        invoiceItemDetailDao.save(invoiceItem);
+                        ItemDetail itemDetail = itemDetailDao.get(item.getItemDetailId());
+                        double availableQty =itemDetail.getAvailableQuantity()+item.getReceivedQuantity();
+                        itemDetail.setAvailableQuantity(availableQty);
+                        itemDetailDao.save(itemDetail);
+                        InvoiceItemReturn invoiceItemReturn =new InvoiceItemReturn();
+                        invoiceItemReturn.setCreatedAt(commonFunctions.getCurrentDateAndTimeByTimeZone("Asia/Colombo"));
+                        invoiceItemReturn.setReasonOfReturn(invoiceVO.getReturnDescription());
+                        invoiceItemReturn.setReturnDate(commonFunctions.getDateTimeByDateString(invoiceVO.getReturnDate()));
+                        invoiceItemReturn.setReturnQuantity(item.getReceivedQuantity());
+                        invoiceItemReturn.setInvoice(invoice);
+                        invoiceItemReturn.setItemDetail(invoiceItem.getItemDetail());
+
+                        List<ItemCode> itemCodeList = itemCodeDao.getItemCode("CREDIT_NOTE");
+                        TempCustomerVO tempCustomerVO = invoiceVO.getTempCustomerVO();
+                        ItemCode itemCode = itemCodeList.get(itemCodeList.size() - 1);
+                        String code = itemCode.getCode();
+                        int lastNUmber = itemCode.getNextNumber();
+                        String lastInvoiceNumber = new Integer(itemCode.getNextNumber()).toString();
+                        String invoiceNumber = code + "-" + lastInvoiceNumber;
+                        itemCode.setNextNumber(++lastNUmber);
+                        itemCodeDao.save(itemCode);
+
+
+                        invoiceItemReturnDao.save(invoiceItemReturn);
+                        continue;
+                    }
+                }
+            }
+
+            List<InvoiceVO> updateList = getAllInvoices();
+            return updateList;
+
+        } catch (Exception e) {
+            throw e;
+
+        }
     }
 }

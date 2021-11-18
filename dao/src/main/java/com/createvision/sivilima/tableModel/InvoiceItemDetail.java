@@ -9,19 +9,16 @@ import java.io.Serializable;
 @Table(name = "invoice_item_Details")
 public class InvoiceItemDetail extends BaseObject implements Serializable {
 
-    @Basic
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id",nullable = false)
     @JsonIgnore
     private Item item;
 
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id",nullable = false)
     @JsonIgnore
     private Invoice invoice;
 
-    @Basic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_detail_id",nullable = false)
     @JsonIgnore
@@ -30,6 +27,10 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
     @Basic
     @Column(name = "selling_quantity")
     private double sellingQuantity;
+
+    @Basic
+    @Column(name = "return_quantity",nullable = false, columnDefinition = "int default 0")
+    private double returnQuantity;
 
     @Basic
     @Column(name = "total_item_discount")
@@ -68,6 +69,9 @@ public class InvoiceItemDetail extends BaseObject implements Serializable {
 
     public double getSellingQuantity() { return sellingQuantity; }
     public void setSellingQuantity(double sellingQuantity) { this.sellingQuantity = sellingQuantity; }
+
+    public double getReturnQuantity() {return returnQuantity;}
+    public void setReturnQuantity(double returnQuantity) {this.returnQuantity = returnQuantity;}
 
     public double getTotalItemDiscount() { return totalItemDiscount; }
     public void setTotalItemDiscount(double totalItemDiscount) { this.totalItemDiscount = totalItemDiscount; }

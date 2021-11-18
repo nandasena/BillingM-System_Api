@@ -1,20 +1,20 @@
 package com.createvision.sivilima.controller;
 
-import com.createvision.sivilima.tableModel.Invoice;
-import com.createvision.sivilima.tableModel.User;
 import com.createvision.sivilima.service.InvoiceItemDetailService;
 import com.createvision.sivilima.service.InvoiceService;
 import com.createvision.sivilima.service.ItemService;
-import com.createvision.sivilima.valuesObject.*;
+import com.createvision.sivilima.valuesObject.InvoiceVO;
+import com.createvision.sivilima.valuesObject.ItemDetailsVO;
+import com.createvision.sivilima.valuesObject.PaymentDetailVO;
+import com.createvision.sivilima.valuesObject.ReturnVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
 
 @Controller
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -211,5 +211,25 @@ public class InvoiceController {
         }
 
     }
+
+    @RequestMapping(value = "/returnInvoiceItem", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> addReturnInvoiceItem(@RequestBody InvoiceVO invoiceVO) throws Exception{
+        ReturnVO returnVO = new ReturnVO();
+        try {
+            List<InvoiceVO> invoiceVOS = invoiceService.addReturnInvoiceItem(invoiceVO);
+            returnVO.setResult(invoiceVO);
+            returnVO.setSuccess(true);
+            returnVO.setStatusCode(200);
+            return ResponseEntity.ok(returnVO);
+        } catch (Exception e) {
+            returnVO.setResult(e);
+            returnVO.setStatusCode(5001);
+            returnVO.setSuccess(false);
+            return ResponseEntity.ok(returnVO);
+        }
+
+    }
+
 
 }

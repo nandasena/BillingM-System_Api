@@ -25,6 +25,8 @@ public class InvoiceVO {
     private List<PaymentDetailVO> paymentDetailList;
     private String paymentType;
     private TempCustomerVO tempCustomerVO;
+    private String returnDescription;
+    private String returnDate;
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -76,4 +78,10 @@ public class InvoiceVO {
 
     public TempCustomerVO getTempCustomerVO() {return tempCustomerVO;}
     public void setTempCustomerVO(TempCustomerVO tempCustomerVO) {this.tempCustomerVO = tempCustomerVO;}
+
+    public String getReturnDescription() {return returnDescription;}
+    public void setReturnDescription(String returnDescription) {this.returnDescription = returnDescription;}
+
+    public String getReturnDate() {return returnDate;}
+    public void setReturnDate(String returnDate) {this.returnDate = returnDate;}
 }

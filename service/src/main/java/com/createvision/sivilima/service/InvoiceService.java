@@ -4,7 +4,6 @@ import com.createvision.sivilima.tableModel.Invoice;
 import com.createvision.sivilima.valuesObject.InvoiceVO;
 import com.createvision.sivilima.valuesObject.ItemDetailsVO;
 import com.createvision.sivilima.valuesObject.PaymentDetailVO;
-import com.createvision.sivilima.valuesObject.TempCustomerVO;
 
 import java.util.List;
 
@@ -33,6 +32,9 @@ public interface InvoiceService {
     PaymentDetailVO createCreditPayment(PaymentDetailVO paymentDetailVO) throws Exception;
 
     InvoiceVO getInvoiceReprintData(Long id) throws Exception;
+
+    List<InvoiceVO> addReturnInvoiceItem(InvoiceVO invoiceVO) throws Exception;
+
 
 
 }
